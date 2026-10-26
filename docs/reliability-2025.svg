@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="660" height="490" viewBox="0 0 660 490">
+<rect width="660" height="490" fill="white"/>
+<text x="330" y="26" text-anchor="middle" font-family="sans-serif" font-size="18">Observed calibration (fixed probability bins)</text>
+<path d="M80 410 L480 410 M80 410 L80 50" fill="none" stroke="black"/>
+<path d="M80 410 L480 50" stroke="#999" stroke-dasharray="5 5"/>
+<text x="80.0" y="431" text-anchor="middle" font-family="sans-serif" font-size="12">0.0</text>
+<text x="67" y="414.0" text-anchor="end" font-family="sans-serif" font-size="12">0.0</text>
+<text x="160.0" y="431" text-anchor="middle" font-family="sans-serif" font-size="12">0.2</text>
+<text x="67" y="342.0" text-anchor="end" font-family="sans-serif" font-size="12">0.2</text>
+<text x="240.0" y="431" text-anchor="middle" font-family="sans-serif" font-size="12">0.4</text>
+<text x="67" y="270.0" text-anchor="end" font-family="sans-serif" font-size="12">0.4</text>
+<text x="320.0" y="431" text-anchor="middle" font-family="sans-serif" font-size="12">0.6</text>
+<text x="67" y="197.99999999999997" text-anchor="end" font-family="sans-serif" font-size="12">0.6</text>
+<text x="400.0" y="431" text-anchor="middle" font-family="sans-serif" font-size="12">0.8</text>
+<text x="67" y="126.0" text-anchor="end" font-family="sans-serif" font-size="12">0.8</text>
+<text x="480.0" y="431" text-anchor="middle" font-family="sans-serif" font-size="12">1.0</text>
+<text x="67" y="54.0" text-anchor="end" font-family="sans-serif" font-size="12">1.0</text>
+<polyline points="84.91,50.00 143.02,380.00 185.52,310.38 222.60,290.00 261.93,251.08 300.75,228.89 339.53,175.09 377.47,135.73 413.98,114.89 448.35,50.00" fill="none" stroke="#2463a5" stroke-width="2"/>
+<circle cx="84.91" cy="50.00" r="4" fill="#2463a5"><title>validation: 1 games</title></circle>
+<circle cx="143.02" cy="380.00" r="4" fill="#2463a5"><title>validation: 12 games</title></circle>
+<circle cx="185.52" cy="310.38" r="4" fill="#2463a5"><title>validation: 159 games</title></circle>
+<circle cx="222.60" cy="290.00" r="4" fill="#2463a5"><title>validation: 534 games</title></circle>
+<circle cx="261.93" cy="251.08" r="4" fill="#2463a5"><title>validation: 999 games</title></circle>
+<circle cx="300.75" cy="228.89" r="4" fill="#2463a5"><title>validation: 1296 games</title></circle>
+<circle cx="339.53" cy="175.09" r="4" fill="#2463a5"><title>validation: 1344 games</title></circle>
+<circle cx="377.47" cy="135.73" r="4" fill="#2463a5"><title>validation: 844 games</title></circle>
+<circle cx="413.98" cy="114.89" r="4" fill="#2463a5"><title>validation: 233 games</title></circle>
+<circle cx="448.35" cy="50.00" r="4" fill="#2463a5"><title>validation: 4 games</title></circle>
+<text x="495" y="80" fill="#2463a5" font-family="sans-serif" font-size="13">validation</text>
+<polyline points="158.02,410.00 188.01,362.00 219.41,281.43 263.50,233.83 299.54,234.62 339.90,170.00 376.15,167.39 414.20,71.18" fill="none" stroke="#bd4517" stroke-width="2"/>
+<circle cx="158.02" cy="410.00" r="4" fill="#bd4517"><title>holdout: 1 games</title></circle>
+<circle cx="188.01" cy="362.00" r="4" fill="#bd4517"><title>holdout: 15 games</title></circle>
+<circle cx="219.41" cy="281.43" r="4" fill="#bd4517"><title>holdout: 28 games</title></circle>
+<circle cx="263.50" cy="233.83" r="4" fill="#bd4517"><title>holdout: 47 games</title></circle>
+<circle cx="299.54" cy="234.62" r="4" fill="#bd4517"><title>holdout: 78 games</title></circle>
+<circle cx="339.90" cy="170.00" r="4" fill="#bd4517"><title>holdout: 39 games</title></circle>
+<circle cx="376.15" cy="167.39" r="4" fill="#bd4517"><title>holdout: 46 games</title></circle>
+<circle cx="414.20" cy="71.18" r="4" fill="#bd4517"><title>holdout: 17 games</title></circle>
+<text x="495" y="105" fill="#bd4517" font-family="sans-serif" font-size="13">holdout</text>
+<text x="280" y="464" text-anchor="middle" font-family="sans-serif" font-size="14">Mean predicted home-win probability</text>
+<text x="22" y="230" transform="rotate(-90 22 230)" text-anchor="middle" font-family="sans-serif" font-size="14">Observed home-win frequency</text>
+</svg>
