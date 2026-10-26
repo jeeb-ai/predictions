@@ -1,0 +1,441 @@
+{
+  "schema_version": 1,
+  "run_id": "20261026T194204061367Z-e243c51e",
+  "generated_at": "2026-10-26T19:42:04.061367+00:00",
+  "source_metadata": {
+    "bytes": 2186540,
+    "fetched_at": "2026-10-26T19:39:22.532045+00:00",
+    "license_note": "No explicit license file was found in the source repository during implementation. Public availability is not a redistribution license; review upstream and underlying-source terms before redistribution or commercial use.",
+    "license_url": "https://github.com/nflverse/nfldata",
+    "sha256": "5b8c66203d43c8faa93b0519b3ca078970aa0bdb39ccb51076dc99e5248f1486",
+    "source_url": "https://raw.githubusercontent.com/nflverse/nfldata/master/data/games.csv",
+    "as_of": "2026-10-26T00:00:00+00:00",
+    "requested_as_of": "2026-10-26T00:00:00+00:00",
+    "feature_window": 8
+  },
+  "source_code_sha256": "91ef8dbbc899976be8b9206e67e1f7a176a6555c9400366aaa24dfa02e48148a",
+  "runtime": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "scikit-learn": "1.8.0",
+    "joblib": "1.6.0"
+  },
+  "configuration": {
+    "holdout_season": 2025,
+    "min_train_seasons": 5,
+    "bootstrap_samples": 1000,
+    "seed": 42,
+    "feature_columns": [
+      "win_rate_diff",
+      "margin_diff",
+      "points_for_diff",
+      "points_against_diff",
+      "rest_days_diff",
+      "games_played_diff",
+      "home_advantage"
+    ]
+  },
+  "excluded_tied_regular_season_games": 15,
+  "validation": {
+    "games": 5426,
+    "model": {
+      "accuracy": 0.6279026907482492,
+      "brier_score": 0.22385264372505487,
+      "log_loss": 0.6386267887518543,
+      "games": 5426,
+      "mean_predicted_home_win": 0.5716409086861496,
+      "observed_home_win_rate": 0.5587910062661261,
+      "expected_calibration_error": 0.021571407818912553,
+      "reliability_bins": [
+        {
+          "lower": 0.0,
+          "upper": 0.1,
+          "count": 1,
+          "mean_predicted": 0.01227276965759681,
+          "observed_home_win_rate": 1.0
+        },
+        {
+          "lower": 0.1,
+          "upper": 0.2,
+          "count": 12,
+          "mean_predicted": 0.15755963101515422,
+          "observed_home_win_rate": 0.08333333333333333
+        },
+        {
+          "lower": 0.2,
+          "upper": 0.3,
+          "count": 159,
+          "mean_predicted": 0.2637884928270251,
+          "observed_home_win_rate": 0.27672955974842767
+        },
+        {
+          "lower": 0.3,
+          "upper": 0.4,
+          "count": 534,
+          "mean_predicted": 0.3564920418070211,
+          "observed_home_win_rate": 0.3333333333333333
+        },
+        {
+          "lower": 0.4,
+          "upper": 0.5,
+          "count": 999,
+          "mean_predicted": 0.45481538893378093,
+          "observed_home_win_rate": 0.44144144144144143
+        },
+        {
+          "lower": 0.5,
+          "upper": 0.6,
+          "count": 1296,
+          "mean_predicted": 0.5518699046888564,
+          "observed_home_win_rate": 0.5030864197530864
+        },
+        {
+          "lower": 0.6,
+          "upper": 0.7,
+          "count": 1344,
+          "mean_predicted": 0.6488355739983667,
+          "observed_home_win_rate": 0.6525297619047619
+        },
+        {
+          "lower": 0.7,
+          "upper": 0.8,
+          "count": 844,
+          "mean_predicted": 0.7436793407229896,
+          "observed_home_win_rate": 0.7618483412322274
+        },
+        {
+          "lower": 0.8,
+          "upper": 0.9,
+          "count": 233,
+          "mean_predicted": 0.8349509818004187,
+          "observed_home_win_rate": 0.8197424892703863
+        },
+        {
+          "lower": 0.9,
+          "upper": 1.0,
+          "count": 4,
+          "mean_predicted": 0.9208844249128904,
+          "observed_home_win_rate": 1.0
+        }
+      ],
+      "confidence_intervals_95": {
+        "accuracy": [
+          0.6146882288477463,
+          0.641061357588146
+        ],
+        "brier_score": [
+          0.2201018475520378,
+          0.22778674130857526
+        ],
+        "log_loss": [
+          0.6308980177090459,
+          0.6476109534539569
+        ]
+      },
+      "bootstrap_clusters": 361
+    },
+    "home_rate_baseline": {
+      "accuracy": 0.5587910062661261,
+      "brier_score": 0.2466736269483607,
+      "log_loss": 0.6864834723530966,
+      "games": 5426,
+      "mean_predicted_home_win": 0.5714709284464222,
+      "observed_home_win_rate": 0.5587910062661261,
+      "expected_calibration_error": 0.012679922180296122,
+      "reliability_bins": [
+        {
+          "lower": 0.0,
+          "upper": 0.1,
+          "count": 0,
+          "mean_predicted": null,
+          "observed_home_win_rate": null
+        },
+        {
+          "lower": 0.1,
+          "upper": 0.2,
+          "count": 0,
+          "mean_predicted": null,
+          "observed_home_win_rate": null
+        },
+        {
+          "lower": 0.2,
+          "upper": 0.3,
+          "count": 0,
+          "mean_predicted": null,
+          "observed_home_win_rate": null
+        },
+        {
+          "lower": 0.3,
+          "upper": 0.4,
+          "count": 0,
+          "mean_predicted": null,
+          "observed_home_win_rate": null
+        },
+        {
+          "lower": 0.4,
+          "upper": 0.5,
+          "count": 0,
+          "mean_predicted": null,
+          "observed_home_win_rate": null
+        },
+        {
+          "lower": 0.5,
+          "upper": 0.6,
+          "count": 5426,
+          "mean_predicted": 0.5714709284464222,
+          "observed_home_win_rate": 0.5587910062661261
+        },
+        {
+          "lower": 0.6,
+          "upper": 0.7,
+          "count": 0,
+          "mean_predicted": null,
+          "observed_home_win_rate": null
+        },
+        {
+          "lower": 0.7,
+          "upper": 0.8,
+          "count": 0,
+          "mean_predicted": null,
+          "observed_home_win_rate": null
+        },
+        {
+          "lower": 0.8,
+          "upper": 0.9,
+          "count": 0,
+          "mean_predicted": null,
+          "observed_home_win_rate": null
+        },
+        {
+          "lower": 0.9,
+          "upper": 1.0,
+          "count": 0,
+          "mean_predicted": null,
+          "observed_home_win_rate": null
+        }
+      ],
+      "confidence_intervals_95": {
+        "accuracy": [
+          0.5457041027996955,
+          0.5710103948336912
+        ],
+        "brier_score": [
+          0.2448860283193626,
+          0.24854605596562432
+        ],
+        "log_loss": [
+          0.6828821341070535,
+          0.690258279643236
+        ]
+      },
+      "bootstrap_clusters": 361
+    },
+    "always_home_accuracy": 0.5587910062661261
+  },
+  "holdout": {
+    "games": 271,
+    "model": {
+      "accuracy": 0.6162361623616236,
+      "brier_score": 0.22198070508863552,
+      "log_loss": 0.6323096904592099,
+      "games": 271,
+      "mean_predicted_home_win": 0.5608034768159551,
+      "observed_home_win_rate": 0.5387453874538746,
+      "expected_calibration_error": 0.05257834001863256,
+      "reliability_bins": [
+        {
+          "lower": 0.0,
+          "upper": 0.1,
+          "count": 0,
+          "mean_predicted": null,
+          "observed_home_win_rate": null
+        },
+        {
+          "lower": 0.1,
+          "upper": 0.2,
+          "count": 1,
+          "mean_predicted": 0.1950439615831663,
+          "observed_home_win_rate": 0.0
+        },
+        {
+          "lower": 0.2,
+          "upper": 0.3,
+          "count": 15,
+          "mean_predicted": 0.27003050533344974,
+          "observed_home_win_rate": 0.13333333333333333
+        },
+        {
+          "lower": 0.3,
+          "upper": 0.4,
+          "count": 28,
+          "mean_predicted": 0.3485336474563906,
+          "observed_home_win_rate": 0.35714285714285715
+        },
+        {
+          "lower": 0.4,
+          "upper": 0.5,
+          "count": 47,
+          "mean_predicted": 0.45875364996791396,
+          "observed_home_win_rate": 0.48936170212765956
+        },
+        {
+          "lower": 0.5,
+          "upper": 0.6,
+          "count": 78,
+          "mean_predicted": 0.5488538585564464,
+          "observed_home_win_rate": 0.48717948717948717
+        },
+        {
+          "lower": 0.6,
+          "upper": 0.7,
+          "count": 39,
+          "mean_predicted": 0.6497579095112981,
+          "observed_home_win_rate": 0.6666666666666666
+        },
+        {
+          "lower": 0.7,
+          "upper": 0.8,
+          "count": 46,
+          "mean_predicted": 0.7403724711325848,
+          "observed_home_win_rate": 0.6739130434782609
+        },
+        {
+          "lower": 0.8,
+          "upper": 0.9,
+          "count": 17,
+          "mean_predicted": 0.8355049345779816,
+          "observed_home_win_rate": 0.9411764705882353
+        },
+        {
+          "lower": 0.9,
+          "upper": 1.0,
+          "count": 0,
+          "mean_predicted": null,
+          "observed_home_win_rate": null
+        }
+      ],
+      "confidence_intervals_95": {
+        "accuracy": [
+          0.5580399725163689,
+          0.6741594313925774
+        ],
+        "brier_score": [
+          0.206918829220553,
+          0.24005063733279203
+        ],
+        "log_loss": [
+          0.6001249719829119,
+          0.67239692845529
+        ]
+      },
+      "bootstrap_clusters": 18
+    },
+    "home_rate_baseline": {
+      "accuracy": 0.5387453874538746,
+      "brier_score": 0.2490697629103735,
+      "log_loss": 0.6912976695815637,
+      "games": 271,
+      "mean_predicted_home_win": 0.5626403233048944,
+      "observed_home_win_rate": 0.5387453874538746,
+      "expected_calibration_error": 0.02389493585101987,
+      "reliability_bins": [
+        {
+          "lower": 0.0,
+          "upper": 0.1,
+          "count": 0,
+          "mean_predicted": null,
+          "observed_home_win_rate": null
+        },
+        {
+          "lower": 0.1,
+          "upper": 0.2,
+          "count": 0,
+          "mean_predicted": null,
+          "observed_home_win_rate": null
+        },
+        {
+          "lower": 0.2,
+          "upper": 0.3,
+          "count": 0,
+          "mean_predicted": null,
+          "observed_home_win_rate": null
+        },
+        {
+          "lower": 0.3,
+          "upper": 0.4,
+          "count": 0,
+          "mean_predicted": null,
+          "observed_home_win_rate": null
+        },
+        {
+          "lower": 0.4,
+          "upper": 0.5,
+          "count": 0,
+          "mean_predicted": null,
+          "observed_home_win_rate": null
+        },
+        {
+          "lower": 0.5,
+          "upper": 0.6,
+          "count": 271,
+          "mean_predicted": 0.5626403233048944,
+          "observed_home_win_rate": 0.5387453874538746
+        },
+        {
+          "lower": 0.6,
+          "upper": 0.7,
+          "count": 0,
+          "mean_predicted": null,
+          "observed_home_win_rate": null
+        },
+        {
+          "lower": 0.7,
+          "upper": 0.8,
+          "count": 0,
+          "mean_predicted": null,
+          "observed_home_win_rate": null
+        },
+        {
+          "lower": 0.8,
+          "upper": 0.9,
+          "count": 0,
+          "mean_predicted": null,
+          "observed_home_win_rate": null
+        },
+        {
+          "lower": 0.9,
+          "upper": 1.0,
+          "count": 0,
+          "mean_predicted": null,
+          "observed_home_win_rate": null
+        }
+      ],
+      "confidence_intervals_95": {
+        "accuracy": [
+          0.4673477431131763,
+          0.6044125258799171
+        ],
+        "brier_score": [
+          0.24084294134734438,
+          0.2580145059597919
+        ],
+        "log_loss": [
+          0.6747571253203026,
+          0.7092816403266444
+        ]
+      },
+      "bootstrap_clusters": 18
+    },
+    "always_home_accuracy": 0.5387453874538746
+  },
+  "methodology": [
+    "Regular-season decisive games only; tied games are excluded from binary targets (their past form may count half a win).",
+    "A StandardScaler and fixed C=1 logistic regression are fitted separately before each evaluation season, using older-season outcomes available strictly before its first kickoff.",
+    "The latest selected season is a separate holdout: no fitting, model selection, tuning, or probability recalibration uses its targets. Earlier holdout games can enter later pregame rolling form once available.",
+    "Features use completed historical outcomes only, under a conservative kickoff-plus-24-hours availability assumption, not archived publication timestamps; corrected historical source values are not point-in-time snapshots.",
+    "Probabilities are raw logistic outputs; calibration is measured, not fitted. Reliability uses ten fixed-width bins, including probability 1 in the final bin.",
+    "95% percentile intervals resample season/week blocks with fixed fitted forecasts; they do not include model refitting, source revision uncertainty, or dependence across weeks.",
+    "The baseline predicts the training-set home-win rate; always-home accuracy is also reported. These retrospective results do not establish a trading edge."
+  ]
+}
