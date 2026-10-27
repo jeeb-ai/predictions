@@ -1,6 +1,6 @@
 # NFL Prediction Engine
 
-A runnable, research-first NFL pregame forecasting package. Model 1.0 uses lagged game results; Model 2.0 adds causal play-by-play EPA, success/explosive rates, opponent-adjusted strength, and prior-observed quarterback performance. Both fit logistic regression and are compared on identical chronological splits. It saves auditable forecasts, models, reliability plots, and measured metrics. No market adapter, order placement, real-money trading, or simulated profit is implemented.
+A runnable, research-first NFL pregame forecasting package. Model 1.0 uses lagged game results; Model 2.0 adds causal play-by-play EPA, success/explosive rates, opponent-adjusted strength, and prior-observed quarterback performance. Both fit logistic regression and are compared on identical chronological splits. It saves auditable forecasts, models, reliability plots, and measured metrics. Live pregame inference, a verified read-only Polymarket US adapter, fee-aware EV, and an append-only paper ledger are available. No account access or real-money order placement is implemented.
 
 ## Install and test
 
@@ -77,6 +77,26 @@ On 5,426 walk-forward validation games, Model 2.0 achieved 65.09% accuracy versu
 
 The 2025 results were already examined for Model 1.0; this preserves their exclusion from Model 2.0 fitting/tuning but cannot make the season unseen again. See the [actual comparison](docs/model2-comparison.md), [machine-readable results](docs/model2-comparison.json), and [paired reliability plots](docs/model2-reliability.svg). New run directories retain full per-model forecasts, trained win/EP model provenance, comparison reports, coverage, and paired predictions. Raw snapshots and binaries remain excluded from Git.
 
+## Live pregame forecasts and paper trading
+
+```bash
+uv run --frozen nfl-predict forecast --game-id 2026_08_CAR_GB > /tmp/nfl-forecasts.json
+uv run --frozen nfl-predict us-markets --limit 20
+uv run --frozen nfl-predict quote --market aec-nfl-car-gb-2026-10-29 --outcome no --output reports/quotes/car-gb-no.json
+uv run --frozen nfl-predict ev --forecast /tmp/nfl-forecasts.json --quote reports/quotes/car-gb-no.json --team GB --quantity 10 --output reports/ev/car-gb.json
+uv run --frozen nfl-predict paper-audit
+```
+
+These dates and IDs identify the live smoke-check game; select current games and market slugs when running later. `forecast` refreshes public schedules and current-season PBP by default, caps information at its actual forecast time, and trains an immutable annual Model 2.0 bundle from older seasons only. `--model-version v1` selects the historical baseline family; `--bundle` reuses a trusted live bundle; `--offline --input PATH` explicitly uses cached inputs. Historical `backtest`/`compare` behavior and archived results remain unchanged.
+
+Quotes use the documented public **Polymarket US** gateway, real ask depth, exact team/kickoff matching, timestamps, and immutable raw snapshots. No credentials are needed. NFL ties pay $0.50 per contract and cancellations may use last fair market price. Therefore the EV command above intentionally reports a pass until explicit tie and game-completion probability assumptions are supplied; the model does not estimate either. Any cancellation probability also needs a cancellation-price assumption. Add `--tie-probability`, `--completion-probability`, and, when needed, `--cancellation-settlement-price` using documented assumptions rather than implied defaults.
+
+US taker fees use the verified coefficient 0.0695 and half-even cent rounding. EV consumes displayed price levels and deducts a conservative cumulative fee upper bound because aggregate depth hides individual maker-fill rounding. Stale/mismatched quotes, started games, unknown fees/terms, missing assumptions, insufficient depth, and EV below the chosen threshold cannot become paper candidates. Raw model probabilities remain uncalibrated estimates; a positive estimated EV does not establish a trading edge.
+
+`forecast`, `quote`, and `ev` append their inputs/results to `data/paper/ledger.sqlite`. Only an explicit `paper-fill --evaluation-id EV_ID --idempotency-key UNIQUE_KEY` creates a local simulated position. Optional `--max-exposure` caps outstanding paper cost. Paper fills never call an exchange and cannot exceed the retained book's available depth, including repeated polls of the same book. `market-settlement` reads final exchange settlement; `paper-settle` requires a price and evidence file. SQL append-only triggers, foreign keys, idempotency, retained evidence, and a hash chain support audit. Keep the audit head hash separately to detect complete-file rewriting or truncation.
+
+See the [live/paper workflow](docs/live-paper-workflow.md) for exact commands, settlement evidence, freshness policies, and limitations, and the [verified US API references](docs/polymarket-us-reference.md). Production smoke checks and automated fixture outcomes are documented separately; no fabricated real trade or settled profit is reported.
+
 ## Source terms and limitations
 
 Data come from [nflverse/nfldata](https://github.com/nflverse/nfldata), whose README credits Lee Sharpe and the nflfastR/nflscrapR contributors. The adapter snapshots the [games CSV](https://raw.githubusercontent.com/nflverse/nfldata/master/data/games.csv) with SHA-256, HTTPS source URL, and fetch timestamp. No explicit license file was found in this source repository during implementation; upstream and underlying-source rights require review before redistribution or commercial use. Public access alone does not establish a license. Raw data are not committed.
@@ -85,4 +105,4 @@ The play-by-play source is [nflverse/nflverse-data](https://github.com/nflverse/
 
 This is a present-day historical snapshot, not an archive of what the provider published at each historical cutoff. Conservative lagging prevents current/future outcomes entering features, but cannot undo later source corrections or prove historical schedule availability. This limitation is retained in every report. Injuries, market prices, confirmed upcoming starters, and prospective performance remain outside this implementation. Model 2.0 adds online opponent adjustment without using season-end ratings.
 
-Next is independent prospective evaluation and held-out probability calibration, then scoring-distribution diagnostics before any simulations. A documented, read-only **Polymarket US** adapter remains disabled until endpoint, fees, settlement, and depth are verified. A Streamlit dashboard and append-only paper-trading ledger are later milestones. Real-money trading requires a separate explicit request and review. Read `AGENTS.md` for the project principles.
+Next is independent prospective evaluation and held-out probability calibration, then scoring-distribution diagnostics before any simulations. The public Polymarket US adapter is now verified and read-only; paper positions remain local. A Streamlit dashboard and prospective calibration study remain future work. Real-money trading requires a separate explicit request and review. Read `AGENTS.md` for the project principles.

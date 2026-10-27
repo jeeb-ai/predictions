@@ -1,0 +1,172 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-10-27T06:09:14.199649+00:00",
+  "validation": {
+    "clean_locked_tests_passed": 289,
+    "installed_wheel_workflow_tests_passed": 9,
+    "ruff_lint_passed": true,
+    "ruff_format_passed": true,
+    "source_and_wheel_builds_passed": true,
+    "historical_aggregates_paired_intervals_and_annual_metrics_match": true
+  },
+  "forecast": {
+    "forecast_id": "07c72bfafc414217a64152664a2a94a3",
+    "game_id": "2026_08_CAR_GB",
+    "season": 2026,
+    "home_team": "GB",
+    "away_team": "CAR",
+    "kickoff": "2026-10-30T00:15:00+00:00",
+    "as_of": "2026-10-27T06:07:46.398916+00:00",
+    "generated_at": "2026-10-27T06:08:06.158529+00:00",
+    "model_id": "live-v2-2026-20261027T060806131393Z-d5a67b72",
+    "model_version": "logistic-regression-v2",
+    "model_sha256": "60facd192881fd3cd128c5844f23053138e44bfbcad90afcaebbacac24a9e63b",
+    "source_code_sha256": "d7d07071f6ba5f0d0b1548a3a3aa7a3a6d37609cc17485914bb36ecdd6d7a9a4",
+    "features_sha256": "5f8deb3443a244c198358665d4647cad8b63fccf0874a3ea2a53ef2d83f6b861",
+    "home_win_probability": 0.6449240423405829,
+    "away_win_probability": 0.35507595765941713,
+    "probability_scope": "conditional_on_decisive_result",
+    "tie_probability": null,
+    "calibration_status": "raw_logistic_not_recalibrated",
+    "history_available_through": "2026-10-26T20:25:00+00:00",
+    "advanced_history_available_through": "2026-10-26T20:25:00+00:00"
+  },
+  "training": {
+    "training_seasons": [
+      1999,
+      2000,
+      2001,
+      2002,
+      2003,
+      2004,
+      2005,
+      2006,
+      2007,
+      2008,
+      2009,
+      2010,
+      2011,
+      2012,
+      2013,
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2025
+    ],
+    "training_games": 6952,
+    "training_cutoff_at": "2026-09-10T00:20:00+00:00",
+    "train_max_result_available_at": "2026-01-06T01:20:00+00:00",
+    "training_game_ids_sha256": "b0350aa557075b43e1045b2cb54e3fa9093ed22c2f43bc0ee71d61169166fd1d"
+  },
+  "quote": {
+    "quote_id": "a024c120dc873a3a7a87d96f655482739e51b88782393e680f50d32ae741bb4c",
+    "venue": "polymarket_us",
+    "market_id": "1458580",
+    "market_slug": "aec-nfl-car-gb-2026-10-29",
+    "outcome": "no",
+    "yes_team": "CAR",
+    "no_team": "GB",
+    "game_start_time": "2026-10-30T00:15:00+00:00",
+    "quote_at": "2026-10-27T06:06:18.671326+00:00",
+    "received_at": "2026-10-27T06:09:10.416642+00:00",
+    "fee_schedule": {
+      "type": "polymarket_us_standard_taker",
+      "theta": "0.0695",
+      "effective_at": "2026-10-19T17:00:00+00:00",
+      "rounding": "ROUND_HALF_EVEN",
+      "currency": "USD",
+      "source_url": "https://docs.polymarket.us/fees.md",
+      "note": "Per-fill banker's rounding capped by rounded cumulative exact fee; L2 depth hides individual maker fill partitions. No rebates assumed."
+    }
+  },
+  "best_displayed_ask": {
+    "price": "0.6475",
+    "quantity": "98580.1500"
+  },
+  "quote_sources": {
+    "market": {
+      "url": "https://gateway.polymarket.us/v1/market/slug/aec-nfl-car-gb-2026-10-29",
+      "sha256": "a0d70d5e3f7a2525a45707476ee21b4e80d599fb956d14c2f6d20695c729c291",
+      "fetched_at": "2026-10-27T06:09:10.143201+00:00"
+    },
+    "book": {
+      "url": "https://gateway.polymarket.us/v1/markets/aec-nfl-car-gb-2026-10-29/book",
+      "sha256": "2a098a248398d83e01298aeb075a3edfa3cd9f1d9bbdb8c5a6caa5923aaf89cc",
+      "fetched_at": "2026-10-27T06:09:10.416642+00:00"
+    }
+  },
+  "evaluation": {
+    "evaluation_id": "ev-65a312a1c6ca84bf9ed529e1",
+    "status": "pass",
+    "reasons": [
+      "quote_stale",
+      "tie_probability_required",
+      "completion_probability_required"
+    ],
+    "assumptions": {
+      "tie_probability": null,
+      "completion_probability": null,
+      "cancellation_settlement_price": null
+    },
+    "quantity": 10,
+    "fee": null,
+    "expected_profit": null,
+    "ev_scope": "conditional_on_explicit_tie_completion_and_cancellation_assumptions",
+    "match_evidence": {
+      "method": "exact_canonical_teams_and_kickoff",
+      "game_id": "2026_08_CAR_GB",
+      "quote_game_id": null,
+      "home_team": "GB",
+      "away_team": "CAR",
+      "yes_team": "CAR",
+      "no_team": "GB",
+      "forecast_kickoff": "2026-10-30T00:15:00+00:00",
+      "market_game_start_time": "2026-10-30T00:15:00+00:00"
+    }
+  },
+  "paper_audit": {
+    "valid": true,
+    "errors": [],
+    "events": 3,
+    "head_hash": "549a9e8cf9093b4d44bb9ccf16215fdda9f43b3e0e5e98c58b89d25351e3e753",
+    "counts": {
+      "paper_forecasts": 1,
+      "paper_quotes": 1,
+      "paper_evaluations": 1,
+      "paper_trades": 0,
+      "paper_settlements": 0
+    },
+    "source_verification": {
+      "a024c120dc873a3a7a87d96f655482739e51b88782393e680f50d32ae741bb4c": "raw_snapshots_reconciled"
+    },
+    "summary": {
+      "mode": "paper_only",
+      "counts": {
+        "paper_forecasts": 1,
+        "paper_quotes": 1,
+        "paper_evaluations": 1,
+        "paper_trades": 0,
+        "paper_settlements": 0
+      },
+      "open_positions": 0,
+      "open_exposure": "0",
+      "realized_paper_profit": "0",
+      "fee_kind": "estimated_upper_bound"
+    }
+  },
+  "boundaries": [
+    "The live quote may fail the strict 60-second book timestamp policy; a fresh HTTP receipt does not refresh its book timestamp.",
+    "No tie or completion probability was invented. No paper position or settlement was created.",
+    "Synthetic test fills and settlement profits are not real performance results.",
+    "Live probabilities remain conditional on decisive results and are not recalibrated.",
+    "All adapter requests were public GETs; no account or real-money execution API is implemented."
+  ]
+}
