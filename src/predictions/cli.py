@@ -13,6 +13,7 @@ import requests
 from predictions.backtest import run_backtest
 from predictions.data import NflverseProvider, load_games
 from predictions.features import build_features
+from predictions.live_cli import add_commands, dispatch
 
 
 def _parser() -> argparse.ArgumentParser:
@@ -54,6 +55,7 @@ def _parser() -> argparse.ArgumentParser:
     compare.add_argument("--ep-dir", type=Path, default=Path("data/causal_ep"))
     compare.add_argument("--workers", type=int, default=4)
     compare.add_argument("--offline", action="store_true")
+    add_commands(sub)
     return parser
 
 
@@ -201,6 +203,10 @@ def _compare(args) -> dict:
 def main(argv: list[str] | None = None) -> int:
     args = _parser().parse_args(argv)
     try:
+        result = dispatch(args)
+        if result is not None:
+            print(json.dumps(result, indent=2, allow_nan=False))
+            return 1 if args.command == "paper-audit" and not result["valid"] else 0
         if args.command == "fetch":
             path, metadata = NflverseProvider(args.cache_dir).fetch(refresh=args.refresh)
             print(json.dumps({"path": str(path), "metadata": metadata}, indent=2))

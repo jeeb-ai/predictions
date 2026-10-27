@@ -1,0 +1,21 @@
+# Verified Polymarket US market-data contract
+
+The implementation uses the documented **public US gateway**, `https://gateway.polymarket.us`. It does not use international Polymarket APIs, authenticated account APIs, trading APIs, order previews, or order placement. Every adapter network request is an unauthenticated GET, and redirects are disabled.
+
+Official references reviewed during implementation:
+
+- [API introduction](https://docs.polymarket.us/api-reference/introduction.md): separates the public gateway from authenticated `api.polymarket.us`; market data need no API key.
+- [List markets](https://docs.polymarket.us/api-reference/markets/get-markets.md): `GET /v1/markets` with explicit pagination.
+- [NFL league events](https://docs.polymarket.us/api-reference/sports/get-events-by-league-slug.md): `GET /v2/leagues/nfl/events` provides current NFL markets directly.
+- [Market details](https://docs.polymarket.us/api-reference/markets/get-market-by-slug.md): `GET /v1/market/slug/{slug}` supplies identity, actual description, NFL teams, status, tick size, minimum quantity, kickoff, and fee coefficient.
+- [Full market book](https://docs.polymarket.us/api-reference/markets/get-market-book.md): `GET /v1/markets/{slug}/book` supplies bids, offers, quantities, state, and `transactTime`.
+- [Final settlement price](https://docs.polymarket.us/api-reference/markets/get-market-settlement.md): `GET /v1/markets/{slug}/settlement`; the adapter first requires market status `MARKET_STATUS_RESOLVED` so a pending/closed market cannot be mistaken for final resolution.
+- [Single-instrument YES/NO structure](https://docs.polymarket.us/concepts/orders.md): NO exposure is a synthetic short of the YES instrument. Executable YES asks come from offers; executable NO asks are `1 − YES bid`, with the same available quantity. Display/outcome prices and midpoints are not executable asks.
+- [Sports settlement FAQ](https://docs.polymarket.us/faqs/sports-faqs.md): NFL winner contracts include overtime, settle ties at **$0.50**, and can settle cancellations or sufficiently postponed games at **last fair market price**, not an automatic refund. The actual market description is preserved and hashed because its specific terms govern; one observed contract uses a two-day postponement window, whereas the general FAQ discusses typical expiration dates.
+- [US fees](https://docs.polymarket.us/fees.md): the standard schedule effective October 19, 2026 at 1 PM Eastern uses `theta × contracts × price × (1 − price)`, with standard taker theta **0.0695**. Fees use nearest-cent half-even rounding. Individual fill charges are adjusted downward so total commission never exceeds the half-even rounded cumulative exact fee. Aggregate level-two depth does not reveal each resting maker fill, so EV must distinguish a conservative fee upper bound from an exact execution fee. No rebates are assumed.
+
+The adapter only normalizes the documented `football_team_full_game_winner` / `SPORTS_MARKET_TYPE_MONEYLINE` contract with two distinct NFL teams. Unsupported states, ambiguous terms, unknown fees, missing identity/depth/timestamps, and crossed books fail explicitly. An empty side of an otherwise valid book is retained as empty depth so the evaluator can record a no-liquidity pass.
+
+Every raw response is saved byte-for-byte under its SHA-256 with separate immutable observation metadata containing the source URL, UTC fetch timestamp, and local evidence path. Quotes have unique observation IDs and a separate stable liquidity key, so repeated observations of the same book do not create extra paper depth. Parent workflow mapping must verify the quoted YES/NO teams and scheduled kickoff against the forecast game; no fuzzy title matching establishes a contract mapping.
+
+Read-only live checks succeeded against the NFL discovery, detail, and full-book endpoints for `aec-nfl-car-gb-2026-10-29` (CAR versus GB, kickoff `2026-10-30T00:15:00Z`). A captured observation had a YES ask of `0.3550` and sufficient displayed depth, with NO exposure derived from YES bids. These are transient data observations, not a prediction, paper-trade result, or profitability claim. Offline tests use explicitly synthetic payloads following these documented shapes.
