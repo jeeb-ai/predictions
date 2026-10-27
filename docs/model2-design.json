@@ -1,0 +1,115 @@
+{
+  "design_frozen_at": "2026-10-27T05:25:15.628502+00:00",
+  "status": "Prespecified before any Model2.0 validation or holdout metrics were computed",
+  "baseline_commit": "8b68a705814530fd57cb146cafa65f40d53975fe",
+  "schedule_sha256": "5b8c66203d43c8faa93b0519b3ca078970aa0bdb39ccb51076dc99e5248f1486",
+  "training_start_season": 1999,
+  "validation_seasons": [
+    2004,
+    2005,
+    2006,
+    2007,
+    2008,
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+  ],
+  "holdout_season": 2025,
+  "holdout_status": "Reused Model1.0 holdout; excluded from Model2 fitting/tuning/calibration. Previously observed Model1.0 results mean it is not a globally unseen test.",
+  "features": [
+    "win_rate_diff",
+    "margin_diff",
+    "points_for_diff",
+    "points_against_diff",
+    "rest_days_diff",
+    "games_played_diff",
+    "home_advantage",
+    "off_epa_per_play_diff",
+    "def_epa_per_play_diff",
+    "off_success_rate_diff",
+    "def_success_rate_diff",
+    "off_explosive_rate_diff",
+    "def_explosive_rate_diff",
+    "qb_epa_per_dropback_diff",
+    "qb_success_rate_diff",
+    "elo_strength_diff",
+    "off_history_plays_diff",
+    "def_history_plays_diff",
+    "qb_history_dropbacks_diff",
+    "qb_proxy_missing_diff"
+  ],
+  "form_window_games": 8,
+  "epa": {
+    "definition": "Locally reconstructed expected net points remaining in half from nflverse raw play-by-play; not published nflfastR next-score EPA",
+    "ep_training_seasons": 3,
+    "ep_training_cutoff": "Previous-season game results available strictly before season first kickoff",
+    "first_season": "Fixed zero-EP warmup prior, no future-data bootstrap",
+    "state_columns": [
+      "yardline_100",
+      "down",
+      "ydstogo",
+      "half_seconds_remaining",
+      "score_differential",
+      "posteam_timeouts_remaining",
+      "defteam_timeouts_remaining"
+    ],
+    "ep_model": {
+      "estimator": "HistGradientBoostingRegressor",
+      "max_iter": 60,
+      "max_leaf_nodes": 15,
+      "max_bins": 64,
+      "l2_regularization": 10.0,
+      "learning_rate": 0.1,
+      "random_state": 42
+    },
+    "published_epa": "Excluded: shared learned EP model may incorporate later seasons"
+  },
+  "rates": {
+    "success": "causal EPA > 0",
+    "explosive_rush_yards": 10,
+    "explosive_pass_yards": 20,
+    "weighting": "Pooled eligible historical play counts"
+  },
+  "qb": "Most dropbacks in latest available prior team game; prior performance of that QB, never target-game starter",
+  "opponent_adjustment": {
+    "method": "Online outcome-based Elo",
+    "initial": 1500,
+    "K": 20,
+    "home_advantage": 50,
+    "scale": 400,
+    "season_regression": false
+  },
+  "win_model": {
+    "estimator": "StandardScaler + LogisticRegression",
+    "C": 1.0,
+    "max_iter": 2000,
+    "random_state": 42,
+    "probability_recalibration": false
+  },
+  "uncertainty": {
+    "method": "Paired season/week block bootstrap, fixed forecasts, identical draws",
+    "samples": 2000,
+    "seed": 42,
+    "metrics": [
+      "accuracy",
+      "brier_score",
+      "log_loss",
+      "expected_calibration_error"
+    ],
+    "multiplicity": "Unadjusted exploratory intervals; no blanket superiority claim"
+  },
+  "policy": "No tuning or feature choice using 2025. Source corrections and absent archived publication timestamps remain limitations. No real-money trades."
+}

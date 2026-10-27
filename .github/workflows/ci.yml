@@ -20,3 +20,4 @@ jobs:
       - run: uv run --frozen --extra dev ruff check .
       - run: uv run --frozen --extra dev ruff format --check .
       - run: uv run --frozen --extra dev pytest
+      - run: uv build

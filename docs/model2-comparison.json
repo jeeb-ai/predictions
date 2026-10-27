@@ -1,0 +1,2399 @@
+{
+  "schema_version": 1,
+  "run_id": "20261027T053315125622Z-d8868df1",
+  "generated_at": "2026-10-27T05:33:15.125622+00:00",
+  "source_code_sha256": "d1ab4c067d2b695d61768da7f4194371e4f07e7e09392ddae0aeba8bbc21a7ec",
+  "runtime": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "scikit-learn": "1.8.0",
+    "joblib": "1.6.0"
+  },
+  "configuration": {
+    "holdout_season": 2025,
+    "min_train_seasons": 5,
+    "bootstrap_samples": 2000,
+    "seed": 42,
+    "model_1_features": [
+      "win_rate_diff",
+      "margin_diff",
+      "points_for_diff",
+      "points_against_diff",
+      "rest_days_diff",
+      "games_played_diff",
+      "home_advantage"
+    ],
+    "model_2_features": [
+      "win_rate_diff",
+      "margin_diff",
+      "points_for_diff",
+      "points_against_diff",
+      "rest_days_diff",
+      "games_played_diff",
+      "home_advantage",
+      "off_epa_per_play_diff",
+      "def_epa_per_play_diff",
+      "off_success_rate_diff",
+      "def_success_rate_diff",
+      "off_explosive_rate_diff",
+      "def_explosive_rate_diff",
+      "qb_epa_per_dropback_diff",
+      "qb_success_rate_diff",
+      "elo_strength_diff",
+      "off_history_plays_diff",
+      "def_history_plays_diff",
+      "qb_history_dropbacks_diff",
+      "qb_proxy_missing_diff"
+    ]
+  },
+  "splits": {
+    "validation": {
+      "games": 5426,
+      "bootstrap_clusters": 361,
+      "model_1": {
+        "accuracy": 0.6279026907482492,
+        "brier_score": 0.22385264372505487,
+        "log_loss": 0.6386267887518543,
+        "games": 5426,
+        "mean_predicted_home_win": 0.5716409086861496,
+        "observed_home_win_rate": 0.5587910062661261,
+        "expected_calibration_error": 0.021571407818912546,
+        "reliability_bins": [
+          {
+            "lower": 0.0,
+            "upper": 0.1,
+            "count": 1,
+            "mean_predicted": 0.0122727696575968,
+            "observed_home_win_rate": 1.0
+          },
+          {
+            "lower": 0.1,
+            "upper": 0.2,
+            "count": 12,
+            "mean_predicted": 0.1575596310151542,
+            "observed_home_win_rate": 0.08333333333333333
+          },
+          {
+            "lower": 0.2,
+            "upper": 0.3,
+            "count": 159,
+            "mean_predicted": 0.2637884928270251,
+            "observed_home_win_rate": 0.27672955974842767
+          },
+          {
+            "lower": 0.3,
+            "upper": 0.4,
+            "count": 534,
+            "mean_predicted": 0.35649204180702104,
+            "observed_home_win_rate": 0.3333333333333333
+          },
+          {
+            "lower": 0.4,
+            "upper": 0.5,
+            "count": 999,
+            "mean_predicted": 0.45481538893378093,
+            "observed_home_win_rate": 0.44144144144144143
+          },
+          {
+            "lower": 0.5,
+            "upper": 0.6,
+            "count": 1296,
+            "mean_predicted": 0.5518699046888564,
+            "observed_home_win_rate": 0.5030864197530864
+          },
+          {
+            "lower": 0.6,
+            "upper": 0.7,
+            "count": 1344,
+            "mean_predicted": 0.6488355739983667,
+            "observed_home_win_rate": 0.6525297619047619
+          },
+          {
+            "lower": 0.7,
+            "upper": 0.8,
+            "count": 844,
+            "mean_predicted": 0.7436793407229896,
+            "observed_home_win_rate": 0.7618483412322274
+          },
+          {
+            "lower": 0.8,
+            "upper": 0.9,
+            "count": 233,
+            "mean_predicted": 0.8349509818004187,
+            "observed_home_win_rate": 0.8197424892703863
+          },
+          {
+            "lower": 0.9,
+            "upper": 1.0,
+            "count": 4,
+            "mean_predicted": 0.9208844249128902,
+            "observed_home_win_rate": 1.0
+          }
+        ],
+        "confidence_intervals_95": {
+          "accuracy": [
+            0.6147840452831211,
+            0.6408649425612775
+          ],
+          "brier_score": [
+            0.22013074440186917,
+            0.2276069419602827
+          ],
+          "log_loss": [
+            0.6305014200350482,
+            0.6468633108651606
+          ],
+          "expected_calibration_error": [
+            0.015577008949977364,
+            0.03610889006570218
+          ]
+        },
+        "bootstrap_clusters": 361
+      },
+      "model_2": {
+        "accuracy": 0.6509399189089569,
+        "brier_score": 0.22006378347970412,
+        "log_loss": 0.6301506528410851,
+        "games": 5426,
+        "mean_predicted_home_win": 0.570900555842116,
+        "observed_home_win_rate": 0.5587910062661261,
+        "expected_calibration_error": 0.01919139823581934,
+        "reliability_bins": [
+          {
+            "lower": 0.0,
+            "upper": 0.1,
+            "count": 3,
+            "mean_predicted": 0.06652489240924883,
+            "observed_home_win_rate": 0.3333333333333333
+          },
+          {
+            "lower": 0.1,
+            "upper": 0.2,
+            "count": 48,
+            "mean_predicted": 0.1723117491976286,
+            "observed_home_win_rate": 0.2916666666666667
+          },
+          {
+            "lower": 0.2,
+            "upper": 0.3,
+            "count": 262,
+            "mean_predicted": 0.2583632851597348,
+            "observed_home_win_rate": 0.2824427480916031
+          },
+          {
+            "lower": 0.3,
+            "upper": 0.4,
+            "count": 611,
+            "mean_predicted": 0.3530245649413108,
+            "observed_home_win_rate": 0.3322422258592471
+          },
+          {
+            "lower": 0.4,
+            "upper": 0.5,
+            "count": 900,
+            "mean_predicted": 0.45366209861105594,
+            "observed_home_win_rate": 0.4111111111111111
+          },
+          {
+            "lower": 0.5,
+            "upper": 0.6,
+            "count": 1144,
+            "mean_predicted": 0.5509598410471845,
+            "observed_home_win_rate": 0.5559440559440559
+          },
+          {
+            "lower": 0.6,
+            "upper": 0.7,
+            "count": 1118,
+            "mean_predicted": 0.6498015643074732,
+            "observed_home_win_rate": 0.627906976744186
+          },
+          {
+            "lower": 0.7,
+            "upper": 0.8,
+            "count": 921,
+            "mean_predicted": 0.7459553872743591,
+            "observed_home_win_rate": 0.738327904451683
+          },
+          {
+            "lower": 0.8,
+            "upper": 0.9,
+            "count": 387,
+            "mean_predicted": 0.8383010669480814,
+            "observed_home_win_rate": 0.8320413436692506
+          },
+          {
+            "lower": 0.9,
+            "upper": 1.0,
+            "count": 32,
+            "mean_predicted": 0.916473971166848,
+            "observed_home_win_rate": 0.9375
+          }
+        ],
+        "confidence_intervals_95": {
+          "accuracy": [
+            0.6377441704089112,
+            0.6636012712322221
+          ],
+          "brier_score": [
+            0.21587228393190555,
+            0.224225924436183
+          ],
+          "log_loss": [
+            0.6210243348103598,
+            0.6396770719168192
+          ],
+          "expected_calibration_error": [
+            0.013765958320717532,
+            0.033973481289893415
+          ]
+        },
+        "bootstrap_clusters": 361
+      },
+      "delta_model_2_minus_model_1": {
+        "accuracy": {
+          "estimate": 0.023037228160707635,
+          "confidence_interval_95": [
+            0.014221600059149542,
+            0.032034766349854124
+          ],
+          "better_direction": "higher",
+          "evidence": "supports_improvement"
+        },
+        "brier_score": {
+          "estimate": -0.0037888602453507447,
+          "confidence_interval_95": [
+            -0.005484468214390346,
+            -0.001951740673875661
+          ],
+          "better_direction": "lower",
+          "evidence": "supports_improvement"
+        },
+        "log_loss": {
+          "estimate": -0.008476135910769234,
+          "confidence_interval_95": [
+            -0.01225945929944483,
+            -0.004336890025958204
+          ],
+          "better_direction": "lower",
+          "evidence": "supports_improvement"
+        },
+        "expected_calibration_error": {
+          "estimate": -0.0023800095830932046,
+          "confidence_interval_95": [
+            -0.01373221112330809,
+            0.010872726868651329
+          ],
+          "better_direction": "lower",
+          "evidence": "inconclusive"
+        }
+      }
+    },
+    "holdout": {
+      "games": 271,
+      "bootstrap_clusters": 18,
+      "model_1": {
+        "accuracy": 0.6162361623616236,
+        "brier_score": 0.22198070508863552,
+        "log_loss": 0.6323096904592099,
+        "games": 271,
+        "mean_predicted_home_win": 0.5608034768159551,
+        "observed_home_win_rate": 0.5387453874538746,
+        "expected_calibration_error": 0.05257834001863256,
+        "reliability_bins": [
+          {
+            "lower": 0.0,
+            "upper": 0.1,
+            "count": 0,
+            "mean_predicted": null,
+            "observed_home_win_rate": null
+          },
+          {
+            "lower": 0.1,
+            "upper": 0.2,
+            "count": 1,
+            "mean_predicted": 0.1950439615831663,
+            "observed_home_win_rate": 0.0
+          },
+          {
+            "lower": 0.2,
+            "upper": 0.3,
+            "count": 15,
+            "mean_predicted": 0.2700305053334497,
+            "observed_home_win_rate": 0.13333333333333333
+          },
+          {
+            "lower": 0.3,
+            "upper": 0.4,
+            "count": 28,
+            "mean_predicted": 0.34853364745639054,
+            "observed_home_win_rate": 0.35714285714285715
+          },
+          {
+            "lower": 0.4,
+            "upper": 0.5,
+            "count": 47,
+            "mean_predicted": 0.45875364996791396,
+            "observed_home_win_rate": 0.48936170212765956
+          },
+          {
+            "lower": 0.5,
+            "upper": 0.6,
+            "count": 78,
+            "mean_predicted": 0.5488538585564464,
+            "observed_home_win_rate": 0.48717948717948717
+          },
+          {
+            "lower": 0.6,
+            "upper": 0.7,
+            "count": 39,
+            "mean_predicted": 0.6497579095112981,
+            "observed_home_win_rate": 0.6666666666666666
+          },
+          {
+            "lower": 0.7,
+            "upper": 0.8,
+            "count": 46,
+            "mean_predicted": 0.7403724711325848,
+            "observed_home_win_rate": 0.6739130434782609
+          },
+          {
+            "lower": 0.8,
+            "upper": 0.9,
+            "count": 17,
+            "mean_predicted": 0.8355049345779816,
+            "observed_home_win_rate": 0.9411764705882353
+          },
+          {
+            "lower": 0.9,
+            "upper": 1.0,
+            "count": 0,
+            "mean_predicted": null,
+            "observed_home_win_rate": null
+          }
+        ],
+        "confidence_intervals_95": {
+          "accuracy": [
+            0.5604323308270677,
+            0.6750949152090799
+          ],
+          "brier_score": [
+            0.20647934203775942,
+            0.2394362418346572
+          ],
+          "log_loss": [
+            0.5989553731421388,
+            0.6707724539649302
+          ],
+          "expected_calibration_error": [
+            0.041456270584618475,
+            0.12056425778678741
+          ]
+        },
+        "bootstrap_clusters": 18
+      },
+      "model_2": {
+        "accuracy": 0.6236162361623616,
+        "brier_score": 0.21992821046199032,
+        "log_loss": 0.6269471196606302,
+        "games": 271,
+        "mean_predicted_home_win": 0.5615298992700175,
+        "observed_home_win_rate": 0.5387453874538746,
+        "expected_calibration_error": 0.059383341209037196,
+        "reliability_bins": [
+          {
+            "lower": 0.0,
+            "upper": 0.1,
+            "count": 0,
+            "mean_predicted": null,
+            "observed_home_win_rate": null
+          },
+          {
+            "lower": 0.1,
+            "upper": 0.2,
+            "count": 3,
+            "mean_predicted": 0.18958846519557904,
+            "observed_home_win_rate": 0.0
+          },
+          {
+            "lower": 0.2,
+            "upper": 0.3,
+            "count": 20,
+            "mean_predicted": 0.2543236536330033,
+            "observed_home_win_rate": 0.25
+          },
+          {
+            "lower": 0.3,
+            "upper": 0.4,
+            "count": 33,
+            "mean_predicted": 0.353034790205602,
+            "observed_home_win_rate": 0.3333333333333333
+          },
+          {
+            "lower": 0.4,
+            "upper": 0.5,
+            "count": 49,
+            "mean_predicted": 0.4575575352734942,
+            "observed_home_win_rate": 0.5102040816326531
+          },
+          {
+            "lower": 0.5,
+            "upper": 0.6,
+            "count": 50,
+            "mean_predicted": 0.5547691257638183,
+            "observed_home_win_rate": 0.5
+          },
+          {
+            "lower": 0.6,
+            "upper": 0.7,
+            "count": 43,
+            "mean_predicted": 0.6534346344534931,
+            "observed_home_win_rate": 0.5116279069767442
+          },
+          {
+            "lower": 0.7,
+            "upper": 0.8,
+            "count": 51,
+            "mean_predicted": 0.7449453327488063,
+            "observed_home_win_rate": 0.7254901960784313
+          },
+          {
+            "lower": 0.8,
+            "upper": 0.9,
+            "count": 21,
+            "mean_predicted": 0.8431619890990723,
+            "observed_home_win_rate": 0.9523809523809523
+          },
+          {
+            "lower": 0.9,
+            "upper": 1.0,
+            "count": 1,
+            "mean_predicted": 0.9141376177810968,
+            "observed_home_win_rate": 1.0
+          }
+        ],
+        "confidence_intervals_95": {
+          "accuracy": [
+            0.567270013568521,
+            0.6801508172971791
+          ],
+          "brier_score": [
+            0.20091885708399804,
+            0.24059103743262467
+          ],
+          "log_loss": [
+            0.5851358378461743,
+            0.6730217499867847
+          ],
+          "expected_calibration_error": [
+            0.04753358200518498,
+            0.13029838318218454
+          ]
+        },
+        "bootstrap_clusters": 18
+      },
+      "delta_model_2_minus_model_1": {
+        "accuracy": {
+          "estimate": 0.0073800738007380184,
+          "confidence_interval_95": [
+            -0.026022304832713727,
+            0.03731692660294033
+          ],
+          "better_direction": "higher",
+          "evidence": "inconclusive"
+        },
+        "brier_score": {
+          "estimate": -0.002052494626645196,
+          "confidence_interval_95": [
+            -0.009810851167816274,
+            0.00510219695364503
+          ],
+          "better_direction": "lower",
+          "evidence": "inconclusive"
+        },
+        "log_loss": {
+          "estimate": -0.005362570798579713,
+          "confidence_interval_95": [
+            -0.022273069621167055,
+            0.010407836658387622
+          ],
+          "better_direction": "lower",
+          "evidence": "inconclusive"
+        },
+        "expected_calibration_error": {
+          "estimate": 0.0068050011904046345,
+          "confidence_interval_95": [
+            -0.03231855295617813,
+            0.05139738898277192
+          ],
+          "better_direction": "lower",
+          "evidence": "inconclusive"
+        }
+      }
+    }
+  },
+  "methodology": [
+    "Both versions use identical scheduled games, decisive regular-season targets, expanding prior-season training IDs, season-opening cutoffs, StandardScaler, and fixed C=1 logistic regression. No missing-data intersection or split changes are allowed.",
+    "The first five seasons are training warm-up by default. Annual coefficients and scaling remain frozen; earlier same-season outcomes may enter later pregame form only after their strict availability cutoff.",
+    "The 2025 outcomes were previously reported for Model 1.0. It is a reused holdout excluded from Model 2.0 fitting, tuning, selection, and calibration; it cannot be described as a newly unseen test.",
+    "Probabilities are raw logistic outputs. Calibration is measured using ten fixed-width bins, not fitted on evaluation targets.",
+    "Individual and paired 95% percentile intervals resample identical season/week blocks with fixed forecasts, recomputing ECE in every sample. They omit model-refit uncertainty, cross-week dependence, and source revisions; per-metric intervals are not adjusted for multiple comparisons.",
+    "Paired deltas are Model 2.0 minus Model 1.0. Improvement evidence requires the corresponding interval to exclude zero in the favorable direction; no overall improvement or trading-value claim follows automatically.",
+    "Model 2.0 recomputes EPA and success locally using EP models trained only on prior seasons; published retrospective nflfastR EPA is excluded from its predictors. EP training provenance must be retained with the source metadata.",
+    "Historical raw source snapshots can be revised retrospectively. Pregame lagging and prior-season EP fitting enforce temporal cutoffs in the supplied data, but do not establish archived historical publication availability."
+  ],
+  "source_metadata": {
+    "schedule": {
+      "source_url": "https://raw.githubusercontent.com/nflverse/nfldata/master/data/games.csv",
+      "sha256": "5b8c66203d43c8faa93b0519b3ca078970aa0bdb39ccb51076dc99e5248f1486",
+      "fetched_at": "2026-10-26T19:39:22.532045+00:00",
+      "as_of": "2026-10-26T00:00:00+00:00",
+      "requested_as_of": "2026-10-26T00:00:00+00:00",
+      "feature_window": 8
+    },
+    "play_by_play": {
+      "1999": {
+        "season": 1999,
+        "source_url": "https://github.com/nflverse/nflverse-data/releases/download/pbp/play_by_play_1999.parquet",
+        "sha256": "dcf640fd18e4cdea03dba14c733bbcbd89796f100c509249b6ba5e3cff9e904c",
+        "fetched_at": "2026-10-27T05:23:38.931566+00:00",
+        "license": "CC-BY-4.0",
+        "license_url": "https://github.com/nflverse/nflverse-data/blob/main/LICENSE.md",
+        "bytes": 13364401
+      },
+      "2000": {
+        "season": 2000,
+        "source_url": "https://github.com/nflverse/nflverse-data/releases/download/pbp/play_by_play_2000.parquet",
+        "sha256": "595c3b0eefeb91afd6f08c629669823b31e63c34304c98faed09adf4fbd54706",
+        "fetched_at": "2026-10-27T05:23:38.922677+00:00",
+        "license": "CC-BY-4.0",
+        "license_url": "https://github.com/nflverse/nflverse-data/blob/main/LICENSE.md",
+        "bytes": 13404971
+      },
+      "2001": {
+        "season": 2001,
+        "source_url": "https://github.com/nflverse/nflverse-data/releases/download/pbp/play_by_play_2001.parquet",
+        "sha256": "43f0eea9f76de070a09382a5f3438b0ddb509c9ca48ac98dee77639e35724bca",
+        "fetched_at": "2026-10-27T05:23:38.586268+00:00",
+        "license": "CC-BY-4.0",
+        "license_url": "https://github.com/nflverse/nflverse-data/blob/main/LICENSE.md",
+        "bytes": 14007738
+      },
+      "2002": {
+        "season": 2002,
+        "source_url": "https://github.com/nflverse/nflverse-data/releases/download/pbp/play_by_play_2002.parquet",
+        "sha256": "4930befb7ce6597fa149d53e56565eb1377bad778a04fec1e6c21b0537c4aa17",
+        "fetched_at": "2026-10-27T05:23:38.867314+00:00",
+        "license": "CC-BY-4.0",
+        "license_url": "https://github.com/nflverse/nflverse-data/blob/main/LICENSE.md",
+        "bytes": 14742308
+      },
+      "2003": {
+        "season": 2003,
+        "source_url": "https://github.com/nflverse/nflverse-data/releases/download/pbp/play_by_play_2003.parquet",
+        "sha256": "a5bc20c69eee0c18364bea7fa1d3c2817941c8d9026058c694ab1ee73a2d279d",
+        "fetched_at": "2026-10-27T05:23:39.502494+00:00",
+        "license": "CC-BY-4.0",
+        "license_url": "https://github.com/nflverse/nflverse-data/blob/main/LICENSE.md",
+        "bytes": 14620361
+      },
+      "2004": {
+        "season": 2004,
+        "source_url": "https://github.com/nflverse/nflverse-data/releases/download/pbp/play_by_play_2004.parquet",
+        "sha256": "94658bc15788eda63a8cdba0d8f1c8aa9253fb5baa9c0d07b9c2e35e75ae6a03",
+        "fetched_at": "2026-10-27T05:23:40.010813+00:00",
+        "license": "CC-BY-4.0",
+        "license_url": "https://github.com/nflverse/nflverse-data/blob/main/LICENSE.md",
+        "bytes": 14568240
+      },
+      "2005": {
+        "season": 2005,
+        "source_url": "https://github.com/nflverse/nflverse-data/releases/download/pbp/play_by_play_2005.parquet",
+        "sha256": "1b93d868e286fc556192e642ec09ff76b29880b441674dcb0f3b51fb0064df92",
+        "fetched_at": "2026-10-27T05:23:40.083999+00:00",
+        "license": "CC-BY-4.0",
+        "license_url": "https://github.com/nflverse/nflverse-data/blob/main/LICENSE.md",
+        "bytes": 14612857
+      },
+      "2006": {
+        "season": 2006,
+        "source_url": "https://github.com/nflverse/nflverse-data/releases/download/pbp/play_by_play_2006.parquet",
+        "sha256": "f3d45c8cf41fa860ec22519490781eb19a00cf04cbf039b28af671bfcb11c2b4",
+        "fetched_at": "2026-10-27T05:23:40.173688+00:00",
+        "license": "CC-BY-4.0",
+        "license_url": "https://github.com/nflverse/nflverse-data/blob/main/LICENSE.md",
+        "bytes": 18555685
+      },
+      "2007": {
+        "season": 2007,
+        "source_url": "https://github.com/nflverse/nflverse-data/releases/download/pbp/play_by_play_2007.parquet",
+        "sha256": "bcfded2ff41b221617e38e48cbc56fd797f336363436ed5b5da17659caede9a9",
+        "fetched_at": "2026-10-27T05:23:40.410353+00:00",
+        "license": "CC-BY-4.0",
+        "license_url": "https://github.com/nflverse/nflverse-data/blob/main/LICENSE.md",
+        "bytes": 18716524
+      },
+      "2008": {
+        "season": 2008,
+        "source_url": "https://github.com/nflverse/nflverse-data/releases/download/pbp/play_by_play_2008.parquet",
+        "sha256": "f625e836a0117698feaad1a6e84f4ab341ff03197c1904313836ef7313af0f07",
+        "fetched_at": "2026-10-27T05:23:41.728817+00:00",
+        "license": "CC-BY-4.0",
+        "license_url": "https://github.com/nflverse/nflverse-data/blob/main/LICENSE.md",
+        "bytes": 18565820
+      },
+      "2009": {
+        "season": 2009,
+        "source_url": "https://github.com/nflverse/nflverse-data/releases/download/pbp/play_by_play_2009.parquet",
+        "sha256": "17ba96f594a7b84c86060a99a3082158ebab206672d6c16036a069829d77dee7",
+        "fetched_at": "2026-10-27T05:23:41.707458+00:00",
+        "license": "CC-BY-4.0",
+        "license_url": "https://github.com/nflverse/nflverse-data/blob/main/LICENSE.md",
+        "bytes": 18905386
+      },
+      "2010": {
+        "season": 2010,
+        "source_url": "https://github.com/nflverse/nflverse-data/releases/download/pbp/play_by_play_2010.parquet",
+        "sha256": "d2ef9c407319719910ad8de8c4c1b88f0ea945ffb3f78f48ef32fa3ed3a7573b",
+        "fetched_at": "2026-10-27T05:23:41.757098+00:00",
+        "license": "CC-BY-4.0",
+        "license_url": "https://github.com/nflverse/nflverse-data/blob/main/LICENSE.md",
+        "bytes": 19059048
+      },
+      "2011": {
+        "season": 2011,
+        "source_url": "https://github.com/nflverse/nflverse-data/releases/download/pbp/play_by_play_2011.parquet",
+        "sha256": "c54753b8137b88dab260489b1462cbf1309c3d11741eb8d10e5f1b0a9b8795b1",
+        "fetched_at": "2026-10-27T05:23:41.436657+00:00",
+        "license": "CC-BY-4.0",
+        "license_url": "https://github.com/nflverse/nflverse-data/blob/main/LICENSE.md",
+        "bytes": 19117830
+      },
+      "2012": {
+        "season": 2012,
+        "source_url": "https://github.com/nflverse/nflverse-data/releases/download/pbp/play_by_play_2012.parquet",
+        "sha256": "447b90789104aac70427ec9d3b51df7247234029d0ecabd269279369b1cc6278",
+        "fetched_at": "2026-10-27T05:23:42.495708+00:00",
+        "license": "CC-BY-4.0",
+        "license_url": "https://github.com/nflverse/nflverse-data/blob/main/LICENSE.md",
+        "bytes": 19322039
+      },
+      "2013": {
+        "season": 2013,
+        "source_url": "https://github.com/nflverse/nflverse-data/releases/download/pbp/play_by_play_2013.parquet",
+        "sha256": "f454605a1983b3946baf0ffadf3a0b9f5e04735c4b84732e0483f2049a780d00",
+        "fetched_at": "2026-10-27T05:23:43.398724+00:00",
+        "license": "CC-BY-4.0",
+        "license_url": "https://github.com/nflverse/nflverse-data/blob/main/LICENSE.md",
+        "bytes": 19521610
+      },
+      "2014": {
+        "season": 2014,
+        "source_url": "https://github.com/nflverse/nflverse-data/releases/download/pbp/play_by_play_2014.parquet",
+        "sha256": "54c01408d8f0ff9e013a4ea51428b91d610101f72545d082e932f5710e2fb4f7",
+        "fetched_at": "2026-10-27T05:23:43.345254+00:00",
+        "license": "CC-BY-4.0",
+        "license_url": "https://github.com/nflverse/nflverse-data/blob/main/LICENSE.md",
+        "bytes": 19360792
+      },
+      "2015": {
+        "season": 2015,
+        "source_url": "https://github.com/nflverse/nflverse-data/releases/download/pbp/play_by_play_2015.parquet",
+        "sha256": "01b5ae7d06633a2e66b418404461a3d4ff055ad2f3a87d453cebcc8d3fda7ed9",
+        "fetched_at": "2026-10-27T05:23:43.148661+00:00",
+        "license": "CC-BY-4.0",
+        "license_url": "https://github.com/nflverse/nflverse-data/blob/main/LICENSE.md",
+        "bytes": 19545842
+      },
+      "2016": {
+        "season": 2016,
+        "source_url": "https://github.com/nflverse/nflverse-data/releases/download/pbp/play_by_play_2016.parquet",
+        "sha256": "95eba04e2145e3c1c8ca502f2a3a76cfb0a5990680c3fb480f02a74a45f54a3b",
+        "fetched_at": "2026-10-27T05:23:43.380201+00:00",
+        "license": "CC-BY-4.0",
+        "license_url": "https://github.com/nflverse/nflverse-data/blob/main/LICENSE.md",
+        "bytes": 19344382
+      },
+      "2017": {
+        "season": 2017,
+        "source_url": "https://github.com/nflverse/nflverse-data/releases/download/pbp/play_by_play_2017.parquet",
+        "sha256": "84eacd963c1fdd45965f6222c62e9329a7f3412f029d92c1ac5e34a1bb4d3710",
+        "fetched_at": "2026-10-27T05:23:44.123001+00:00",
+        "license": "CC-BY-4.0",
+        "license_url": "https://github.com/nflverse/nflverse-data/blob/main/LICENSE.md",
+        "bytes": 19050401
+      },
+      "2018": {
+        "season": 2018,
+        "source_url": "https://github.com/nflverse/nflverse-data/releases/download/pbp/play_by_play_2018.parquet",
+        "sha256": "2e6f2dce7c7ebd46e985cabe0c17eb72b39a77f98cb4478409294f50b5820150",
+        "fetched_at": "2026-10-27T05:23:44.948737+00:00",
+        "license": "CC-BY-4.0",
+        "license_url": "https://github.com/nflverse/nflverse-data/blob/main/LICENSE.md",
+        "bytes": 19072097
+      },
+      "2019": {
+        "season": 2019,
+        "source_url": "https://github.com/nflverse/nflverse-data/releases/download/pbp/play_by_play_2019.parquet",
+        "sha256": "60c3067017db2d28a78f66a79b657268be8578d9a5288e6a827efdcd7fe42540",
+        "fetched_at": "2026-10-27T05:23:44.491931+00:00",
+        "license": "CC-BY-4.0",
+        "license_url": "https://github.com/nflverse/nflverse-data/blob/main/LICENSE.md",
+        "bytes": 19119729
+      },
+      "2020": {
+        "season": 2020,
+        "source_url": "https://github.com/nflverse/nflverse-data/releases/download/pbp/play_by_play_2020.parquet",
+        "sha256": "8889f5d8782b5c5dce3c3644acdc0322b228a7e9cb13fa36cbac250e260e9f60",
+        "fetched_at": "2026-10-27T05:23:44.666668+00:00",
+        "license": "CC-BY-4.0",
+        "license_url": "https://github.com/nflverse/nflverse-data/blob/main/LICENSE.md",
+        "bytes": 19286459
+      },
+      "2021": {
+        "season": 2021,
+        "source_url": "https://github.com/nflverse/nflverse-data/releases/download/pbp/play_by_play_2021.parquet",
+        "sha256": "333ad34378e5339d5172717cc83378e908daf02c8699416ab3e17c2ec10f78d8",
+        "fetched_at": "2026-10-27T05:23:45.006795+00:00",
+        "license": "CC-BY-4.0",
+        "license_url": "https://github.com/nflverse/nflverse-data/blob/main/LICENSE.md",
+        "bytes": 20249925
+      },
+      "2022": {
+        "season": 2022,
+        "source_url": "https://github.com/nflverse/nflverse-data/releases/download/pbp/play_by_play_2022.parquet",
+        "sha256": "931121d8897779d7944e2a293e92ed8799c8e5cceef84096ac42339003fedc09",
+        "fetched_at": "2026-10-27T05:23:45.553031+00:00",
+        "license": "CC-BY-4.0",
+        "license_url": "https://github.com/nflverse/nflverse-data/blob/main/LICENSE.md",
+        "bytes": 20426548
+      },
+      "2023": {
+        "season": 2023,
+        "source_url": "https://github.com/nflverse/nflverse-data/releases/download/pbp/play_by_play_2023.parquet",
+        "sha256": "bd3484731408def6b0ec93225bba2bd7b2c65769ca707a2b9444d891abdc6776",
+        "fetched_at": "2026-10-27T05:23:45.716379+00:00",
+        "license": "CC-BY-4.0",
+        "license_url": "https://github.com/nflverse/nflverse-data/blob/main/LICENSE.md",
+        "bytes": 20534088
+      },
+      "2024": {
+        "season": 2024,
+        "source_url": "https://github.com/nflverse/nflverse-data/releases/download/pbp/play_by_play_2024.parquet",
+        "sha256": "3fd2896bc0b911b615142d2f1fabae54a4bbba5ab7b73b28187b118ef8af6a3b",
+        "fetched_at": "2026-10-27T05:23:45.867230+00:00",
+        "license": "CC-BY-4.0",
+        "license_url": "https://github.com/nflverse/nflverse-data/blob/main/LICENSE.md",
+        "bytes": 20597560
+      },
+      "2025": {
+        "season": 2025,
+        "source_url": "https://github.com/nflverse/nflverse-data/releases/download/pbp/play_by_play_2025.parquet",
+        "sha256": "c6ecedd6d678cc37ed316b23ef84ee1ec6abb69c514bb11868a7ebd5a367df29",
+        "fetched_at": "2026-10-27T05:26:56.334967+00:00",
+        "license": "CC-BY-4.0",
+        "license_url": "https://github.com/nflverse/nflverse-data/blob/main/LICENSE.md",
+        "bytes": 20337029
+      }
+    },
+    "causal_ep": {
+      "ep_version": "causal-remaining-half-ep-v1",
+      "definition": "Chronological net remaining-half EP, distinct from nflfastR next-score EP",
+      "raw_upstream_epa_used": false,
+      "source_code_sha256": "071716577a0c624b8334392e4f7dce0d45d603981a7d2fb57894789c4b33e9ae",
+      "feature_columns": [
+        "yardline_100",
+        "down",
+        "ydstogo",
+        "half_seconds_remaining",
+        "score_differential",
+        "posteam_timeouts_remaining",
+        "defteam_timeouts_remaining"
+      ],
+      "model_parameters": {
+        "max_iter": 60,
+        "max_leaf_nodes": 15,
+        "max_bins": 64,
+        "l2_regularization": 10.0,
+        "random_state": 42,
+        "early_stopping": false
+      },
+      "annual_fit_audit": [
+        {
+          "season": 1999,
+          "training_seasons": [],
+          "training_cutoff_at": "1999-09-12T04:00:00+00:00",
+          "train_max_result_available_at": null,
+          "training_games": 0,
+          "training_rows": 0,
+          "training_game_ids_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "cache_key": "c680e32b522d81cdf9b714231d51e9d720d2b48b2ca4c5c2f0f64297be1c4c0e",
+          "epa_sha256": "1938084d896e718ced424e19213f8ba9612bcfe5a3f2eb3027654376c675d513",
+          "model_sha256": null,
+          "model_kind": "zero-EP-warmup",
+          "total_rows": 46136,
+          "valued_rows": 39100
+        },
+        {
+          "season": 2000,
+          "training_seasons": [
+            1999
+          ],
+          "training_cutoff_at": "2000-09-03T17:00:00+00:00",
+          "train_max_result_available_at": "2000-02-01T04:59:00+00:00",
+          "training_games": 258,
+          "training_rows": 39100,
+          "training_game_ids_sha256": "bba6fb77fb51e6ee560085a4f1c41bdcbac9ae9d02a8a051c56e5ea34f10a0f6",
+          "cache_key": "a9001a1c667bc8da1a21c604ca4cb5a5c9f741d2ed6fa2a37df307b5e78e0014",
+          "epa_sha256": "8b4d8f5dfddd967b936cf99010b221e0db01fc0986b24c91e6430576429e7a2f",
+          "model_sha256": "0fa55fadc86b2d9296f70fe8f37682caba11729a9d294f25ff6232205212754b",
+          "model_kind": "prior-three-seasons-hist-gradient-boosting",
+          "total_rows": 45491,
+          "valued_rows": 38301
+        },
+        {
+          "season": 2001,
+          "training_seasons": [
+            1999,
+            2000
+          ],
+          "training_cutoff_at": "2001-09-09T17:00:00+00:00",
+          "train_max_result_available_at": "2001-01-29T23:18:00+00:00",
+          "training_games": 515,
+          "training_rows": 77401,
+          "training_game_ids_sha256": "ff22391dda81cfc67b8781bd1cefd66d15f867ee11be8a132d6c418e49c37f14",
+          "cache_key": "1ede788caae90ece85984fd0eba2d1c13e74492bc62d72ec87d48cd12f51e1ca",
+          "epa_sha256": "4a13637f8a66d986f16e800711d89d4eb6d6da14882abd1e3785ed4f6bf66f00",
+          "model_sha256": "0965527cbc7233a93e69f5f0c7fb39faccfacfcbb3e4c2dbad0d6e6f1948fb17",
+          "model_kind": "prior-three-seasons-hist-gradient-boosting",
+          "total_rows": 44969,
+          "valued_rows": 38190
+        },
+        {
+          "season": 2002,
+          "training_seasons": [
+            1999,
+            2000,
+            2001
+          ],
+          "training_cutoff_at": "2002-09-06T00:30:00+00:00",
+          "train_max_result_available_at": "2002-02-04T23:40:00+00:00",
+          "training_games": 774,
+          "training_rows": 115591,
+          "training_game_ids_sha256": "4eac77648d708393c0883833fe6fc108cdb8a7001e9a006ed98efc08a9cea048",
+          "cache_key": "52a6b08894c7e096d9639b1db07fbc0dc06edac3baa6bfa8a23b06326483dd7c",
+          "epa_sha256": "d036528849de8e5b82e8338a9c7ac76102b1b0d66f686438b939abfc92ec10b4",
+          "model_sha256": "e60ee6d43e5fe6731f38cb1ad4eac99a99c0e16467e94707a635c452c7f8c4a8",
+          "model_kind": "prior-three-seasons-hist-gradient-boosting",
+          "total_rows": 47355,
+          "valued_rows": 40056
+        },
+        {
+          "season": 2003,
+          "training_seasons": [
+            2000,
+            2001,
+            2002
+          ],
+          "training_cutoff_at": "2003-09-04T13:00:00+00:00",
+          "train_max_result_available_at": "2003-01-27T23:18:00+00:00",
+          "training_games": 783,
+          "training_rows": 116547,
+          "training_game_ids_sha256": "689713c412c45d9ccd9efe97d3a2f01de59eeffc0fba75f8db74ff79f875ecc9",
+          "cache_key": "681acbea57a1198d20184723fbf1f06c95ea173929d3b543768e49f595189ac1",
+          "epa_sha256": "0e88f1f103950631f55f6a26c13b91c76a006586bbc65fb24bb744e3a9392a0b",
+          "model_sha256": "87fdbd4578a549c6d56f633d560b2190156421dcbc057284cda9d16d63e04b52",
+          "model_kind": "prior-three-seasons-hist-gradient-boosting",
+          "total_rows": 46811,
+          "valued_rows": 39705
+        },
+        {
+          "season": 2004,
+          "training_seasons": [
+            2001,
+            2002,
+            2003
+          ],
+          "training_cutoff_at": "2004-09-09T13:00:00+00:00",
+          "train_max_result_available_at": "2004-02-02T23:25:00+00:00",
+          "training_games": 793,
+          "training_rows": 117951,
+          "training_game_ids_sha256": "d778cb4d76ac33fc7ee83d8b1a2a16015e54df7ed194a5f4c089bd6f207ef13e",
+          "cache_key": "d3ef64503eade1ee70c55e680cc2f144bd629967b60b92827c31f92f7e76e2bd",
+          "epa_sha256": "fd7b7cf24bcc49065e6aef16291a8f1082a7c459d569a004af5d5a0ea89cd8fd",
+          "model_sha256": "cb974ddcb050d4741483dbd93ca4e7a15fb4687abfc6e09a0e725a8d9078394a",
+          "model_kind": "prior-three-seasons-hist-gradient-boosting",
+          "total_rows": 46705,
+          "valued_rows": 39563
+        },
+        {
+          "season": 2005,
+          "training_seasons": [
+            2002,
+            2003,
+            2004
+          ],
+          "training_cutoff_at": "2005-09-08T13:00:00+00:00",
+          "train_max_result_available_at": "2005-02-07T23:30:00+00:00",
+          "training_games": 801,
+          "training_rows": 119324,
+          "training_game_ids_sha256": "c7cfc56eb5cb3be1f5c75c7fb3876e2cc4bab78252a6502a206c9324395b584d",
+          "cache_key": "01392bc570f4cc6636248bc67ba27427535f8c2b75172bd40aaac6bfb56f7fae",
+          "epa_sha256": "546d081d1bc17e756dac4da42aa33ff23c623a9da2c25deb58a35b31fcd2c8ef",
+          "model_sha256": "6e7f263d16e855783359d266b76a32e17dbc596e1835b2517914b3f088a964ec",
+          "model_kind": "prior-three-seasons-hist-gradient-boosting",
+          "total_rows": 46823,
+          "valued_rows": 39780
+        },
+        {
+          "season": 2006,
+          "training_seasons": [
+            2003,
+            2004,
+            2005
+          ],
+          "training_cutoff_at": "2006-09-08T00:30:00+00:00",
+          "train_max_result_available_at": "2006-02-06T23:30:00+00:00",
+          "training_games": 801,
+          "training_rows": 119048,
+          "training_game_ids_sha256": "40c66ab2333594dea303e8dde465b5124b2f1cfc8d060a76eb59df9ed2fd7409",
+          "cache_key": "15aaf4148e3ca5cadbf12a7c3525acc4b970b343d7dfeedc2f3cc38e0ea8cec7",
+          "epa_sha256": "b60cd7486dce2a2400c43719685b432ef3db160e40540032c1081b756a7ed397",
+          "model_sha256": "193e266b318caf3f846940eb6aacb7590ea80a960689d51efe48e23cbbacda6b",
+          "model_kind": "prior-three-seasons-hist-gradient-boosting",
+          "total_rows": 46299,
+          "valued_rows": 39227
+        },
+        {
+          "season": 2007,
+          "training_seasons": [
+            2004,
+            2005,
+            2006
+          ],
+          "training_cutoff_at": "2007-09-07T00:30:00+00:00",
+          "train_max_result_available_at": "2007-02-05T23:25:00+00:00",
+          "training_games": 801,
+          "training_rows": 118570,
+          "training_game_ids_sha256": "95f1829cfe9c39cc70455f445ce072595a27a4e73948d21b4da6dc3682d96260",
+          "cache_key": "275358e38e54cf6559f43ae122b39fe1594685d860e10bededaf53ea8ea180ac",
+          "epa_sha256": "e108a4d0666f5db009082ec0fd26dee38b8f6aaf258fdadc83cacd1245c28445",
+          "model_sha256": "3ab563e3a83a3f152114be3e0827aceb2b210eb1ebc00a842726bd3a93a3b160",
+          "model_kind": "prior-three-seasons-hist-gradient-boosting",
+          "total_rows": 46266,
+          "valued_rows": 39097
+        },
+        {
+          "season": 2008,
+          "training_seasons": [
+            2005,
+            2006,
+            2007
+          ],
+          "training_cutoff_at": "2008-09-04T23:00:00+00:00",
+          "train_max_result_available_at": "2008-02-04T23:30:00+00:00",
+          "training_games": 801,
+          "training_rows": 118104,
+          "training_game_ids_sha256": "590b9771f069346f6d786d0cc55b49c14c33914cd636b30ed6f94be2d6c059c8",
+          "cache_key": "3869c50fedcd31ef6b53df7a45462556ad3413be170327cd593f0c47aa135c18",
+          "epa_sha256": "f73fd48fcb06a3ebc84fe2268af6602cd5f3381a80082dc3c36d0718b4680a5c",
+          "model_sha256": "c01dbb17bc86d48c40b2bfe94101d0d252943c18f45558bd6d6c28f597670014",
+          "model_kind": "prior-three-seasons-hist-gradient-boosting",
+          "total_rows": 45917,
+          "valued_rows": 38677
+        },
+        {
+          "season": 2009,
+          "training_seasons": [
+            2006,
+            2007,
+            2008
+          ],
+          "training_cutoff_at": "2009-09-11T00:30:00+00:00",
+          "train_max_result_available_at": "2009-02-02T23:31:00+00:00",
+          "training_games": 801,
+          "training_rows": 117001,
+          "training_game_ids_sha256": "98c22f08eb455328246ca60c0f727dcff5ce04ef0e5bcd22a4c030ecba642828",
+          "cache_key": "fe1236ebc9fa8d3cc7e6c35ee744e7956821dd5d533f58dca40981f2827a5785",
+          "epa_sha256": "974c8d1515d6b03cd6d37b90d96cce9754fbabbab89cc0e7185f7faeb7d85e2c",
+          "model_sha256": "c3ea5173abb6cd9e28eaf58a9cd0a8896994cbc2a9a032f39e492cdf5c40897f",
+          "model_kind": "prior-three-seasons-hist-gradient-boosting",
+          "total_rows": 46519,
+          "valued_rows": 39376
+        },
+        {
+          "season": 2010,
+          "training_seasons": [
+            2007,
+            2008,
+            2009
+          ],
+          "training_cutoff_at": "2010-09-10T00:30:00+00:00",
+          "train_max_result_available_at": "2010-02-08T23:32:00+00:00",
+          "training_games": 801,
+          "training_rows": 117150,
+          "training_game_ids_sha256": "659b80f79d1be1c0683857787d7759ece5ca69804b65e8e75ce3d288116b960c",
+          "cache_key": "6bb84da9bbcd7f7be3f7525bc51020119bcbcc5dce988b7fe21e6b80b3d8c466",
+          "epa_sha256": "08f9d691a56bf6675f5136a2f17d6f3088e59bb037bf9ef4392f8f1c9c1a8c25",
+          "model_sha256": "9730a973fe1dd3ed74d831212d441c7f1a9300dcd9670d5e1f6c2d6be620067a",
+          "model_kind": "prior-three-seasons-hist-gradient-boosting",
+          "total_rows": 46892,
+          "valued_rows": 39605
+        },
+        {
+          "season": 2011,
+          "training_seasons": [
+            2008,
+            2009,
+            2010
+          ],
+          "training_cutoff_at": "2011-09-09T00:30:00+00:00",
+          "train_max_result_available_at": "2011-02-07T23:30:00+00:00",
+          "training_games": 801,
+          "training_rows": 117658,
+          "training_game_ids_sha256": "03f18aa088066ad1594bcf8ddfd5e2a61cd634f0d51ecc9a9bae31f14abf5733",
+          "cache_key": "3e009a66b3f17aa65976e1532211f6f8f2d32b20888d02cdbdc62458307001c7",
+          "epa_sha256": "8b6aefa7031f2affde6abbe659a78f55ad542a0b6e38634dffc6415b99c7c473",
+          "model_sha256": "b48dfb4bdcda78f9b177d3cc52245fabb1ce5c0a01faf4eeb6927a4ff0a19b3f",
+          "model_kind": "prior-three-seasons-hist-gradient-boosting",
+          "total_rows": 47448,
+          "valued_rows": 40159
+        },
+        {
+          "season": 2012,
+          "training_seasons": [
+            2009,
+            2010,
+            2011
+          ],
+          "training_cutoff_at": "2012-09-06T00:30:00+00:00",
+          "train_max_result_available_at": "2012-02-06T23:30:00+00:00",
+          "training_games": 801,
+          "training_rows": 119140,
+          "training_game_ids_sha256": "106e3ff90b4ae812ea0e9e02174d39be2af2f71a3c7d755a3429e43073044da5",
+          "cache_key": "c1ee1a04ddec9368e85da1d619a6e3a45723d500ddf042e9350ba783835cc799",
+          "epa_sha256": "eea573407a0b8b25dc71e04cd00baa4ff4a0f5d33749168def15bb61f98c9add",
+          "model_sha256": "0f3946ff60f7c8cc9c11c941c3aaa27e8eda3cf8f3d558bfc247e3967d93674f",
+          "model_kind": "prior-three-seasons-hist-gradient-boosting",
+          "total_rows": 47834,
+          "valued_rows": 40426
+        },
+        {
+          "season": 2013,
+          "training_seasons": [
+            2010,
+            2011,
+            2012
+          ],
+          "training_cutoff_at": "2013-09-06T00:30:00+00:00",
+          "train_max_result_available_at": "2013-02-04T23:30:00+00:00",
+          "training_games": 801,
+          "training_rows": 120190,
+          "training_game_ids_sha256": "4fdbe4d642385c2057bd058dcff22bb7f5b3606ee4404e81244ee5d068d3c460",
+          "cache_key": "c9d03bbdd7aa5b3cd02b7829bfe304e91cb9cb7f1df45de3cdf9214d3b31c5db",
+          "epa_sha256": "2c693269322d800085f2f8928b29d8a617e05df5d9316625cf9ba5077d4ab432",
+          "model_sha256": "941199555c2a49316592d1f5b99c313bb8d0cc7e6e592a27a4add6198b477589",
+          "model_kind": "prior-three-seasons-hist-gradient-boosting",
+          "total_rows": 48158,
+          "valued_rows": 40628
+        },
+        {
+          "season": 2014,
+          "training_seasons": [
+            2011,
+            2012,
+            2013
+          ],
+          "training_cutoff_at": "2014-09-05T00:30:00+00:00",
+          "train_max_result_available_at": "2014-02-03T23:25:00+00:00",
+          "training_games": 801,
+          "training_rows": 121213,
+          "training_game_ids_sha256": "5d7a7506c1263802828280bd1231202022d964e1a1e0d1301c63982b9425b5f2",
+          "cache_key": "1f39d373333df5ed02d7c4495daa7908fdf327474c74bfcbbf310ad46c6a8d08",
+          "epa_sha256": "c4610468779868f131837b8fcd8548691d1d0cf8abe9597040ae2185997fd9d2",
+          "model_sha256": "de4f3290c58b6ab190be46c0a008640f94f667487f81da59067f72b47f44b93a",
+          "model_kind": "prior-three-seasons-hist-gradient-boosting",
+          "total_rows": 47629,
+          "valued_rows": 40300
+        },
+        {
+          "season": 2015,
+          "training_seasons": [
+            2012,
+            2013,
+            2014
+          ],
+          "training_cutoff_at": "2015-09-11T00:30:00+00:00",
+          "train_max_result_available_at": "2015-02-02T23:30:00+00:00",
+          "training_games": 801,
+          "training_rows": 121354,
+          "training_game_ids_sha256": "71cd0304f1ceab3cf6eef4ebd230fafa21c90806d55a2335716c46f772950287",
+          "cache_key": "91923ba85e2142970bff6a809e4092ffd549f972e19e8ea12f7663e0a3ed154e",
+          "epa_sha256": "5e1c51d331f74785f74b2638a4bf8feaeb9975ccfcbeb077cf280d18a5020f6b",
+          "model_sha256": "9db575b60ec0385c22cad90592686627d820506c0ca4e3704dac99ef533ab2f5",
+          "model_kind": "prior-three-seasons-hist-gradient-boosting",
+          "total_rows": 48122,
+          "valued_rows": 40679
+        },
+        {
+          "season": 2016,
+          "training_seasons": [
+            2013,
+            2014,
+            2015
+          ],
+          "training_cutoff_at": "2016-09-09T00:30:00+00:00",
+          "train_max_result_available_at": "2016-02-08T23:30:00+00:00",
+          "training_games": 801,
+          "training_rows": 121607,
+          "training_game_ids_sha256": "da1a856dff88c4ea32afdc521afc45913e53ceae04d8f889aed3711d540cd261",
+          "cache_key": "f61493e23f03e9ff7574e598c2ac23ea5c7017481a16783e74ecfd238ba54282",
+          "epa_sha256": "40dfde26029d5308ad774b4ccf9f6e422bd2b0baeb28d58b859663ccaf4a5a50",
+          "model_sha256": "dc72540a1436ed6c4dc4369cfd24093b9bf2b7eea3ab851ddbe6a5caea312530",
+          "model_kind": "prior-three-seasons-hist-gradient-boosting",
+          "total_rows": 47651,
+          "valued_rows": 40241
+        },
+        {
+          "season": 2017,
+          "training_seasons": [
+            2014,
+            2015,
+            2016
+          ],
+          "training_cutoff_at": "2017-09-08T00:30:00+00:00",
+          "train_max_result_available_at": "2017-02-06T23:30:00+00:00",
+          "training_games": 801,
+          "training_rows": 121220,
+          "training_game_ids_sha256": "c2f34bfa049383b5049c2e04122cd76dc436cb7fbb8fe8890b4a9be8bf0a35fc",
+          "cache_key": "3dbb1c7247977f144d2a0147ffedbe1f9c3b1959b95c091fb48b4f57e2df6e34",
+          "epa_sha256": "e923b8a07e3fd78c938f2011eafd93630871b6fbd1cd96d626d49fa5dd74d700",
+          "model_sha256": "f516a35a94f6072ef4520d349afa7b5c43c8d18f862ca112bd8aa97d4daac738",
+          "model_kind": "prior-three-seasons-hist-gradient-boosting",
+          "total_rows": 47245,
+          "valued_rows": 39970
+        },
+        {
+          "season": 2018,
+          "training_seasons": [
+            2015,
+            2016,
+            2017
+          ],
+          "training_cutoff_at": "2018-09-07T00:20:00+00:00",
+          "train_max_result_available_at": "2018-02-05T23:31:00+00:00",
+          "training_games": 801,
+          "training_rows": 120890,
+          "training_game_ids_sha256": "9ad0ee42e04c0d7843e5edd49fb71acac44bb544ea677d7e071fd64c6d3d4f82",
+          "cache_key": "c710ce8bccb63043908254b6c00991dd92676f97e69f84522e10e166331fee7d",
+          "epa_sha256": "5034ab3edbbc9d685e8fd29edb20529c393399ed86f55868a47a99729802367a",
+          "model_sha256": "a044fdcc74736f70ff3d2ada9c39c66853f2c0d27c3978a6e412a6c79393a941",
+          "model_kind": "prior-three-seasons-hist-gradient-boosting",
+          "total_rows": 47109,
+          "valued_rows": 39518
+        },
+        {
+          "season": 2019,
+          "training_seasons": [
+            2016,
+            2017,
+            2018
+          ],
+          "training_cutoff_at": "2019-09-06T00:20:00+00:00",
+          "train_max_result_available_at": "2019-02-04T23:30:00+00:00",
+          "training_games": 801,
+          "training_rows": 119729,
+          "training_game_ids_sha256": "785c6b9088bc3b8cf66c4ed4348083cbab5c2e56b3505e43b5cfa3d58f6ad60a",
+          "cache_key": "147583ad11bfc3e1acca98ef85055d22f4138e59962dffc3d82fe8ab054916cc",
+          "epa_sha256": "65de42450f7916663ab74224d077535288ec214a32e1e3bc4dbe9655d826495a",
+          "model_sha256": "8ec6bac5b67f46093ad2c478b00f488b016bc8ed825b24309bcdb7bbb0d7a929",
+          "model_kind": "prior-three-seasons-hist-gradient-boosting",
+          "total_rows": 47260,
+          "valued_rows": 39832
+        },
+        {
+          "season": 2020,
+          "training_seasons": [
+            2017,
+            2018,
+            2019
+          ],
+          "training_cutoff_at": "2020-09-11T00:20:00+00:00",
+          "train_max_result_available_at": "2020-02-03T23:30:00+00:00",
+          "training_games": 801,
+          "training_rows": 119320,
+          "training_game_ids_sha256": "160d2fdcee5f5d8772c4a11680b4f9fb4a09545ff8871760a7aca0cfb7aaa51a",
+          "cache_key": "20323179bf7b229b4347c777cd7d7cf01970e4d03c034163ecc71711178c9092",
+          "epa_sha256": "f611e60da3c770450be40ccef38d81c0fe2d13a7c47bcc6a8318c8201bca1b6a",
+          "model_sha256": "c22e1169e4903dd34232473fb9877a282db3b292beed7327406109ed3570436d",
+          "model_kind": "prior-three-seasons-hist-gradient-boosting",
+          "total_rows": 47705,
+          "valued_rows": 39901
+        },
+        {
+          "season": 2021,
+          "training_seasons": [
+            2018,
+            2019,
+            2020
+          ],
+          "training_cutoff_at": "2021-09-10T00:20:00+00:00",
+          "train_max_result_available_at": "2021-02-08T23:30:00+00:00",
+          "training_games": 803,
+          "training_rows": 119251,
+          "training_game_ids_sha256": "f4e0388ad44e5fe2b5b20e4a26915763f46969c1922c5abb1940619e8591d035",
+          "cache_key": "c9289b3723b9d939cfe907a88e8817f1226b5bb5174e91bec0e5a518b1d6917a",
+          "epa_sha256": "7acfe196f2c8902feef67bddf6f62f1b9827e07258a1c6dd8e6f5b4ff953807f",
+          "model_sha256": "8c7dca2c9371466a99c83ef5cd9a04aeb89903a7cc59ce4f130c5f886b4cc22e",
+          "model_kind": "prior-three-seasons-hist-gradient-boosting",
+          "total_rows": 49922,
+          "valued_rows": 41900
+        },
+        {
+          "season": 2022,
+          "training_seasons": [
+            2019,
+            2020,
+            2021
+          ],
+          "training_cutoff_at": "2022-09-09T00:20:00+00:00",
+          "train_max_result_available_at": "2022-02-14T23:30:00+00:00",
+          "training_games": 821,
+          "training_rows": 121633,
+          "training_game_ids_sha256": "264760cde7acc97ee895a4d120cd824889c3abe6255e95f027f1b8e5ca27e531",
+          "cache_key": "4f6078ce9bf32bc0b0897e7a613b3a126b2a9fd3119260bb70cba033217d7ded",
+          "epa_sha256": "cbc706baf6fb58a18c5101eb6d914c0689fc4e73fd9bcec9cbcf758a949fe634",
+          "model_sha256": "8339ed0e731fe1f36a18df6b133049871301fc82abea9ce01db215eb3c336b45",
+          "model_kind": "prior-three-seasons-hist-gradient-boosting",
+          "total_rows": 49434,
+          "valued_rows": 41604
+        },
+        {
+          "season": 2023,
+          "training_seasons": [
+            2020,
+            2021,
+            2022
+          ],
+          "training_cutoff_at": "2023-09-08T00:20:00+00:00",
+          "train_max_result_available_at": "2023-02-13T23:30:00+00:00",
+          "training_games": 838,
+          "training_rows": 123405,
+          "training_game_ids_sha256": "9817ee9bb0f23f137a8fa64918c4f098816466085cf7c07dbc96e1650cc452cc",
+          "cache_key": "b1a5e558ca9c809d2da7b74451972f77627f11447346b1b06d2779d8faf399bd",
+          "epa_sha256": "7950786bc67ce93bec0c39d4d945a56d436689ba5b9c9099600b09a0415ec69d",
+          "model_sha256": "5b6c98fd4ec2a599cc0992663eb0bd50f699ea63df5ce9255ab7b953e1cc67ca",
+          "model_kind": "prior-three-seasons-hist-gradient-boosting",
+          "total_rows": 49665,
+          "valued_rows": 41925
+        },
+        {
+          "season": 2024,
+          "training_seasons": [
+            2021,
+            2022,
+            2023
+          ],
+          "training_cutoff_at": "2024-09-06T00:20:00+00:00",
+          "train_max_result_available_at": "2024-02-12T23:30:00+00:00",
+          "training_games": 854,
+          "training_rows": 125429,
+          "training_game_ids_sha256": "fd46bb6a4214dfd6dd57779986458a613db1748c3a90b7c8c5ad9753f0c50a08",
+          "cache_key": "69c0ca214d7527fe8e6407b0f9abc6b2a3b1a76c42a6a2cc08ceb82033a13587",
+          "epa_sha256": "8ea2272fb199e7fbb8490990b45ea22c17147b95453436ab75ac960dba82f541",
+          "model_sha256": "20a23f434c0f0477a66a8ed913eace1e6782586812b86cd8aec9e65e9ef59d8a",
+          "model_kind": "prior-three-seasons-hist-gradient-boosting",
+          "total_rows": 49492,
+          "valued_rows": 41483
+        },
+        {
+          "season": 2025,
+          "training_seasons": [
+            2022,
+            2023,
+            2024
+          ],
+          "training_cutoff_at": "2025-09-05T00:20:00+00:00",
+          "train_max_result_available_at": "2025-02-10T23:30:00+00:00",
+          "training_games": 854,
+          "training_rows": 125012,
+          "training_game_ids_sha256": "91474e989b8e91891241f1ef535cc7d7248eb3a76402e9132f2458326f322b3c",
+          "cache_key": "53b1ba52cd08439ee4d3da59ed35296405edf08eafc14d874abb8989798fa927",
+          "epa_sha256": "1d04113dcce2fc8e463e7f94139bee1cc27b18f8b9aed8ca98029f4b578cfca7",
+          "model_sha256": "30aeaa260541708948d00c255aa28d110ae8bffefab3e2a1dc3918390096d821",
+          "model_kind": "prior-three-seasons-hist-gradient-boosting",
+          "total_rows": 48771,
+          "valued_rows": 40778
+        }
+      ]
+    },
+    "pbp_coverage": [
+      {
+        "season": 1999,
+        "team_games": 516,
+        "eligible_plays": 32134,
+        "missing_epa_plays": 91
+      },
+      {
+        "season": 2000,
+        "team_games": 514,
+        "eligible_plays": 31965,
+        "missing_epa_plays": 87
+      },
+      {
+        "season": 2001,
+        "team_games": 518,
+        "eligible_plays": 31977,
+        "missing_epa_plays": 91
+      },
+      {
+        "season": 2002,
+        "team_games": 534,
+        "eligible_plays": 33337,
+        "missing_epa_plays": 95
+      },
+      {
+        "season": 2003,
+        "team_games": 534,
+        "eligible_plays": 32712,
+        "missing_epa_plays": 67
+      },
+      {
+        "season": 2004,
+        "team_games": 534,
+        "eligible_plays": 32428,
+        "missing_epa_plays": 72
+      },
+      {
+        "season": 2005,
+        "team_games": 534,
+        "eligible_plays": 32446,
+        "missing_epa_plays": 52
+      },
+      {
+        "season": 2006,
+        "team_games": 534,
+        "eligible_plays": 32467,
+        "missing_epa_plays": 41
+      },
+      {
+        "season": 2007,
+        "team_games": 534,
+        "eligible_plays": 32586,
+        "missing_epa_plays": 57
+      },
+      {
+        "season": 2008,
+        "team_games": 534,
+        "eligible_plays": 32191,
+        "missing_epa_plays": 66
+      },
+      {
+        "season": 2009,
+        "team_games": 534,
+        "eligible_plays": 32680,
+        "missing_epa_plays": 60
+      },
+      {
+        "season": 2010,
+        "team_games": 534,
+        "eligible_plays": 32848,
+        "missing_epa_plays": 54
+      },
+      {
+        "season": 2011,
+        "team_games": 534,
+        "eligible_plays": 33138,
+        "missing_epa_plays": 53
+      },
+      {
+        "season": 2012,
+        "team_games": 534,
+        "eligible_plays": 33490,
+        "missing_epa_plays": 59
+      },
+      {
+        "season": 2013,
+        "team_games": 534,
+        "eligible_plays": 33732,
+        "missing_epa_plays": 72
+      },
+      {
+        "season": 2014,
+        "team_games": 534,
+        "eligible_plays": 33248,
+        "missing_epa_plays": 56
+      },
+      {
+        "season": 2015,
+        "team_games": 534,
+        "eligible_plays": 33480,
+        "missing_epa_plays": 99
+      },
+      {
+        "season": 2016,
+        "team_games": 534,
+        "eligible_plays": 33273,
+        "missing_epa_plays": 107
+      },
+      {
+        "season": 2017,
+        "team_games": 534,
+        "eligible_plays": 32908,
+        "missing_epa_plays": 86
+      },
+      {
+        "season": 2018,
+        "team_games": 534,
+        "eligible_plays": 32721,
+        "missing_epa_plays": 136
+      },
+      {
+        "season": 2019,
+        "team_games": 534,
+        "eligible_plays": 32960,
+        "missing_epa_plays": 116
+      },
+      {
+        "season": 2020,
+        "team_games": 538,
+        "eligible_plays": 33760,
+        "missing_epa_plays": 140
+      },
+      {
+        "season": 2021,
+        "team_games": 570,
+        "eligible_plays": 35232,
+        "missing_epa_plays": 158
+      },
+      {
+        "season": 2022,
+        "team_games": 568,
+        "eligible_plays": 34949,
+        "missing_epa_plays": 126
+      },
+      {
+        "season": 2023,
+        "team_games": 570,
+        "eligible_plays": 35095,
+        "missing_epa_plays": 126
+      },
+      {
+        "season": 2024,
+        "team_games": 570,
+        "eligible_plays": 34514,
+        "missing_epa_plays": 147
+      },
+      {
+        "season": 2025,
+        "team_games": 570,
+        "eligible_plays": 34101,
+        "missing_epa_plays": 125
+      }
+    ]
+  },
+  "per_season": [
+    {
+      "season": 2004,
+      "games": 256,
+      "model_1": {
+        "accuracy": 0.62109375,
+        "brier_score": 0.22630823158642388,
+        "log_loss": 0.6432707100360682,
+        "expected_calibration_error": 0.024269902802941196
+      },
+      "model_2": {
+        "accuracy": 0.6484375,
+        "brier_score": 0.22445012239905388,
+        "log_loss": 0.6396926172033235,
+        "expected_calibration_error": 0.0455357969019816
+      }
+    },
+    {
+      "season": 2005,
+      "games": 256,
+      "model_1": {
+        "accuracy": 0.63671875,
+        "brier_score": 0.21852059675820587,
+        "log_loss": 0.6357216379211853,
+        "expected_calibration_error": 0.06733457013161606
+      },
+      "model_2": {
+        "accuracy": 0.68359375,
+        "brier_score": 0.2193771261482131,
+        "log_loss": 0.636125514783803,
+        "expected_calibration_error": 0.07713503788353654
+      }
+    },
+    {
+      "season": 2006,
+      "games": 256,
+      "model_1": {
+        "accuracy": 0.5234375,
+        "brier_score": 0.24331222414240683,
+        "log_loss": 0.6800036684542696,
+        "expected_calibration_error": 0.12043620591509811
+      },
+      "model_2": {
+        "accuracy": 0.546875,
+        "brier_score": 0.24230356185417817,
+        "log_loss": 0.6778603350510923,
+        "expected_calibration_error": 0.10328517559149275
+      }
+    },
+    {
+      "season": 2007,
+      "games": 256,
+      "model_1": {
+        "accuracy": 0.65234375,
+        "brier_score": 0.21925436494080153,
+        "log_loss": 0.6282241784685132,
+        "expected_calibration_error": 0.062250293765887074
+      },
+      "model_2": {
+        "accuracy": 0.65234375,
+        "brier_score": 0.21733821066119613,
+        "log_loss": 0.6219151015672894,
+        "expected_calibration_error": 0.07166227691211016
+      }
+    },
+    {
+      "season": 2008,
+      "games": 255,
+      "model_1": {
+        "accuracy": 0.6392156862745098,
+        "brier_score": 0.22128603025409913,
+        "log_loss": 0.6340780393405673,
+        "expected_calibration_error": 0.040083378820106874
+      },
+      "model_2": {
+        "accuracy": 0.6784313725490196,
+        "brier_score": 0.21341403896796818,
+        "log_loss": 0.6174494029901983,
+        "expected_calibration_error": 0.05970708543068292
+      }
+    },
+    {
+      "season": 2009,
+      "games": 256,
+      "model_1": {
+        "accuracy": 0.640625,
+        "brier_score": 0.20864831550825472,
+        "log_loss": 0.6034232164426534,
+        "expected_calibration_error": 0.060612909064990075
+      },
+      "model_2": {
+        "accuracy": 0.69140625,
+        "brier_score": 0.19965615026858874,
+        "log_loss": 0.5818567654807827,
+        "expected_calibration_error": 0.04496669083131937
+      }
+    },
+    {
+      "season": 2010,
+      "games": 256,
+      "model_1": {
+        "accuracy": 0.5859375,
+        "brier_score": 0.23693976753345208,
+        "log_loss": 0.6659820499982329,
+        "expected_calibration_error": 0.04219629904424614
+      },
+      "model_2": {
+        "accuracy": 0.62890625,
+        "brier_score": 0.23259575396948262,
+        "log_loss": 0.6596706054270989,
+        "expected_calibration_error": 0.06277234382293734
+      }
+    },
+    {
+      "season": 2011,
+      "games": 256,
+      "model_1": {
+        "accuracy": 0.6875,
+        "brier_score": 0.21432611121052844,
+        "log_loss": 0.617022621305521,
+        "expected_calibration_error": 0.07856449686486074
+      },
+      "model_2": {
+        "accuracy": 0.66015625,
+        "brier_score": 0.21064759058121252,
+        "log_loss": 0.6074285684690035,
+        "expected_calibration_error": 0.05865549958493688
+      }
+    },
+    {
+      "season": 2012,
+      "games": 255,
+      "model_1": {
+        "accuracy": 0.6431372549019608,
+        "brier_score": 0.22125205044963275,
+        "log_loss": 0.6335130271649202,
+        "expected_calibration_error": 0.03428145560192311
+      },
+      "model_2": {
+        "accuracy": 0.6588235294117647,
+        "brier_score": 0.2177095498456003,
+        "log_loss": 0.6248986460847096,
+        "expected_calibration_error": 0.06202136623915459
+      }
+    },
+    {
+      "season": 2013,
+      "games": 255,
+      "model_1": {
+        "accuracy": 0.6470588235294118,
+        "brier_score": 0.2175295820285421,
+        "log_loss": 0.6235202496706026,
+        "expected_calibration_error": 0.08957418186133531
+      },
+      "model_2": {
+        "accuracy": 0.6549019607843137,
+        "brier_score": 0.21822798028765625,
+        "log_loss": 0.6248091931452965,
+        "expected_calibration_error": 0.040190088579808325
+      }
+    },
+    {
+      "season": 2014,
+      "games": 255,
+      "model_1": {
+        "accuracy": 0.6392156862745098,
+        "brier_score": 0.21355728357144355,
+        "log_loss": 0.615237072127238,
+        "expected_calibration_error": 0.05682053184780608
+      },
+      "model_2": {
+        "accuracy": 0.6941176470588235,
+        "brier_score": 0.20965566200544275,
+        "log_loss": 0.6066788654544158,
+        "expected_calibration_error": 0.044289665730605166
+      }
+    },
+    {
+      "season": 2015,
+      "games": 256,
+      "model_1": {
+        "accuracy": 0.63671875,
+        "brier_score": 0.23064075865425288,
+        "log_loss": 0.6528610069125593,
+        "expected_calibration_error": 0.055730790292055105
+      },
+      "model_2": {
+        "accuracy": 0.6328125,
+        "brier_score": 0.22940939121351756,
+        "log_loss": 0.6515010361997109,
+        "expected_calibration_error": 0.04304762825082523
+      }
+    },
+    {
+      "season": 2016,
+      "games": 254,
+      "model_1": {
+        "accuracy": 0.6259842519685039,
+        "brier_score": 0.22241660209532416,
+        "log_loss": 0.6353485619698569,
+        "expected_calibration_error": 0.05976759773837632
+      },
+      "model_2": {
+        "accuracy": 0.6653543307086615,
+        "brier_score": 0.2189356780966876,
+        "log_loss": 0.6269589998689591,
+        "expected_calibration_error": 0.07076303565161861
+      }
+    },
+    {
+      "season": 2017,
+      "games": 256,
+      "model_1": {
+        "accuracy": 0.65234375,
+        "brier_score": 0.2200429433544382,
+        "log_loss": 0.63031562617775,
+        "expected_calibration_error": 0.044453592859594
+      },
+      "model_2": {
+        "accuracy": 0.6796875,
+        "brier_score": 0.21489208995943526,
+        "log_loss": 0.6195260194574945,
+        "expected_calibration_error": 0.05776168446390581
+      }
+    },
+    {
+      "season": 2018,
+      "games": 254,
+      "model_1": {
+        "accuracy": 0.6535433070866141,
+        "brier_score": 0.2179257766938732,
+        "log_loss": 0.6258369115717519,
+        "expected_calibration_error": 0.046076191398715036
+      },
+      "model_2": {
+        "accuracy": 0.6692913385826772,
+        "brier_score": 0.21747635112116473,
+        "log_loss": 0.6253306726484748,
+        "expected_calibration_error": 0.05987861385929454
+      }
+    },
+    {
+      "season": 2019,
+      "games": 255,
+      "model_1": {
+        "accuracy": 0.6313725490196078,
+        "brier_score": 0.22467028333488806,
+        "log_loss": 0.6387565785655698,
+        "expected_calibration_error": 0.07259478027836345
+      },
+      "model_2": {
+        "accuracy": 0.6352941176470588,
+        "brier_score": 0.2222804450710053,
+        "log_loss": 0.633339151206131,
+        "expected_calibration_error": 0.05621208474239384
+      }
+    },
+    {
+      "season": 2020,
+      "games": 255,
+      "model_1": {
+        "accuracy": 0.615686274509804,
+        "brier_score": 0.22759651468816633,
+        "log_loss": 0.6462339909836649,
+        "expected_calibration_error": 0.0760042955532822
+      },
+      "model_2": {
+        "accuracy": 0.6352941176470588,
+        "brier_score": 0.2176671884374702,
+        "log_loss": 0.6250286953015016,
+        "expected_calibration_error": 0.0764030796694991
+      }
+    },
+    {
+      "season": 2021,
+      "games": 271,
+      "model_1": {
+        "accuracy": 0.6051660516605166,
+        "brier_score": 0.23277996989741345,
+        "log_loss": 0.6591966237521789,
+        "expected_calibration_error": 0.08051026978505632
+      },
+      "model_2": {
+        "accuracy": 0.6383763837638377,
+        "brier_score": 0.2232891684592349,
+        "log_loss": 0.6369437780119914,
+        "expected_calibration_error": 0.10213816169780941
+      }
+    },
+    {
+      "season": 2022,
+      "games": 269,
+      "model_1": {
+        "accuracy": 0.6245353159851301,
+        "brier_score": 0.22335071988121,
+        "log_loss": 0.6374788980303026,
+        "expected_calibration_error": 0.0623755747743923
+      },
+      "model_2": {
+        "accuracy": 0.6245353159851301,
+        "brier_score": 0.22493423085528486,
+        "log_loss": 0.6408642284580611,
+        "expected_calibration_error": 0.03944550505145792
+      }
+    },
+    {
+      "season": 2023,
+      "games": 272,
+      "model_1": {
+        "accuracy": 0.6029411764705882,
+        "brier_score": 0.23257653878030954,
+        "log_loss": 0.6567402016794291,
+        "expected_calibration_error": 0.04009918011021129
+      },
+      "model_2": {
+        "accuracy": 0.6360294117647058,
+        "brier_score": 0.2311851724773828,
+        "log_loss": 0.653995124715951,
+        "expected_calibration_error": 0.04227630056548444
+      }
+    },
+    {
+      "season": 2024,
+      "games": 272,
+      "model_1": {
+        "accuracy": 0.625,
+        "brier_score": 0.22662964519688344,
+        "log_loss": 0.6454111784864122,
+        "expected_calibration_error": 0.05827647076539982
+      },
+      "model_2": {
+        "accuracy": 0.6580882352941176,
+        "brier_score": 0.21496832481712272,
+        "log_loss": 0.6192843443708852,
+        "expected_calibration_error": 0.07193414470135176
+      }
+    },
+    {
+      "season": 2025,
+      "games": 271,
+      "model_1": {
+        "accuracy": 0.6162361623616236,
+        "brier_score": 0.22198070508863552,
+        "log_loss": 0.6323096904592099,
+        "expected_calibration_error": 0.05257834001863256
+      },
+      "model_2": {
+        "accuracy": 0.6236162361623616,
+        "brier_score": 0.21992821046199032,
+        "log_loss": 0.6269471196606302,
+        "expected_calibration_error": 0.059383341209037196
+      }
+    }
+  ],
+  "training_fold_audit": [
+    {
+      "season": 2004,
+      "training_games": 1255,
+      "training_seasons": [
+        1999,
+        2000,
+        2001,
+        2002,
+        2003
+      ],
+      "training_game_ids_sha256": "67845a0937c466608b7e5ea319276ec7bd56b4cfe9d4c201cce2873495376103",
+      "training_cutoff_at": "2004-09-09T13:00:00+00:00",
+      "train_max_result_available_at": "2003-12-30T01:30:00+00:00"
+    },
+    {
+      "season": 2005,
+      "training_games": 1511,
+      "training_seasons": [
+        1999,
+        2000,
+        2001,
+        2002,
+        2003,
+        2004
+      ],
+      "training_game_ids_sha256": "b0da98060617111b7a72e69b9e13c96132d56afc6e763badd71a7bb1e01a877d",
+      "training_cutoff_at": "2005-09-08T13:00:00+00:00",
+      "train_max_result_available_at": "2005-01-04T01:30:00+00:00"
+    },
+    {
+      "season": 2006,
+      "training_games": 1767,
+      "training_seasons": [
+        1999,
+        2000,
+        2001,
+        2002,
+        2003,
+        2004,
+        2005
+      ],
+      "training_game_ids_sha256": "8564b3c1950c3c9d6edd7f5c5babe0b9fa19a027e226b26410ebea47959be2bd",
+      "training_cutoff_at": "2006-09-08T00:30:00+00:00",
+      "train_max_result_available_at": "2006-01-03T01:30:00+00:00"
+    },
+    {
+      "season": 2007,
+      "training_games": 2023,
+      "training_seasons": [
+        1999,
+        2000,
+        2001,
+        2002,
+        2003,
+        2004,
+        2005,
+        2006
+      ],
+      "training_game_ids_sha256": "5e77b9757baf2f1499dd10a413508e46cfe9ba9aa79c3a05c1637e4068eac9c2",
+      "training_cutoff_at": "2007-09-07T00:30:00+00:00",
+      "train_max_result_available_at": "2007-01-02T01:15:00+00:00"
+    },
+    {
+      "season": 2008,
+      "training_games": 2279,
+      "training_seasons": [
+        1999,
+        2000,
+        2001,
+        2002,
+        2003,
+        2004,
+        2005,
+        2006,
+        2007
+      ],
+      "training_game_ids_sha256": "936987bb8fe124ad6713e693ca15888f3e3a835f9f4ca5058cf00545d94d380a",
+      "training_cutoff_at": "2008-09-04T23:00:00+00:00",
+      "train_max_result_available_at": "2008-01-01T01:25:00+00:00"
+    },
+    {
+      "season": 2009,
+      "training_games": 2534,
+      "training_seasons": [
+        1999,
+        2000,
+        2001,
+        2002,
+        2003,
+        2004,
+        2005,
+        2006,
+        2007,
+        2008
+      ],
+      "training_game_ids_sha256": "918927aa309a61aab991d2713f2e16fc82a951b9525729d07d933b41c169f310",
+      "training_cutoff_at": "2009-09-11T00:30:00+00:00",
+      "train_max_result_available_at": "2008-12-30T01:15:00+00:00"
+    },
+    {
+      "season": 2010,
+      "training_games": 2790,
+      "training_seasons": [
+        1999,
+        2000,
+        2001,
+        2002,
+        2003,
+        2004,
+        2005,
+        2006,
+        2007,
+        2008,
+        2009
+      ],
+      "training_game_ids_sha256": "42586d91a68a987cd31052a562c6675bd4e2b917d78a4a1963a04a78547487ef",
+      "training_cutoff_at": "2010-09-10T00:30:00+00:00",
+      "train_max_result_available_at": "2010-01-05T01:20:00+00:00"
+    },
+    {
+      "season": 2011,
+      "training_games": 3046,
+      "training_seasons": [
+        1999,
+        2000,
+        2001,
+        2002,
+        2003,
+        2004,
+        2005,
+        2006,
+        2007,
+        2008,
+        2009,
+        2010
+      ],
+      "training_game_ids_sha256": "89ac730bc1e26379edffa7355c5ab40361381a6b8a165c787a85da6763e240d1",
+      "training_cutoff_at": "2011-09-09T00:30:00+00:00",
+      "train_max_result_available_at": "2011-01-04T01:20:00+00:00"
+    },
+    {
+      "season": 2012,
+      "training_games": 3302,
+      "training_seasons": [
+        1999,
+        2000,
+        2001,
+        2002,
+        2003,
+        2004,
+        2005,
+        2006,
+        2007,
+        2008,
+        2009,
+        2010,
+        2011
+      ],
+      "training_game_ids_sha256": "7bc979bdd0da55e540c095438b7a18e4155fd177bedbbf0f907698e04c9764f4",
+      "training_cutoff_at": "2012-09-06T00:30:00+00:00",
+      "train_max_result_available_at": "2012-01-03T01:20:00+00:00"
+    },
+    {
+      "season": 2013,
+      "training_games": 3557,
+      "training_seasons": [
+        1999,
+        2000,
+        2001,
+        2002,
+        2003,
+        2004,
+        2005,
+        2006,
+        2007,
+        2008,
+        2009,
+        2010,
+        2011,
+        2012
+      ],
+      "training_game_ids_sha256": "4fdacd6e4b000126784ac4b4076a3c770965ed108fce77bf7d0ec04092df8e08",
+      "training_cutoff_at": "2013-09-06T00:30:00+00:00",
+      "train_max_result_available_at": "2013-01-01T01:20:00+00:00"
+    },
+    {
+      "season": 2014,
+      "training_games": 3812,
+      "training_seasons": [
+        1999,
+        2000,
+        2001,
+        2002,
+        2003,
+        2004,
+        2005,
+        2006,
+        2007,
+        2008,
+        2009,
+        2010,
+        2011,
+        2012,
+        2013
+      ],
+      "training_game_ids_sha256": "172dc95236520e87363eeb29e5df7ea3c99cb100f9b14d83b07c4f17e3545127",
+      "training_cutoff_at": "2014-09-05T00:30:00+00:00",
+      "train_max_result_available_at": "2013-12-31T01:30:00+00:00"
+    },
+    {
+      "season": 2015,
+      "training_games": 4067,
+      "training_seasons": [
+        1999,
+        2000,
+        2001,
+        2002,
+        2003,
+        2004,
+        2005,
+        2006,
+        2007,
+        2008,
+        2009,
+        2010,
+        2011,
+        2012,
+        2013,
+        2014
+      ],
+      "training_game_ids_sha256": "04f2ac20fc7b29553bc99fa4deb2e77195e32f5ff69cac5de093908e2d44f104",
+      "training_cutoff_at": "2015-09-11T00:30:00+00:00",
+      "train_max_result_available_at": "2014-12-30T01:30:00+00:00"
+    },
+    {
+      "season": 2016,
+      "training_games": 4323,
+      "training_seasons": [
+        1999,
+        2000,
+        2001,
+        2002,
+        2003,
+        2004,
+        2005,
+        2006,
+        2007,
+        2008,
+        2009,
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015
+      ],
+      "training_game_ids_sha256": "2ef8541ea604ebfcb1c195cc73433e4432011f8e1ca6a757086f75a229fac355",
+      "training_cutoff_at": "2016-09-09T00:30:00+00:00",
+      "train_max_result_available_at": "2016-01-05T01:30:00+00:00"
+    },
+    {
+      "season": 2017,
+      "training_games": 4577,
+      "training_seasons": [
+        1999,
+        2000,
+        2001,
+        2002,
+        2003,
+        2004,
+        2005,
+        2006,
+        2007,
+        2008,
+        2009,
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016
+      ],
+      "training_game_ids_sha256": "66e4f52f3efb2f1e5530312f8cba73fefc4085a87a2756fe0c50bf07bc879df1",
+      "training_cutoff_at": "2017-09-08T00:30:00+00:00",
+      "train_max_result_available_at": "2017-01-03T01:30:00+00:00"
+    },
+    {
+      "season": 2018,
+      "training_games": 4833,
+      "training_seasons": [
+        1999,
+        2000,
+        2001,
+        2002,
+        2003,
+        2004,
+        2005,
+        2006,
+        2007,
+        2008,
+        2009,
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017
+      ],
+      "training_game_ids_sha256": "1444ae484eece2670da6cd45bab10c3e519bcfef37536a05b11abaf7a8c44e3b",
+      "training_cutoff_at": "2018-09-07T00:20:00+00:00",
+      "train_max_result_available_at": "2018-01-01T21:25:00+00:00"
+    },
+    {
+      "season": 2019,
+      "training_games": 5087,
+      "training_seasons": [
+        1999,
+        2000,
+        2001,
+        2002,
+        2003,
+        2004,
+        2005,
+        2006,
+        2007,
+        2008,
+        2009,
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "training_game_ids_sha256": "2d30140ee74b0d25e0c94a842d1dab5d59ab9c1f4c6de010c80071050d3d6262",
+      "training_cutoff_at": "2019-09-06T00:20:00+00:00",
+      "train_max_result_available_at": "2019-01-01T01:20:00+00:00"
+    },
+    {
+      "season": 2020,
+      "training_games": 5342,
+      "training_seasons": [
+        1999,
+        2000,
+        2001,
+        2002,
+        2003,
+        2004,
+        2005,
+        2006,
+        2007,
+        2008,
+        2009,
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019
+      ],
+      "training_game_ids_sha256": "e69b67efee7a8b41d292b56486f8163f739a51c8b5e035ec95b97ce3a9d43b2b",
+      "training_cutoff_at": "2020-09-11T00:20:00+00:00",
+      "train_max_result_available_at": "2019-12-31T01:20:00+00:00"
+    },
+    {
+      "season": 2021,
+      "training_games": 5597,
+      "training_seasons": [
+        1999,
+        2000,
+        2001,
+        2002,
+        2003,
+        2004,
+        2005,
+        2006,
+        2007,
+        2008,
+        2009,
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020
+      ],
+      "training_game_ids_sha256": "3ed56c803e924bcce3568792ea2a90c114cfc52bd0c5a7889f88b970bfacc827",
+      "training_cutoff_at": "2021-09-10T00:20:00+00:00",
+      "train_max_result_available_at": "2021-01-05T01:20:00+00:00"
+    },
+    {
+      "season": 2022,
+      "training_games": 5868,
+      "training_seasons": [
+        1999,
+        2000,
+        2001,
+        2002,
+        2003,
+        2004,
+        2005,
+        2006,
+        2007,
+        2008,
+        2009,
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021
+      ],
+      "training_game_ids_sha256": "e53b30a826bea372a12f904ab0e1b83b0d3b01f4d715019e6068e7e1b8eaa63c",
+      "training_cutoff_at": "2022-09-09T00:20:00+00:00",
+      "train_max_result_available_at": "2022-01-11T01:20:00+00:00"
+    },
+    {
+      "season": 2023,
+      "training_games": 6137,
+      "training_seasons": [
+        1999,
+        2000,
+        2001,
+        2002,
+        2003,
+        2004,
+        2005,
+        2006,
+        2007,
+        2008,
+        2009,
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ],
+      "training_game_ids_sha256": "5e833bbc27688817c7afa66e970d3f8301f30e801cb7ac09e931fa26b56663a2",
+      "training_cutoff_at": "2023-09-08T00:20:00+00:00",
+      "train_max_result_available_at": "2023-01-10T01:20:00+00:00"
+    },
+    {
+      "season": 2024,
+      "training_games": 6409,
+      "training_seasons": [
+        1999,
+        2000,
+        2001,
+        2002,
+        2003,
+        2004,
+        2005,
+        2006,
+        2007,
+        2008,
+        2009,
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "training_game_ids_sha256": "1d889d5bc2dd062416d81cb32926928c61a1b24701cb43d563fd005ab619e028",
+      "training_cutoff_at": "2024-09-06T00:20:00+00:00",
+      "train_max_result_available_at": "2024-01-09T01:20:00+00:00"
+    },
+    {
+      "season": 2025,
+      "training_games": 6681,
+      "training_seasons": [
+        1999,
+        2000,
+        2001,
+        2002,
+        2003,
+        2004,
+        2005,
+        2006,
+        2007,
+        2008,
+        2009,
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "training_game_ids_sha256": "373376f50bdf8ebd4769a21fab550923372f6a8782194c86c5f2cd68ca977191",
+      "training_cutoff_at": "2025-09-05T00:20:00+00:00",
+      "train_max_result_available_at": "2025-01-07T01:20:00+00:00"
+    }
+  ],
+  "validation_checks": {
+    "offline_tests_passed": 146,
+    "clean_environment_replay_matches": true,
+    "model1_original_point_metrics_match": true,
+    "all_history_and_qb_cutoffs_strict": true,
+    "target_count": 5697,
+    "both_offense_histories_present_fraction": 1.0
+  }
+}
