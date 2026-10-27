@@ -1,6 +1,6 @@
 # NFL Prediction Engine
 
-A runnable, research-first NFL pregame forecasting package. Milestone 1 imports public nflverse schedules, constructs strictly lagged team features, fits logistic regression, and evaluates it chronologically. It saves auditable forecasts, models, reliability plots, and measured metrics. No market adapter, order placement, real-money trading, or simulated profit is implemented.
+A runnable, research-first NFL pregame forecasting package. Model 1.0 uses lagged game results; Model 2.0 adds causal play-by-play EPA, success/explosive rates, opponent-adjusted strength, and prior-observed quarterback performance. Both fit logistic regression and are compared on identical chronological splits. It saves auditable forecasts, models, reliability plots, and measured metrics. No market adapter, order placement, real-money trading, or simulated profit is implemented.
 
 ## Install and test
 
@@ -61,10 +61,28 @@ Each execution creates a fresh `reports/<run-id>/` with:
 
 `reports/predictions.sqlite` appends each run and its forecasts transactionally with unique `(run_id, game_id)` keys; reruns preserve earlier records. Raw snapshots, models, databases, and execution outputs remain ignored by Git. Only the small measured summary and plot are committed for review.
 
+## Model 2.0 comparison
+
+```bash
+uv sync --frozen --extra dev
+uv run --frozen nfl-predict fetch-pbp --start-season 1999 --through-season 2025
+uv run --frozen nfl-predict compare --input data/raw/5b8c66203d43c8faa93b0519b3ca078970aa0bdb39ccb51076dc99e5248f1486.csv --through-season 2025 --as-of 2026-10-26T00:00:00Z --offline
+```
+
+Use the schedule path returned by `fetch`. The comparison command can fetch missing snapshots unless `--offline` is supplied. The first PBP fetch downloads roughly 0.5 GB; EP estimators and verified caches are reused on later runs. `--pbp-dir`, `--ep-dir`, `--workers` (default 4), and `--output-dir` control local storage and bounded download concurrency. The fixed default comparison uses 2,000 paired week-block bootstrap draws.
+
+Published nflfastR EPA can incorporate later seasons through its shared EP estimator. To avoid that historical estimator lookahead, Model 2.0 **reconstructs a distinct remaining-half EPA from raw nflverse PBP**, fitting each annual EP model only on earlier available seasons. The QB proxy comes from a prior observed game, never the target game's actual starter. [Methods and the Model 1.0 review](docs/model2-method.md) describe the definitions, cutoffs, data coverage, fixed design, and limitations.
+
+On 5,426 walk-forward validation games, Model 2.0 achieved 65.09% accuracy versus 62.79% for Model 1.0, with favorable paired accuracy/Brier/log-loss intervals. On 271 reused 2025 holdout games, accuracy was 62.36% versus 61.62%, Brier 0.21993 versus 0.22198, log loss 0.62695 versus 0.63231, and ECE 0.05938 versus 0.05258. **All 2025 paired intervals include zero: holdout improvement is inconclusive.** Calibration is not established by the favorable loss estimates.
+
+The 2025 results were already examined for Model 1.0; this preserves their exclusion from Model 2.0 fitting/tuning but cannot make the season unseen again. See the [actual comparison](docs/model2-comparison.md), [machine-readable results](docs/model2-comparison.json), and [paired reliability plots](docs/model2-reliability.svg). New run directories retain full per-model forecasts, trained win/EP model provenance, comparison reports, coverage, and paired predictions. Raw snapshots and binaries remain excluded from Git.
+
 ## Source terms and limitations
 
 Data come from [nflverse/nfldata](https://github.com/nflverse/nfldata), whose README credits Lee Sharpe and the nflfastR/nflscrapR contributors. The adapter snapshots the [games CSV](https://raw.githubusercontent.com/nflverse/nfldata/master/data/games.csv) with SHA-256, HTTPS source URL, and fetch timestamp. No explicit license file was found in this source repository during implementation; upstream and underlying-source rights require review before redistribution or commercial use. Public access alone does not establish a license. Raw data are not committed.
 
-This is a present-day historical snapshot, not an archive of what the provider published at each historical cutoff. Conservative lagging prevents current/future outcomes entering features, but cannot undo later source corrections or prove historical schedule availability. This limitation is retained in every report. Injuries, market prices, roster changes, strength-of-schedule corrections, and prospective performance are outside this baseline.
+The play-by-play source is [nflverse/nflverse-data](https://github.com/nflverse/nflverse-data); its [CC BY 4.0 license](https://github.com/nflverse/nflverse-data/blob/main/LICENSE.md) and attribution are recorded in each snapshot metadata file. This is distinct from the schedule source terms above.
 
-Next is Milestone 2: independently validated challengers and held-out probability calibration, then scoring-distribution diagnostics before any simulations. A documented, read-only **Polymarket US** adapter remains disabled until endpoint, fees, settlement, and depth are verified. A Streamlit dashboard and append-only paper-trading ledger are later milestones. Real-money trading requires a separate explicit request and review. Read `AGENTS.md` for the project principles.
+This is a present-day historical snapshot, not an archive of what the provider published at each historical cutoff. Conservative lagging prevents current/future outcomes entering features, but cannot undo later source corrections or prove historical schedule availability. This limitation is retained in every report. Injuries, market prices, confirmed upcoming starters, and prospective performance remain outside this implementation. Model 2.0 adds online opponent adjustment without using season-end ratings.
+
+Next is independent prospective evaluation and held-out probability calibration, then scoring-distribution diagnostics before any simulations. A documented, read-only **Polymarket US** adapter remains disabled until endpoint, fees, settlement, and depth are verified. A Streamlit dashboard and append-only paper-trading ledger are later milestones. Real-money trading requires a separate explicit request and review. Read `AGENTS.md` for the project principles.

@@ -13,3 +13,4 @@ reports/
 *.sqlite
 *.db
 .DS_Store
+dist/

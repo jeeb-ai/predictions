@@ -262,13 +262,25 @@ def run_backtest(
     bootstrap_samples: int = 1000,
     seed: int = 42,
     source_metadata: dict | None = None,
+    feature_columns: list[str] | None = None,
+    model_version: str = MODEL_VERSION,
+    methodology_extra: tuple[str, ...] = (),
 ) -> dict:
-    """Fit once per season using older, already available results; reserve final season."""
+    """Fit once per season using older, already available results; reserve final season.
+
+    The default feature set and estimator exactly preserve Model 1.0. Explicit
+    feature sets reuse the same chronological folds and fitted preprocessing.
+    """
+    columns = list(FEATURE_COLUMNS if feature_columns is None else feature_columns)
+    if not columns or len(set(columns)) != len(columns):
+        raise ValueError("Feature columns must be nonempty and unique")
+    if not isinstance(model_version, str) or not model_version.strip():
+        raise ValueError("model_version must be a nonempty string")
     if min_train_seasons < 1:
         raise ValueError("min_train_seasons must be at least one")
     if bootstrap_samples < 0:
         raise ValueError("bootstrap_samples must be nonnegative")
-    required = set(FEATURE_COLUMNS) | {
+    required = set(columns) | {
         "game_id",
         "season",
         "game_type",
@@ -282,22 +294,18 @@ def run_backtest(
     if missing:
         raise ValueError(f"Missing backtest columns: {sorted(missing)}")
     frame = features.copy()
-    for column in [
-        "kickoff",
-        "result_available_at",
-        "feature_cutoff_at",
-        "history_available_through",
-    ]:
+    history_audits = [name for name in frame if name.endswith("history_available_through")]
+    for column in ["kickoff", "result_available_at", "feature_cutoff_at", *history_audits]:
         frame[column] = pd.to_datetime(frame[column], utc=True)
     if frame["game_id"].duplicated().any():
         raise ValueError("Duplicate game IDs are not allowed")
     if frame["kickoff"].isna().any() or frame["feature_cutoff_at"].ne(frame["kickoff"]).any():
         raise ValueError("Each feature cutoff must equal its pregame kickoff")
-    if (
-        frame["history_available_through"].notna()
-        & (frame["history_available_through"] >= frame["kickoff"])
-    ).any():
-        raise ValueError("Historical outcomes must be available strictly before kickoff")
+    for column in history_audits:
+        if (frame[column].notna() & (frame[column] >= frame["kickoff"])).any():
+            raise ValueError(
+                f"{column}: historical outcomes must be available strictly before kickoff"
+            )
     if "week" not in frame:
         frame["week"] = frame["kickoff"].dt.isocalendar().week.astype(int)
     selected = frame.loc[(frame["game_type"] == "REG") & (frame["season"] <= holdout_season)].copy()
@@ -313,7 +321,7 @@ def run_backtest(
     selected = selected.loc[selected["home_win"].notna()].sort_values(["kickoff", "game_id"])
     if not np.isin(selected["home_win"], [0, 1]).all():
         raise ValueError("Backtest labels must be binary")
-    if not np.isfinite(selected[FEATURE_COLUMNS].to_numpy(dtype=float)).all():
+    if not np.isfinite(selected[columns].to_numpy(dtype=float)).all():
         raise ValueError("Features must contain only finite numbers")
     if selected["result_available_at"].isna().any():
         raise ValueError("Completed games require result availability timestamps")
@@ -363,13 +371,13 @@ def run_backtest(
         model = make_pipeline(
             StandardScaler(), LogisticRegression(C=1.0, max_iter=2000, random_state=seed)
         )
-        model.fit(train[FEATURE_COLUMNS], train["home_win"].astype(int))
+        model.fit(train[columns], train["home_win"].astype(int))
         model_id = f"{run_id}-{year}"
-        test["home_win_probability"] = model.predict_proba(test[FEATURE_COLUMNS])[:, 1]
+        test["home_win_probability"] = model.predict_proba(test[columns])[:, 1]
         test["baseline_home_win_probability"] = float(train["home_win"].mean())
         test["run_id"] = run_id
         test["model_id"] = model_id
-        test["model_version"] = MODEL_VERSION
+        test["model_version"] = model_version
         test["generated_at"] = generated_at
         test["training_cutoff_at"] = cutoff
         test["train_max_result_available_at"] = train["result_available_at"].max()
@@ -381,7 +389,7 @@ def run_backtest(
         fitted = model.named_steps["logisticregression"]
         metadata = {
             "model_id": model_id,
-            "model_version": MODEL_VERSION,
+            "model_version": model_version,
             "season": year,
             "generated_at": generated_at,
             "training_cutoff_at": cutoff.isoformat(),
@@ -391,13 +399,11 @@ def run_backtest(
             "training_game_ids_sha256": hashlib.sha256(
                 "\n".join(train["game_id"].astype(str)).encode()
             ).hexdigest(),
-            "feature_columns": FEATURE_COLUMNS,
+            "feature_columns": columns,
             "source_metadata": source,
             "source_code_sha256": code_sha,
             "dependency_versions": versions,
-            "scaled_coefficients": dict(
-                zip(FEATURE_COLUMNS, fitted.coef_[0].tolist(), strict=True)
-            ),
+            "scaled_coefficients": dict(zip(columns, fitted.coef_[0].tolist(), strict=True)),
             "intercept": float(fitted.intercept_[0]),
             "hyperparameters": {"C": 1.0, "max_iter": 2000, "random_state": seed},
         }
@@ -420,7 +426,7 @@ def run_backtest(
             "min_train_seasons": min_train_seasons,
             "bootstrap_samples": bootstrap_samples,
             "seed": seed,
-            "feature_columns": FEATURE_COLUMNS,
+            "feature_columns": columns,
         },
         "excluded_tied_regular_season_games": tie_count,
         "validation": _summary(
@@ -442,6 +448,7 @@ def run_backtest(
             "Probabilities are raw logistic outputs; calibration is measured, not fitted. Reliability uses ten fixed-width bins, including probability 1 in the final bin.",
             "95% percentile intervals resample season/week blocks with fixed fitted forecasts; they do not include model refitting, source revision uncertainty, or dependence across weeks.",
             "The baseline predicts the training-set home-win rate; always-home accuracy is also reported. These retrospective results do not establish a trading edge.",
+            *methodology_extra,
         ],
     }
     serializable = _jsonable_frame(predictions)
