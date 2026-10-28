@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "nfl-prediction-engine"
-version = "0.3.0"
+version = "0.4.0"
 description = "Auditable NFL pregame logistic regression and chronological backtests"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -16,6 +16,7 @@ dependencies = [
   "joblib==1.6.0",
   "pyarrow==26.0.0",
   "threadpoolctl==3.7.0",
+  "streamlit==1.66.1",
 ]
 
 [project.optional-dependencies]

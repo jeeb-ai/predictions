@@ -14,6 +14,8 @@ from predictions.backtest import run_backtest
 from predictions.data import NflverseProvider, load_games
 from predictions.features import build_features
 from predictions.live_cli import add_commands, dispatch
+from predictions.research_cli import add_commands as add_research_commands
+from predictions.research_cli import dispatch as dispatch_research
 
 
 def _parser() -> argparse.ArgumentParser:
@@ -56,6 +58,7 @@ def _parser() -> argparse.ArgumentParser:
     compare.add_argument("--workers", type=int, default=4)
     compare.add_argument("--offline", action="store_true")
     add_commands(sub)
+    add_research_commands(sub)
     return parser
 
 
@@ -203,6 +206,20 @@ def _compare(args) -> dict:
 def main(argv: list[str] | None = None) -> int:
     args = _parser().parse_args(argv)
     try:
+        research_result = dispatch_research(args)
+        if research_result is not None:
+            print(json.dumps(research_result, indent=2, allow_nan=False))
+            if (
+                args.command == "research-status"
+                and args.healthcheck
+                and not research_result["healthy"]
+            ):
+                return 1
+            return (
+                1
+                if args.command == "research-run" and research_result.get("status") == "failed"
+                else 0
+            )
         result = dispatch(args)
         if result is not None:
             print(json.dumps(result, indent=2, allow_nan=False))

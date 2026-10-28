@@ -1,0 +1,73 @@
+name: nfl-research
+services:
+  worker:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+      secrets: [proxy_ca]
+    image: nfl-research:local
+    command: ["research-worker", "--config", "/app/research.local.json"]
+    init: true
+    restart: unless-stopped
+    stop_grace_period: 120s
+    cpus: 2.0
+    mem_limit: 2g
+    environment:
+      HTTP_PROXY: ${HTTP_PROXY:-}
+      HTTPS_PROXY: ${HTTPS_PROXY:-}
+      NO_PROXY: ${NO_PROXY:-localhost,127.0.0.1}
+    volumes:
+      - type: bind
+        source: ../research.local.json
+        target: /app/research.local.json
+        read_only: true
+        bind:
+          create_host_path: false
+      - research-data:/app/data
+      - research-models:/app/models
+      - research-reports:/app/reports
+    healthcheck:
+      test: ["CMD", "nfl-predict", "research-status", "--config", "/app/research.local.json", "--healthcheck"]
+      interval: 30s
+      timeout: 10s
+      # The first run downloads historical PBP and fits causal EP/annual models.
+      start_period: 30m
+      retries: 3
+  dashboard:
+    image: nfl-research:local
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+      secrets: [proxy_ca]
+    entrypoint: ["python", "-m", "streamlit"]
+    command: ["run", "/app/src/predictions/dashboard.py", "--server.address=0.0.0.0", "--server.port=8501", "--server.headless=true", "--server.enableCORS=true", "--server.enableXsrfProtection=true", "--browser.gatherUsageStats=false"]
+    environment:
+      NFL_RESEARCH_CONFIG: /app/research.local.json
+    init: true
+    restart: unless-stopped
+    depends_on: [worker]
+    cpus: 1.0
+    mem_limit: 1g
+    ports: ["127.0.0.1:8501:8501"]
+    volumes:
+      - type: bind
+        source: ../research.local.json
+        target: /app/research.local.json
+        read_only: true
+        bind:
+          create_host_path: false
+      - research-data:/app/data:ro
+      - research-models:/app/models:ro
+      - research-reports:/app/reports:ro
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8501/_stcore/health', timeout=5)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+volumes:
+  research-data:
+  research-models:
+  research-reports:
+secrets:
+  proxy_ca:
+    file: ${NFL_PROXY_CA_FILE:-/dev/null}

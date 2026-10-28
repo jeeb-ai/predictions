@@ -298,6 +298,16 @@ class PolymarketUSProvider:
         return payload["markets"]
 
     def list_nfl_markets(self, limit: int = 20, offset: int = 0) -> list[dict]:
+        markets, _ = self.list_nfl_market_page(limit=limit, offset=offset)
+        return markets
+
+    def list_nfl_market_page(self, limit: int = 20, offset: int = 0) -> tuple[list[dict], int]:
+        """Return winner markets and the raw event count used for pagination.
+
+        Filtering can yield no winner markets on a nonempty event page. Callers
+        must use the event count, rather than the filtered list, to detect the
+        end of the league endpoint's pagination.
+        """
         if isinstance(limit, bool) or not isinstance(limit, int) or not 1 <= limit <= 100:
             raise ValueError("limit must be an integer between 1 and 100")
         if isinstance(offset, bool) or not isinstance(offset, int) or offset < 0:
@@ -305,12 +315,13 @@ class PolymarketUSProvider:
         payload, _ = self._get("/v2/leagues/nfl/events", {"limit": limit, "offset": offset})
         if not isinstance(payload.get("events"), list):
             raise ValueError("US gateway response lacks an NFL events list")
-        return [
+        markets = [
             market
             for event in payload["events"]
             for market in event.get("markets", [])
             if market.get("sportsMarketType") == "football_team_full_game_winner"
         ]
+        return markets, len(payload["events"])
 
     def get_quote(self, market_slug: str, outcome: str = "yes") -> dict:
         slug = _slug(market_slug)

@@ -194,6 +194,9 @@ def train_live_model(
     as_of,
     season: int,
     source_metadata: dict | None = None,
+    bootstrap_samples: int = 0,
+    confidence_level: float = 0.95,
+    bootstrap_seed: int = 42,
 ) -> dict:
     """Fit a fresh immutable annual bundle using older-season outcomes only.
 
@@ -202,6 +205,9 @@ def train_live_model(
     scaling. They may enter later live pregame form after they are known.
     """
     cutoff = _timestamp(as_of, "as_of")
+    from predictions.uncertainty import fit_ensemble, validate_bootstrap_settings
+
+    validate_bootstrap_settings(bootstrap_samples, confidence_level, bootstrap_seed)
     family = _family(model_version)
     source = _validate_sources(source_metadata, cutoff)
     if not isinstance(season, int) or isinstance(season, bool):
@@ -276,6 +282,25 @@ def train_live_model(
         "calibration_status": "raw_logistic_not_recalibrated",
         "methodology": "Older-season decisive regular-season training only; coefficients frozen for the live season",
     }
+    if bootstrap_samples:
+        ensemble, specification = fit_ensemble(
+            eligible,
+            columns,
+            samples=bootstrap_samples,
+            confidence_level=confidence_level,
+            seed=bootstrap_seed,
+            training_cutoff_at=metadata["training_cutoff_at"],
+            training_game_ids_sha256=metadata["training_game_ids_sha256"],
+        )
+        ensemble_path = directory / "ensemble.joblib"
+        joblib.dump(ensemble, ensemble_path)
+        metadata["uncertainty_ensemble"] = {
+            **specification,
+            "file": "ensemble.joblib",
+            "sha256": _file_digest(ensemble_path),
+            "model_id": metadata["model_id"],
+            "model_sha256": metadata["model_sha256"],
+        }
     (directory / "metadata.json").write_bytes(_encode(metadata))
     return {**metadata, "bundle_path": str(directory)}
 
@@ -363,6 +388,14 @@ def predict_pregame(
     source = _validate_sources(source_metadata, cutoff)
     columns = metadata["feature_columns"]
     probabilities = model.predict_proba(targets[columns])[:, 1]
+    intervals = None
+    if "uncertainty_ensemble" in metadata:
+        from predictions.uncertainty import predict_intervals
+
+        directory = Path(bundle_path)
+        if directory.name == "metadata.json":
+            directory = directory.parent
+        intervals = predict_intervals(directory, metadata, targets)
     forecasts = []
     source_sha = _digest(source)
     for (_, row), probability in zip(targets.iterrows(), probabilities, strict=True):
@@ -401,6 +434,14 @@ def predict_pregame(
             "source_metadata_sha256": source_sha,
             "source_code_sha256": _code_digest(),
         }
+        if intervals is not None:
+            forecast["probability_interval"] = {
+                **intervals[len(forecasts)],
+                "game_id": forecast["game_id"],
+                "features_sha256": forecast["features_sha256"],
+                "as_of": cutoff.isoformat(),
+            }
+            forecast["model_training_game_ids_sha256"] = metadata["training_game_ids_sha256"]
         for name in _audit_columns(targets):
             forecast[name] = row[name].isoformat() if pd.notna(row[name]) else None
         for name in [

@@ -107,6 +107,37 @@ def journal(tmp_path, monkeypatch):
     return ledger, forecast, quote, evaluate, record, clock
 
 
+@pytest.mark.parametrize("limit,expected_positions", [(1, 1), (None, 2)])
+def test_concurrent_game_cap_applies_across_different_book_snapshots(
+    journal, limit, expected_positions
+):
+    ledger, _, quote, evaluate, record, _ = journal
+    first = record(evaluate(quantity=5))
+    other = copy.deepcopy(quote)
+    other["quote_id"] = "different-observation"
+    other["source"]["book"]["sha256"] = "d" * 64
+    ledger.record_quote(other)
+    second = evaluate(quantity=5, selected_quote=other)
+    ledger.record_evaluation(second)
+
+    def fill(index):
+        try:
+            return ledger.paper_fill(
+                [first, second][index]["evaluation_id"],
+                idempotency_key=f"parallel-game-cap-{index}",
+                max_open_positions_per_game=limit,
+            )
+        except ValueError as exc:
+            assert "game position limit" in str(exc)
+            return None
+
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        outcomes = list(pool.map(fill, [0, 1]))
+    assert sum(item is not None for item in outcomes) == expected_positions
+    assert ledger.summary()["open_positions"] == expected_positions
+    assert ledger.audit()["valid"]
+
+
 def test_persist_reopen_hash_chain_and_paper_summary(journal):
     ledger, _, _, _, record, _ = journal
     evaluation = record()

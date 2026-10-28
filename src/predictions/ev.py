@@ -13,6 +13,7 @@ import hashlib
 import json
 import re
 from decimal import ROUND_HALF_EVEN, Decimal, InvalidOperation, localcontext
+from itertools import product
 
 import pandas as pd
 
@@ -190,7 +191,7 @@ def _order_cost(levels, quantity: int, theta: Decimal) -> dict:
     }
 
 
-def evaluate_expected_value(
+def _evaluate_point_expected_value(
     forecast: dict,
     quote: dict,
     *,
@@ -425,3 +426,301 @@ def evaluate_expected_value(
                 else:
                     result["status"] = "paper_candidate"
     return _finish(result)
+
+
+def validate_probability_range(value, name: str = "probability_range") -> tuple[Decimal, Decimal]:
+    """Validate a caller-supplied closed probability range without inventing a prior."""
+    if not isinstance(value, (list, tuple)) or len(value) != 2:
+        raise ValueError(f"{name} must contain exactly two probability bounds")
+    lower = _probability(value[0], f"{name} lower")
+    upper = _probability(value[1], f"{name} upper")
+    if lower > upper:
+        raise ValueError(f"{name} lower bound cannot exceed its upper bound")
+    return lower, upper
+
+
+def _interval_from_forecast(forecast: dict, reasons: list[str]) -> tuple[dict | None, dict]:
+    """Bind a bootstrap interval to the particular fitted model and training data."""
+    interval = forecast.get("probability_interval")
+    if interval is None:
+        reasons.append("probability_interval_required")
+        return None, {}
+    if not isinstance(interval, dict):
+        raise ValueError("probability_interval must be an object")
+    for side in ["home", "away"]:
+        bounds = interval.get(side)
+        if not isinstance(bounds, dict) or not {"lower", "upper"} <= set(bounds):
+            reasons.append("probability_interval_bounds_required")
+            return None, {}
+    ranges = {
+        side: validate_probability_range(
+            [interval[side]["lower"], interval[side]["upper"]], f"{side} probability interval"
+        )
+        for side in ["home", "away"]
+    }
+    if abs(ranges["home"][0] + ranges["away"][1] - ONE) > Decimal("1e-12") or abs(
+        ranges["home"][1] + ranges["away"][0] - ONE
+    ) > Decimal("1e-12"):
+        raise ValueError("Home and away probability intervals must be complementary")
+    confidence = _probability(interval.get("confidence_level"), "interval confidence_level")
+    if not ZERO < confidence < ONE:
+        raise ValueError("interval confidence_level must be strictly between zero and one")
+    samples = interval.get("bootstrap_samples")
+    if isinstance(samples, bool) or not isinstance(samples, int) or not 20 <= samples <= 2000:
+        raise ValueError("interval bootstrap_samples must be an integer from 20 to 2000")
+    if (
+        interval.get("method") != "training_week_block_bootstrap"
+        or interval.get("scope") != "model_estimation_conditional_on_features"
+        or interval.get("calibration") != "not_a_calibrated_predictive_coverage_guarantee"
+    ):
+        reasons.append("unsupported_probability_interval_method")
+    if (
+        not isinstance(interval.get("model_id"), str)
+        or not interval["model_id"].strip()
+        or interval.get("model_id") != forecast.get("model_id")
+        or interval.get("model_sha256") != forecast.get("model_sha256")
+    ):
+        reasons.append("probability_interval_model_mismatch")
+    for field in ["model_sha256", "ensemble_sha256", "training_game_ids_sha256", "features_sha256"]:
+        if not isinstance(interval.get(field), str) or not re.fullmatch(
+            r"[a-f0-9]{64}", interval[field]
+        ):
+            reasons.append("probability_interval_provenance_required")
+    if (
+        interval.get("game_id") != forecast.get("game_id")
+        or interval.get("features_sha256") != forecast.get("features_sha256")
+        or interval.get("as_of") is None
+        or _time(interval["as_of"], "interval as_of") != _time(forecast["as_of"], "forecast as_of")
+    ):
+        reasons.append("probability_interval_forecast_mismatch")
+    if not forecast.get("model_training_game_ids_sha256") or interval.get(
+        "training_game_ids_sha256"
+    ) != forecast.get("model_training_game_ids_sha256"):
+        reasons.append("probability_interval_training_data_mismatch")
+    if (
+        interval.get("training_cutoff_at") is None
+        or forecast.get("model_training_cutoff_at") is None
+    ):
+        reasons.append("probability_interval_training_cutoff_required")
+    else:
+        training_cutoff = _time(interval["training_cutoff_at"], "interval training_cutoff_at")
+        model_cutoff = _time(forecast["model_training_cutoff_at"], "model training_cutoff_at")
+        as_of = _time(forecast["as_of"], "forecast as_of")
+        if training_cutoff != model_cutoff:
+            reasons.append("probability_interval_training_cutoff_mismatch")
+        if training_cutoff > as_of:
+            reasons.append("probability_interval_training_from_future")
+        availability = forecast.get("model_train_max_result_available_at")
+        if availability is None:
+            reasons.append("probability_interval_training_availability_required")
+        elif _time(availability, "training result availability") >= training_cutoff:
+            reasons.append("probability_interval_training_not_strictly_before_cutoff")
+    return interval, ranges
+
+
+def _robust_expected_value(
+    result: dict,
+    forecast: dict,
+    *,
+    require_uncertainty: bool,
+    tie_probability_range,
+    completion_probability_range,
+    cancellation_settlement_price_range,
+) -> dict:
+    result.pop("evaluation_id")
+    reasons = result["reasons"]
+    ranges = {}
+    for name, value in [
+        ("tie_probability_range", tie_probability_range),
+        ("completion_probability_range", completion_probability_range),
+        ("cancellation_settlement_price_range", cancellation_settlement_price_range),
+    ]:
+        ranges[name] = validate_probability_range(value, name) if value is not None else None
+    result["uncertainty_policy"] = {
+        "require_uncertainty": require_uncertainty,
+        **{
+            name: [_number(lower), _number(upper)] if bounds is not None else None
+            for name, bounds in ranges.items()
+            for lower, upper in [bounds if bounds is not None else (None, None)]
+        },
+    }
+    result["uncertainty"] = {
+        "selected_team_probability": None,
+        "expected_payout_lower": None,
+        "expected_payout_upper": None,
+        "expected_profit_lower": None,
+        "expected_profit_upper": None,
+        "ev_per_contract_lower": None,
+        "ev_per_contract_upper": None,
+        "lower_bound_assumptions": None,
+        "upper_bound_assumptions": None,
+        "method": "probability_interval_and_assumption_range_corners",
+        "scope": "model_estimation_conditional_on_features_and_explicit_assumption_ranges",
+        "calibration": "not_a_calibrated_predictive_coverage_guarantee",
+        "limitation": (
+            "Bounds combine a model-estimation bootstrap interval with explicit scenario ranges. "
+            "They are not a calibrated profit-coverage guarantee and omit source, lineup, "
+            "cross-week dependence, and unmodeled risk."
+        ),
+    }
+    interval_reasons = []
+    interval, probabilities = _interval_from_forecast(forecast, interval_reasons)
+    reasons.extend(interval_reasons)
+    for name in ["tie_probability_range", "completion_probability_range"]:
+        if ranges[name] is None:
+            reasons.append(f"{name}_required")
+    completion_bounds = ranges["completion_probability_range"]
+    cancellation_bounds = ranges["cancellation_settlement_price_range"]
+    if completion_bounds is not None and completion_bounds[0] < ONE and cancellation_bounds is None:
+        reasons.append("cancellation_settlement_price_range_required")
+    for field in ["tie_probability", "completion_probability", "cancellation_settlement_price"]:
+        bounds = ranges[f"{field}_range"]
+        value = result["assumptions"].get(field)
+        if (
+            bounds is not None
+            and value is not None
+            and not bounds[0] <= _probability(value, field) <= bounds[1]
+        ):
+            reasons.append("point_assumption_outside_uncertainty_range")
+    details = result["uncertainty"]
+    if interval is not None:
+        details.update(
+            confidence_level=interval["confidence_level"],
+            probability_method=interval["method"],
+            bootstrap_samples=interval["bootstrap_samples"],
+            ensemble_sha256=interval.get("ensemble_sha256"),
+        )
+    if probabilities:
+        side = (
+            "home" if result["selected_team"] == result["match_evidence"]["home_team"] else "away"
+        )
+        probability_bounds = probabilities[side]
+        details["selected_team_probability"] = dict(
+            zip(["lower", "upper"], map(_number, probability_bounds), strict=True)
+        )
+    else:
+        probability_bounds = None
+    uncertainty_errors = interval_reasons or any(
+        reason.endswith("_range_required") or reason == "point_assumption_outside_uncertainty_range"
+        for reason in reasons
+    )
+    full_depth = _decimal(result["fill_quantity"], "fill_quantity") == Decimal(result["quantity"])
+    if (
+        not uncertainty_errors
+        and probability_bounds is not None
+        and ranges["tie_probability_range"] is not None
+        and completion_bounds is not None
+        and result.get("total_cost") is not None
+        and full_depth
+    ):
+        # A cancellation price is mathematically irrelevant when completion is
+        # exactly one across the entire supplied range, not an assumed refund.
+        cancellation_values = cancellation_bounds or (ZERO, ZERO)
+        corners = []
+        with localcontext() as context:
+            context.prec = 40
+            quantity = Decimal(result["quantity"])
+            cost = _decimal(result["total_cost"], "total_cost")
+            for probability, tie, completion, cancellation in product(
+                probability_bounds,
+                ranges["tie_probability_range"],
+                completion_bounds,
+                cancellation_values,
+            ):
+                payout = quantity * (
+                    completion * ((ONE - tie) * probability + tie * Decimal("0.5"))
+                    + (ONE - completion) * cancellation
+                )
+                corners.append(
+                    (
+                        payout,
+                        {
+                            "decisive_win_probability": _number(probability),
+                            "tie_probability": _number(tie),
+                            "completion_probability": _number(completion),
+                            "cancellation_settlement_price": (
+                                _number(cancellation) if cancellation_bounds is not None else None
+                            ),
+                        },
+                    )
+                )
+            lowest, highest = (
+                min(corners, key=lambda item: item[0]),
+                max(corners, key=lambda item: item[0]),
+            )
+            details.update(
+                expected_payout_lower=_number(lowest[0]),
+                expected_payout_upper=_number(highest[0]),
+                expected_profit_lower=_number(lowest[0] - cost),
+                expected_profit_upper=_number(highest[0] - cost),
+                ev_per_contract_lower=_number((lowest[0] - cost) / quantity),
+                ev_per_contract_upper=_number((highest[0] - cost) / quantity),
+                lower_bound_assumptions=lowest[1],
+                upper_bound_assumptions=highest[1],
+            )
+            if (lowest[0] - cost) / quantity <= _decimal(
+                result["min_ev_per_contract"], "min_ev_per_contract"
+            ):
+                reasons.append("uncertainty_does_not_clear_minimum_ev")
+    if reasons:
+        result["status"] = "pass"
+    return _finish(result)
+
+
+def evaluate_expected_value(
+    forecast: dict,
+    quote: dict,
+    *,
+    selected_team: str,
+    quantity: int,
+    as_of,
+    tie_probability=None,
+    completion_probability=None,
+    cancellation_settlement_price=None,
+    max_quote_age_seconds: int = 60,
+    max_forecast_age_seconds: int = 3600,
+    min_ev_per_contract="0",
+    require_uncertainty: bool = False,
+    tie_probability_range=None,
+    completion_probability_range=None,
+    cancellation_settlement_price_range=None,
+) -> dict:
+    """Evaluate point EV, optionally requiring favorable conservative scenario bounds.
+
+    Existing Model 3.0 calls receive exactly their original result and ID when
+    uncertainty is not requested. Scheduled research can require a model-bound
+    training-week bootstrap interval and explicit outcome-assumption ranges.
+    """
+    if not isinstance(require_uncertainty, bool):
+        raise ValueError("require_uncertainty must be boolean")
+    result = _evaluate_point_expected_value(
+        forecast,
+        quote,
+        selected_team=selected_team,
+        quantity=quantity,
+        as_of=as_of,
+        tie_probability=tie_probability,
+        completion_probability=completion_probability,
+        cancellation_settlement_price=cancellation_settlement_price,
+        max_quote_age_seconds=max_quote_age_seconds,
+        max_forecast_age_seconds=max_forecast_age_seconds,
+        min_ev_per_contract=min_ev_per_contract,
+    )
+    requested = require_uncertainty or any(
+        value is not None
+        for value in [
+            tie_probability_range,
+            completion_probability_range,
+            cancellation_settlement_price_range,
+        ]
+    )
+    if not requested:
+        return result
+    return _robust_expected_value(
+        result,
+        forecast,
+        require_uncertainty=require_uncertainty,
+        tie_probability_range=tie_probability_range,
+        completion_probability_range=completion_probability_range,
+        cancellation_settlement_price_range=cancellation_settlement_price_range,
+    )

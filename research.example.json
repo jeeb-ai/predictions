@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "interval_seconds": 900,
+  "lookahead_hours": 168,
+  "model_version": "v2",
+  "bootstrap_samples": 100,
+  "confidence_level": 0.95,
+  "bootstrap_seed": 42,
+  "workers": 4,
+  "paths": {
+    "state_dir": "data/research",
+    "data_dir": "data",
+    "ledger": "data/paper/research.sqlite",
+    "performance_db": "data/research/performance.sqlite",
+    "model_dir": "models/research",
+    "reports_dir": "reports/research",
+    "schedule_cache": "data/raw",
+    "pbp_dir": "data/pbp",
+    "ep_dir": "data/causal_ep",
+    "market_cache": "data/polymarket_us"
+  },
+  "paper": {
+    "enabled": true,
+    "quantity": 10,
+    "max_open_exposure": "100",
+    "max_open_positions_per_game": 1,
+    "min_ev_per_contract": "0.02",
+    "max_quote_age_seconds": 60,
+    "max_forecast_age_seconds": 3600,
+    "assumptions": {
+      "tie_probability_range": null,
+      "completion_probability_range": null,
+      "cancellation_settlement_price_range": null
+    }
+  },
+  "dashboard": {
+    "token_file": "data/private/dashboard.token",
+    "max_snapshot_age_seconds": 1800
+  }
+}
