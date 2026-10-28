@@ -127,13 +127,21 @@ def build_dashboard_view(config: dict, now=None) -> dict:
         previous = last_successful.get("performance") if last_successful else None
         if isinstance(previous, dict) and previous:
             performance, from_previous = previous, True
+    prediction_path = Path(config["paths"]["state_dir"]).resolve() / "predictions.json"
+    predictions = (
+        _read_report(prediction_path, prediction_path.parent) if prediction_path.exists() else None
+    )
+    forecast_source = (
+        predictions or (report if report and report.get("forecasts") else last_successful) or {}
+    )
     return {
+        "slate": forecast_source.get("slate", []),
         "report": report,
         "last_successful_run": last_successful,
         "snapshot_age_seconds": age,
         "stale": report is not None and (age is None or age < 0 or age > limit),
         "clock_ahead": age is not None and age < 0,
-        "forecasts": _records(report.get("forecasts", [])) if report else [],
+        "forecasts": _records(forecast_source.get("forecasts", [])),
         "evaluations": _records(report.get("evaluations", [])) if report else [],
         "performance": performance if isinstance(performance, dict) else {},
         "performance_from_last_successful_run": from_previous,
@@ -373,73 +381,48 @@ def _render_performance(performance: dict) -> None:
 
 
 def render_dashboard(view: dict) -> None:
-    st.title("NFL research and paper trading")
-    st.caption("Private research workspace · read-only dashboard · no real-money execution")
+    from predictions.prediction_ui import render_predictions
+
+    st.title("NFL Predictions")
+    st.caption("Independent model forecasts · probabilities conditional on a decisive result")
     st.caption("Display times: America/Chicago. Source and audit timestamps remain in UTC.")
-    report = view["report"]
-    if report is None:
-        st.info("No research runs yet. The worker will publish recorded results here.")
-        return
-    if view["clock_ahead"]:
-        st.error("The recorded run is ahead of the dashboard clock. Check the host clocks.")
-    elif view["stale"]:
-        st.warning("Research results are stale. Check the worker before relying on current quotes.")
-    status = report.get("status", "unknown")
-    if status in SUCCESS_STATES:
-        st.success("The latest research run completed.")
-    elif status in {"partial", "failed"}:
-        st.error(
-            f"The latest research run is {status}. Recorded results and errors are shown below."
-        )
-    else:
-        st.info(f"Recorded run status: {status}")
-    overview = st.columns(4)
-    overview[0].metric("Run status", str(status))
-    overview[1].metric("Forecasts in run", str(len(view["forecasts"])))
-    overview[2].metric("Market evaluations", str(len(view["evaluations"])))
-    success = view["last_successful_run"]
-    overview[3].metric(
-        "Last successful run",
-        _display_time(success.get("as_of")) if success else "Not yet observed",
-    )
-    tabs = st.tabs(["Forecasts", "Markets", "Paper ledger", "Performance", "Audit"])
-    with tabs[0]:
-        _render_forecasts(view["forecasts"])
-    with tabs[1]:
-        _render_evaluations(view["evaluations"])
-    with tabs[2]:
-        _render_paper(view["performance"], report)
-    with tabs[3]:
+    render_predictions(view)
+    with st.expander("Research / Administration", expanded=False):
+        report = view["report"] or {}
+        st.caption(f"Worker status: {report.get('status', 'not started')}")
+        if report.get("status") in {"partial", "failed"}:
+            st.error(
+                f"The latest research run is {report['status']}. Recorded errors are retained below."
+            )
+        if view["stale"]:
+            st.warning(
+                "Research results are stale. Check the worker before relying on current quotes."
+            )
+        if view["clock_ahead"]:
+            st.error("The recorded run is ahead of the dashboard clock. Check the host clocks.")
         if view["performance_from_last_successful_run"]:
             st.warning(
                 "Performance is from the last successful run; the current run has not published a new report."
             )
         _render_performance(view["performance"])
-    with tabs[4]:
-        errors = report.get("errors", [])
-        if errors:
-            st.markdown("**Worker errors retained for this run**")
-            _display_table(
-                [item if isinstance(item, dict) else {"Error": str(item)} for item in errors]
-            )
-        audit = report.get("audit", report.get("ledger_audit", {}))
-        if isinstance(audit, dict) and "valid" in audit:
-            if audit["valid"]:
-                st.success("The recorded ledger audit passed.")
-            else:
-                st.error("The recorded ledger audit failed.")
-        with st.expander("Run provenance"):
-            st.json(
-                {
-                    name: report[name]
-                    for name in ["run_id", "slot", "as_of", "status", "config_hash", "stages"]
-                    if name in report
-                }
-            )
+        _render_paper(view["performance"], report)
+        success = view["last_successful_run"]
+        st.metric(
+            "Last successful run",
+            _display_time(success.get("as_of")) if success else "Not yet observed",
+        )
+        st.subheader("Audit")
+        _render_forecasts(view["forecasts"])
+        st.json(
+            {
+                key: report.get(key)
+                for key in ["run_id", "as_of", "status", "errors", "ledger_audit"]
+            }
+        )
 
 
 def main() -> None:
-    st.set_page_config(page_title="Private NFL research", page_icon="🏈", layout="wide")
+    st.set_page_config(page_title="NFL Predictions", page_icon="🏈", layout="wide")
     try:
         config = load_dashboard_config()
         token = read_token(config["dashboard"]["token_file"])

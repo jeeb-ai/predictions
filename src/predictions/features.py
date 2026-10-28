@@ -127,6 +127,7 @@ def build_features(games: pd.DataFrame, window: int = 8) -> pd.DataFrame:
     for game in frame.itertuples(index=False):
         sides = []
         used_history = []
+        source_details = {}
         for team in (game.home_team, game.away_team):
             history = histories.get(team, [])
             # bisect_left deliberately excludes results available at the exact cutoff.
@@ -136,10 +137,23 @@ def build_features(games: pd.DataFrame, window: int = 8) -> pd.DataFrame:
             selected = sorted(eligible, key=lambda previous: (previous.kickoff, previous.game_id))[
                 -window:
             ]
+            side = "home" if team == game.home_team else "away"
+            source_details[f"{side}_form_source_game_ids"] = [item.game_id for item in selected]
+            source_details[f"{side}_form_available_through"] = max(
+                (item.available_at for item in selected), default=None
+            )
             sides.append(_form(selected, game.kickoff))
             used_history.extend(selected)
         home, away = sides
         row = {f"{name}_diff": home[name] - away[name] for name in home}
+        row.update(
+            {
+                f"{side}_{name}": value
+                for side, stats in [("home", home), ("away", away)]
+                for name, value in stats.items()
+            }
+        )
+        row.update(source_details)
         row["home_advantage"] = float(not bool(game.neutral))
         row["history_available_through"] = (
             max(previous.available_at for previous in used_history) if used_history else pd.NaT
@@ -149,6 +163,9 @@ def build_features(games: pd.DataFrame, window: int = 8) -> pd.DataFrame:
     derived = pd.DataFrame(rows, index=frame.index)
     for column in FEATURE_COLUMNS:
         frame[column] = derived[column] if column in derived else pd.Series(dtype=float)
+    for name in derived:
+        if name.startswith(("home_", "away_")):
+            frame[name] = derived[name]
     frame["history_available_through"] = pd.to_datetime(
         derived.get("history_available_through", pd.Series(dtype="datetime64[ns, UTC]")),
         utc=True,

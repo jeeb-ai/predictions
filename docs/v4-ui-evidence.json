@@ -1,0 +1,415 @@
+{
+  "evidence_kind": "Actual authenticated Streamlit AppTest rendering of fresh public-data forecast; not a screenshot or performance backtest",
+  "generated_at": "2026-10-28T22:31:32.508929+00:00",
+  "page_title": "NFL Predictions",
+  "primary_tabs": [
+    "Predictions",
+    "Matchup Analysis",
+    "Market Value"
+  ],
+  "expanders": [
+    "Exact source values and provider provenance",
+    "Research / Administration"
+  ],
+  "displayed_metrics": [
+    {
+      "label": "Green Bay Packers win probability",
+      "value": "64.5%"
+    },
+    {
+      "label": "Carolina Panthers win probability",
+      "value": "35.5%"
+    },
+    {
+      "label": "Last successful run",
+      "value": "2026-10-28 17:31 CDT"
+    }
+  ],
+  "displayed_markdown": [
+    "### Carolina Panthers at Green Bay Packers",
+    "**Predicted winner: Green Bay Packers**",
+    "Model uncertainty \u2014 Green Bay Packers: 61.7%\u201368.1%; Carolina Panthers: 31.9%\u201338.3%",
+    "Home field indicator: 1.0 (0 = neutral, 1 = home field).",
+    "**Cross-matchup factors**",
+    "Green Bay Packers offense epa per play: 0.03807683293726855 \u00b7 Carolina Panthers defense allowed: 0.04463818260322407",
+    "Green Bay Packers offense success rate: 0.4214876033057851 \u00b7 Carolina Panthers defense allowed: 0.44787644787644787",
+    "Green Bay Packers offense explosive rate: 0.09917355371900827 \u00b7 Carolina Panthers defense allowed: 0.06563706563706563",
+    "Carolina Panthers offense epa per play: 0.0021747885987524166 \u00b7 Green Bay Packers defense allowed: -0.03331069558917553",
+    "Carolina Panthers offense success rate: 0.4262295081967213 \u00b7 Green Bay Packers defense allowed: 0.4378585086042065",
+    "Carolina Panthers offense explosive rate: 0.0860655737704918 \u00b7 Green Bay Packers defense allowed: 0.07265774378585087",
+    "**Model factors favoring Green Bay Packers**",
+    "elo strength diff: +0.3037 home log-odds",
+    "qb epa per dropback diff: +0.1045 home log-odds",
+    "points against diff: +0.0728 home log-odds",
+    "**Model factors favoring Carolina Panthers**"
+  ],
+  "game_id": "2026_08_CAR_GB",
+  "model_version": "logistic-regression-v2",
+  "model_id": "live-v2-2026-20261028T223131284849Z-3045451f",
+  "model_sha256": "60facd192881fd3cd128c5844f23053138e44bfbcad90afcaebbacac24a9e63b",
+  "home_win_probability": 0.6449240423405829,
+  "away_win_probability": 0.35507595765941713,
+  "probability_interval": {
+    "home": {
+      "lower": 0.6172286133437783,
+      "upper": 0.6812040453102399
+    },
+    "away": {
+      "lower": 0.3187959546897601,
+      "upper": 0.3827713866562217
+    },
+    "model_id": "live-v2-2026-20261028T223131284849Z-3045451f",
+    "model_sha256": "60facd192881fd3cd128c5844f23053138e44bfbcad90afcaebbacac24a9e63b",
+    "ensemble_sha256": "cd5c8862c524c6c59dcb2167effdee3d64e6a334d04b11e8483f8bc68dd83a58",
+    "confidence_level": 0.95,
+    "method": "training_week_block_bootstrap",
+    "scope": "model_estimation_conditional_on_features",
+    "calibration": "not_a_calibrated_predictive_coverage_guarantee",
+    "bootstrap_samples": 100,
+    "training_blocks": 464,
+    "seed": 42,
+    "training_cutoff_at": "2026-09-10T00:20:00+00:00",
+    "training_game_ids_sha256": "b0350aa557075b43e1045b2cb54e3fa9093ed22c2f43bc0ee71d61169166fd1d",
+    "game_id": "2026_08_CAR_GB",
+    "features_sha256": "236eeeafc84f60cea2061c4bf04193126f1c9558adfa646b821b32756e22cad2",
+    "as_of": "2026-10-28T22:31:17.724962+00:00"
+  },
+  "feature_cutoff_at": "2026-10-28T22:31:17.724962+00:00",
+  "source_metadata_sha256": "0c5e73127d787ce9d4cc582371d20a196f96c946099c759b3d54a1f12500c713",
+  "source_values": {
+    "home_advantage": 1.0,
+    "home_win_rate": 0.5,
+    "home_margin": -0.625,
+    "home_points_for": 21.375,
+    "home_points_against": 22.0,
+    "home_rest_days": 4.159722222222222,
+    "home_games_played": 8.0,
+    "away_win_rate": 0.375,
+    "away_margin": -1.5,
+    "away_points_for": 25.5,
+    "away_points_against": 27.0,
+    "away_rest_days": 4.302083333333333,
+    "away_games_played": 8.0,
+    "home_form_source_game_ids": [
+      "2025_19_GB_CHI",
+      "2026_01_GB_MIN",
+      "2026_02_GB_NYJ",
+      "2026_03_ATL_GB",
+      "2026_04_GB_TB",
+      "2026_05_CHI_GB",
+      "2026_06_DAL_GB",
+      "2026_07_GB_DET"
+    ],
+    "home_form_available_through": "2026-10-26T20:25:00+00:00",
+    "away_form_source_game_ids": [
+      "2025_18_CAR_TB",
+      "2025_19_LA_CAR",
+      "2026_01_CHI_CAR",
+      "2026_02_CAR_ATL",
+      "2026_03_CAR_CLE",
+      "2026_04_DET_CAR",
+      "2026_06_CAR_PHI",
+      "2026_07_TB_CAR"
+    ],
+    "away_form_available_through": "2026-10-26T17:00:00+00:00",
+    "home_off_epa_per_play": 0.03807683293726855,
+    "home_def_epa_per_play": -0.03331069558917553,
+    "home_off_success_rate": 0.4214876033057851,
+    "home_def_success_rate": 0.4378585086042065,
+    "home_off_explosive_rate": 0.09917355371900827,
+    "home_def_explosive_rate": 0.07265774378585087,
+    "home_qb_epa_per_dropback": 0.1520100427953112,
+    "home_qb_success_rate": 0.4420731707317073,
+    "home_elo_strength": 3.8769806486232987,
+    "home_off_history_plays": 484.0,
+    "home_def_history_plays": 523.0,
+    "home_qb_history_dropbacks": 328.0,
+    "home_qb_proxy_missing": 0.0,
+    "home_off_source_game_ids": [
+      "2025_19_GB_CHI",
+      "2026_01_GB_MIN",
+      "2026_02_GB_NYJ",
+      "2026_03_ATL_GB",
+      "2026_04_GB_TB",
+      "2026_05_CHI_GB",
+      "2026_06_DAL_GB",
+      "2026_07_GB_DET"
+    ],
+    "home_off_available_through": "2026-10-26T20:25:00+00:00",
+    "home_def_source_game_ids": [
+      "2025_19_GB_CHI",
+      "2026_01_GB_MIN",
+      "2026_02_GB_NYJ",
+      "2026_03_ATL_GB",
+      "2026_04_GB_TB",
+      "2026_05_CHI_GB",
+      "2026_06_DAL_GB",
+      "2026_07_GB_DET"
+    ],
+    "home_def_available_through": "2026-10-26T20:25:00+00:00",
+    "home_qb_source_game_ids": [
+      "2025_19_GB_CHI",
+      "2026_01_GB_MIN",
+      "2026_02_GB_NYJ",
+      "2026_03_ATL_GB",
+      "2026_04_GB_TB",
+      "2026_05_CHI_GB",
+      "2026_06_DAL_GB",
+      "2026_07_GB_DET"
+    ],
+    "home_qb_available_through": "2026-10-26T20:25:00+00:00",
+    "home_qb_id_proxy": "00-0036264",
+    "home_qb_proxy_game_id": "2026_07_GB_DET",
+    "home_qb_proxy_available_at": "2026-10-26T20:25:00+00:00",
+    "home_off_history_games": 8.0,
+    "home_def_history_games": 8.0,
+    "home_qb_history_games": 8.0,
+    "home_elo_rating": 1550.7922594493195,
+    "away_off_epa_per_play": 0.0021747885987524166,
+    "away_def_epa_per_play": 0.04463818260322407,
+    "away_off_success_rate": 0.4262295081967213,
+    "away_def_success_rate": 0.44787644787644787,
+    "away_off_explosive_rate": 0.0860655737704918,
+    "away_def_explosive_rate": 0.06563706563706563,
+    "away_qb_epa_per_dropback": 0.0366851264958777,
+    "away_qb_success_rate": 0.445141065830721,
+    "away_elo_strength": 3.4954762244618474,
+    "away_off_history_plays": 488.0,
+    "away_def_history_plays": 518.0,
+    "away_qb_history_dropbacks": 319.0,
+    "away_qb_proxy_missing": 0.0,
+    "away_off_source_game_ids": [
+      "2025_18_CAR_TB",
+      "2025_19_LA_CAR",
+      "2026_01_CHI_CAR",
+      "2026_02_CAR_ATL",
+      "2026_03_CAR_CLE",
+      "2026_04_DET_CAR",
+      "2026_06_CAR_PHI",
+      "2026_07_TB_CAR"
+    ],
+    "away_off_available_through": "2026-10-26T17:00:00+00:00",
+    "away_def_source_game_ids": [
+      "2025_18_CAR_TB",
+      "2025_19_LA_CAR",
+      "2026_01_CHI_CAR",
+      "2026_02_CAR_ATL",
+      "2026_03_CAR_CLE",
+      "2026_04_DET_CAR",
+      "2026_06_CAR_PHI",
+      "2026_07_TB_CAR"
+    ],
+    "away_def_available_through": "2026-10-26T17:00:00+00:00",
+    "away_qb_source_game_ids": [
+      "2025_18_CAR_TB",
+      "2025_19_LA_CAR",
+      "2026_01_CHI_CAR",
+      "2026_02_CAR_ATL",
+      "2026_03_CAR_CLE",
+      "2026_04_DET_CAR",
+      "2026_06_CAR_PHI",
+      "2026_07_TB_CAR"
+    ],
+    "away_qb_available_through": "2026-10-26T17:00:00+00:00",
+    "away_qb_id_proxy": "00-0039150",
+    "away_qb_proxy_game_id": "2026_07_TB_CAR",
+    "away_qb_proxy_available_at": "2026-10-26T17:00:00+00:00",
+    "away_off_history_games": 8.0,
+    "away_def_history_games": 8.0,
+    "away_qb_history_games": 8.0,
+    "away_elo_rating": 1398.190489784739
+  },
+  "contributions": [
+    {
+      "feature": "win_rate_diff",
+      "raw_value": 0.125,
+      "training_mean": -0.00573164967943449,
+      "training_scale": 0.31160486305365953,
+      "standardized_value": 0.41954303407942,
+      "coefficient": 0.048811504660738594,
+      "log_odds_contribution": 0.02047852676334802
+    },
+    {
+      "feature": "margin_diff",
+      "raw_value": 0.875,
+      "training_mean": -0.21921663515809087,
+      "training_scale": 9.771314280914465,
+      "standardized_value": 0.11198254438457042,
+      "coefficient": 0.16482351633413092,
+      "log_odds_contribution": 0.018457356733507783
+    },
+    {
+      "feature": "points_for_diff",
+      "raw_value": -4.125,
+      "training_mean": -0.12793149624636965,
+      "training_scale": 6.929980472073175,
+      "standardized_value": -0.5767791871652802,
+      "coefficient": 0.15793586170886043,
+      "log_odds_contribution": -0.09109411794068462
+    },
+    {
+      "feature": "points_against_diff",
+      "raw_value": -5.0,
+      "training_mean": 0.09128513891172119,
+      "training_scale": 6.0077703180817785,
+      "standardized_value": -0.8474500304361366,
+      "coefficient": -0.08589708230865765,
+      "log_odds_contribution": 0.07279348501684726
+    },
+    {
+      "feature": "rest_days_diff",
+      "raw_value": -0.14236111111111072,
+      "training_mean": -0.040438003452243965,
+      "training_scale": 2.5264177262319625,
+      "standardized_value": -0.04034293561218811,
+      "coefficient": 0.045342847710849794,
+      "log_odds_contribution": -0.0018292635856720643
+    },
+    {
+      "feature": "games_played_diff",
+      "raw_value": 0.0,
+      "training_mean": -0.0011507479861910242,
+      "training_scale": 0.18810682165845624,
+      "standardized_value": 0.006117523947538842,
+      "coefficient": 0.058281271893583245,
+      "log_odds_contribution": 0.00035653707650201797
+    },
+    {
+      "feature": "home_advantage",
+      "raw_value": 1.0,
+      "training_mean": 0.9906501726121979,
+      "training_scale": 0.09624140541170612,
+      "standardized_value": 0.09714973869931512,
+      "coefficient": 0.019602308591340382,
+      "log_odds_contribution": 0.001904359157552058
+    },
+    {
+      "feature": "off_epa_per_play_diff",
+      "raw_value": 0.03590204433851613,
+      "training_mean": -0.0016860960477987845,
+      "training_scale": 0.1252506027507163,
+      "standardized_value": 0.30010346905176827,
+      "coefficient": -0.08725643671858332,
+      "log_odds_contribution": -0.026185959356342946
+    },
+    {
+      "feature": "def_epa_per_play_diff",
+      "raw_value": -0.0779488781923996,
+      "training_mean": 0.0015096791944978459,
+      "training_scale": 0.10643783444633288,
+      "standardized_value": -0.7465254981954872,
+      "coefficient": 0.1268211301147208,
+      "log_odds_contribution": -0.09467520734060664
+    },
+    {
+      "feature": "off_success_rate_diff",
+      "raw_value": -0.004741904890936177,
+      "training_mean": -0.0007537000144616212,
+      "training_scale": 0.05113107714634941,
+      "standardized_value": -0.07799962564957034,
+      "coefficient": 0.16195346497537494,
+      "log_odds_contribution": -0.012632309640730048
+    },
+    {
+      "feature": "def_success_rate_diff",
+      "raw_value": -0.010017939272241372,
+      "training_mean": 0.0007631131774517609,
+      "training_scale": 0.045044297517496994,
+      "standardized_value": -0.23934333631255642,
+      "coefficient": -0.13012426758459247,
+      "log_odds_contribution": 0.0311443763389242
+    },
+    {
+      "feature": "off_explosive_rate_diff",
+      "raw_value": 0.013107979948516466,
+      "training_mean": -0.00021972029337185108,
+      "training_scale": 0.024659294206619973,
+      "standardized_value": 0.5404737106510694,
+      "coefficient": 0.021032828798823622,
+      "log_odds_contribution": 0.011367691026388878
+    },
+    {
+      "feature": "def_explosive_rate_diff",
+      "raw_value": 0.0070206781487852365,
+      "training_mean": 0.00028162252292775045,
+      "training_scale": 0.02368255418757022,
+      "standardized_value": 0.2845578045544799,
+      "coefficient": -0.11316035085164108,
+      "log_odds_contribution": -0.032200661000957656
+    },
+    {
+      "feature": "qb_epa_per_dropback_diff",
+      "raw_value": 0.11532491629943349,
+      "training_mean": -0.0026972944444210328,
+      "training_scale": 0.19805562465823204,
+      "standardized_value": 0.595904362461382,
+      "coefficient": 0.17534675246743478,
+      "log_odds_contribution": 0.10448989473878048
+    },
+    {
+      "feature": "qb_success_rate_diff",
+      "raw_value": -0.0030678950990136733,
+      "training_mean": -0.0006539197693977681,
+      "training_scale": 0.07489595498089793,
+      "standardized_value": -0.03223105079882599,
+      "coefficient": -0.04804301152901699,
+      "log_odds_contribution": 0.0015484767451203294
+    },
+    {
+      "feature": "elo_strength_diff",
+      "raw_value": 0.38150442416145136,
+      "training_mean": -0.00019338268837210804,
+      "training_scale": 0.31649109518819674,
+      "standardized_value": 1.2060301621530696,
+      "coefficient": 0.251786835365333,
+      "log_odds_contribution": 0.3036625178836608
+    },
+    {
+      "feature": "off_history_plays_diff",
+      "raw_value": -4.0,
+      "training_mean": -0.044735327963176065,
+      "training_scale": 40.88553566199645,
+      "standardized_value": -0.0967399499112662,
+      "coefficient": -0.045046918363662,
+      "log_odds_contribution": 0.004357836626157559
+    },
+    {
+      "feature": "def_history_plays_diff",
+      "raw_value": 5.0,
+      "training_mean": -0.25230149597238205,
+      "training_scale": 38.52095708207412,
+      "standardized_value": 0.13634919518696387,
+      "coefficient": -0.011288584519631257,
+      "log_odds_contribution": -0.001539189414051741
+    },
+    {
+      "feature": "qb_history_dropbacks_diff",
+      "raw_value": 9.0,
+      "training_mean": 0.05710586881472957,
+      "training_scale": 93.17397786339019,
+      "standardized_value": 0.09598059819123705,
+      "coefficient": 0.07243589303095824,
+      "log_odds_contribution": 0.006952440343627831
+    },
+    {
+      "feature": "qb_proxy_missing_diff",
+      "raw_value": 0.0,
+      "training_mean": 0.00028768699654775604,
+      "training_scale": 0.023985229398267794,
+      "standardized_value": -0.01199434000695998,
+      "coefficient": 0.06560205429766926,
+      "log_odds_contribution": -0.0007868533444012953
+    }
+  ],
+  "intercept": 0.28023087739513647,
+  "home_log_odds": 0.5968008142221066,
+  "probability_reconstruction_absolute_error": 0.0,
+  "ui_exceptions": 0,
+  "market_inputs_used_for_prediction": 0,
+  "limitations": [
+    "Associations in a fitted model, not causal effects.",
+    "QB is the most-used passer in the last observed game, not a confirmed starter.",
+    "EPA uses an older-season remaining-half EP estimator; opponent adjustment is Elo, not opponent-adjusted EPA.",
+    "Empty histories use documented neutral model defaults; sample counts identify missing observations."
+  ]
+}

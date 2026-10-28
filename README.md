@@ -1,6 +1,8 @@
-# NFL Prediction Engine
+# NFL Predictions — Version 4.0
 
-A runnable, research-first NFL pregame forecasting package. Model 1.0 uses lagged game results; Model 2.0 adds causal play-by-play EPA, success/explosive rates, opponent-adjusted strength, and prior-observed quarterback performance. Both fit logistic regression and are compared on identical chronological splits. It saves auditable forecasts, models, reliability plots, and measured metrics. Live pregame inference, a verified read-only Polymarket US adapter, fee-aware EV, and an append-only paper ledger are available. No account access or real-money order placement is implemented.
+Independent NFL predictions and matchup analysis. The private dashboard opens on **Predictions**, with matchup cards naming our model's predicted winner, win probabilities, uncertainty and update time. **Matchup Analysis** explains the actual pregame statistics and fitted logistic contributions. **Market Value** is an optional, separate Polymarket US comparison. Performance, Paper Ledger and Audit live under expandable Research / Administration.
+
+See the [Version 4.0 guide and limitations](docs/prediction-first-v4.md) and [actual authenticated UI evidence](docs/v4-ui-evidence.json). This product redesign preserves the existing Model 1.0/2.0 families, historical comparisons, leakage protections and local paper ledger. No real-money execution, projected scores or scoring simulations are implemented.
 
 ## Install and test
 

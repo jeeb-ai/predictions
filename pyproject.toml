@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "nfl-prediction-engine"
-version = "0.4.0"
+version = "4.0.0"
 description = "Auditable NFL pregame logistic regression and chronological backtests"
 readme = "README.md"
 requires-python = ">=3.11"
