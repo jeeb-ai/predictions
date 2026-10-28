@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "validated_at": "2026-10-28T20:09:32.979008+00:00",
+  "software_version": "0.4.0",
+  "base_commit": "44c2f642ec27ea8b96298f0e140fe56ba7772ad1",
+  "mode": "paper_only",
+  "automated_checks": {
+    "pytest": {
+      "passed": 441,
+      "failed": 0,
+      "skipped": 0
+    },
+    "clean_locked_python_3_12": {
+      "pytest_passed": 441,
+      "dependency_check": "passed"
+    },
+    "ruff_check": "passed",
+    "ruff_format_check": "passed",
+    "sdist_and_wheel_build": "passed",
+    "pinned_container_build": "passed",
+    "running_container_sources_match_checkout": true,
+    "targeted_review_suite_passed": 117
+  },
+  "real_public_source_validation": {
+    "native_cycle": {
+      "run_id": "20261028T193725668961Z-9e69f3b5",
+      "started_at": "2026-10-28T19:37:25.668961+00:00",
+      "finished_at": "2026-10-28T19:38:50.169068+00:00",
+      "status": "completed",
+      "forecasts": 14,
+      "evaluations": 28,
+      "paper_fills": 0,
+      "settlements": 0,
+      "errors": [],
+      "performance": {
+        "logistic-regression-v2": {
+          "n": 0,
+          "pending": 14,
+          "ties": 0,
+          "status": "no_scored_games",
+          "metrics": null
+        }
+      },
+      "ledger_audit_valid": true
+    },
+    "recurring_native_worker": {
+      "cycles": 2,
+      "recent_runs": [
+        {
+          "run_id": "20261028T194440733450Z-bccb9675",
+          "status": "completed",
+          "slot": "2026-10-28T19:44:00+00:00",
+          "reason": null
+        },
+        {
+          "run_id": "20261028T194700000738Z-dfdbb0d6",
+          "status": "completed",
+          "slot": "2026-10-28T19:47:00+00:00",
+          "reason": null
+        }
+      ],
+      "stopped": false,
+      "mode": "paper_only"
+    },
+    "container_cycle": {
+      "run_id": "20261028T200714380643Z-69a5bc7a",
+      "started_at": "2026-10-28T20:07:14.380643+00:00",
+      "finished_at": "2026-10-28T20:08:39.845316+00:00",
+      "status": "completed",
+      "forecasts": 14,
+      "evaluations": 28,
+      "paper_fills": 0,
+      "settlements": 0,
+      "errors": [],
+      "performance": {
+        "logistic-regression-v2": {
+          "n": 0,
+          "pending": 14,
+          "ties": 0,
+          "status": "no_scored_games",
+          "metrics": null
+        }
+      },
+      "ledger_audit_valid": true
+    },
+    "default_missing_assumptions": "Recorded PASS evaluations; no entries fabricated."
+  },
+  "dashboard": {
+    "http_health": "200 ok",
+    "unauthenticated_private_tables_and_metrics": 0,
+    "actual_container_login_and_render": "passed without printing key",
+    "token_mode": "0600",
+    "published_host_interface": "127.0.0.1",
+    "data_models_reports_mounts": "read_only",
+    "runtime_user": "research"
+  },
+  "preserved_baselines": {
+    "archived_report": "docs/model2-comparison.json",
+    "schedule_sha256": "5b8c66203d43c8faa93b0519b3ca078970aa0bdb39ccb51076dc99e5248f1486",
+    "requested_as_of": "2026-10-26T00:00:00+00:00",
+    "validation_games": 5426,
+    "holdout_games": 271,
+    "holdout_season": 2025,
+    "aggregate_metrics_calibration_bins_intervals_and_paired_comparisons_exactly_equal": true,
+    "per_season_point_metrics_exactly_equal": true,
+    "seasons_compared": 22,
+    "legacy_paper_ledger_audit_valid": true
+  },
+  "container_ledger_audit": {
+    "valid": true,
+    "events": 100,
+    "head_hash": "ee61d007d0db0fdfa198d39685a62f277534c2167332131d8b148d0e31bcf147",
+    "counts": {
+      "paper_forecasts": 28,
+      "paper_quotes": 36,
+      "paper_evaluations": 36,
+      "paper_trades": 0,
+      "paper_settlements": 0
+    }
+  },
+  "runtime_notes": [
+    "An interrupted cold-cache worker was restarted; verified caches and recorded forecasts were preserved. The scheduler recovered the abandoned attempt.",
+    "This cloud Docker bridge could reach only one of the configured proxy DNS addresses. A local-only Compose DNS override selects that address of the same provided proxy; TLS verification remains enabled.",
+    "Dashboard authentication was checked through Streamlit AppTest inside the actual read-only dashboard container; HTTP health separately confirms serving.",
+    "Two recurring native cycles retained 14 unique pending game/model observations, rather than treating 28 repeated forecasts as independent games."
+  ],
+  "limitations": [
+    "No prospective scored games yet; accuracy, Brier score, log loss and calibration are null. No new improvement or profit claim.",
+    "Positive fill, settlement, correction and concurrency paths are tested with synthetic fixtures, separate from real-source smoke results.",
+    "Bootstrap intervals quantify model-estimation uncertainty conditional on features, not calibrated predictive coverage.",
+    "Explicit tie/completion/cancellation policy ranges are required before automatic paper entries.",
+    "Validation in this temporary workspace does not establish perpetual hosting on an external Linux server."
+  ],
+  "next_milestone": "Accumulate prospective observed outcomes and study calibration on separately reserved data."
+}

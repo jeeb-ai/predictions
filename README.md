@@ -93,9 +93,24 @@ Quotes use the documented public **Polymarket US** gateway, real ask depth, exac
 
 US taker fees use the verified coefficient 0.0695 and half-even cent rounding. EV consumes displayed price levels and deducts a conservative cumulative fee upper bound because aggregate depth hides individual maker-fill rounding. Stale/mismatched quotes, started games, unknown fees/terms, missing assumptions, insufficient depth, and EV below the chosen threshold cannot become paper candidates. Raw model probabilities remain uncalibrated estimates; a positive estimated EV does not establish a trading edge.
 
-`forecast`, `quote`, and `ev` append their inputs/results to `data/paper/ledger.sqlite`. Only an explicit `paper-fill --evaluation-id EV_ID --idempotency-key UNIQUE_KEY` creates a local simulated position. Optional `--max-exposure` caps outstanding paper cost. Paper fills never call an exchange and cannot exceed the retained book's available depth, including repeated polls of the same book. `market-settlement` reads final exchange settlement; `paper-settle` requires a price and evidence file. SQL append-only triggers, foreign keys, idempotency, retained evidence, and a hash chain support audit. Keep the audit head hash separately to detect complete-file rewriting or truncation.
+`forecast`, `quote`, and `ev` append their inputs/results to `data/paper/ledger.sqlite`. In this standalone workflow, an explicit `paper-fill --evaluation-id EV_ID --idempotency-key UNIQUE_KEY` creates a local simulated position. Optional `--max-exposure` caps outstanding paper cost. Paper fills never call an exchange and cannot exceed the retained book's available depth, including repeated polls of the same book. `market-settlement` reads final exchange settlement; `paper-settle` requires a price and evidence file. SQL append-only triggers, foreign keys, idempotency, retained evidence, and a hash chain support audit. Keep the audit head hash separately to detect complete-file rewriting or truncation.
 
 See the [live/paper workflow](docs/live-paper-workflow.md) for exact commands, settlement evidence, freshness policies, and limitations, and the [verified US API references](docs/polymarket-us-reference.md). Production smoke checks and automated fixture outcomes are documented separately; no fabricated real trade or settled profit is reported.
+
+## Scheduled research and private dashboard
+
+```bash
+uv run --frozen nfl-predict research-init --config research.local.json
+docker compose -f deploy/compose.yml build
+docker compose -f deploy/compose.yml up -d --no-build
+docker compose -f deploy/compose.yml exec -T worker nfl-predict research-status --config /app/research.local.json
+```
+
+The self-hosted Linux worker refreshes pregame forecasts and Polymarket US quotes every 15 minutes, retains auditable run history, and automatically tracks the first issued forecast per game against subsequently observed outcomes. A private, authenticated Streamlit dashboard displays uncertainty, pass reasons, paper positions, calibration, and worker health. Docker publishes it only on the host's loopback interface; access it through SSH or a private network. The initial historical-data and model warmup can take 15–30 minutes or longer. Persistent volumes retain evidence across restarts.
+
+Training-week bootstrap intervals describe model-estimation uncertainty conditional on features, not calibrated outcome coverage. Scheduled paper entries require fee/depth/freshness gates and worst-case EV above the threshold across the model interval and explicit risk ranges. Tie, completion, and cancellation assumptions default to missing, so the initial policy records passes and creates no positions. Prospective metrics remain unavailable until actual scored games exist; repeated polls cannot inflate the sample. Existing historical results and standalone point-forecast defaults are preserved.
+
+See [deployment, private access, policy, and tracking instructions](docs/research-system.md) and [measured system validation](docs/research-system-validation.json). The container key lives in its private data volume, separately from a host development key. The dashboard reads reports through read-only mounts and cannot place trades or modify the ledger. These commands prepare a persistent-host deployment; a temporary cloud workspace does not supply always-on hosting.
 
 ## Source terms and limitations
 
@@ -103,6 +118,6 @@ Data come from [nflverse/nfldata](https://github.com/nflverse/nfldata), whose RE
 
 The play-by-play source is [nflverse/nflverse-data](https://github.com/nflverse/nflverse-data); its [CC BY 4.0 license](https://github.com/nflverse/nflverse-data/blob/main/LICENSE.md) and attribution are recorded in each snapshot metadata file. This is distinct from the schedule source terms above.
 
-This is a present-day historical snapshot, not an archive of what the provider published at each historical cutoff. Conservative lagging prevents current/future outcomes entering features, but cannot undo later source corrections or prove historical schedule availability. This limitation is retained in every report. Injuries, market prices, confirmed upcoming starters, and prospective performance remain outside this implementation. Model 2.0 adds online opponent adjustment without using season-end ratings.
+This is a present-day historical snapshot, not an archive of what the provider published at each historical cutoff. Conservative lagging prevents current/future outcomes entering features, but cannot undo later source corrections or prove historical schedule availability. This limitation is retained in every report. Injuries, market prices, and confirmed upcoming starters remain outside the prediction features. Model 2.0 adds online opponent adjustment without using season-end ratings. Prospective tracking starts with actual recorded pregame forecasts; it does not turn retrospective results into prospective evidence.
 
-Next is independent prospective evaluation and held-out probability calibration, then scoring-distribution diagnostics before any simulations. The public Polymarket US adapter is now verified and read-only; paper positions remain local. A Streamlit dashboard and prospective calibration study remain future work. Real-money trading requires a separate explicit request and review. Read `AGENTS.md` for the project principles.
+Next is accumulating independent prospective evidence and studying held-out probability calibration, followed by scoring-distribution diagnostics before any scoring simulations. The public Polymarket US adapter remains read-only and paper positions remain local. No real-money trading is implemented. Read `AGENTS.md` for the project principles.

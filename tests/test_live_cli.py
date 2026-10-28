@@ -176,6 +176,67 @@ def forecast(workflow, capsys):
     return batch, batch["forecasts"][0]
 
 
+def test_requested_uncertainty_cannot_silently_reuse_a_point_only_bundle(workflow, capsys):
+    batch, _ = forecast(workflow, capsys)
+    code, _, error = invoke(
+        [
+            "forecast",
+            "--input",
+            workflow["schedule"],
+            "--game-id",
+            "synthetic-target",
+            "--model-version",
+            "v1",
+            "--offline",
+            "--as-of",
+            workflow["clock"][0].isoformat(),
+            "--bundle",
+            batch["bundle_path"],
+            "--bootstrap-samples",
+            "20",
+            "--output-dir",
+            workflow["root"] / "new-forecast",
+            "--ledger",
+            workflow["ledger"],
+        ],
+        capsys,
+    )
+    assert code == 1
+    assert "requested bootstrap uncertainty" in error
+
+
+def test_forecast_cli_can_train_and_persist_bootstrap_intervals(workflow, capsys):
+    code, batch, error = invoke(
+        [
+            "forecast",
+            "--input",
+            workflow["schedule"],
+            "--game-id",
+            "synthetic-target",
+            "--model-version",
+            "v1",
+            "--offline",
+            "--as-of",
+            workflow["clock"][0].isoformat(),
+            "--bootstrap-samples",
+            "20",
+            "--model-dir",
+            workflow["root"] / "models",
+            "--output-dir",
+            workflow["root"] / "forecasts",
+            "--ledger",
+            workflow["ledger"],
+        ],
+        capsys,
+    )
+    assert code == 0, error
+    interval = batch["forecasts"][0]["probability_interval"]
+    assert interval["bootstrap_samples"] == 20
+    assert 0 <= interval["home"]["lower"] <= interval["home"]["upper"] <= 1
+    assert interval["away"]["lower"] == 1 - interval["home"]["upper"]
+    assert interval["features_sha256"] == batch["forecasts"][0]["features_sha256"]
+
+
 def quote(workflow, forecast_record, capsys):
     # Make the better-probability side cheap without altering model outputs.
     if forecast_record["home_win_probability"] >= 0.5:

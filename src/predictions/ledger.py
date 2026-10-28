@@ -242,6 +242,17 @@ def _reconcile(evaluation: dict, forecast: dict, quote: dict) -> None:
     assumptions = evaluation.get("assumptions")
     if not isinstance(assumptions, dict):
         raise ValueError("Evaluation requires explicit assumptions")
+    uncertainty_policy = evaluation.get("uncertainty_policy", {})
+    allowed_policy = {
+        "require_uncertainty",
+        "tie_probability_range",
+        "completion_probability_range",
+        "cancellation_settlement_price_range",
+    }
+    if not isinstance(uncertainty_policy, dict) or uncertainty_policy.keys() - allowed_policy:
+        raise ValueError("Unsupported evaluation uncertainty policy")
+    if "uncertainty" in evaluation and "uncertainty_policy" not in evaluation:
+        raise ValueError("Uncertainty results require their reproducible policy")
     expected = evaluate_expected_value(
         forecast,
         quote,
@@ -254,6 +265,7 @@ def _reconcile(evaluation: dict, forecast: dict, quote: dict) -> None:
         max_quote_age_seconds=evaluation.get("max_quote_age_seconds", 60),
         max_forecast_age_seconds=evaluation.get("max_forecast_age_seconds", 3600),
         min_ev_per_contract=evaluation.get("min_ev_per_contract", "0"),
+        **uncertainty_policy,
     )
     for field, value in expected.items():
         if evaluation.get(field) != value:
@@ -438,9 +450,16 @@ class PaperLedger:
         idempotency_key: str,
         recorded_at=None,
         max_exposure=None,
+        max_open_positions_per_game: int | None = None,
     ) -> dict:
         """Reserve quoted levels and append a simulated fill, never an exchange order."""
         _text({"idempotency_key": idempotency_key}, "idempotency_key")
+        if max_open_positions_per_game is not None and (
+            isinstance(max_open_positions_per_game, bool)
+            or not isinstance(max_open_positions_per_game, int)
+            or max_open_positions_per_game < 1
+        ):
+            raise ValueError("max_open_positions_per_game must be a positive integer")
         with self._connect() as connection:
             connection.execute("BEGIN IMMEDIATE")
             try:
@@ -528,6 +547,16 @@ class PaperLedger:
                     for price, quantity in used.items()
                 ):
                     raise ValueError("Displayed snapshot liquidity has already been reserved")
+                if max_open_positions_per_game is not None:
+                    open_rows = connection.execute(
+                        "SELECT t.payload_json FROM paper_trades t LEFT JOIN paper_settlements s "
+                        "ON t.paper_trade_id=s.paper_trade_id WHERE s.paper_trade_id IS NULL"
+                    ).fetchall()
+                    game_positions = sum(
+                        json.loads(row[0])["game_id"] == evaluation["game_id"] for row in open_rows
+                    )
+                    if game_positions >= max_open_positions_per_game:
+                        raise ValueError("Paper game position limit reached")
                 if max_exposure is not None:
                     limit = _decimal(max_exposure, "max_exposure")
                     if limit <= 0:
@@ -556,6 +585,8 @@ class PaperLedger:
                     "forecast": forecast,
                     "quote": quote,
                 }
+                if max_open_positions_per_game is not None:
+                    result["max_open_positions_per_game"] = max_open_positions_per_game
                 self._insert(
                     connection,
                     "paper_fill",

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import sqlite3
 from concurrent.futures import ThreadPoolExecutor
@@ -27,6 +28,9 @@ def add_commands(sub) -> None:
     forecast.add_argument("--output-dir", type=Path, default=Path("reports/live"))
     forecast.add_argument("--window", type=int, default=8)
     forecast.add_argument("--workers", type=int, default=4)
+    forecast.add_argument("--bootstrap-samples", type=int, default=0)
+    forecast.add_argument("--confidence-level", type=float, default=0.95)
+    forecast.add_argument("--bootstrap-seed", type=int, default=42)
     forecast.add_argument("--as-of", help="Information cutoff; default is after source fetching")
     forecast.add_argument("--offline", action="store_true")
     forecast.add_argument("--ledger", type=Path, default=Path("data/paper/ledger.sqlite"))
@@ -109,7 +113,17 @@ def _forecast(args) -> dict:
     from predictions.ledger import PaperLedger
 
     if args.input is not None:
-        path, schedule_source = args.input, _local_metadata(args.input)
+        path = args.input
+        supplied_source = getattr(args, "schedule_metadata", None)
+        if supplied_source is None:
+            schedule_source = _local_metadata(path)
+        else:
+            if (
+                not isinstance(supplied_source, dict)
+                or supplied_source.get("sha256") != hashlib.sha256(path.read_bytes()).hexdigest()
+            ):
+                raise ValueError("Observed schedule metadata does not match its snapshot")
+            schedule_source = supplied_source
     else:
         if args.offline and not (args.cache_dir / "latest.json").exists():
             raise FileNotFoundError("Offline forecasts need --input or a cached schedule")
@@ -188,6 +202,18 @@ def _forecast(args) -> dict:
         window=args.window,
     )
     bundle = args.bundle
+    requested_samples = getattr(args, "bootstrap_samples", 0)
+    if bundle is not None and requested_samples:
+        specification = _read(Path(bundle) / "metadata.json").get("uncertainty_ensemble", {})
+        if not isinstance(specification, dict) or any(
+            specification.get(key) != value
+            for key, value in [
+                ("bootstrap_samples", requested_samples),
+                ("confidence_level", getattr(args, "confidence_level", 0.95)),
+                ("seed", getattr(args, "bootstrap_seed", 42)),
+            ]
+        ):
+            raise ValueError("Reused bundle does not match the requested bootstrap uncertainty")
     if bundle is None:
         trained = train_live_model(
             features,
@@ -196,6 +222,9 @@ def _forecast(args) -> dict:
             as_of=as_of,
             season=season,
             source_metadata=metadata,
+            bootstrap_samples=getattr(args, "bootstrap_samples", 0),
+            confidence_level=getattr(args, "confidence_level", 0.95),
+            bootstrap_seed=getattr(args, "bootstrap_seed", 42),
         )
         bundle = Path(trained["bundle_path"])
     batch = predict_pregame(
