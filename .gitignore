@@ -15,3 +15,5 @@ reports/
 .DS_Store
 dist/
 research.local.json
+
+research.*.local.json

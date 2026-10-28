@@ -119,6 +119,7 @@ class _PublicServices:
                 game_id=game_ids,
                 model_version=config["model_version"],
                 bundle=None,
+                include_analysis=True,
                 input=self.schedule_path,
                 schedule_metadata=self.schedule_metadata,
                 cache_dir=Path(paths["schedule_cache"]),
@@ -237,7 +238,89 @@ def _execute(config, services, clock, report, checkpoint_path):
             {"stage": stage, "type": type(exc).__name__, "message": str(exc), **context}
         )
 
-    # Settlements do not depend on a successful new forecast or schedule read.
+    games = source = None
+    try:
+        games, source = _service(services, "fetch_schedule")()
+        report["stages"]["schedule"] = "ok"
+    except Exception as exc:
+        error("schedule", exc)
+
+    checkpoint = _read_json(checkpoint_path, {"batches": {}})
+    if games is not None:
+        start = clock()
+        end = start + pd.Timedelta(hours=config["lookahead_hours"])
+        eligible = games.loc[(games["kickoff"] > start) & (games["kickoff"] <= end)].copy()
+        if "kickoff_time_imputed" in eligible:
+            eligible = eligible.loc[~eligible["kickoff_time_imputed"].astype(bool)]
+        report["slate"] = [
+            {
+                "game_id": str(row.game_id),
+                "home_team": str(row.home_team),
+                "away_team": str(row.away_team),
+                "kickoff": row.kickoff.isoformat(),
+            }
+            for row in eligible.itertuples()
+        ]
+        root = Path(config["paths"]["state_dir"])
+        prior = _read_json(root / "predictions.json", {}).get("forecasts", [])
+        slate_by_id = {row["game_id"]: row for row in report["slate"]}
+        retained = {
+            row["game_id"]: row
+            for row in prior
+            if row["game_id"] in slate_by_id
+            and all(
+                row.get(key) == slate_by_id[row["game_id"]][key]
+                for key in ["home_team", "away_team", "kickoff"]
+            )
+        }
+
+        def publish_predictions():
+            retained.update({row["game_id"]: row for row in report["forecasts"]})
+            snapshot = {
+                "run_id": report["run_id"],
+                "as_of": clock().isoformat(),
+                "forecasts": list(retained.values()),
+                "slate": report["slate"],
+                "errors": [item for item in report["errors"] if item["stage"] == "forecast"],
+            }
+            _atomic_write(root / "predictions.json", _encode(snapshot))
+
+        publish_predictions()
+        for season in sorted(eligible["season"].unique()):
+            ids = eligible.loc[eligible["season"].eq(season), "game_id"].astype(str).tolist()
+            try:
+                batch = _fresh_checkpoint(
+                    checkpoint.get("batches", {}).get(str(season)),
+                    ids,
+                    clock,
+                    paper["max_forecast_age_seconds"],
+                )
+                if batch is None:
+                    batch = _service(services, "forecast")(ids, config)
+                    returned = [item["game_id"] for item in batch["forecasts"]]
+                    skipped = [item["game_id"] for item in batch.get("skipped", [])]
+                    if (
+                        len(set(returned)) != len(returned)
+                        or set(returned) & set(skipped)
+                        or set(returned) | set(skipped) != set(ids)
+                    ):
+                        raise ValueError("Forecast service omitted or changed requested game IDs")
+                    checkpoint.setdefault("batches", {})[str(season)] = batch
+                    _atomic_write(checkpoint_path, _encode(checkpoint))
+                for forecast in batch["forecasts"]:
+                    if forecast["game_id"] not in ids:
+                        raise ValueError("Forecast service returned an unrequested game")
+                    ledger.record_forecast(forecast)
+                    report["forecasts"].append(forecast)
+                if batch.get("bundle_path"):
+                    report.setdefault("model_bundles", {})[str(season)] = batch["bundle_path"]
+            except Exception as exc:
+                error("forecast", exc, season=int(season))
+        report["stages"]["forecasts"] = "checked"
+        # Publish independent predictions before any market request can block/fail.
+        publish_predictions()
+
+    # Market settlement reads follow independent prediction publication.
     for trade in _open_positions(ledger):
         identity = trade["paper_trade_id"]
         if _timestamp(trade["kickoff"]) > clock():
@@ -270,52 +353,6 @@ def _execute(config, services, clock, report, checkpoint_path):
         except Exception as exc:
             error("settlement", exc, paper_trade_id=identity)
     report["stages"]["settlements"] = "checked"
-
-    games = source = None
-    try:
-        games, source = _service(services, "fetch_schedule")()
-        report["stages"]["schedule"] = "ok"
-    except Exception as exc:
-        error("schedule", exc)
-
-    checkpoint = _read_json(checkpoint_path, {"batches": {}})
-    if games is not None:
-        start = clock()
-        end = start + pd.Timedelta(hours=config["lookahead_hours"])
-        eligible = games.loc[(games["kickoff"] > start) & (games["kickoff"] <= end)].copy()
-        if "kickoff_time_imputed" in eligible:
-            eligible = eligible.loc[~eligible["kickoff_time_imputed"].astype(bool)]
-        for season in sorted(eligible["season"].unique()):
-            ids = eligible.loc[eligible["season"].eq(season), "game_id"].astype(str).tolist()
-            try:
-                batch = _fresh_checkpoint(
-                    checkpoint.get("batches", {}).get(str(season)),
-                    ids,
-                    clock,
-                    paper["max_forecast_age_seconds"],
-                )
-                if batch is None:
-                    batch = _service(services, "forecast")(ids, config)
-                    returned = [item["game_id"] for item in batch["forecasts"]]
-                    skipped = [item["game_id"] for item in batch.get("skipped", [])]
-                    if (
-                        len(set(returned)) != len(returned)
-                        or set(returned) & set(skipped)
-                        or set(returned) | set(skipped) != set(ids)
-                    ):
-                        raise ValueError("Forecast service omitted or changed requested game IDs")
-                    checkpoint.setdefault("batches", {})[str(season)] = batch
-                    _atomic_write(checkpoint_path, _encode(checkpoint))
-                for forecast in batch["forecasts"]:
-                    if forecast["game_id"] not in ids:
-                        raise ValueError("Forecast service returned an unrequested game")
-                    ledger.record_forecast(forecast)
-                    report["forecasts"].append(forecast)
-                if batch.get("bundle_path"):
-                    report.setdefault("model_bundles", {})[str(season)] = batch["bundle_path"]
-            except Exception as exc:
-                error("forecast", exc, season=int(season))
-        report["stages"]["forecasts"] = "checked"
 
     markets = []
     if report["forecasts"]:

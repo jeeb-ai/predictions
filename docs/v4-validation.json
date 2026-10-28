@@ -1,0 +1,36 @@
+{
+  "mode": "prediction_first_no_real_money",
+  "validation": "Fresh public-source worker cycle plus authenticated Streamlit AppTest of its entire independent slate",
+  "run_id": "20261028T223402114260Z-dd8931b3",
+  "started_at": "2026-10-28T22:34:02.114260+00:00",
+  "finished_at": "2026-10-28T22:35:26.329244+00:00",
+  "worker_status": "completed",
+  "worker_errors": [],
+  "scheduled_games": 14,
+  "verified_forecasts": 14,
+  "rendered_winner_cards": 14,
+  "rendered_probabilities_match_trained_forecasts": true,
+  "maximum_probability_reconstruction_error": 0.0,
+  "market_evaluations": 28,
+  "paper_fills": 0,
+  "ledger_audit_valid": true,
+  "historical_comparison": "Aggregate validation/2025 metrics, reliability bins, bootstrap/paired intervals and 22 per-season point metrics exactly reproduced from docs/model2-comparison.json",
+  "legacy_paper_ledger_audit_valid": true,
+  "automated_tests": {
+    "passed": 446,
+    "failed": 0,
+    "skipped": 0
+  },
+  "ruff_lint": "passed",
+  "ruff_format": "passed",
+  "wheel_and_source_build": "passed",
+  "docker_build": "passed",
+  "ui_evidence": "docs/v4-ui-evidence.json",
+  "limitations": [
+    "No new historical improvement claim; underlying Model 1.0/2.0 unchanged.",
+    "Intervals are conditional model-estimation uncertainty, not calibrated coverage.",
+    "Causal reconstructed EPA is not opponent-adjusted EPA; Elo supplies opponent-adjusted strength.",
+    "QB proxies are prior observed players, not confirmed upcoming starters.",
+    "No projected scores or scoring simulations; scoring-model diagnostics are exploratory."
+  ]
+}

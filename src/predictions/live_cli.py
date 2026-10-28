@@ -19,6 +19,7 @@ def add_commands(sub) -> None:
     forecast = sub.add_parser("forecast", help="Train or load an annual model and forecast pregame")
     forecast.add_argument("--game-id", action="append", required=True)
     forecast.add_argument("--model-version", choices=["v1", "v2"], default="v2")
+    forecast.add_argument("--include-analysis", action="store_true")
     forecast.add_argument("--bundle", type=Path, help="Trusted local live-model bundle directory")
     forecast.add_argument("--input", type=Path, help="Local nflverse schedule snapshot")
     forecast.add_argument("--cache-dir", type=Path, default=Path("data/raw"))
@@ -233,6 +234,7 @@ def _forecast(args) -> dict:
         as_of=as_of,
         source_metadata=metadata,
         output_dir=args.output_dir,
+        include_analysis=getattr(args, "include_analysis", False),
     )
     ledger = PaperLedger(args.ledger)
     for forecast in batch["forecasts"]:

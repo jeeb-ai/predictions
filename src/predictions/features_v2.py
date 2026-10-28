@@ -264,6 +264,12 @@ def build_features_v2(
                     "qb_proxy_missing": float(not proxy),
                 }
             )
+            metadata.update({f"{side}_{key}": value for key, value in sides[-1].items()})
+            for kind, history in [("off", off), ("def", defense_history), ("qb", qb)]:
+                metadata[f"{side}_{kind}_source_game_ids"] = [item.game_id for item in history]
+                metadata[f"{side}_{kind}_available_through"] = max(
+                    (item.available_at for item in history), default=None
+                )
             metadata.update(
                 {
                     f"{side}_qb_id_proxy": quarterback,

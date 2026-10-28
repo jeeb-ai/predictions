@@ -1,0 +1,14 @@
+{
+  "scope": "Descriptive historical scoring diagnostics only; no scoring predictor, simulations, or projected scores implemented",
+  "source_sha256": "5b8c66203d43c8faa93b0519b3ca078970aa0bdb39ccb51076dc99e5248f1486",
+  "seasons": [
+    1999,
+    2023
+  ],
+  "games": 6423,
+  "home_mean": 23.138253152732368,
+  "home_variance": 105.86970277178038,
+  "away_mean": 20.875603300638332,
+  "away_variance": 101.82616117054033,
+  "score_correlation": -0.03156869925219753
+}

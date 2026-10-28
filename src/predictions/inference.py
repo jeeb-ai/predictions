@@ -339,6 +339,7 @@ def predict_pregame(
     as_of,
     source_metadata: dict | None = None,
     output_dir: Path | None = None,
+    include_analysis: bool = False,
 ) -> dict:
     """Forecast only known, unfinished games that have not actually started.
 
@@ -434,6 +435,12 @@ def predict_pregame(
             "source_metadata_sha256": source_sha,
             "source_code_sha256": _code_digest(),
         }
+        if include_analysis:
+            from predictions.matchup import explain_prediction
+
+            forecast["matchup_analysis"] = explain_prediction(
+                model, row, columns, float(probability)
+            )
         if intervals is not None:
             forecast["probability_interval"] = {
                 **intervals[len(forecasts)],
