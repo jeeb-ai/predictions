@@ -1,0 +1,154 @@
+{
+  "kind": "Authenticated Streamlit AppTest of retained timestamped public-data forecasts",
+  "title": "NFL Predictions",
+  "tabs": [
+    "Predictions",
+    "Matchup Analysis",
+    "Market Value"
+  ],
+  "expanders": [
+    {
+      "label": "Why this pick?",
+      "expanded": false
+    },
+    {
+      "label": "Why this pick?",
+      "expanded": false
+    },
+    {
+      "label": "Why this pick?",
+      "expanded": false
+    },
+    {
+      "label": "Why this pick?",
+      "expanded": false
+    },
+    {
+      "label": "Why this pick?",
+      "expanded": false
+    },
+    {
+      "label": "Why this pick?",
+      "expanded": false
+    },
+    {
+      "label": "Why this pick?",
+      "expanded": false
+    },
+    {
+      "label": "Why this pick?",
+      "expanded": false
+    },
+    {
+      "label": "Why this pick?",
+      "expanded": false
+    },
+    {
+      "label": "Why this pick?",
+      "expanded": false
+    },
+    {
+      "label": "Why this pick?",
+      "expanded": false
+    },
+    {
+      "label": "Why this pick?",
+      "expanded": false
+    },
+    {
+      "label": "Why this pick?",
+      "expanded": false
+    },
+    {
+      "label": "Why this pick?",
+      "expanded": false
+    },
+    {
+      "label": "Advanced Analysis",
+      "expanded": false
+    },
+    {
+      "label": "Exact source values and provider provenance",
+      "expanded": false
+    },
+    {
+      "label": "Research / Administration",
+      "expanded": false
+    }
+  ],
+  "examples": [
+    {
+      "game_id": "2026_08_CAR_GB",
+      "as_of": "2026-10-28T22:34:03.321915+00:00",
+      "summary": "Green Bay Packers is the model\u2019s pick at 64% for a game that does not finish tied. The largest supporting input is opponent-adjusted results. The strongest counterweight is defensive efficiency. These are patterns in past games, not proof that a statistic causes a win.",
+      "support": [
+        {
+          "feature": "elo_strength_diff",
+          "winner_log_odds_contribution": 0.3036625178836608,
+          "text": "Opponent-adjusted results: Green Bay Packers 1550.79, Carolina Panthers 1398.19 (team strength rating from earlier results). The model weights this input toward Green Bay Packers."
+        },
+        {
+          "feature": "qb_epa_per_dropback_diff",
+          "winner_log_odds_contribution": 0.10448989473878048,
+          "text": "Previous passer performance: Green Bay Packers 0.15, Carolina Panthers 0.04 (estimated points gained per passing play). The model weights this input toward Green Bay Packers. This is a prior observed passer, not a confirmed starter."
+        },
+        {
+          "feature": "points_against_diff",
+          "winner_log_odds_contribution": 0.07279348501684726,
+          "text": "Recent defense: Green Bay Packers 22.00, Carolina Panthers 27.00 (average points allowed). The model weights this input toward Green Bay Packers."
+        }
+      ],
+      "risks": [
+        {
+          "feature": "def_epa_per_play_diff",
+          "winner_log_odds_contribution": -0.09467520734060664,
+          "text": "Defensive efficiency: Green Bay Packers -0.03, Carolina Panthers 0.04 (estimated points allowed per play). The model weights this input toward Carolina Panthers."
+        },
+        {
+          "feature": "points_for_diff",
+          "winner_log_odds_contribution": -0.09109411794068462,
+          "text": "Recent scoring: Green Bay Packers 21.38, Carolina Panthers 25.50 (average points scored). The model weights this input toward Carolina Panthers."
+        }
+      ],
+      "confidence": "The model gives Carolina Panthers a 36% chance of winning a decisive game, so this is not a certainty. Refitting on resampled historical weeks puts Green Bay Packers's estimate between 62% and 68%. These ranges do not prove future accuracy; injuries and the upcoming starting lineup are not modeled."
+    },
+    {
+      "game_id": "2026_08_ARI_DAL",
+      "as_of": "2026-10-28T22:34:03.321915+00:00",
+      "summary": "Dallas Cowboys is the model\u2019s pick at 73% for a game that does not finish tied. The largest supporting input is opponent-adjusted results. The strongest counterweight is offensive efficiency. These are patterns in past games, not proof that a statistic causes a win.",
+      "support": [
+        {
+          "feature": "elo_strength_diff",
+          "winner_log_odds_contribution": 0.26090289384951304,
+          "text": "Opponent-adjusted results: Dallas Cowboys 1494.32, Arizona Cardinals 1363.22 (team strength rating from earlier results). The model weights this input toward Dallas Cowboys."
+        },
+        {
+          "feature": "margin_diff",
+          "winner_log_odds_contribution": 0.16183621535609605,
+          "text": "Recent scoring balance: Dallas Cowboys -1.00, Arizona Cardinals -10.38 (average points scored minus allowed). The model weights this input toward Dallas Cowboys."
+        },
+        {
+          "feature": "points_for_diff",
+          "winner_log_odds_contribution": 0.1282618636632604,
+          "text": "Recent scoring: Dallas Cowboys 25.75, Arizona Cardinals 20.25 (average points scored). The model weights this input toward Dallas Cowboys."
+        }
+      ],
+      "risks": [
+        {
+          "feature": "off_epa_per_play_diff",
+          "winner_log_odds_contribution": -0.04712819310406241,
+          "text": "Offensive efficiency: Dallas Cowboys 0.05, Arizona Cardinals -0.01 (estimated points gained per play). The model weights this input toward Arizona Cardinals."
+        },
+        {
+          "feature": "def_success_rate_diff",
+          "winner_log_odds_contribution": -0.03388535030789247,
+          "text": "Consistent defense: Dallas Cowboys 47%, Arizona Cardinals 46% (opponent share of plays improving scoring prospects). The model weights this input toward Arizona Cardinals."
+        }
+      ],
+      "confidence": "The model gives Arizona Cardinals a 27% chance of winning a decisive game, so this is not a certainty. Refitting on resampled historical weeks puts Dallas Cowboys's estimate between 71% and 77%. These ranges do not prove future accuracy; injuries and the upcoming starting lineup are not modeled."
+    }
+  ],
+  "ui_exceptions": 0,
+  "tests_passed": 450,
+  "baseline_comparison_exact": true
+}

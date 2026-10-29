@@ -68,11 +68,32 @@ def render_predictions(view):
         datetime,
         timezone,
     )
+    from predictions.verdict import verdict
 
     now = pd.Timestamp(datetime.now(timezone.utc))
     rows = upcoming(view["forecasts"], now)
     known = {row["game_id"] for row in rows}
     pending = upcoming([row for row in view.get("slate", []) if row["game_id"] not in known], now)
+    filters = st.columns(2)
+    filters[0].selectbox("Sport", ["NFL"])
+    days = sorted(
+        {
+            pd.Timestamp(row["kickoff"]).tz_convert("America/Chicago").strftime("%Y-%m-%d")
+            for row in rows + pending
+        }
+    )
+    selected_day = filters[1].selectbox("Game date", ["All upcoming dates", *days])
+    search = st.text_input("Find a team or matchup", key="game_search")
+
+    def visible(row):
+        date = pd.Timestamp(row["kickoff"]).tz_convert("America/Chicago").strftime("%Y-%m-%d")
+        return (
+            selected_day == "All upcoming dates" or date == selected_day
+        ) and search.casefold() in (
+            team(row["home_team"]) + " " + team(row["away_team"])
+        ).casefold()
+
+    rows, pending = [r for r in rows if visible(r)], [r for r in pending if visible(r)]
     predictions, analysis, markets = st.tabs(["Predictions", "Matchup Analysis", "Market Value"])
     with predictions:
         st.subheader("Upcoming matchups")
@@ -97,6 +118,26 @@ def render_predictions(view):
                 st.caption(
                     f"Probability advantage: {abs(2 * p - 1) * 100:.1f} percentage points · not a projected score margin"
                 )
+                explanation = verdict(row, team)
+                st.write(explanation["summary"])
+                st.write(explanation["confidence"])
+                st.caption(
+                    "Projected score, spread and total: Not yet available — a separate scoring model must be validated first."
+                )
+                with st.expander("Why this pick?"):
+                    st.markdown("**Three strongest supporting inputs**")
+                    for factor in explanation["support"]:
+                        st.write("• " + factor["text"])
+                    if len(explanation["support"]) < 3:
+                        st.caption(
+                            "Fewer than three supporting contributions are available; none are invented."
+                        )
+                    st.markdown("**How the opponent could win**")
+                    for factor in explanation["risks"]:
+                        st.write("• " + factor["text"])
+                    st.caption(
+                        "A contribution describes how this model uses an input; it is not a causal effect or a guaranteed advantage."
+                    )
                 interval = row.get("probability_interval", {})
                 st.write(
                     f"Model uncertainty — {home}: {_interval(interval.get('home'))}; {away}: {_interval(interval.get('away'))}"
@@ -145,7 +186,9 @@ def render_predictions(view):
                 ),
             )
             row = next(r for r in rows if r["game_id"] == selected)
-            render_analysis(row)
+            st.write(verdict(row, team)["summary"])
+            with st.expander("Advanced Analysis", expanded=False):
+                render_analysis(row)
     with markets:
         st.subheader("Optional Polymarket US comparison")
         st.caption(
