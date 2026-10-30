@@ -1,0 +1,27 @@
+{
+  "tests": {
+    "passed": 464,
+    "failed": 0,
+    "skipped": 0
+  },
+  "locked_python312_clean_install": "passed",
+  "ruff_lint": "passed",
+  "ruff_format": "passed",
+  "source_and_wheel_build": "passed",
+  "docker_build": "passed",
+  "full_historical_backtest": {
+    "validation_games_per_model": 5183,
+    "holdout_2025_games_per_model": 272,
+    "candidate_models": 3,
+    "selected": "ridge_joint_gaussian",
+    "report": "docs/v5-scoring-validation.json"
+  },
+  "ui_evidence": "docs/v5-scoring-ui-evidence.json",
+  "winner_and_score_ledger_audit": true,
+  "known_failed_check": "2025 integer-line push calibration (home \u22123); prominently disclosed, no trading-edge claim",
+  "not_completed": [
+    "NBA and NHL models",
+    "Verified executable spread/total market adapters",
+    "NFL key-number calibration and prospective confirmation"
+  ]
+}
