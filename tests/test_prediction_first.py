@@ -92,7 +92,7 @@ def test_trained_model_to_prediction_home_and_matchup_ui(games, tmp_path, monkey
     app.text_input[0].set_value(Path(init["token_file"]).read_text().strip())
     app.button[0].click().run()
     assert not app.exception
-    assert app.title[0].value == "NFL Predictions"
+    assert app.title[0].value == "Sports Predictions"
     assert any(e.label == "Why this pick?" for e in app.expander)
     assert any(e.label == "Advanced Analysis" and not e.proto.expanded for e in app.expander)
     assert any("model’s pick" in m.value for m in app.markdown)

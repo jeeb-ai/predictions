@@ -134,14 +134,48 @@ def build_dashboard_view(config: dict, now=None) -> dict:
     forecast_source = (
         predictions or (report if report and report.get("forecasts") else last_successful) or {}
     )
+    league_rows = []
+    league_errors = []
+    for sport in ["nba", "nhl"]:
+        path = Path(config["paths"]["state_dir"]).resolve() / (sport + "-predictions.json")
+        if path.exists():
+            try:
+                batch = _read_report(path, path.parent)
+                from predictions.league_forecast import league_verdict
+
+                if batch.get("sport") != sport.upper():
+                    raise ValueError("League snapshot sport mismatch")
+                rows = _records(batch.get("forecasts", []))
+                for row in rows:
+                    if (
+                        row.get("sport") != sport.upper()
+                        or _timestamp(row.get("kickoff")) is None
+                        or _timestamp(row.get("as_of")) is None
+                    ):
+                        raise ValueError("Invalid league prediction identity or time")
+                    if _timestamp(row.get("generated_at")) is None or _timestamp(
+                        row["generated_at"]
+                    ) >= _timestamp(row["kickoff"]):
+                        raise ValueError("League forecast was not issued pregame")
+                    p, q = (
+                        _number(row.get("home_win_probability")),
+                        _number(row.get("away_win_probability")),
+                    )
+                    if p is None or q is None or not 0 <= p <= 1 or abs(p + q - 1) > 1e-10:
+                        raise ValueError("Invalid league probabilities")
+                    league_verdict(row)
+                league_rows.extend(rows)
+            except (OSError, ValueError, KeyError, TypeError, OverflowError):
+                league_errors.append(sport.upper())
     return {
+        "league_errors": league_errors,
         "slate": forecast_source.get("slate", []),
         "report": report,
         "last_successful_run": last_successful,
         "snapshot_age_seconds": age,
         "stale": report is not None and (age is None or age < 0 or age > limit),
         "clock_ahead": age is not None and age < 0,
-        "forecasts": _records(forecast_source.get("forecasts", [])),
+        "forecasts": _records(forecast_source.get("forecasts", [])) + league_rows,
         "evaluations": _records(report.get("evaluations", [])) if report else [],
         "performance": performance if isinstance(performance, dict) else {},
         "performance_from_last_successful_run": from_previous,
@@ -412,9 +446,15 @@ def _render_performance(performance: dict) -> None:
 def render_dashboard(view: dict) -> None:
     from predictions.prediction_ui import render_predictions
 
-    st.title("NFL Predictions")
-    st.caption("Independent model forecasts · probabilities conditional on a decisive result")
+    st.title("Sports Predictions")
+    st.caption(
+        "Independent sports forecasts · NFL win probabilities condition on a decisive result; other outcome scopes are labeled"
+    )
     st.caption("Display times: America/Chicago. Source and audit timestamps remain in UTC.")
+    for sport in view.get("league_errors", []):
+        st.warning(
+            f"{sport} snapshot could not be verified. Other sports remain available; check the sport worker."
+        )
     render_predictions(view)
     with st.expander("Research / Administration", expanded=False):
         report = view["report"] or {}
@@ -451,7 +491,7 @@ def render_dashboard(view: dict) -> None:
 
 
 def main() -> None:
-    st.set_page_config(page_title="NFL Predictions", page_icon="🏈", layout="wide")
+    st.set_page_config(page_title="Sports Predictions", page_icon="🏈", layout="wide")
     try:
         config = load_dashboard_config()
         token = read_token(config["dashboard"]["token_file"])

@@ -75,7 +75,9 @@ def render_predictions(view):
     known = {row["game_id"] for row in rows}
     pending = upcoming([row for row in view.get("slate", []) if row["game_id"] not in known], now)
     filters = st.columns(2)
-    filters[0].selectbox("Sport", ["NFL"])
+    sport = filters[0].selectbox(
+        "Sport", ["All sports", *sorted({r.get("sport", "NFL") for r in rows + pending})]
+    )
     days = sorted(
         {
             pd.Timestamp(row["kickoff"]).tz_convert("America/Chicago").strftime("%Y-%m-%d")
@@ -88,10 +90,15 @@ def render_predictions(view):
     def visible(row):
         date = pd.Timestamp(row["kickoff"]).tz_convert("America/Chicago").strftime("%Y-%m-%d")
         return (
-            selected_day == "All upcoming dates" or date == selected_day
-        ) and search.casefold() in (
-            team(row["home_team"]) + " " + team(row["away_team"])
-        ).casefold()
+            (sport == "All sports" or row.get("sport", "NFL") == sport)
+            and (selected_day == "All upcoming dates" or date == selected_day)
+            and search.casefold()
+            in (
+                row.get("home_name", team(row["home_team"]))
+                + " "
+                + row.get("away_name", team(row["away_team"]))
+            ).casefold()
+        )
 
     rows, pending = [r for r in rows if visible(r)], [r for r in pending if visible(r)]
     predictions, analysis, markets = st.tabs(["Predictions", "Matchup Analysis", "Market Value"])
@@ -105,6 +112,11 @@ def render_predictions(view):
                 "No upcoming predictions yet. The scheduled worker discovers games from nflverse, independently of market coverage. Check Research / Administration for provider errors."
             )
         for index, row in enumerate(rows):
+            if row.get("sport", "NFL") != "NFL":
+                from predictions.league_ui import render_league_card
+
+                render_league_card(row)
+                continue
             home, away = team(row["home_team"]), team(row["away_team"])
             p = row["home_win_probability"]
             winner = home if p > 0.5 else away if p < 0.5 else "Even matchup"
@@ -193,23 +205,40 @@ def render_predictions(view):
                 ids,
                 key="matchup_game",
                 format_func=lambda key: next(
-                    f"{team(r['away_team'])} at {team(r['home_team'])}"
+                    f"{r.get('away_name', team(r['away_team']))} at {r.get('home_name', team(r['home_team']))}"
                     for r in rows
                     if r["game_id"] == key
                 ),
             )
             row = next(r for r in rows if r["game_id"] == selected)
-            st.write(verdict(row, team)["summary"])
-            if row.get("score_prediction"):
-                render_score_lines(row["score_prediction"])
-            with st.expander("Advanced Analysis", expanded=False):
-                render_analysis(row)
+            if row.get("sport", "NFL") != "NFL":
+                from predictions.league_ui import render_league_card, render_league_lines
+
+                render_league_card(row)
+                render_league_lines(row)
+            else:
+                st.write(verdict(row, team)["summary"])
+                if row.get("score_prediction"):
+                    render_score_lines(row["score_prediction"])
+                with st.expander("Advanced Analysis", expanded=False):
+                    render_analysis(row)
     with markets:
         st.subheader("Optional Polymarket US comparison")
         st.caption(
             "Executable prices and conditional EV are separate from our predictions. Recorded quotes may now be stale; strict PASS gates remain in force. No real-money execution."
         )
-        _render_evaluations(view["evaluations"], view["forecasts"])
+        _render_evaluations(
+            [
+                evaluation
+                for evaluation in view["evaluations"]
+                if evaluation.get("game_id") in {r["game_id"] for r in rows}
+            ],
+            view["forecasts"],
+        )
+        if any(r.get("sport", "NFL") != "NFL" for r in rows):
+            st.info(
+                "NBA/NHL market value: PASS — no verified executable quote or matching settlement rules are supported."
+            )
         for value in view["evaluations"]:
             if value.get("fills"):
                 st.write(

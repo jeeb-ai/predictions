@@ -141,7 +141,7 @@ def test_wrong_key_remains_generic_and_does_not_read_data(workspace, monkeypatch
 def test_successful_login_shows_unknown_metrics_without_inventing_zero(workspace):
     write_report(workspace)
     application = unlock(app())
-    assert application.title[0].value == "NFL Predictions"
+    assert application.title[0].value == "Sports Predictions"
     assert any("No scored games yet" in item.value for item in application.info)
     rows = [frame.value for frame in application.dataframe]
     metrics = next(frame for frame in rows if "Accuracy" in frame)
