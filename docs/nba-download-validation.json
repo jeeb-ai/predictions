@@ -1,0 +1,1781 @@
+{
+  "type": "league_validation",
+  "sport": "NBA",
+  "model_version": "nba-v1",
+  "run_dir": "reports/nba-download-fix/nba-abd4f82c5ad8469fb5000e78d9cd6023",
+  "source": {
+    "2010": {
+      "adapter_version": "nba-history-v2",
+      "provider": "NBA Stats via sportsdataverse release",
+      "fetched_at": "2026-10-30T18:27:30.828848+00:00",
+      "components": [
+        {
+          "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_schedules/nba_schedule_2011.parquet",
+          "sha256": "2d54101b85be037324df35801c5ab16f81a4e5dc61fa21104dc8689b5f30eb66",
+          "fetched_at": "2026-10-30T18:27:30.828848+00:00",
+          "file": "2d54101b85be037324df35801c5ab16f81a4e5dc61fa21104dc8689b5f30eb66.raw",
+          "bytes": 23800,
+          "rights": "Public access does not grant redistribution or commercial rights; review provider terms.",
+          "published_sha256": "2d54101b85be037324df35801c5ab16f81a4e5dc61fa21104dc8689b5f30eb66",
+          "asset": "nba_schedule_2011.parquet",
+          "release": "nba_stats_schedules",
+          "release_catalog_sha256": "4edeefcad5163e32ce0609621e3e829f23cd9d5f512ccdd81062f03d421843a6",
+          "source_repository": "https://github.com/sportsdataverse/hoopR-nba-stats-data"
+        },
+        {
+          "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_team_boxscores/team_boxscores_2011.parquet",
+          "sha256": "d8be58cb957d9c14d5571d993178e786e94c2a6191a1e77283f97c03c114e565",
+          "fetched_at": "2026-10-30T18:27:31.833484+00:00",
+          "file": "d8be58cb957d9c14d5571d993178e786e94c2a6191a1e77283f97c03c114e565.raw",
+          "bytes": 70262,
+          "rights": "Public access does not grant redistribution or commercial rights; review provider terms.",
+          "published_sha256": "d8be58cb957d9c14d5571d993178e786e94c2a6191a1e77283f97c03c114e565",
+          "asset": "team_boxscores_2011.parquet",
+          "release": "nba_stats_team_boxscores",
+          "release_catalog_sha256": "ff06224bef1c69fd6bfbadd2bf39fd18182b15a6bae61161e9de9c6b746be3fe",
+          "source_repository": "https://github.com/sportsdataverse/hoopR-nba-stats-data"
+        }
+      ],
+      "coverage": {
+        "final_schedule_games": 1230,
+        "box_games": 1230,
+        "eligible_games_required": 1230,
+        "closed_season": true
+      },
+      "fallback_reasons": []
+    },
+    "2011": {
+      "adapter_version": "nba-history-v2",
+      "provider": "NBA Stats via sportsdataverse release",
+      "fetched_at": "2026-10-30T18:28:30.489394+00:00",
+      "components": [
+        {
+          "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_schedules/nba_schedule_2012.parquet",
+          "sha256": "cbd0f6fd411fc2aa9e0c760822ad76e445f9f247dc189c0897edca0ba959e7cd",
+          "fetched_at": "2026-10-30T18:28:30.489394+00:00",
+          "file": "cbd0f6fd411fc2aa9e0c760822ad76e445f9f247dc189c0897edca0ba959e7cd.raw",
+          "bytes": 19894,
+          "rights": "Public access does not grant redistribution or commercial rights; review provider terms.",
+          "published_sha256": "cbd0f6fd411fc2aa9e0c760822ad76e445f9f247dc189c0897edca0ba959e7cd",
+          "asset": "nba_schedule_2012.parquet",
+          "release": "nba_stats_schedules",
+          "release_catalog_sha256": "4edeefcad5163e32ce0609621e3e829f23cd9d5f512ccdd81062f03d421843a6",
+          "source_repository": "https://github.com/sportsdataverse/hoopR-nba-stats-data"
+        },
+        {
+          "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_team_boxscores/team_boxscores_2012.parquet",
+          "sha256": "8cf4d809c0279b2bde0f794396b0c3fc52394d008abb157fb331f60fe5757a2e",
+          "fetched_at": "2026-10-30T18:28:30.999212+00:00",
+          "file": "8cf4d809c0279b2bde0f794396b0c3fc52394d008abb157fb331f60fe5757a2e.raw",
+          "bytes": 60623,
+          "rights": "Public access does not grant redistribution or commercial rights; review provider terms.",
+          "published_sha256": "8cf4d809c0279b2bde0f794396b0c3fc52394d008abb157fb331f60fe5757a2e",
+          "asset": "team_boxscores_2012.parquet",
+          "release": "nba_stats_team_boxscores",
+          "release_catalog_sha256": "ff06224bef1c69fd6bfbadd2bf39fd18182b15a6bae61161e9de9c6b746be3fe",
+          "source_repository": "https://github.com/sportsdataverse/hoopR-nba-stats-data"
+        }
+      ],
+      "coverage": {
+        "final_schedule_games": 990,
+        "box_games": 990,
+        "eligible_games_required": 990,
+        "closed_season": true
+      },
+      "fallback_reasons": []
+    },
+    "2012": {
+      "adapter_version": "nba-history-v2",
+      "provider": "NBA Stats via sportsdataverse release",
+      "fetched_at": "2026-10-30T18:28:32.107811+00:00",
+      "components": [
+        {
+          "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_schedules/nba_schedule_2013.parquet",
+          "sha256": "d96bf6a8a41f5fde6f91d0f24bc8170afaf82cb5f41e1e481e4221253f567256",
+          "fetched_at": "2026-10-30T18:28:32.107811+00:00",
+          "file": "d96bf6a8a41f5fde6f91d0f24bc8170afaf82cb5f41e1e481e4221253f567256.raw",
+          "bytes": 23904,
+          "rights": "Public access does not grant redistribution or commercial rights; review provider terms.",
+          "published_sha256": "d96bf6a8a41f5fde6f91d0f24bc8170afaf82cb5f41e1e481e4221253f567256",
+          "asset": "nba_schedule_2013.parquet",
+          "release": "nba_stats_schedules",
+          "release_catalog_sha256": "4edeefcad5163e32ce0609621e3e829f23cd9d5f512ccdd81062f03d421843a6",
+          "source_repository": "https://github.com/sportsdataverse/hoopR-nba-stats-data"
+        },
+        {
+          "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_team_boxscores/team_boxscores_2013.parquet",
+          "sha256": "3ade40bbe400c6d65fcf2c58135c77d215f62829735173e2279aac3d49ba3b19",
+          "fetched_at": "2026-10-30T18:28:32.624581+00:00",
+          "file": "3ade40bbe400c6d65fcf2c58135c77d215f62829735173e2279aac3d49ba3b19.raw",
+          "bytes": 71081,
+          "rights": "Public access does not grant redistribution or commercial rights; review provider terms.",
+          "published_sha256": "3ade40bbe400c6d65fcf2c58135c77d215f62829735173e2279aac3d49ba3b19",
+          "asset": "team_boxscores_2013.parquet",
+          "release": "nba_stats_team_boxscores",
+          "release_catalog_sha256": "ff06224bef1c69fd6bfbadd2bf39fd18182b15a6bae61161e9de9c6b746be3fe",
+          "source_repository": "https://github.com/sportsdataverse/hoopR-nba-stats-data"
+        }
+      ],
+      "coverage": {
+        "final_schedule_games": 1229,
+        "box_games": 1229,
+        "eligible_games_required": 1229,
+        "closed_season": true
+      },
+      "fallback_reasons": []
+    },
+    "2013": {
+      "adapter_version": "nba-history-v2",
+      "provider": "NBA Stats via sportsdataverse release",
+      "fetched_at": "2026-10-30T18:29:54.925794+00:00",
+      "components": [
+        {
+          "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_schedules/nba_schedule_2014.parquet",
+          "sha256": "0753b1362fee052df1aaa7e29b76783994a91c1baa0430561cda1edc2b8d676c",
+          "fetched_at": "2026-10-30T18:29:54.925794+00:00",
+          "file": "0753b1362fee052df1aaa7e29b76783994a91c1baa0430561cda1edc2b8d676c.raw",
+          "bytes": 24256,
+          "rights": "Public access does not grant redistribution or commercial rights; review provider terms.",
+          "published_sha256": "0753b1362fee052df1aaa7e29b76783994a91c1baa0430561cda1edc2b8d676c",
+          "asset": "nba_schedule_2014.parquet",
+          "release": "nba_stats_schedules",
+          "release_catalog_sha256": "4edeefcad5163e32ce0609621e3e829f23cd9d5f512ccdd81062f03d421843a6",
+          "source_repository": "https://github.com/sportsdataverse/hoopR-nba-stats-data"
+        },
+        {
+          "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_team_boxscores/team_boxscores_2014.parquet",
+          "sha256": "a60bf3a77974343f50478ff67e982b0945b244cb0002b2825457ef9a826442b9",
+          "fetched_at": "2026-10-30T18:29:55.423677+00:00",
+          "file": "a60bf3a77974343f50478ff67e982b0945b244cb0002b2825457ef9a826442b9.raw",
+          "bytes": 71145,
+          "rights": "Public access does not grant redistribution or commercial rights; review provider terms.",
+          "published_sha256": "a60bf3a77974343f50478ff67e982b0945b244cb0002b2825457ef9a826442b9",
+          "asset": "team_boxscores_2014.parquet",
+          "release": "nba_stats_team_boxscores",
+          "release_catalog_sha256": "ff06224bef1c69fd6bfbadd2bf39fd18182b15a6bae61161e9de9c6b746be3fe",
+          "source_repository": "https://github.com/sportsdataverse/hoopR-nba-stats-data"
+        }
+      ],
+      "coverage": {
+        "final_schedule_games": 1230,
+        "box_games": 1230,
+        "eligible_games_required": 1230,
+        "closed_season": true
+      },
+      "fallback_reasons": []
+    },
+    "2014": {
+      "adapter_version": "nba-history-v2",
+      "provider": "NBA Stats via sportsdataverse release",
+      "fetched_at": "2026-10-30T18:29:56.798420+00:00",
+      "components": [
+        {
+          "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_schedules/nba_schedule_2015.parquet",
+          "sha256": "e98792a763bc8d41f3b2ff1e111bc7e35a2cfe8e9b45134296cd053fe5581cb5",
+          "fetched_at": "2026-10-30T18:29:56.798420+00:00",
+          "file": "e98792a763bc8d41f3b2ff1e111bc7e35a2cfe8e9b45134296cd053fe5581cb5.raw",
+          "bytes": 24184,
+          "rights": "Public access does not grant redistribution or commercial rights; review provider terms.",
+          "published_sha256": "e98792a763bc8d41f3b2ff1e111bc7e35a2cfe8e9b45134296cd053fe5581cb5",
+          "asset": "nba_schedule_2015.parquet",
+          "release": "nba_stats_schedules",
+          "release_catalog_sha256": "4edeefcad5163e32ce0609621e3e829f23cd9d5f512ccdd81062f03d421843a6",
+          "source_repository": "https://github.com/sportsdataverse/hoopR-nba-stats-data"
+        },
+        {
+          "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_team_boxscores/team_boxscores_2015.parquet",
+          "sha256": "5b7ebbfa496f7c08fa0ce0ac91eb96a3a071880ff94bd891a7186f22dbbb08a8",
+          "fetched_at": "2026-10-30T18:29:57.310622+00:00",
+          "file": "5b7ebbfa496f7c08fa0ce0ac91eb96a3a071880ff94bd891a7186f22dbbb08a8.raw",
+          "bytes": 70952,
+          "rights": "Public access does not grant redistribution or commercial rights; review provider terms.",
+          "published_sha256": "5b7ebbfa496f7c08fa0ce0ac91eb96a3a071880ff94bd891a7186f22dbbb08a8",
+          "asset": "team_boxscores_2015.parquet",
+          "release": "nba_stats_team_boxscores",
+          "release_catalog_sha256": "ff06224bef1c69fd6bfbadd2bf39fd18182b15a6bae61161e9de9c6b746be3fe",
+          "source_repository": "https://github.com/sportsdataverse/hoopR-nba-stats-data"
+        }
+      ],
+      "coverage": {
+        "final_schedule_games": 1230,
+        "box_games": 1230,
+        "eligible_games_required": 1230,
+        "closed_season": true
+      },
+      "fallback_reasons": []
+    },
+    "2015": {
+      "adapter_version": "nba-history-v2",
+      "provider": "NBA Stats via sportsdataverse release",
+      "fetched_at": "2026-10-30T18:29:58.520587+00:00",
+      "components": [
+        {
+          "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_schedules/nba_schedule_2016.parquet",
+          "sha256": "c49e9ec5830c00613a08c74114e748e7c2d76b45f211ae637db7d20b6d9a0168",
+          "fetched_at": "2026-10-30T18:29:58.520587+00:00",
+          "file": "c49e9ec5830c00613a08c74114e748e7c2d76b45f211ae637db7d20b6d9a0168.raw",
+          "bytes": 23595,
+          "rights": "Public access does not grant redistribution or commercial rights; review provider terms.",
+          "published_sha256": "c49e9ec5830c00613a08c74114e748e7c2d76b45f211ae637db7d20b6d9a0168",
+          "asset": "nba_schedule_2016.parquet",
+          "release": "nba_stats_schedules",
+          "release_catalog_sha256": "4edeefcad5163e32ce0609621e3e829f23cd9d5f512ccdd81062f03d421843a6",
+          "source_repository": "https://github.com/sportsdataverse/hoopR-nba-stats-data"
+        },
+        {
+          "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_team_boxscores/team_boxscores_2016.parquet",
+          "sha256": "1f1e96115032e0994246c3d37ac101651c9593a04f4e406999a0dc2750349cf2",
+          "fetched_at": "2026-10-30T18:29:58.939334+00:00",
+          "file": "1f1e96115032e0994246c3d37ac101651c9593a04f4e406999a0dc2750349cf2.raw",
+          "bytes": 71301,
+          "rights": "Public access does not grant redistribution or commercial rights; review provider terms.",
+          "published_sha256": "1f1e96115032e0994246c3d37ac101651c9593a04f4e406999a0dc2750349cf2",
+          "asset": "team_boxscores_2016.parquet",
+          "release": "nba_stats_team_boxscores",
+          "release_catalog_sha256": "ff06224bef1c69fd6bfbadd2bf39fd18182b15a6bae61161e9de9c6b746be3fe",
+          "source_repository": "https://github.com/sportsdataverse/hoopR-nba-stats-data"
+        }
+      ],
+      "coverage": {
+        "final_schedule_games": 1230,
+        "box_games": 1230,
+        "eligible_games_required": 1230,
+        "closed_season": true
+      },
+      "fallback_reasons": []
+    },
+    "2016": {
+      "adapter_version": "nba-history-v2",
+      "provider": "NBA Stats via sportsdataverse release",
+      "fetched_at": "2026-10-30T18:30:00.233318+00:00",
+      "components": [
+        {
+          "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_schedules/nba_schedule_2017.parquet",
+          "sha256": "9d0e3e31133e8cbc7672234172d26950e44c6ac455c076732f09f185f2f51527",
+          "fetched_at": "2026-10-30T18:30:00.233318+00:00",
+          "file": "9d0e3e31133e8cbc7672234172d26950e44c6ac455c076732f09f185f2f51527.raw",
+          "bytes": 23465,
+          "rights": "Public access does not grant redistribution or commercial rights; review provider terms.",
+          "published_sha256": "9d0e3e31133e8cbc7672234172d26950e44c6ac455c076732f09f185f2f51527",
+          "asset": "nba_schedule_2017.parquet",
+          "release": "nba_stats_schedules",
+          "release_catalog_sha256": "4edeefcad5163e32ce0609621e3e829f23cd9d5f512ccdd81062f03d421843a6",
+          "source_repository": "https://github.com/sportsdataverse/hoopR-nba-stats-data"
+        },
+        {
+          "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_team_boxscores/team_boxscores_2017.parquet",
+          "sha256": "8f023b96daeceb9cabee3f90013bec23e0e845742cf855c258a2c9b161eadb3c",
+          "fetched_at": "2026-10-30T18:30:00.730445+00:00",
+          "file": "8f023b96daeceb9cabee3f90013bec23e0e845742cf855c258a2c9b161eadb3c.raw",
+          "bytes": 70643,
+          "rights": "Public access does not grant redistribution or commercial rights; review provider terms.",
+          "published_sha256": "8f023b96daeceb9cabee3f90013bec23e0e845742cf855c258a2c9b161eadb3c",
+          "asset": "team_boxscores_2017.parquet",
+          "release": "nba_stats_team_boxscores",
+          "release_catalog_sha256": "ff06224bef1c69fd6bfbadd2bf39fd18182b15a6bae61161e9de9c6b746be3fe",
+          "source_repository": "https://github.com/sportsdataverse/hoopR-nba-stats-data"
+        }
+      ],
+      "coverage": {
+        "final_schedule_games": 1230,
+        "box_games": 1230,
+        "eligible_games_required": 1230,
+        "closed_season": true
+      },
+      "fallback_reasons": []
+    },
+    "2017": {
+      "adapter_version": "nba-history-v2",
+      "provider": "NBA Stats via sportsdataverse release",
+      "fetched_at": "2026-10-30T18:30:02.066806+00:00",
+      "components": [
+        {
+          "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_schedules/nba_schedule_2018.parquet",
+          "sha256": "0b8bd8690aede3b58b71a32b067ea476bc64a1b0afe27aaed65b8593623ab673",
+          "fetched_at": "2026-10-30T18:30:02.066806+00:00",
+          "file": "0b8bd8690aede3b58b71a32b067ea476bc64a1b0afe27aaed65b8593623ab673.raw",
+          "bytes": 23284,
+          "rights": "Public access does not grant redistribution or commercial rights; review provider terms.",
+          "published_sha256": "0b8bd8690aede3b58b71a32b067ea476bc64a1b0afe27aaed65b8593623ab673",
+          "asset": "nba_schedule_2018.parquet",
+          "release": "nba_stats_schedules",
+          "release_catalog_sha256": "4edeefcad5163e32ce0609621e3e829f23cd9d5f512ccdd81062f03d421843a6",
+          "source_repository": "https://github.com/sportsdataverse/hoopR-nba-stats-data"
+        },
+        {
+          "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_team_boxscores/team_boxscores_2018.parquet",
+          "sha256": "474b77b045f7de5a05a77cc759da17e2b844300dd8983ad29e09ea196ac888cc",
+          "fetched_at": "2026-10-30T18:30:02.588550+00:00",
+          "file": "474b77b045f7de5a05a77cc759da17e2b844300dd8983ad29e09ea196ac888cc.raw",
+          "bytes": 71156,
+          "rights": "Public access does not grant redistribution or commercial rights; review provider terms.",
+          "published_sha256": "474b77b045f7de5a05a77cc759da17e2b844300dd8983ad29e09ea196ac888cc",
+          "asset": "team_boxscores_2018.parquet",
+          "release": "nba_stats_team_boxscores",
+          "release_catalog_sha256": "ff06224bef1c69fd6bfbadd2bf39fd18182b15a6bae61161e9de9c6b746be3fe",
+          "source_repository": "https://github.com/sportsdataverse/hoopR-nba-stats-data"
+        }
+      ],
+      "coverage": {
+        "final_schedule_games": 1230,
+        "box_games": 1230,
+        "eligible_games_required": 1230,
+        "closed_season": true
+      },
+      "fallback_reasons": []
+    },
+    "2018": {
+      "adapter_version": "nba-history-v2",
+      "provider": "NBA Stats via sportsdataverse release",
+      "fetched_at": "2026-10-30T18:30:03.893192+00:00",
+      "components": [
+        {
+          "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_schedules/nba_schedule_2019.parquet",
+          "sha256": "3990c1f0b284b6ef3ed009d3a9b42e4ed4e5a2e3fcf6f0951301bf701fcc0afa",
+          "fetched_at": "2026-10-30T18:30:03.893192+00:00",
+          "file": "3990c1f0b284b6ef3ed009d3a9b42e4ed4e5a2e3fcf6f0951301bf701fcc0afa.raw",
+          "bytes": 23368,
+          "rights": "Public access does not grant redistribution or commercial rights; review provider terms.",
+          "published_sha256": "3990c1f0b284b6ef3ed009d3a9b42e4ed4e5a2e3fcf6f0951301bf701fcc0afa",
+          "asset": "nba_schedule_2019.parquet",
+          "release": "nba_stats_schedules",
+          "release_catalog_sha256": "4edeefcad5163e32ce0609621e3e829f23cd9d5f512ccdd81062f03d421843a6",
+          "source_repository": "https://github.com/sportsdataverse/hoopR-nba-stats-data"
+        },
+        {
+          "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_team_boxscores/team_boxscores_2019.parquet",
+          "sha256": "c94bf0d73a677bd7ddd56bfa18151bde3b65407ba64015ffe81e4bd05819d9ec",
+          "fetched_at": "2026-10-30T18:30:04.412975+00:00",
+          "file": "c94bf0d73a677bd7ddd56bfa18151bde3b65407ba64015ffe81e4bd05819d9ec.raw",
+          "bytes": 71467,
+          "rights": "Public access does not grant redistribution or commercial rights; review provider terms.",
+          "published_sha256": "c94bf0d73a677bd7ddd56bfa18151bde3b65407ba64015ffe81e4bd05819d9ec",
+          "asset": "team_boxscores_2019.parquet",
+          "release": "nba_stats_team_boxscores",
+          "release_catalog_sha256": "ff06224bef1c69fd6bfbadd2bf39fd18182b15a6bae61161e9de9c6b746be3fe",
+          "source_repository": "https://github.com/sportsdataverse/hoopR-nba-stats-data"
+        }
+      ],
+      "coverage": {
+        "final_schedule_games": 1230,
+        "box_games": 1230,
+        "eligible_games_required": 1230,
+        "closed_season": true
+      },
+      "fallback_reasons": []
+    },
+    "2019": {
+      "adapter_version": "nba-history-v2",
+      "provider": "NBA Stats via sportsdataverse release",
+      "fetched_at": "2026-10-30T18:30:05.615607+00:00",
+      "components": [
+        {
+          "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_schedules/nba_schedule_2020.parquet",
+          "sha256": "6fb45790190b0ce2d3f97cd920c5c8a33ba5f8b1df041cc12ba00ca800fc3156",
+          "fetched_at": "2026-10-30T18:30:05.615607+00:00",
+          "file": "6fb45790190b0ce2d3f97cd920c5c8a33ba5f8b1df041cc12ba00ca800fc3156.raw",
+          "bytes": 20341,
+          "rights": "Public access does not grant redistribution or commercial rights; review provider terms.",
+          "published_sha256": "6fb45790190b0ce2d3f97cd920c5c8a33ba5f8b1df041cc12ba00ca800fc3156",
+          "asset": "nba_schedule_2020.parquet",
+          "release": "nba_stats_schedules",
+          "release_catalog_sha256": "4edeefcad5163e32ce0609621e3e829f23cd9d5f512ccdd81062f03d421843a6",
+          "source_repository": "https://github.com/sportsdataverse/hoopR-nba-stats-data"
+        },
+        {
+          "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_team_boxscores/team_boxscores_2020.parquet",
+          "sha256": "d8d61e52b2046aa05e048a224ecdcf580e589c8e0b86f2936601c12bd8896a82",
+          "fetched_at": "2026-10-30T18:30:06.099540+00:00",
+          "file": "d8d61e52b2046aa05e048a224ecdcf580e589c8e0b86f2936601c12bd8896a82.raw",
+          "bytes": 63742,
+          "rights": "Public access does not grant redistribution or commercial rights; review provider terms.",
+          "published_sha256": "d8d61e52b2046aa05e048a224ecdcf580e589c8e0b86f2936601c12bd8896a82",
+          "asset": "team_boxscores_2020.parquet",
+          "release": "nba_stats_team_boxscores",
+          "release_catalog_sha256": "ff06224bef1c69fd6bfbadd2bf39fd18182b15a6bae61161e9de9c6b746be3fe",
+          "source_repository": "https://github.com/sportsdataverse/hoopR-nba-stats-data"
+        }
+      ],
+      "coverage": {
+        "final_schedule_games": 1059,
+        "box_games": 1059,
+        "eligible_games_required": 1059,
+        "closed_season": true
+      },
+      "fallback_reasons": []
+    },
+    "2020": {
+      "adapter_version": "nba-history-v2",
+      "provider": "NBA Stats via sportsdataverse release",
+      "fetched_at": "2026-10-30T18:30:07.140795+00:00",
+      "components": [
+        {
+          "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_schedules/nba_schedule_2021.parquet",
+          "sha256": "a2f694a8ea19e4f1418350d45bd6684c3ac15b0ddb589ca693c84383ad09cc73",
+          "fetched_at": "2026-10-30T18:30:07.140795+00:00",
+          "file": "a2f694a8ea19e4f1418350d45bd6684c3ac15b0ddb589ca693c84383ad09cc73.raw",
+          "bytes": 20860,
+          "rights": "Public access does not grant redistribution or commercial rights; review provider terms.",
+          "published_sha256": "a2f694a8ea19e4f1418350d45bd6684c3ac15b0ddb589ca693c84383ad09cc73",
+          "asset": "nba_schedule_2021.parquet",
+          "release": "nba_stats_schedules",
+          "release_catalog_sha256": "4edeefcad5163e32ce0609621e3e829f23cd9d5f512ccdd81062f03d421843a6",
+          "source_repository": "https://github.com/sportsdataverse/hoopR-nba-stats-data"
+        },
+        {
+          "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_team_boxscores/team_boxscores_2021.parquet",
+          "sha256": "3de8560e450727980221da4d7ca63566b2d672562758a1fbb62a53235bd4de4d",
+          "fetched_at": "2026-10-30T18:30:07.653961+00:00",
+          "file": "3de8560e450727980221da4d7ca63566b2d672562758a1fbb62a53235bd4de4d.raw",
+          "bytes": 65499,
+          "rights": "Public access does not grant redistribution or commercial rights; review provider terms.",
+          "published_sha256": "3de8560e450727980221da4d7ca63566b2d672562758a1fbb62a53235bd4de4d",
+          "asset": "team_boxscores_2021.parquet",
+          "release": "nba_stats_team_boxscores",
+          "release_catalog_sha256": "ff06224bef1c69fd6bfbadd2bf39fd18182b15a6bae61161e9de9c6b746be3fe",
+          "source_repository": "https://github.com/sportsdataverse/hoopR-nba-stats-data"
+        }
+      ],
+      "coverage": {
+        "final_schedule_games": 1080,
+        "box_games": 1080,
+        "eligible_games_required": 1080,
+        "closed_season": true
+      },
+      "fallback_reasons": []
+    },
+    "2021": {
+      "adapter_version": "nba-history-v2",
+      "provider": "NBA Stats via sportsdataverse release",
+      "fetched_at": "2026-10-30T18:30:08.950954+00:00",
+      "components": [
+        {
+          "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_schedules/nba_schedule_2022.parquet",
+          "sha256": "e7a968c6f56a9ef0cb2c89d8a315154b6982beb68b42a7fe3e0a4c1464b77bb7",
+          "fetched_at": "2026-10-30T18:30:08.950954+00:00",
+          "file": "e7a968c6f56a9ef0cb2c89d8a315154b6982beb68b42a7fe3e0a4c1464b77bb7.raw",
+          "bytes": 23371,
+          "rights": "Public access does not grant redistribution or commercial rights; review provider terms.",
+          "published_sha256": "e7a968c6f56a9ef0cb2c89d8a315154b6982beb68b42a7fe3e0a4c1464b77bb7",
+          "asset": "nba_schedule_2022.parquet",
+          "release": "nba_stats_schedules",
+          "release_catalog_sha256": "4edeefcad5163e32ce0609621e3e829f23cd9d5f512ccdd81062f03d421843a6",
+          "source_repository": "https://github.com/sportsdataverse/hoopR-nba-stats-data"
+        },
+        {
+          "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_team_boxscores/team_boxscores_2022.parquet",
+          "sha256": "7b618540e11533f7dd7e29ea040ba319437c1e1314271bcd2f5a9d8aab5738a8",
+          "fetched_at": "2026-10-30T18:30:09.382224+00:00",
+          "file": "7b618540e11533f7dd7e29ea040ba319437c1e1314271bcd2f5a9d8aab5738a8.raw",
+          "bytes": 71835,
+          "rights": "Public access does not grant redistribution or commercial rights; review provider terms.",
+          "published_sha256": "7b618540e11533f7dd7e29ea040ba319437c1e1314271bcd2f5a9d8aab5738a8",
+          "asset": "team_boxscores_2022.parquet",
+          "release": "nba_stats_team_boxscores",
+          "release_catalog_sha256": "ff06224bef1c69fd6bfbadd2bf39fd18182b15a6bae61161e9de9c6b746be3fe",
+          "source_repository": "https://github.com/sportsdataverse/hoopR-nba-stats-data"
+        }
+      ],
+      "coverage": {
+        "final_schedule_games": 1230,
+        "box_games": 1230,
+        "eligible_games_required": 1230,
+        "closed_season": true
+      },
+      "fallback_reasons": []
+    },
+    "2022": {
+      "adapter_version": "nba-history-v2",
+      "provider": "NBA Stats via sportsdataverse release",
+      "fetched_at": "2026-10-30T18:30:10.764633+00:00",
+      "components": [
+        {
+          "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_schedules/nba_schedule_2023.parquet",
+          "sha256": "44e826e8b432b863ddec3976a1c72eb2e5ce345af32e8d0c8b84a6137f6d2164",
+          "fetched_at": "2026-10-30T18:30:10.764633+00:00",
+          "file": "44e826e8b432b863ddec3976a1c72eb2e5ce345af32e8d0c8b84a6137f6d2164.raw",
+          "bytes": 23782,
+          "rights": "Public access does not grant redistribution or commercial rights; review provider terms.",
+          "published_sha256": "44e826e8b432b863ddec3976a1c72eb2e5ce345af32e8d0c8b84a6137f6d2164",
+          "asset": "nba_schedule_2023.parquet",
+          "release": "nba_stats_schedules",
+          "release_catalog_sha256": "4edeefcad5163e32ce0609621e3e829f23cd9d5f512ccdd81062f03d421843a6",
+          "source_repository": "https://github.com/sportsdataverse/hoopR-nba-stats-data"
+        },
+        {
+          "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_team_boxscores/team_boxscores_2023.parquet",
+          "sha256": "afe5e8dbe1a6cfaba48286524a26994676e2efd7d4ec2c20c9b19e7eecdd8572",
+          "fetched_at": "2026-10-30T18:30:11.240037+00:00",
+          "file": "afe5e8dbe1a6cfaba48286524a26994676e2efd7d4ec2c20c9b19e7eecdd8572.raw",
+          "bytes": 71681,
+          "rights": "Public access does not grant redistribution or commercial rights; review provider terms.",
+          "published_sha256": "afe5e8dbe1a6cfaba48286524a26994676e2efd7d4ec2c20c9b19e7eecdd8572",
+          "asset": "team_boxscores_2023.parquet",
+          "release": "nba_stats_team_boxscores",
+          "release_catalog_sha256": "ff06224bef1c69fd6bfbadd2bf39fd18182b15a6bae61161e9de9c6b746be3fe",
+          "source_repository": "https://github.com/sportsdataverse/hoopR-nba-stats-data"
+        }
+      ],
+      "coverage": {
+        "final_schedule_games": 1230,
+        "box_games": 1230,
+        "eligible_games_required": 1230,
+        "closed_season": true
+      },
+      "fallback_reasons": []
+    },
+    "2023": {
+      "adapter_version": "nba-history-v2",
+      "provider": "NBA Stats via sportsdataverse release",
+      "fetched_at": "2026-10-30T18:30:12.688182+00:00",
+      "components": [
+        {
+          "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_schedules/nba_schedule_2024.parquet",
+          "sha256": "2d2cd6e93a462a61981e59db5e12132bf4b21bb946fc4f83b75f58bd650f9aa4",
+          "fetched_at": "2026-10-30T18:30:12.688182+00:00",
+          "file": "2d2cd6e93a462a61981e59db5e12132bf4b21bb946fc4f83b75f58bd650f9aa4.raw",
+          "bytes": 23502,
+          "rights": "Public access does not grant redistribution or commercial rights; review provider terms.",
+          "published_sha256": "2d2cd6e93a462a61981e59db5e12132bf4b21bb946fc4f83b75f58bd650f9aa4",
+          "asset": "nba_schedule_2024.parquet",
+          "release": "nba_stats_schedules",
+          "release_catalog_sha256": "4edeefcad5163e32ce0609621e3e829f23cd9d5f512ccdd81062f03d421843a6",
+          "source_repository": "https://github.com/sportsdataverse/hoopR-nba-stats-data"
+        },
+        {
+          "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_team_boxscores/team_boxscores_2024.parquet",
+          "sha256": "1a601bceaa11956c325a50d3690f80dcc5a567abd5707b71431a3a9787651995",
+          "fetched_at": "2026-10-30T18:30:13.083516+00:00",
+          "file": "1a601bceaa11956c325a50d3690f80dcc5a567abd5707b71431a3a9787651995.raw",
+          "bytes": 71724,
+          "rights": "Public access does not grant redistribution or commercial rights; review provider terms.",
+          "published_sha256": "1a601bceaa11956c325a50d3690f80dcc5a567abd5707b71431a3a9787651995",
+          "asset": "team_boxscores_2024.parquet",
+          "release": "nba_stats_team_boxscores",
+          "release_catalog_sha256": "ff06224bef1c69fd6bfbadd2bf39fd18182b15a6bae61161e9de9c6b746be3fe",
+          "source_repository": "https://github.com/sportsdataverse/hoopR-nba-stats-data"
+        }
+      ],
+      "coverage": {
+        "final_schedule_games": 1230,
+        "box_games": 1230,
+        "eligible_games_required": 1230,
+        "closed_season": true
+      },
+      "fallback_reasons": []
+    },
+    "2024": {
+      "adapter_version": "nba-history-v2",
+      "provider": "NBA Stats via sportsdataverse release",
+      "fetched_at": "2026-10-30T18:30:14.491590+00:00",
+      "components": [
+        {
+          "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_schedules/nba_schedule_2025.parquet",
+          "sha256": "959fdff85cf5892f83166d90cc84964075e13440ada5cff2a6bbe0bd9d4052fa",
+          "fetched_at": "2026-10-30T18:30:14.491590+00:00",
+          "file": "959fdff85cf5892f83166d90cc84964075e13440ada5cff2a6bbe0bd9d4052fa.raw",
+          "bytes": 23421,
+          "rights": "Public access does not grant redistribution or commercial rights; review provider terms.",
+          "published_sha256": "959fdff85cf5892f83166d90cc84964075e13440ada5cff2a6bbe0bd9d4052fa",
+          "asset": "nba_schedule_2025.parquet",
+          "release": "nba_stats_schedules",
+          "release_catalog_sha256": "4edeefcad5163e32ce0609621e3e829f23cd9d5f512ccdd81062f03d421843a6",
+          "source_repository": "https://github.com/sportsdataverse/hoopR-nba-stats-data"
+        },
+        {
+          "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_team_boxscores/team_boxscores_2025.parquet",
+          "sha256": "00146a2abf0350296ad8e4e81a28a6213a48b80deb1e48282dbe0daadf58af0b",
+          "fetched_at": "2026-10-30T18:30:15.089586+00:00",
+          "file": "00146a2abf0350296ad8e4e81a28a6213a48b80deb1e48282dbe0daadf58af0b.raw",
+          "bytes": 71845,
+          "rights": "Public access does not grant redistribution or commercial rights; review provider terms.",
+          "published_sha256": "00146a2abf0350296ad8e4e81a28a6213a48b80deb1e48282dbe0daadf58af0b",
+          "asset": "team_boxscores_2025.parquet",
+          "release": "nba_stats_team_boxscores",
+          "release_catalog_sha256": "ff06224bef1c69fd6bfbadd2bf39fd18182b15a6bae61161e9de9c6b746be3fe",
+          "source_repository": "https://github.com/sportsdataverse/hoopR-nba-stats-data"
+        }
+      ],
+      "coverage": {
+        "final_schedule_games": 1230,
+        "box_games": 1230,
+        "eligible_games_required": 1230,
+        "closed_season": true
+      },
+      "fallback_reasons": []
+    },
+    "2025": {
+      "adapter_version": "nba-history-v2",
+      "provider": "NBA Stats via sportsdataverse release",
+      "fetched_at": "2026-10-30T18:30:16.671107+00:00",
+      "components": [
+        {
+          "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_schedules/nba_schedule_2026.parquet",
+          "sha256": "1604c62a6d0a03dace9f1b8238c1374ecf87efeb6455175514a2d3d064fe520e",
+          "fetched_at": "2026-10-30T18:30:16.671107+00:00",
+          "file": "1604c62a6d0a03dace9f1b8238c1374ecf87efeb6455175514a2d3d064fe520e.raw",
+          "bytes": 23506,
+          "rights": "Public access does not grant redistribution or commercial rights; review provider terms.",
+          "published_sha256": "1604c62a6d0a03dace9f1b8238c1374ecf87efeb6455175514a2d3d064fe520e",
+          "asset": "nba_schedule_2026.parquet",
+          "release": "nba_stats_schedules",
+          "release_catalog_sha256": "4edeefcad5163e32ce0609621e3e829f23cd9d5f512ccdd81062f03d421843a6",
+          "source_repository": "https://github.com/sportsdataverse/hoopR-nba-stats-data"
+        },
+        {
+          "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nba_stats_team_boxscores/team_boxscores_2026.parquet",
+          "sha256": "7822e7069ada35711f9da47939a4a047d8bbb1e7dfd8f458e41bff30e4f5881e",
+          "fetched_at": "2026-10-30T18:30:17.053183+00:00",
+          "file": "7822e7069ada35711f9da47939a4a047d8bbb1e7dfd8f458e41bff30e4f5881e.raw",
+          "bytes": 72303,
+          "rights": "Public access does not grant redistribution or commercial rights; review provider terms.",
+          "published_sha256": "7822e7069ada35711f9da47939a4a047d8bbb1e7dfd8f458e41bff30e4f5881e",
+          "asset": "team_boxscores_2026.parquet",
+          "release": "nba_stats_team_boxscores",
+          "release_catalog_sha256": "ff06224bef1c69fd6bfbadd2bf39fd18182b15a6bae61161e9de9c6b746be3fe",
+          "source_repository": "https://github.com/sportsdataverse/hoopR-nba-stats-data"
+        }
+      ],
+      "coverage": {
+        "final_schedule_games": 1230,
+        "box_games": 1230,
+        "eligible_games_required": 1230,
+        "closed_season": true
+      },
+      "fallback_reasons": []
+    }
+  },
+  "columns": [
+    "home_off_rating",
+    "home_def_rating",
+    "home_pace",
+    "home_form",
+    "home_rest",
+    "home_back_to_back",
+    "home_elo",
+    "home_history",
+    "away_off_rating",
+    "away_def_rating",
+    "away_pace",
+    "away_form",
+    "away_rest",
+    "away_back_to_back",
+    "away_elo",
+    "away_history"
+  ],
+  "holdout_season": 2025,
+  "folds": [
+    {
+      "test_season": 2016,
+      "calibration_season": 2015,
+      "training_seasons": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014
+      ],
+      "training_games": 5909,
+      "calibration_games": 1230,
+      "train_ids_sha256": "91752d667baafd740243620896d77eb494f706fdddfd0ed3d747fed32d847b21",
+      "calibration_ids_sha256": "953ca78ba7ad82ca3810612f9a042432f7fc1c81a8898ff7393bfaa225cd7aec",
+      "latest_calibration_result": "2016-04-15T00:00:00+00:00",
+      "first_test_cutoff": "2016-10-25T00:00:00+00:00"
+    },
+    {
+      "test_season": 2017,
+      "calibration_season": 2016,
+      "training_seasons": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015
+      ],
+      "training_games": 7139,
+      "calibration_games": 1230,
+      "train_ids_sha256": "7c61bf21c273db6f15155e1ff1d88e8d24efa962506dec4f328a28c1cb428ecf",
+      "calibration_ids_sha256": "9cc4622ee8e026685023a696bf0708fb55031475275e914c8d5bee643be55cfb",
+      "latest_calibration_result": "2017-04-14T00:00:00+00:00",
+      "first_test_cutoff": "2017-10-17T00:00:00+00:00"
+    },
+    {
+      "test_season": 2018,
+      "calibration_season": 2017,
+      "training_seasons": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016
+      ],
+      "training_games": 8369,
+      "calibration_games": 1230,
+      "train_ids_sha256": "2e08f7aa282f75543091afcf79be9ced447d6fc04f167ffe96a13fc1c2d96844",
+      "calibration_ids_sha256": "fd3d53b41940c5c90761e9b8753c0e26e625353a052ce0303a9c32ddb57a4191",
+      "latest_calibration_result": "2018-04-13T00:00:00+00:00",
+      "first_test_cutoff": "2018-10-16T00:00:00+00:00"
+    },
+    {
+      "test_season": 2019,
+      "calibration_season": 2018,
+      "training_seasons": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017
+      ],
+      "training_games": 9599,
+      "calibration_games": 1230,
+      "train_ids_sha256": "cd32f33ec71399705a39cdf7cdd29a99f61bfd1a9960de97cc0f648d2b95289d",
+      "calibration_ids_sha256": "0a1496960b93f76c1f63b9a32dd37062281c1e7e56dc0efd484b7fd005112a85",
+      "latest_calibration_result": "2019-04-12T00:00:00+00:00",
+      "first_test_cutoff": "2019-10-22T00:00:00+00:00"
+    },
+    {
+      "test_season": 2020,
+      "calibration_season": 2019,
+      "training_seasons": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "training_games": 10829,
+      "calibration_games": 1059,
+      "train_ids_sha256": "3d68cf757fb5c09b7604b33fe107cc32d306f625035e817e53be8dab8a750915",
+      "calibration_ids_sha256": "7f8c5c02e1e0a984d2359bbce87c4ae7f8d2db4f4698f866052e54c1ed1d3524",
+      "latest_calibration_result": "2020-08-16T00:00:00+00:00",
+      "first_test_cutoff": "2020-12-22T00:00:00+00:00"
+    },
+    {
+      "test_season": 2021,
+      "calibration_season": 2020,
+      "training_seasons": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019
+      ],
+      "training_games": 11888,
+      "calibration_games": 1080,
+      "train_ids_sha256": "9d691249ea49c1187a0063dafb33532a2fdc3e638b43b5a534085546f176d0f7",
+      "calibration_ids_sha256": "47cca5159133bb9b6b5b1e23cb008f5555fbfc9dd5dbb264893baa18cecc7ac4",
+      "latest_calibration_result": "2021-05-18T00:00:00+00:00",
+      "first_test_cutoff": "2021-10-19T00:00:00+00:00"
+    },
+    {
+      "test_season": 2022,
+      "calibration_season": 2021,
+      "training_seasons": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020
+      ],
+      "training_games": 12968,
+      "calibration_games": 1230,
+      "train_ids_sha256": "3f0892f71d41c5247aa6da8234c2f832dcc9264dce0efc9fd836f042d9a852b3",
+      "calibration_ids_sha256": "6a1f08a5acca8a2f1086ec2ca3252eb33372a6367e0cfc8f6695789fc678b0ce",
+      "latest_calibration_result": "2022-04-12T00:00:00+00:00",
+      "first_test_cutoff": "2022-10-18T00:00:00+00:00"
+    },
+    {
+      "test_season": 2023,
+      "calibration_season": 2022,
+      "training_seasons": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021
+      ],
+      "training_games": 14198,
+      "calibration_games": 1230,
+      "train_ids_sha256": "4be57b0b916fcb539595282af079c12aaf1669d3eb1c30eba28729f842c9a6f9",
+      "calibration_ids_sha256": "4aea25038eb0be8dfc8a4578508013cd4c988fc4f0d26f6fed7cdcc719950feb",
+      "latest_calibration_result": "2023-04-11T00:00:00+00:00",
+      "first_test_cutoff": "2023-10-24T00:00:00+00:00"
+    },
+    {
+      "test_season": 2024,
+      "calibration_season": 2023,
+      "training_seasons": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ],
+      "training_games": 15428,
+      "calibration_games": 1230,
+      "train_ids_sha256": "82747fb5668ba1d7751b6981f10e5c3ec072db00c5fa515382026173e0235f37",
+      "calibration_ids_sha256": "f0438a03762c9165868026c570e642bd4353585caf1cce4d4ba03c8e7b418938",
+      "latest_calibration_result": "2024-04-16T00:00:00+00:00",
+      "first_test_cutoff": "2024-10-22T00:00:00+00:00"
+    },
+    {
+      "test_season": 2025,
+      "calibration_season": 2024,
+      "training_seasons": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "training_games": 16658,
+      "calibration_games": 1230,
+      "train_ids_sha256": "cea91b5381e11aacb634d229f2a83723a2fe28d0e84541d129f9d1526ae0b310",
+      "calibration_ids_sha256": "5db3b3fdd3ee11b36423cf0dc03f822c768c00ec1ba87f639216417423d3c61a",
+      "latest_calibration_result": "2025-04-15T00:00:00+00:00",
+      "first_test_cutoff": "2025-10-21T00:00:00+00:00"
+    }
+  ],
+  "splits": {
+    "validation": {
+      "model": {
+        "accuracy": 0.647688157037864,
+        "brier": 0.21767865907915537,
+        "log_loss": 0.6247916364766626,
+        "score_mae": 9.216659260420581,
+        "joint_log_loss": 7.658211530057742,
+        "margin_mae": 10.543458063751249,
+        "total_mae": 14.95545340923149,
+        "coverage_90": 0.907154153874779,
+        "score_crps": 6.529178623916118,
+        "spread_brier3": 0.43633405921913626,
+        "total_brier3": 0.43831647740309543,
+        "games": 10749,
+        "score_rmse": 11.60159609256564,
+        "calibration": {
+          "winner": [
+            {
+              "count": 12,
+              "predicted": 0.07929951376979735,
+              "observed": 0.08333333333333333
+            },
+            {
+              "count": 142,
+              "predicted": 0.162910720163375,
+              "observed": 0.2112676056338028
+            },
+            {
+              "count": 629,
+              "predicted": 0.2569846615936908,
+              "observed": 0.27344992050874406
+            },
+            {
+              "count": 1217,
+              "predicted": 0.3553774628895867,
+              "observed": 0.34346754313886607
+            },
+            {
+              "count": 1692,
+              "predicted": 0.45170995573564676,
+              "observed": 0.45449172576832153
+            },
+            {
+              "count": 2242,
+              "predicted": 0.55049880081196,
+              "observed": 0.5361284567350579
+            },
+            {
+              "count": 2213,
+              "predicted": 0.6478565733103941,
+              "observed": 0.64979665612291
+            },
+            {
+              "count": 1696,
+              "predicted": 0.746755740274835,
+              "observed": 0.7464622641509434
+            },
+            {
+              "count": 810,
+              "predicted": 0.8394211091118448,
+              "observed": 0.8209876543209876
+            },
+            {
+              "count": 96,
+              "predicted": 0.9256225381553245,
+              "observed": 0.9270833333333334
+            }
+          ],
+          "spread": [
+            {
+              "count": 58,
+              "predicted": 0.07560292706416394,
+              "observed": 0.10344827586206896
+            },
+            {
+              "count": 716,
+              "predicted": 0.16147924015074483,
+              "observed": 0.15223463687150837
+            },
+            {
+              "count": 1763,
+              "predicted": 0.25377864621202034,
+              "observed": 0.24333522404991492
+            },
+            {
+              "count": 2460,
+              "predicted": 0.3526191922060873,
+              "observed": 0.3548780487804878
+            },
+            {
+              "count": 2488,
+              "predicted": 0.4489831721552263,
+              "observed": 0.4561897106109325
+            },
+            {
+              "count": 1794,
+              "predicted": 0.5470255099839382,
+              "observed": 0.5551839464882943
+            },
+            {
+              "count": 1015,
+              "predicted": 0.6435987309355397,
+              "observed": 0.6640394088669951
+            },
+            {
+              "count": 370,
+              "predicted": 0.7375323040417329,
+              "observed": 0.7567567567567568
+            },
+            {
+              "count": 82,
+              "predicted": 0.8347708488822684,
+              "observed": 0.8536585365853658
+            },
+            {
+              "count": 3,
+              "predicted": 0.922323310510443,
+              "observed": 0.6666666666666666
+            }
+          ],
+          "total": [
+            {
+              "count": 49,
+              "predicted": 0.07631462301885931,
+              "observed": 0.10204081632653061
+            },
+            {
+              "count": 358,
+              "predicted": 0.16133259714437231,
+              "observed": 0.14804469273743018
+            },
+            {
+              "count": 767,
+              "predicted": 0.2556678520501805,
+              "observed": 0.24902216427640156
+            },
+            {
+              "count": 1313,
+              "predicted": 0.35437824561120956,
+              "observed": 0.3495811119573496
+            },
+            {
+              "count": 1880,
+              "predicted": 0.4526109920693165,
+              "observed": 0.4377659574468085
+            },
+            {
+              "count": 2355,
+              "predicted": 0.5511824502041364,
+              "observed": 0.5558386411889596
+            },
+            {
+              "count": 2247,
+              "predicted": 0.6496149903167686,
+              "observed": 0.6599910992434357
+            },
+            {
+              "count": 1408,
+              "predicted": 0.7416390338094064,
+              "observed": 0.7272727272727273
+            },
+            {
+              "count": 361,
+              "predicted": 0.8334140521382487,
+              "observed": 0.8670360110803325
+            },
+            {
+              "count": 11,
+              "predicted": 0.9226351040451832,
+              "observed": 1.0
+            }
+          ]
+        },
+        "ece": 0.00823831459385616,
+        "intervals_95": {
+          "accuracy": [
+            0.6385938582483053,
+            0.6576145927681858
+          ],
+          "brier": [
+            0.21423106981849055,
+            0.2208675267687453
+          ],
+          "log_loss": [
+            0.6172083533862146,
+            0.631881311822197
+          ],
+          "score_mae": [
+            9.120330466104681,
+            9.320839126465312
+          ],
+          "joint_log_loss": [
+            7.637622299120014,
+            7.681413250674315
+          ],
+          "margin_mae": [
+            10.364685188838319,
+            10.721616215434102
+          ],
+          "total_mae": [
+            14.753151035029845,
+            15.151840793458351
+          ],
+          "coverage_90": [
+            0.9029260241606708,
+            0.9112180033806762
+          ],
+          "score_crps": [
+            6.462690311866143,
+            6.600701330784883
+          ],
+          "spread_brier3": [
+            0.4304072011251166,
+            0.4424413031553426
+          ],
+          "total_brier3": [
+            0.43019718272194624,
+            0.4455559870692563
+          ]
+        }
+      },
+      "baseline": {
+        "accuracy": 0.5628430551679225,
+        "brier": 0.24651442601449836,
+        "log_loss": 0.6861785611177372,
+        "score_mae": 10.07599509057254,
+        "joint_log_loss": 7.829993146029218,
+        "margin_mae": 11.637797591630381,
+        "total_mae": 16.29802508372541,
+        "coverage_90": 0.9006419201786212,
+        "score_crps": 7.122442839706434,
+        "spread_brier3": 0.48947523867821324,
+        "total_brier3": 0.4864881703277435,
+        "games": 10749,
+        "score_rmse": 12.635191321739507,
+        "calibration": {
+          "winner": [
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            },
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            },
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            },
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            },
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            },
+            {
+              "count": 10749,
+              "predicted": 0.5861765463941431,
+              "observed": 0.5628430551679225
+            },
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            },
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            },
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            },
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            }
+          ],
+          "spread": [
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            },
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            },
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            },
+            {
+              "count": 1230,
+              "predicted": 0.39237265056922016,
+              "observed": 0.42276422764227645
+            },
+            {
+              "count": 9519,
+              "predicted": 0.42548025388701033,
+              "observed": 0.42588507196134046
+            },
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            },
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            },
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            },
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            },
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            }
+          ],
+          "total": [
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            },
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            },
+            {
+              "count": 1230,
+              "predicted": 0.2145583972080587,
+              "observed": 0.3178861788617886
+            },
+            {
+              "count": 2460,
+              "predicted": 0.33290731656764716,
+              "observed": 0.43130081300813006
+            },
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            },
+            {
+              "count": 4599,
+              "predicted": 0.5465405764535418,
+              "observed": 0.5764296586214395
+            },
+            {
+              "count": 2460,
+              "predicted": 0.6639988459084871,
+              "observed": 0.6373983739837399
+            },
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            },
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            },
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            }
+          ]
+        },
+        "ece": 0.023333491226220526,
+        "intervals_95": {
+          "accuracy": [
+            0.5540175905698161,
+            0.5717338564426564
+          ],
+          "brier": [
+            0.2449755527693137,
+            0.24807597350608374
+          ],
+          "log_loss": [
+            0.6830670787518446,
+            0.6893328892835007
+          ],
+          "score_mae": [
+            9.974355250676657,
+            10.186681751129834
+          ],
+          "joint_log_loss": [
+            7.808830622177,
+            7.853219694019274
+          ],
+          "margin_mae": [
+            11.443167794650915,
+            11.852064105933188
+          ],
+          "total_mae": [
+            16.087225222325877,
+            16.48843072820882
+          ],
+          "coverage_90": [
+            0.8963130024980582,
+            0.9047366776848997
+          ],
+          "score_crps": [
+            7.045753784651458,
+            7.196625904203491
+          ],
+          "spread_brier3": [
+            0.48674155076818043,
+            0.4924257472158117
+          ],
+          "total_brier3": [
+            0.47856043920497754,
+            0.4935863831667674
+          ]
+        }
+      }
+    },
+    "holdout": {
+      "model": {
+        "accuracy": 0.6821138211382114,
+        "brier": 0.20855635276254253,
+        "log_loss": 0.6052926083612613,
+        "score_mae": 9.565270515588699,
+        "joint_log_loss": 7.758148653659031,
+        "margin_mae": 11.456964186263994,
+        "total_mae": 15.192731634573176,
+        "coverage_90": 0.8995934959349593,
+        "score_crps": 6.794581394108687,
+        "spread_brier3": 0.4196525654333562,
+        "total_brier3": 0.40833792406559755,
+        "games": 1230,
+        "score_rmse": 12.039408481016897,
+        "calibration": {
+          "winner": [
+            {
+              "count": 4,
+              "predicted": 0.07634327680832068,
+              "observed": 0.0
+            },
+            {
+              "count": 49,
+              "predicted": 0.16105018959047568,
+              "observed": 0.10204081632653061
+            },
+            {
+              "count": 101,
+              "predicted": 0.2470153947394409,
+              "observed": 0.24752475247524752
+            },
+            {
+              "count": 160,
+              "predicted": 0.3488519009450729,
+              "observed": 0.40625
+            },
+            {
+              "count": 197,
+              "predicted": 0.4471025901558546,
+              "observed": 0.41624365482233505
+            },
+            {
+              "count": 204,
+              "predicted": 0.551599518156531,
+              "observed": 0.5931372549019608
+            },
+            {
+              "count": 216,
+              "predicted": 0.6485313350465697,
+              "observed": 0.6898148148148148
+            },
+            {
+              "count": 180,
+              "predicted": 0.7466010792316625,
+              "observed": 0.7722222222222223
+            },
+            {
+              "count": 99,
+              "predicted": 0.8431100039996273,
+              "observed": 0.797979797979798
+            },
+            {
+              "count": 20,
+              "predicted": 0.9166219507577384,
+              "observed": 0.85
+            }
+          ],
+          "spread": [
+            {
+              "count": 10,
+              "predicted": 0.0775114425397059,
+              "observed": 0.1
+            },
+            {
+              "count": 111,
+              "predicted": 0.15781383906105256,
+              "observed": 0.08108108108108109
+            },
+            {
+              "count": 211,
+              "predicted": 0.25558695138030135,
+              "observed": 0.2796208530805687
+            },
+            {
+              "count": 271,
+              "predicted": 0.34772317769722383,
+              "observed": 0.33579335793357934
+            },
+            {
+              "count": 265,
+              "predicted": 0.448232588784931,
+              "observed": 0.47547169811320755
+            },
+            {
+              "count": 201,
+              "predicted": 0.5488876322898768,
+              "observed": 0.5771144278606966
+            },
+            {
+              "count": 104,
+              "predicted": 0.644909544843675,
+              "observed": 0.7307692307692307
+            },
+            {
+              "count": 50,
+              "predicted": 0.7405612388609031,
+              "observed": 0.74
+            },
+            {
+              "count": 7,
+              "predicted": 0.8268669914018377,
+              "observed": 1.0
+            },
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            }
+          ],
+          "total": [
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            },
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            },
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            },
+            {
+              "count": 10,
+              "predicted": 0.3578092700757537,
+              "observed": 0.4
+            },
+            {
+              "count": 37,
+              "predicted": 0.45937519391286824,
+              "observed": 0.35135135135135137
+            },
+            {
+              "count": 159,
+              "predicted": 0.5550230237162262,
+              "observed": 0.5408805031446541
+            },
+            {
+              "count": 355,
+              "predicted": 0.656298628687726,
+              "observed": 0.6647887323943662
+            },
+            {
+              "count": 453,
+              "predicted": 0.7482868408581991,
+              "observed": 0.7218543046357616
+            },
+            {
+              "count": 204,
+              "predicted": 0.8355275771741205,
+              "observed": 0.8235294117647058
+            },
+            {
+              "count": 12,
+              "predicted": 0.9138180184409251,
+              "observed": 0.8333333333333334
+            }
+          ]
+        },
+        "ece": 0.03765386074260324,
+        "intervals_95": {
+          "accuracy": [
+            0.6452453692939627,
+            0.7143050775500575
+          ],
+          "brier": [
+            0.1962811593154303,
+            0.2231994029796279
+          ],
+          "log_loss": [
+            0.5775655952356623,
+            0.6379653847912802
+          ],
+          "score_mae": [
+            9.188461569359035,
+            9.89401483456004
+          ],
+          "joint_log_loss": [
+            7.6939190028033515,
+            7.816749031584492
+          ],
+          "margin_mae": [
+            11.056434292628438,
+            11.907515241965509
+          ],
+          "total_mae": [
+            14.397793489798007,
+            15.838679853745854
+          ],
+          "coverage_90": [
+            0.8889089825119236,
+            0.9106738634965303
+          ],
+          "score_crps": [
+            6.5477363767490715,
+            7.006548423552722
+          ],
+          "spread_brier3": [
+            0.403218345913957,
+            0.4367763666393115
+          ],
+          "total_brier3": [
+            0.38049147016194923,
+            0.43637218289444224
+          ]
+        }
+      },
+      "baseline": {
+        "accuracy": 0.5544715447154471,
+        "brier": 0.24751194246659453,
+        "log_loss": 0.6881780216170466,
+        "score_mae": 10.34853129768768,
+        "joint_log_loss": 7.924036783247239,
+        "margin_mae": 13.120085283197172,
+        "total_mae": 16.017479056834766,
+        "coverage_90": 0.8963414634146342,
+        "score_crps": 7.3416394945445775,
+        "spread_brier3": 0.4887744061913342,
+        "total_brier3": 0.43470798463696597,
+        "games": 1230,
+        "score_rmse": 13.005965581878288,
+        "calibration": {
+          "winner": [
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            },
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            },
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            },
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            },
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            },
+            {
+              "count": 1230,
+              "predicted": 0.5763597070476648,
+              "observed": 0.5544715447154471
+            },
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            },
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            },
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            },
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            }
+          ],
+          "spread": [
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            },
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            },
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            },
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            },
+            {
+              "count": 1230,
+              "predicted": 0.414190326608669,
+              "observed": 0.424390243902439
+            },
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            },
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            },
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            },
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            },
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            }
+          ],
+          "total": [
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            },
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            },
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            },
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            },
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            },
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            },
+            {
+              "count": 1230,
+              "predicted": 0.6412727275151333,
+              "observed": 0.6861788617886179
+            },
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            },
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            },
+            {
+              "count": 0,
+              "predicted": null,
+              "observed": null
+            }
+          ]
+        },
+        "ece": 0.021888162332217687,
+        "intervals_95": {
+          "accuracy": [
+            0.5204345478315239,
+            0.5868806004816567
+          ],
+          "brier": [
+            0.24256245045859617,
+            0.2527100526882719
+          ],
+          "log_loss": [
+            0.6782009836471481,
+            0.6986562167468866
+          ],
+          "score_mae": [
+            9.953202181548477,
+            10.696870157500847
+          ],
+          "joint_log_loss": [
+            7.8533225174015735,
+            7.987692124873702
+          ],
+          "margin_mae": [
+            12.461409562759306,
+            13.770907872485466
+          ],
+          "total_mae": [
+            15.252987778731953,
+            16.689397997111936
+          ],
+          "coverage_90": [
+            0.885905552678416,
+            0.908613498912748
+          ],
+          "score_crps": [
+            7.0650529030011935,
+            7.585641809083803
+          ],
+          "spread_brier3": [
+            0.47862387266203094,
+            0.4985794322967266
+          ],
+          "total_brier3": [
+            0.41513029947254604,
+            0.454324312064103
+          ]
+        }
+      }
+    }
+  },
+  "scenarios": {
+    "home_spread": -5.5,
+    "total": 220.5,
+    "kind": "fixed research lines, not historical market prices"
+  },
+  "limitations": [
+    "Retrospective provider snapshots; original publication vintages not proven.",
+    "No verified historical player availability supplied; unknown, not assumed healthy.",
+    "Week-block fixed-prediction intervals omit refitting and selection uncertainty.",
+    "No verified market quote or reliable betting-edge claim."
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "kind": "Actual authenticated Streamlit AppTest of real archive-backed NBA forecasts; not a screenshot or mocked model",
+  "authenticated": true,
+  "no_forecasts_before_auth": true,
+  "sport": "NBA",
+  "issued_forecasts": 52,
+  "visible_matchup_cards": 52,
+  "ui_exceptions": 0,
+  "example": {
+    "game_id": "0022600015",
+    "home": "Washington Wizards",
+    "away": "Charlotte Hornets",
+    "kickoff": "2026-10-30T23:00:00+00:00",
+    "as_of": "2026-10-30T18:43:05.504421+00:00",
+    "home_win_probability": 0.240060329678701,
+    "log_odds_reconciles": true,
+    "projected_score_text": "Average projected final score: Washington Wizards 109.2, Charlotte Hornets 116.8. Expected home margin -7.6; total 226.0."
+  },
+  "data_source_manifest": {
+    "manifest_path": "/workspace/predictions/reports/nba-download-fix-resilience/nba-1cd8c05778404948a5e330a565cda7ea/source.json",
+    "sha256": "461a8c3cdc11e12a5ff71b1e4df33f41948dfeb304d3e962cb27215272b065de",
+    "provider": "NBA verified provider snapshots"
+  },
+  "market_status": "PASS; no executable NBA quote/fee/settlement adapter",
+  "limitations": "Player availability remains unknown; archived provider publication vintages are not original historical observations."
+}
