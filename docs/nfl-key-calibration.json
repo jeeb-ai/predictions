@@ -1,0 +1,1463 @@
+{
+  "type": "nfl_key_number_research",
+  "run_dir": "reports/scoring-calibration/key-calibration-793a3128257244168d6e02f0b04ecde1",
+  "holdout_season": 2025,
+  "base_model": "ridge_joint_gaussian",
+  "source": {
+    "bytes": 2186540,
+    "fetched_at": "2026-10-26T19:39:22.532045+00:00",
+    "license_note": "No explicit license file was found in the source repository during implementation. Public availability is not a redistribution license; review upstream and underlying-source terms before redistribution or commercial use.",
+    "license_url": "https://github.com/nflverse/nfldata",
+    "sha256": "5b8c66203d43c8faa93b0519b3ca078970aa0bdb39ccb51076dc99e5248f1486",
+    "source_url": "https://raw.githubusercontent.com/nflverse/nfldata/master/data/games.csv",
+    "requested_as_of": "2026-10-26T00:00:00+00:00",
+    "as_of": "2026-10-26T00:00:00+00:00"
+  },
+  "source_code_sha256": "d11dfa8410e33e4ed591a91f1b647b3e0d9b719c66fc5c47bc452ed4bdd67050",
+  "base_report_sha256": "3efc11c7f085a29e7ba91bedf71cd042318d9361ae2bfa7d727c9a0bd9d5745d",
+  "method": {
+    "absolute_margin_categories": [
+      0,
+      3,
+      7,
+      10,
+      14
+    ],
+    "total_categories": [
+      37,
+      41,
+      44,
+      47,
+      51
+    ],
+    "reference": "all other values",
+    "penalty": 0.02,
+    "weight_bounds": [
+      -2,
+      2
+    ],
+    "fit": "previous calibration season only; base models refitted identically"
+  },
+  "scenarios": {
+    "spread_3": [
+      -3,
+      "home_cover"
+    ],
+    "spread_7": [
+      -7,
+      "home_cover"
+    ],
+    "total_44": [
+      44,
+      "over"
+    ],
+    "total_47": [
+      47,
+      "over"
+    ]
+  },
+  "folds": [
+    {
+      "test_season": 2005,
+      "calibration_season": 2004,
+      "train_seasons": [
+        1999,
+        2000,
+        2001,
+        2002,
+        2003
+      ],
+      "train_games": 1256,
+      "calibration_games": 256,
+      "train_latest_result": "2003-12-30T01:30:00+00:00",
+      "calibration_latest_result": "2005-01-04T01:30:00+00:00",
+      "test_first_kickoff": "2005-09-08T13:00:00+00:00",
+      "weights": [
+        -0.39955432730193124,
+        1.084675202673653,
+        0.5625580879268799,
+        0.5861510628324893,
+        0.4860516255111303,
+        0.05498555924460292,
+        -0.033011656393401256,
+        -0.08994332465815559,
+        0.09106927314274399,
+        0.13973117249698738
+      ],
+      "research_model_sha256": "91757917c4f0d3dfe3f2e3966fbaa4f3625316d51867b0e6dc99cc7bb38c1203",
+      "training_game_ids_sha256": "491aa2ae7ff07c3043ad0dfa5f574ab38dc9d5f5c5a08e8b43db00d2c577c58a",
+      "calibration_game_ids_sha256": "0094da8eba97e3545b9a840a708391d9da0144a9005a13bbc6b6c67fe04ff752"
+    },
+    {
+      "test_season": 2006,
+      "calibration_season": 2005,
+      "train_seasons": [
+        1999,
+        2000,
+        2001,
+        2002,
+        2003,
+        2004
+      ],
+      "train_games": 1512,
+      "calibration_games": 256,
+      "train_latest_result": "2005-01-04T01:30:00+00:00",
+      "calibration_latest_result": "2006-01-03T01:30:00+00:00",
+      "test_first_kickoff": "2006-09-08T00:30:00+00:00",
+      "weights": [
+        -0.41778804115480145,
+        0.8242495850444244,
+        0.19975326183844172,
+        0.3405091360888009,
+        0.1932775517359006,
+        0.17850432839472327,
+        0.20303758026935756,
+        0.41587590823275306,
+        -0.2005914565110138,
+        -0.013714876948772124
+      ],
+      "research_model_sha256": "4ede770b2ff583f2536ec137571cfba7a3d29a467d8bceef5a27a4421f36cce6",
+      "training_game_ids_sha256": "b8f28efe07d30c509a525a45a5019607d384be32b0f21fa30e799151f75fc425",
+      "calibration_game_ids_sha256": "1d66388b3d04d399bea7a9b2822b3bc79920b1fe54a1d657e11daf38abb289f1"
+    },
+    {
+      "test_season": 2007,
+      "calibration_season": 2006,
+      "train_seasons": [
+        1999,
+        2000,
+        2001,
+        2002,
+        2003,
+        2004,
+        2005
+      ],
+      "train_games": 1768,
+      "calibration_games": 256,
+      "train_latest_result": "2006-01-03T01:30:00+00:00",
+      "calibration_latest_result": "2007-01-02T01:15:00+00:00",
+      "test_first_kickoff": "2007-09-07T00:30:00+00:00",
+      "weights": [
+        -0.4057441363684704,
+        0.9556321656897316,
+        0.5465088745782762,
+        0.37398669066202167,
+        0.46533157458841373,
+        0.30426085400778435,
+        0.07408199286827664,
+        0.36488974674892816,
+        0.2153668897000873,
+        0.11313416541454988
+      ],
+      "research_model_sha256": "a10317002625f80f92037d504a7d00ced2d4ec937a5820ec63d89c73dfa31d64",
+      "training_game_ids_sha256": "d5a9f8c9a619f4fcae226a724a0e72276987dd7ac76680c47fc226fa015eb5e0",
+      "calibration_game_ids_sha256": "39d230541133c8988817131f7332e95d1632f8765823164ec1c8968b82770a84"
+    },
+    {
+      "test_season": 2008,
+      "calibration_season": 2007,
+      "train_seasons": [
+        1999,
+        2000,
+        2001,
+        2002,
+        2003,
+        2004,
+        2005,
+        2006
+      ],
+      "train_games": 2024,
+      "calibration_games": 256,
+      "train_latest_result": "2007-01-02T01:15:00+00:00",
+      "calibration_latest_result": "2008-01-01T01:25:00+00:00",
+      "test_first_kickoff": "2008-09-04T23:00:00+00:00",
+      "weights": [
+        -0.39520119876066817,
+        0.9513698025030344,
+        0.6237855275307379,
+        0.16352899960784298,
+        0.2738656204036104,
+        0.11389032584551136,
+        0.12962392973264933,
+        0.09918550397138086,
+        0.2402691918401584,
+        0.07211213596808994
+      ],
+      "research_model_sha256": "dd31c60c7ade971817ea6dcd921067819bee8212bd01adaaf834c11228061160",
+      "training_game_ids_sha256": "d1726cbc515046b766d783cce7967b1820e37be315c50a1c3c1d158d5c116467",
+      "calibration_game_ids_sha256": "81b80a28f8d8216426e36191edb1a45035b5acfa75e1031d93cbd25fa3ded876"
+    },
+    {
+      "test_season": 2009,
+      "calibration_season": 2008,
+      "train_seasons": [
+        1999,
+        2000,
+        2001,
+        2002,
+        2003,
+        2004,
+        2005,
+        2006,
+        2007
+      ],
+      "train_games": 2280,
+      "calibration_games": 256,
+      "train_latest_result": "2008-01-01T01:25:00+00:00",
+      "calibration_latest_result": "2008-12-30T01:15:00+00:00",
+      "test_first_kickoff": "2009-09-11T00:30:00+00:00",
+      "weights": [
+        -0.34329196785942107,
+        0.5287589386350308,
+        0.5226272996989209,
+        0.2641000600681478,
+        -0.06835324161684309,
+        0.1338449555899246,
+        0.29646825227679363,
+        0.18596621593500512,
+        -0.025379862620431067,
+        0.12779864353764225
+      ],
+      "research_model_sha256": "a846d25cbe5cebc7f0a312214b88f9eaa957a546aa16f5818fb9333c58a25e1b",
+      "training_game_ids_sha256": "55c5293ec637298ff28e277b53dce04a2b7c77b847b7551dee6fdf3281fc3779",
+      "calibration_game_ids_sha256": "88f360d184559b4fc9d411582d850de740999b7332d5ef8a0dc4c1d0a66f5125"
+    },
+    {
+      "test_season": 2010,
+      "calibration_season": 2009,
+      "train_seasons": [
+        1999,
+        2000,
+        2001,
+        2002,
+        2003,
+        2004,
+        2005,
+        2006,
+        2007,
+        2008
+      ],
+      "train_games": 2536,
+      "calibration_games": 256,
+      "train_latest_result": "2008-12-30T01:15:00+00:00",
+      "calibration_latest_result": "2010-01-05T01:20:00+00:00",
+      "test_first_kickoff": "2010-09-10T00:30:00+00:00",
+      "weights": [
+        -0.3804234935301004,
+        0.9324490226233874,
+        0.5771466102553766,
+        0.312920936404316,
+        0.22592916812389433,
+        0.4510010950686112,
+        0.3092478360216945,
+        0.33951340288903226,
+        -0.15574938146144918,
+        0.2900563137615489
+      ],
+      "research_model_sha256": "c332849278181c95698db7cba6380c699500dd670a9b167fbc37abf058685b5a",
+      "training_game_ids_sha256": "49149c843f900105dba9987e4cc8852a7bfe12023bc87b351cdb49b078e07acd",
+      "calibration_game_ids_sha256": "552bb09b98d8deb088d92d0da3672479e94b82667ee59d9b136e5a81a6704a69"
+    },
+    {
+      "test_season": 2011,
+      "calibration_season": 2010,
+      "train_seasons": [
+        1999,
+        2000,
+        2001,
+        2002,
+        2003,
+        2004,
+        2005,
+        2006,
+        2007,
+        2008,
+        2009
+      ],
+      "train_games": 2792,
+      "calibration_games": 256,
+      "train_latest_result": "2010-01-05T01:20:00+00:00",
+      "calibration_latest_result": "2011-01-04T01:20:00+00:00",
+      "test_first_kickoff": "2011-09-09T00:30:00+00:00",
+      "weights": [
+        -0.392460333156087,
+        1.095792616984485,
+        0.30503567736554954,
+        0.25673878981397175,
+        0.27416229365463046,
+        0.06271917677311545,
+        0.12625014100533155,
+        0.08508121867009932,
+        0.1761478234741838,
+        0.16793806017237203
+      ],
+      "research_model_sha256": "868f3bbb00ef766ebe0064d46c47535776ad58b11e63cb0225344910f43efc4e",
+      "training_game_ids_sha256": "013370284ba7378e31a23dfb1d351763081be47bdea05008183977dc4e76265f",
+      "calibration_game_ids_sha256": "accd5e1d017b6f774b554e889a8c8e1f24259e0540576ca0a405739cb2ea9dc1"
+    },
+    {
+      "test_season": 2012,
+      "calibration_season": 2011,
+      "train_seasons": [
+        1999,
+        2000,
+        2001,
+        2002,
+        2003,
+        2004,
+        2005,
+        2006,
+        2007,
+        2008,
+        2009,
+        2010
+      ],
+      "train_games": 3048,
+      "calibration_games": 256,
+      "train_latest_result": "2011-01-04T01:20:00+00:00",
+      "calibration_latest_result": "2012-01-03T01:20:00+00:00",
+      "test_first_kickoff": "2012-09-06T00:30:00+00:00",
+      "weights": [
+        -0.3949070973844989,
+        0.8296989143181522,
+        0.743352435176633,
+        0.15549232756830816,
+        0.20933557043985884,
+        -0.08676881843629673,
+        0.07163529935878067,
+        0.25012573889362,
+        -0.20694652064802957,
+        0.17114804191899172
+      ],
+      "research_model_sha256": "c6593e0292efa9498b6cbe8e67699c36603d6e1f59ab24f00ad4a2094ec84599",
+      "training_game_ids_sha256": "89de7500edb2976b5843f95755001b5bf80e2599dd3a7efda341d8570def54a1",
+      "calibration_game_ids_sha256": "3bfc450d9deeeaa8769653eaddc71bd5b8cb50e36bf928876272385ae9b06825"
+    },
+    {
+      "test_season": 2013,
+      "calibration_season": 2012,
+      "train_seasons": [
+        1999,
+        2000,
+        2001,
+        2002,
+        2003,
+        2004,
+        2005,
+        2006,
+        2007,
+        2008,
+        2009,
+        2010,
+        2011
+      ],
+      "train_games": 3304,
+      "calibration_games": 256,
+      "train_latest_result": "2012-01-03T01:20:00+00:00",
+      "calibration_latest_result": "2013-01-01T01:20:00+00:00",
+      "test_first_kickoff": "2013-09-06T00:30:00+00:00",
+      "weights": [
+        -0.3269438558635954,
+        0.790836142999616,
+        0.6051553286021658,
+        0.28717505433022367,
+        0.1576301683593356,
+        0.2002387223737347,
+        0.031302193145971206,
+        0.1890179684287446,
+        0.06511475286084172,
+        -0.2574480755869601
+      ],
+      "research_model_sha256": "00c85902a5d752a232e9ffc9b64ee41ab0436a056d3265720d00f079d45ac779",
+      "training_game_ids_sha256": "2d013319f665490a4627d0002d46b92c4a06d8172c3c93a24694bbc884320403",
+      "calibration_game_ids_sha256": "54f37284cab11a3ecb14c2ca852bdff5ffec04f604a7adbf0b04d95afd1b69a6"
+    },
+    {
+      "test_season": 2014,
+      "calibration_season": 2013,
+      "train_seasons": [
+        1999,
+        2000,
+        2001,
+        2002,
+        2003,
+        2004,
+        2005,
+        2006,
+        2007,
+        2008,
+        2009,
+        2010,
+        2011,
+        2012
+      ],
+      "train_games": 3560,
+      "calibration_games": 256,
+      "train_latest_result": "2013-01-01T01:20:00+00:00",
+      "calibration_latest_result": "2013-12-31T01:30:00+00:00",
+      "test_first_kickoff": "2014-09-05T00:30:00+00:00",
+      "weights": [
+        -0.3510116848298294,
+        0.8365039170096107,
+        0.4245875717138057,
+        0.30822849964955645,
+        0.15856702681366514,
+        -0.12211531561961958,
+        -0.11299418760935506,
+        0.4261026997778938,
+        0.13887922984582526,
+        0.45795203481191615
+      ],
+      "research_model_sha256": "6b9bac05978f31054d41f86546069554118b0612638dc5fbe9e7d3a58e40ef61",
+      "training_game_ids_sha256": "1475eb7208a2c2f99dcbf7b77e459f76fcd3f700560f9e53f2f071e63dfd9488",
+      "calibration_game_ids_sha256": "2fd6861bbf871b181d2e301e69806c7021ab513678e0abd9adb3c90a52fe3983"
+    },
+    {
+      "test_season": 2015,
+      "calibration_season": 2014,
+      "train_seasons": [
+        1999,
+        2000,
+        2001,
+        2002,
+        2003,
+        2004,
+        2005,
+        2006,
+        2007,
+        2008,
+        2009,
+        2010,
+        2011,
+        2012,
+        2013
+      ],
+      "train_games": 3816,
+      "calibration_games": 256,
+      "train_latest_result": "2013-12-31T01:30:00+00:00",
+      "calibration_latest_result": "2014-12-30T01:30:00+00:00",
+      "test_first_kickoff": "2015-09-11T00:30:00+00:00",
+      "weights": [
+        -0.32819205872880247,
+        0.6149336894289577,
+        0.20418180468889344,
+        0.19211747309309446,
+        0.24631018539690006,
+        0.37368226692276657,
+        0.09981639077341746,
+        0.22238930306317253,
+        -0.029042570837008144,
+        0.3282852440866977
+      ],
+      "research_model_sha256": "da2cba9ca238360b04f66cf82dc620693ade3f3c0815f8fd28428864d2b4f3c1",
+      "training_game_ids_sha256": "8a3d0033b385b1c647572e87e6c6ebb19f8988cb6534f2049af60ddbb813fb73",
+      "calibration_game_ids_sha256": "e93989cf9d95a73f339f045f5562593aeedbd4c65d05ab632dc130f5b15371d3"
+    },
+    {
+      "test_season": 2016,
+      "calibration_season": 2015,
+      "train_seasons": [
+        1999,
+        2000,
+        2001,
+        2002,
+        2003,
+        2004,
+        2005,
+        2006,
+        2007,
+        2008,
+        2009,
+        2010,
+        2011,
+        2012,
+        2013,
+        2014
+      ],
+      "train_games": 4072,
+      "calibration_games": 256,
+      "train_latest_result": "2014-12-30T01:30:00+00:00",
+      "calibration_latest_result": "2016-01-05T01:30:00+00:00",
+      "test_first_kickoff": "2016-09-09T00:30:00+00:00",
+      "weights": [
+        -0.4100648693734896,
+        0.9833895660906066,
+        0.5840060384406844,
+        0.19400415462074133,
+        0.3661637812668557,
+        -0.045510520183364545,
+        0.11901089372449919,
+        0.07596201543651779,
+        0.042455513721912544,
+        -0.15257679609884411
+      ],
+      "research_model_sha256": "51b37063d6ba007ed98919ac34f389d445ba2e53d7388581b63400a4035c2a09",
+      "training_game_ids_sha256": "1927aecb9397ff69b8639ca0daa98a9985f79ded43d75244f8336612128e5072",
+      "calibration_game_ids_sha256": "196a88bf62600a704a82f3c98aaf5bdb5eb00495c35fb82b17ec797f41be5584"
+    },
+    {
+      "test_season": 2017,
+      "calibration_season": 2016,
+      "train_seasons": [
+        1999,
+        2000,
+        2001,
+        2002,
+        2003,
+        2004,
+        2005,
+        2006,
+        2007,
+        2008,
+        2009,
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015
+      ],
+      "train_games": 4328,
+      "calibration_games": 256,
+      "train_latest_result": "2016-01-05T01:30:00+00:00",
+      "calibration_latest_result": "2017-01-03T01:30:00+00:00",
+      "test_first_kickoff": "2017-09-08T00:30:00+00:00",
+      "weights": [
+        -0.32423228312191305,
+        0.5956916102159301,
+        0.5620426051970017,
+        -0.14380790601550605,
+        0.14610201184474472,
+        0.013133452984602986,
+        0.1667359993086525,
+        0.22735015397114797,
+        0.0903054089491785,
+        -0.09521690159654449
+      ],
+      "research_model_sha256": "186181c644da610ea6623eae2fa4d172cec3bf70f3ac58e4ac1edd75935eb572",
+      "training_game_ids_sha256": "367e2ae3d051bf96dd1cc55dce51592891a9c8edc9995f1f9b2e8f073fedde0a",
+      "calibration_game_ids_sha256": "956463dd6165fca8992d912da50e1f32b10f5336d138e27cac55537b24f5089e"
+    },
+    {
+      "test_season": 2018,
+      "calibration_season": 2017,
+      "train_seasons": [
+        1999,
+        2000,
+        2001,
+        2002,
+        2003,
+        2004,
+        2005,
+        2006,
+        2007,
+        2008,
+        2009,
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016
+      ],
+      "train_games": 4584,
+      "calibration_games": 256,
+      "train_latest_result": "2017-01-03T01:30:00+00:00",
+      "calibration_latest_result": "2018-01-01T21:25:00+00:00",
+      "test_first_kickoff": "2018-09-07T00:20:00+00:00",
+      "weights": [
+        -0.40046455780376206,
+        0.9448457057873695,
+        0.1968305662792822,
+        0.24533197838958487,
+        0.2672331780513158,
+        0.2824081247244761,
+        -0.028018862715940764,
+        -0.22269116292292418,
+        0.09002346403607879,
+        0.29794318308804335
+      ],
+      "research_model_sha256": "23d2ba0277eafdeb4b8502ac17324ea54bf6e54c947c8f9acc00f1d41fc72063",
+      "training_game_ids_sha256": "4b6818f7b990f5c1ab04d9a30a1e3d07a6a58ef801451a897d1ba83509dab554",
+      "calibration_game_ids_sha256": "0b3c6ad65d81fc73890fd106d6007b7a4c4e09a5e4e53393bd33923fb86660af"
+    },
+    {
+      "test_season": 2019,
+      "calibration_season": 2018,
+      "train_seasons": [
+        1999,
+        2000,
+        2001,
+        2002,
+        2003,
+        2004,
+        2005,
+        2006,
+        2007,
+        2008,
+        2009,
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017
+      ],
+      "train_games": 4840,
+      "calibration_games": 256,
+      "train_latest_result": "2018-01-01T21:25:00+00:00",
+      "calibration_latest_result": "2019-01-01T01:20:00+00:00",
+      "test_first_kickoff": "2019-09-06T00:20:00+00:00",
+      "weights": [
+        -0.26058909277438214,
+        1.0102322501000394,
+        0.5521735648886483,
+        -0.02725333303982192,
+        0.6842110892228391,
+        0.0016640388082337732,
+        0.22901141363250715,
+        0.1721064705602948,
+        0.19506230424356072,
+        0.31743616165703215
+      ],
+      "research_model_sha256": "7634c0709a5d779a4781983adac4d77f66cc85c506ed297a2083ee35c6cbd926",
+      "training_game_ids_sha256": "c75d01e76efd853812396a60d9786a41c2d4b58ec9991294111fc22bc350bf82",
+      "calibration_game_ids_sha256": "ac0e20daf499826ba5830d64fbe38c3d7001e7fae28c559708fecfc62829be55"
+    },
+    {
+      "test_season": 2020,
+      "calibration_season": 2019,
+      "train_seasons": [
+        1999,
+        2000,
+        2001,
+        2002,
+        2003,
+        2004,
+        2005,
+        2006,
+        2007,
+        2008,
+        2009,
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "train_games": 5096,
+      "calibration_games": 256,
+      "train_latest_result": "2019-01-01T01:20:00+00:00",
+      "calibration_latest_result": "2019-12-31T01:20:00+00:00",
+      "test_first_kickoff": "2020-09-11T00:20:00+00:00",
+      "weights": [
+        -0.35167078809655633,
+        0.5273129485783571,
+        0.7450687108850603,
+        0.1745653405730342,
+        0.25132273837562097,
+        0.0899437270590266,
+        0.14014833787118358,
+        0.29124188383781413,
+        -0.10413935320633093,
+        0.14809918990247947
+      ],
+      "research_model_sha256": "29d2e089e10077d7e813279f88db88ed74c344e166f9b095d7864341629a249a",
+      "training_game_ids_sha256": "73348f9ef8da0cf87ad7be85f436dbb7c9466739198b8493ec43c3c299813e42",
+      "calibration_game_ids_sha256": "c7e804545e055b93dd40abd5928d3bfe2ff0dbe8f4545492c7c4b35a8a902a86"
+    },
+    {
+      "test_season": 2021,
+      "calibration_season": 2020,
+      "train_seasons": [
+        1999,
+        2000,
+        2001,
+        2002,
+        2003,
+        2004,
+        2005,
+        2006,
+        2007,
+        2008,
+        2009,
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019
+      ],
+      "train_games": 5352,
+      "calibration_games": 256,
+      "train_latest_result": "2019-12-31T01:20:00+00:00",
+      "calibration_latest_result": "2021-01-05T01:20:00+00:00",
+      "test_first_kickoff": "2021-09-10T00:20:00+00:00",
+      "weights": [
+        -0.356709839323596,
+        0.8106663640060221,
+        0.31360839503960986,
+        0.2571422132214653,
+        0.3912569233582677,
+        0.05573649261172124,
+        -0.08583727453754797,
+        0.3192935288992873,
+        -0.15158792712047447,
+        0.17558786232607249
+      ],
+      "research_model_sha256": "4ef7dfab6a90628277829d9f00e2e8286cd1dc8f8d5e3a3fde793d0fc5376c9a",
+      "training_game_ids_sha256": "2a001fc697d4ca55e8e7a6d2d2b55b326e8aec0291b539a661c0b2ca128d92be",
+      "calibration_game_ids_sha256": "234fcb337c83421037fe291b5a804f0599443d312c4e3ee6b293eeffbf3e7b92"
+    },
+    {
+      "test_season": 2022,
+      "calibration_season": 2021,
+      "train_seasons": [
+        1999,
+        2000,
+        2001,
+        2002,
+        2003,
+        2004,
+        2005,
+        2006,
+        2007,
+        2008,
+        2009,
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020
+      ],
+      "train_games": 5608,
+      "calibration_games": 272,
+      "train_latest_result": "2021-01-05T01:20:00+00:00",
+      "calibration_latest_result": "2022-01-11T01:20:00+00:00",
+      "test_first_kickoff": "2022-09-09T00:20:00+00:00",
+      "weights": [
+        -0.34267477930540624,
+        0.8039138897264045,
+        0.24418759038951707,
+        0.22863784545884125,
+        0.01321807546993532,
+        0.18513731888993196,
+        -0.03746838093609082,
+        0.355098906203315,
+        0.19121319528338657,
+        0.12023130593408833
+      ],
+      "research_model_sha256": "e445ba04988720b8165ed0243ba7ffa0e8752fabf241c71b359b941f4277eb7c",
+      "training_game_ids_sha256": "36ab36a416d51baafa7a6da042dd8e7ecbdc6cc9e8383b528caf24240d54c360",
+      "calibration_game_ids_sha256": "04053490605da7f3a90bec8d2fc6331453993606a4390b1a98dc806e06e094c9"
+    },
+    {
+      "test_season": 2023,
+      "calibration_season": 2022,
+      "train_seasons": [
+        1999,
+        2000,
+        2001,
+        2002,
+        2003,
+        2004,
+        2005,
+        2006,
+        2007,
+        2008,
+        2009,
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021
+      ],
+      "train_games": 5880,
+      "calibration_games": 271,
+      "train_latest_result": "2022-01-11T01:20:00+00:00",
+      "calibration_latest_result": "2023-01-10T01:20:00+00:00",
+      "test_first_kickoff": "2023-09-08T00:20:00+00:00",
+      "weights": [
+        -0.3349064773163706,
+        0.8513588149708103,
+        0.21474193773790018,
+        0.1523985072467204,
+        0.22488868036880352,
+        0.18227742706372754,
+        -0.016183488302654835,
+        0.14928389334670836,
+        -0.12053629816851633,
+        0.0869260017468558
+      ],
+      "research_model_sha256": "d262f0dc449959726d9a4efd5a1d46535cb686b664c8c3410db5d8b58607ad26",
+      "training_game_ids_sha256": "f2067a004b1f1dec825822bfb55093d579a7fb02afcdaa345ae09694302c8e81",
+      "calibration_game_ids_sha256": "d7a14108102818e7621a806511ede157c0f1ca36c8430542bfcfdb011df60b7f"
+    },
+    {
+      "test_season": 2024,
+      "calibration_season": 2023,
+      "train_seasons": [
+        1999,
+        2000,
+        2001,
+        2002,
+        2003,
+        2004,
+        2005,
+        2006,
+        2007,
+        2008,
+        2009,
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ],
+      "train_games": 6151,
+      "calibration_games": 272,
+      "train_latest_result": "2023-01-10T01:20:00+00:00",
+      "calibration_latest_result": "2024-01-09T01:20:00+00:00",
+      "test_first_kickoff": "2024-09-06T00:20:00+00:00",
+      "weights": [
+        -0.40987109741069494,
+        0.7669928368748847,
+        0.36391553266924354,
+        -0.028727346203176185,
+        0.52558539715543,
+        0.3305146145130865,
+        0.37023639743288406,
+        -0.02282014565521466,
+        -0.22875650628521907,
+        0.19806089756313328
+      ],
+      "research_model_sha256": "d2806f54df4f3b2237e9d6a238b6ab06d06780ee74f4a3dbfbd29fd5c35bc4f2",
+      "training_game_ids_sha256": "f683f38f36e1b5af2d42b2fbe91db36e3b46d576d57cceabfc4f929af2b79c22",
+      "calibration_game_ids_sha256": "53fa27f73507906045a5fa81e0bcdfd9ef38ca51ed9e2385a41e6c102983628b"
+    },
+    {
+      "test_season": 2025,
+      "calibration_season": 2024,
+      "train_seasons": [
+        1999,
+        2000,
+        2001,
+        2002,
+        2003,
+        2004,
+        2005,
+        2006,
+        2007,
+        2008,
+        2009,
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "train_games": 6423,
+      "calibration_games": 272,
+      "train_latest_result": "2024-01-09T01:20:00+00:00",
+      "calibration_latest_result": "2025-01-07T01:20:00+00:00",
+      "test_first_kickoff": "2025-09-05T00:20:00+00:00",
+      "weights": [
+        -0.42175542584550635,
+        0.7214273304850622,
+        0.276823135263744,
+        0.13166308132829585,
+        -0.19920494481490741,
+        0.26698332080075876,
+        -0.009378401514742117,
+        0.13674750136852448,
+        0.2078792330301036,
+        0.24397816973473832
+      ],
+      "research_model_sha256": "39608993b101c92e977c2deaa18c4779ea9364473c7546fcd6aad706d72570f6",
+      "training_game_ids_sha256": "e59503f694cd1082486787ec83da510aef8631b1db56d24a74d16161e92acd0e",
+      "calibration_game_ids_sha256": "c3aa17da38392b9a8e68a9e6ff44eb8722a6ac0a60198ac465209f584b419220"
+    }
+  ],
+  "splits": {
+    "validation": {
+      "base": {
+        "games": 5183,
+        "joint_log_loss": 7.362850189953122,
+        "score_mae": 7.741538463384205,
+        "spread_3_brier3": 0.5284538494832599,
+        "spread_3_log_loss": 0.8976394952425871,
+        "spread_3_push_probability": 0.02796402282919773,
+        "spread_3_push_outcome": 0.07910476557978005,
+        "spread_7_brier3": 0.45475029321632,
+        "spread_7_log_loss": 0.7550403693257374,
+        "spread_7_push_probability": 0.026454197712667542,
+        "spread_7_push_outcome": 0.04591935172679915,
+        "total_44_brier3": 0.527654505877547,
+        "total_44_log_loss": 0.8256936513129765,
+        "total_44_push_probability": 0.028872077516007576,
+        "total_44_push_outcome": 0.04051707505305807,
+        "total_47_brier3": 0.5057127972631706,
+        "total_47_log_loss": 0.7866069663461549,
+        "total_47_push_probability": 0.028521923100987313,
+        "total_47_push_outcome": 0.03202778313717924,
+        "intervals_95": {
+          "joint_log_loss": [
+            7.334080331345266,
+            7.392336699947115
+          ],
+          "score_mae": [
+            7.6209850316084236,
+            7.862739589005591
+          ],
+          "spread_3_brier3": [
+            0.5194657830027049,
+            0.538806860682862
+          ],
+          "spread_3_log_loss": [
+            0.8764068318124659,
+            0.9212485569364561
+          ],
+          "spread_3_push_probability": [
+            0.027802377917146504,
+            0.02813198690453781
+          ],
+          "spread_3_push_outcome": [
+            0.07261869324920427,
+            0.08662469378615212
+          ],
+          "spread_7_brier3": [
+            0.4465404087814244,
+            0.46485871083295655
+          ],
+          "spread_7_log_loss": [
+            0.7385193142508241,
+            0.7745950434323201
+          ],
+          "spread_7_push_probability": [
+            0.026290817385566656,
+            0.026641162204230243
+          ],
+          "spread_7_push_outcome": [
+            0.040457794751273014,
+            0.05173836382026389
+          ],
+          "total_44_brier3": [
+            0.5205876135052482,
+            0.5350223346140156
+          ],
+          "total_44_log_loss": [
+            0.8108477080673954,
+            0.8431488037002074
+          ],
+          "total_44_push_probability": [
+            0.028756159824482114,
+            0.028989330871189475
+          ],
+          "total_44_push_outcome": [
+            0.035383439075333326,
+            0.04642538764225266
+          ],
+          "total_47_brier3": [
+            0.4982757457249422,
+            0.5148389862489494
+          ],
+          "total_47_log_loss": [
+            0.7700837234525637,
+            0.8043267678239484
+          ],
+          "total_47_push_probability": [
+            0.028399926715122065,
+            0.02865797053080178
+          ],
+          "total_47_push_outcome": [
+            0.02743165376767609,
+            0.03734102664707551
+          ]
+        }
+      },
+      "candidate": {
+        "games": 5183,
+        "joint_log_loss": 7.285937314150395,
+        "score_mae": 7.745220889889772,
+        "spread_3_brier3": 0.5259449570562041,
+        "spread_3_log_loss": 0.8699097660347352,
+        "spread_3_push_probability": 0.05868526939330396,
+        "spread_3_push_outcome": 0.07910476557978005,
+        "spread_7_brier3": 0.45326311887325726,
+        "spread_7_log_loss": 0.7488878685325241,
+        "spread_7_push_probability": 0.037914524047362945,
+        "spread_7_push_outcome": 0.04591935172679915,
+        "total_44_brier3": 0.5277204192793082,
+        "total_44_log_loss": 0.8254376730002267,
+        "total_44_push_probability": 0.032056228623702894,
+        "total_44_push_outcome": 0.04051707505305807,
+        "total_47_brier3": 0.5054960621972733,
+        "total_47_log_loss": 0.7869738130754754,
+        "total_47_push_probability": 0.03079060856136521,
+        "total_47_push_outcome": 0.03202778313717924,
+        "intervals_95": {
+          "joint_log_loss": [
+            7.2539929534851675,
+            7.3184907853596535
+          ],
+          "score_mae": [
+            7.626103624452373,
+            7.867799321265493
+          ],
+          "spread_3_brier3": [
+            0.5175246963728463,
+            0.5355362535760042
+          ],
+          "spread_3_log_loss": [
+            0.8533753230090915,
+            0.8877186022094888
+          ],
+          "spread_3_push_probability": [
+            0.057622616941973605,
+            0.05959877412512697
+          ],
+          "spread_3_push_outcome": [
+            0.07261869324920427,
+            0.08662469378615212
+          ],
+          "spread_7_brier3": [
+            0.44448340936093206,
+            0.4637592523329389
+          ],
+          "spread_7_log_loss": [
+            0.733304917502119,
+            0.7668827310456673
+          ],
+          "spread_7_push_probability": [
+            0.037262860827260914,
+            0.03864992709835056
+          ],
+          "spread_7_push_outcome": [
+            0.040457794751273014,
+            0.05173836382026389
+          ],
+          "total_44_brier3": [
+            0.5207029967061767,
+            0.5351292264421903
+          ],
+          "total_44_log_loss": [
+            0.811006518396267,
+            0.8425316566249115
+          ],
+          "total_44_push_probability": [
+            0.0315022619601455,
+            0.03263129881173709
+          ],
+          "total_44_push_outcome": [
+            0.035383439075333326,
+            0.04642538764225266
+          ],
+          "total_47_brier3": [
+            0.49795525891957376,
+            0.5145949850389885
+          ],
+          "total_47_log_loss": [
+            0.7706404847944414,
+            0.8044156239329574
+          ],
+          "total_47_push_probability": [
+            0.030355156639100624,
+            0.031231189181782557
+          ],
+          "total_47_push_outcome": [
+            0.02743165376767609,
+            0.03734102664707551
+          ]
+        }
+      },
+      "paired_candidate_minus_base_95": {
+        "joint_log_loss": [
+          -0.08589135665806617,
+          -0.06840737670264666
+        ],
+        "score_mae": [
+          6.652393277546794e-05,
+          0.0070899912311827825
+        ],
+        "spread_3_brier3": [
+          -0.003401956132346092,
+          -0.001736090231311161
+        ],
+        "spread_3_log_loss": [
+          -0.03360747799549124,
+          -0.022595243042488333
+        ],
+        "spread_3_push_probability": [
+          0.02972628865286035,
+          0.03156802204726984
+        ],
+        "spread_3_push_outcome": [
+          0.0,
+          0.0
+        ],
+        "spread_7_brier3": [
+          -0.0025183231581597607,
+          -0.0005476954557341224
+        ],
+        "spread_7_log_loss": [
+          -0.008618762447601838,
+          -0.0036226651827994906
+        ],
+        "spread_7_push_probability": [
+          0.010814552979197329,
+          0.012149995416851769
+        ],
+        "spread_7_push_outcome": [
+          0.0,
+          0.0
+        ],
+        "total_44_brier3": [
+          -0.000265111340311085,
+          0.00043006393219187627
+        ],
+        "total_44_log_loss": [
+          -0.0013544300388728674,
+          0.0009559683755708979
+        ],
+        "total_44_push_probability": [
+          0.0026624017779605953,
+          0.003755852715031005
+        ],
+        "total_44_push_outcome": [
+          0.0,
+          0.0
+        ],
+        "total_47_brier3": [
+          -0.0005405273969729608,
+          0.00013954355998853466
+        ],
+        "total_47_log_loss": [
+          -0.0005252992494422716,
+          0.001319347300484692
+        ],
+        "total_47_push_probability": [
+          0.0017973845214035514,
+          0.0027480992250153193
+        ],
+        "total_47_push_outcome": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "holdout": {
+      "base": {
+        "games": 272,
+        "joint_log_loss": 7.312103201727785,
+        "score_mae": 7.490947775836252,
+        "spread_3_brier3": 0.5190129050564724,
+        "spread_3_log_loss": 0.8957552683970875,
+        "spread_3_push_probability": 0.027858598011876668,
+        "spread_3_push_outcome": 0.08455882352941177,
+        "spread_7_brier3": 0.44106903518321044,
+        "spread_7_log_loss": 0.7426931864235925,
+        "spread_7_push_probability": 0.02612689307950029,
+        "spread_7_push_outcome": 0.04779411764705882,
+        "total_44_brier3": 0.5184377200182736,
+        "total_44_log_loss": 0.8214752131035228,
+        "total_44_push_probability": 0.030026465011305428,
+        "total_44_push_outcome": 0.04411764705882353,
+        "total_47_brier3": 0.5155264776077485,
+        "total_47_log_loss": 0.8119589401139365,
+        "total_47_push_probability": 0.030723915468229463,
+        "total_47_push_outcome": 0.04044117647058824,
+        "intervals_95": {
+          "joint_log_loss": [
+            7.219259407510124,
+            7.406539686403295
+          ],
+          "score_mae": [
+            7.011616604154507,
+            7.939364408533178
+          ],
+          "spread_3_brier3": [
+            0.482529848238191,
+            0.5583180077288895
+          ],
+          "spread_3_log_loss": [
+            0.7987485517312435,
+            0.9836951234209863
+          ],
+          "spread_3_push_probability": [
+            0.027637384495675005,
+            0.028072795827724192
+          ],
+          "spread_3_push_outcome": [
+            0.05137160633484163,
+            0.11418250950570341
+          ],
+          "spread_7_brier3": [
+            0.39876732653272423,
+            0.48904735608580585
+          ],
+          "spread_7_log_loss": [
+            0.6680365420831402,
+            0.8272080238768794
+          ],
+          "spread_7_push_probability": [
+            0.02562183653832256,
+            0.02670341815865655
+          ],
+          "spread_7_push_outcome": [
+            0.02559189593861127,
+            0.07407407407407407
+          ],
+          "total_44_brier3": [
+            0.4975894761049493,
+            0.5401069362962241
+          ],
+          "total_44_log_loss": [
+            0.7762714827855036,
+            0.8758692338385009
+          ],
+          "total_44_push_probability": [
+            0.029885707228811738,
+            0.03015309871417242
+          ],
+          "total_44_push_outcome": [
+            0.025358057105349524,
+            0.06704558064695111
+          ],
+          "total_47_brier3": [
+            0.4867440421539027,
+            0.5497375860151502
+          ],
+          "total_47_log_loss": [
+            0.7476205906774056,
+            0.8955782616613033
+          ],
+          "total_47_push_probability": [
+            0.030630022743364158,
+            0.030816011354386465
+          ],
+          "total_47_push_outcome": [
+            0.018213337757133376,
+            0.06731070240657404
+          ]
+        }
+      },
+      "candidate": {
+        "games": 272,
+        "joint_log_loss": 7.2398312367201845,
+        "score_mae": 7.492975725789726,
+        "spread_3_brier3": 0.5154941043494283,
+        "spread_3_log_loss": 0.8638482194575329,
+        "spread_3_push_probability": 0.05469762192147367,
+        "spread_3_push_outcome": 0.08455882352941177,
+        "spread_7_brier3": 0.43902374553669743,
+        "spread_7_log_loss": 0.7360481938153798,
+        "spread_7_push_probability": 0.032894772480597495,
+        "spread_7_push_outcome": 0.04779411764705882,
+        "total_44_brier3": 0.5188159747704345,
+        "total_44_log_loss": 0.8213265008296693,
+        "total_44_push_probability": 0.030887363358025992,
+        "total_44_push_outcome": 0.04411764705882353,
+        "total_47_brier3": 0.515203072482473,
+        "total_47_log_loss": 0.8102148709807602,
+        "total_47_push_probability": 0.039616689372481674,
+        "total_47_push_outcome": 0.04044117647058824,
+        "intervals_95": {
+          "joint_log_loss": [
+            7.130405432431946,
+            7.348470800291975
+          ],
+          "score_mae": [
+            7.01085998258269,
+            7.950358073861237
+          ],
+          "spread_3_brier3": [
+            0.4813714570024417,
+            0.5531932198379208
+          ],
+          "spread_3_log_loss": [
+            0.791473067917179,
+            0.9337768259141892
+          ],
+          "spread_3_push_probability": [
+            0.0542752433937811,
+            0.055123520282959415
+          ],
+          "spread_3_push_outcome": [
+            0.05137160633484163,
+            0.11418250950570341
+          ],
+          "spread_7_brier3": [
+            0.3947337228608047,
+            0.4878570775872698
+          ],
+          "spread_7_log_loss": [
+            0.659517014136593,
+            0.815843371501468
+          ],
+          "spread_7_push_probability": [
+            0.03224222283138804,
+            0.03363468506511467
+          ],
+          "spread_7_push_outcome": [
+            0.02559189593861127,
+            0.07407407407407407
+          ],
+          "total_44_brier3": [
+            0.4979837196557912,
+            0.5404849098965394
+          ],
+          "total_44_log_loss": [
+            0.7767024853861813,
+            0.8748177429461633
+          ],
+          "total_44_push_probability": [
+            0.03073595563632995,
+            0.031021355480196213
+          ],
+          "total_44_push_outcome": [
+            0.025358057105349524,
+            0.06704558064695111
+          ],
+          "total_47_brier3": [
+            0.4869984653801444,
+            0.5488138517204543
+          ],
+          "total_47_log_loss": [
+            0.7509564980033613,
+            0.8866523306227754
+          ],
+          "total_47_push_probability": [
+            0.03949293054227417,
+            0.03973089141200472
+          ],
+          "total_47_push_outcome": [
+            0.018213337757133376,
+            0.06731070240657404
+          ]
+        }
+      },
+      "paired_candidate_minus_base_95": {
+        "joint_log_loss": [
+          -0.10695590808581507,
+          -0.04087316557711238
+        ],
+        "score_mae": [
+          -0.01220741359056862,
+          0.015606986557102914
+        ],
+        "spread_3_brier3": [
+          -0.006804697480790805,
+          -0.00037682729219711003
+        ],
+        "spread_3_log_loss": [
+          -0.052895117852936636,
+          -0.00925687032214627
+        ],
+        "spread_3_push_probability": [
+          0.026637572042048047,
+          0.02704628422236015
+        ],
+        "spread_3_push_outcome": [
+          0.0,
+          0.0
+        ],
+        "spread_7_brier3": [
+          -0.007044151733374702,
+          0.0028394401978677347
+        ],
+        "spread_7_log_loss": [
+          -0.014945622958684441,
+          0.0011996797910556593
+        ],
+        "spread_7_push_probability": [
+          0.006616906326867226,
+          0.006933400499133997
+        ],
+        "spread_7_push_outcome": [
+          0.0,
+          0.0
+        ],
+        "total_44_brier3": [
+          -6.875384029622671e-05,
+          0.0007631055563486938
+        ],
+        "total_44_log_loss": [
+          -0.0012603279307305375,
+          0.0007522351430018186
+        ],
+        "total_44_push_probability": [
+          0.0008357102736624365,
+          0.0008833522456244943
+        ],
+        "total_44_push_outcome": [
+          0.0,
+          0.0
+        ],
+        "total_47_brier3": [
+          -0.0011061650815117022,
+          0.0004402020975972973
+        ],
+        "total_47_log_loss": [
+          -0.008658460471320135,
+          0.003948643172058177
+        ],
+        "total_47_push_probability": [
+          0.008856057338633821,
+          0.008924262257133862
+        ],
+        "total_47_push_outcome": [
+          0.0,
+          0.0
+        ]
+      }
+    }
+  },
+  "promoted": false,
+  "limitations": [
+    "2025 outcomes and original key-number diagnostics were already examined; this is retrospective research, not a newly untouched holdout.",
+    "Fixed-prediction paired week-block intervals omit refitting, selection and source-revision uncertainty.",
+    "Predeclared category weights are an approximation to football scoring, not a possession/drive model.",
+    "No historical executable market prices or betting-edge validation. Production scoring and winner models unchanged."
+  ]
+}
