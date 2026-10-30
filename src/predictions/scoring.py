@@ -460,18 +460,13 @@ def forecast_scoring(games, report, game_ids, root, *, as_of, source_metadata):
     generated = _now()
     if cutoff.tzinfo is None or cutoff > generated:
         raise ValueError("Scoring as_of must be timezone-aware and not future")
-    if (
-        report.get("type") != "nfl_scoring_validation"
-        or report.get("status") != "evaluated_not_a_profit_claim"
-    ):
-        raise ValueError("Completed scoring validation required")
+    validate_report(report)
     from predictions.inference import _validate_sources
 
     _validate_sources(source_metadata, cutoff)
     frame = games.copy()
     frame.loc[frame.result_available_at >= cutoff, ["home_score", "away_score"]] = np.nan
     features = build_features(frame)
-    validate_report(report)
     targets = features.loc[features.game_id.isin(game_ids)]
     if len(targets) != len(set(game_ids)) or targets.season.nunique() != 1:
         raise ValueError("Scoring batch needs known IDs from one season")
@@ -586,6 +581,10 @@ def validate_report(report):
             or report["grid_max_score"] != 150
         ):
             raise ValueError("Scoring validation schema mismatch")
+        if not isinstance(report["holdout_season"], int) or isinstance(
+            report["holdout_season"], bool
+        ):
+            raise ValueError("Scoring holdout season must be an integer")
         scores = {
             kind: report["splits"]["validation"][kind]["joint_log_loss"] for kind in CANDIDATES
         }

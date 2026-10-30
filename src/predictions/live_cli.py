@@ -256,7 +256,7 @@ def _forecast(args) -> dict:
             )
             for record in batch["forecasts"]:
                 record["score_prediction"] = scores[record["game_id"]]
-        except (ValueError, OSError) as exc:
+        except (ValueError, OSError, TypeError, KeyError) as exc:
             batch["scoring_error"] = str(exc)
             for record in batch["forecasts"]:
                 record["score_unavailable_reason"] = (

@@ -64,11 +64,9 @@ def dispatch(args):
         )
         return report
     report = json.loads(args.validation.read_text())
-    if (
-        report.get("type") != "nfl_scoring_validation"
-        or report.get("status") != "evaluated_not_a_profit_claim"
-    ):
-        raise ValueError("A completed chronological scoring validation is required")
+    from predictions.scoring import validate_report
+
+    validate_report(report)
     from predictions.scoring import forecast_scoring, read_score_distribution
 
     score = forecast_scoring(
