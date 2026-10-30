@@ -9,7 +9,7 @@ from pathlib import Path
 import requests
 
 
-def snapshot(url, root, *, params=None, refresh=False, timeout=40):
+def _snapshot(url, root, *, params=None, refresh=False, timeout=40):
     root = Path(root)
     root.mkdir(parents=True, exist_ok=True)
     key = hashlib.sha256(json.dumps([url, params], sort_keys=True).encode()).hexdigest()
@@ -56,3 +56,15 @@ def snapshot(url, root, *, params=None, refresh=False, timeout=40):
     evidence.write_text(json.dumps(meta, indent=2) + "\n")
     pointer.write_text(json.dumps(meta, indent=2) + "\n")
     return path, meta
+
+
+def snapshot(url, root, *, params=None, refresh=False, timeout=40):
+    """Serialize identical cache keys, including concurrent release-catalog reads."""
+    import fcntl
+
+    root = Path(root)
+    root.mkdir(parents=True, exist_ok=True)
+    key = hashlib.sha256(json.dumps([url, params], sort_keys=True).encode()).hexdigest()
+    with (root / (key + ".lock")).open("a") as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX)
+        return _snapshot(url, root, params=params, refresh=refresh, timeout=timeout)

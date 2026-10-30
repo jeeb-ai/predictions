@@ -194,7 +194,7 @@ def nba_slate(root):
     rows = []
     for date in data["gameDates"]:
         for game in date["games"]:
-            if game["gameStatus"] != 1:
+            if game["gameStatus"] not in [1, 2, 3] or game.get("postponedStatus", "A") == "P":
                 continue
             h, a = game["homeTeam"], game["awayTeam"]
             kickoff = pd.Timestamp(game["gameDateTimeUTC"])
