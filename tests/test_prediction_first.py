@@ -93,6 +93,9 @@ def test_trained_model_to_prediction_home_and_matchup_ui(games, tmp_path, monkey
     app.button[0].click().run()
     assert not app.exception
     assert app.title[0].value == "NFL Predictions"
+    assert any(e.label == "Why this pick?" for e in app.expander)
+    assert any(e.label == "Advanced Analysis" and not e.proto.expanded for e in app.expander)
+    assert any("model’s pick" in m.value for m in app.markdown)
     assert [t.label for t in app.tabs] == ["Predictions", "Matchup Analysis", "Market Value"]
     assert any("Predicted winner:" in item.value for item in app.markdown)
     displayed = {m.label: m.value for m in app.metric}
