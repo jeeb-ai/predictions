@@ -23,35 +23,18 @@ NBA_COLUMNS = [
 ]
 
 
-def fetch_nba(root, start=2010, through=2025, refresh=False):
-    frames = []
-    sources = {}
-    for year in range(start, through + 1):
-        path, meta = snapshot(
-            "https://stats.nba.com/stats/leaguegamefinder",
-            root,
-            params={
-                "LeagueID": "00",
-                "Season": f"{year}-{str(year + 1)[-2:]}",
-                "SeasonType": "Regular Season",
-                "PlayerOrTeam": "T",
-            },
-            refresh=refresh and year == through,
-        )
-        data = json.loads(path.read_text())["resultSets"][0]
-        frame = pd.DataFrame(data["rowSet"], columns=data["headers"])
-        if frame.empty or not frame.SEASON_ID.astype(str).eq("2" + str(year)).all():
-            raise ValueError("NBA response season mismatch or empty")
-        frame["season"] = year
-        frames.append(frame)
-        sources[str(year)] = meta
-    result = canonical_nba(pd.concat(frames, ignore_index=True))
-    result["source_observed_at"] = pd.to_datetime(
-        result.season.map(lambda y: sources[str(y)]["fetched_at"]), utc=True
-    )
-    unsafe = result.available_at.ge(result.source_observed_at)
-    result.loc[unsafe, ["home_score", "away_score", "home_efficiency", "away_efficiency"]] = np.nan
-    return result, sources
+def fetch_nba(root, start=2010, through=2025, refresh=False, provider="auto"):
+    """Resume validated per-season archives; the live stats endpoint is opt-in."""
+    import fcntl
+    from pathlib import Path
+
+    from predictions.nba_history import fetch_history
+
+    root = Path(root)
+    root.mkdir(parents=True, exist_ok=True)
+    with (root / "nba-history.lock").open("a") as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX)
+        return fetch_history(root, start, through, provider=provider, refresh=refresh)
 
 
 def canonical_nba(frame):
@@ -186,9 +169,14 @@ def nba_features(games, as_of=None, window=10):
     return pd.DataFrame(rows)
 
 
-def nba_slate(root):
+def _cdn_slate(root):
     path, meta = snapshot(
-        "https://cdn.nba.com/static/json/staticData/scheduleLeagueV2_1.json", root, refresh=True
+        "https://cdn.nba.com/static/json/staticData/scheduleLeagueV2_1.json",
+        root,
+        refresh=True,
+        timeout=(8, 20),
+        attempts=3,
+        label="NBA current CDN schedule",
     )
     data = json.loads(path.read_text())["leagueSchedule"]
     rows = []
@@ -219,3 +207,19 @@ def nba_slate(root):
                 }
             )
     return pd.DataFrame(rows), meta
+
+
+def nba_slate(root):
+    """Prefer the official CDN; use checked NBA identities + ESPN tipoffs if unavailable."""
+    import logging
+
+    from predictions.league_data import DownloadError
+    from predictions.nba_history import archive_slate
+
+    try:
+        return _cdn_slate(root)
+    except (DownloadError, ValueError, KeyError, TypeError) as exc:
+        logging.getLogger(__name__).warning(
+            "NBA schedule CDN unavailable; checking archive slate: %s", exc
+        )
+        return archive_slate(root)

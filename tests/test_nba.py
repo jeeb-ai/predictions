@@ -251,9 +251,16 @@ def test_cached_response_fetched_before_availability_stays_masked(monkeypatch, t
     }
     path = tmp_path / "raw.json"
     path.write_text(json.dumps(data))
-    monkeypatch.setattr(
-        "predictions.nba.snapshot", lambda *a, **k: (path, {"fetched_at": "2025-01-02T00:00:00Z"})
-    )
+
+    def cached(year, *args, **kwargs):
+        part = pd.DataFrame(data["resultSets"][0]["rowSet"], columns=columns)
+        part["season"] = year
+        return canonical_nba(part), {
+            "provider": "test fixture",
+            "fetched_at": "2025-01-02T00:00:00Z",
+        }
+
+    monkeypatch.setattr("predictions.nba_history.load_season", cached)
     frame, _ = fetch_nba(tmp_path, 2024, 2024)
     assert frame.home_score.isna().all()
     assert nba_features(frame, as_of=pd.Timestamp("2025-02-01T00:00:00Z")).home_history.eq(0).all()

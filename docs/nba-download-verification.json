@@ -1,0 +1,322 @@
+{
+  "kind": "Measured NBA acquisition, historical model parity and real-source live pipeline verification",
+  "observed_at": "2026-10-30T18:44:52.057565+00:00",
+  "execution_environment": "Linux Python3.11; macOS offline tests added to CI, commands documented separately",
+  "api_diagnosis": {
+    "route": "leaguegamefinder; root redirect is irrelevant",
+    "mac_failure_reproduced": false,
+    "mac_failing_season": "Unknown from provided exceptions; new per-season diagnostics identify it at the point of failure",
+    "cloud_requests": [
+      {
+        "season": 2010,
+        "url": "https://stats.nba.com/stats/leaguegamefinder?LeagueID=00&Season=2010-11&SeasonType=Regular+Season&PlayerOrTeam=T",
+        "status": 200,
+        "team_rows": 2460,
+        "seconds": 0.38
+      },
+      {
+        "season": 2011,
+        "url": "https://stats.nba.com/stats/leaguegamefinder?LeagueID=00&Season=2011-12&SeasonType=Regular+Season&PlayerOrTeam=T",
+        "status": 200,
+        "team_rows": 1980,
+        "seconds": 1.47
+      },
+      {
+        "season": 2012,
+        "url": "https://stats.nba.com/stats/leaguegamefinder?LeagueID=00&Season=2012-13&SeasonType=Regular+Season&PlayerOrTeam=T",
+        "status": 200,
+        "team_rows": 2458,
+        "seconds": 1.76
+      },
+      {
+        "season": 2013,
+        "url": "https://stats.nba.com/stats/leaguegamefinder?LeagueID=00&Season=2013-14&SeasonType=Regular+Season&PlayerOrTeam=T",
+        "status": 200,
+        "team_rows": 2460,
+        "seconds": 1.47
+      },
+      {
+        "season": 2014,
+        "url": "https://stats.nba.com/stats/leaguegamefinder?LeagueID=00&Season=2014-15&SeasonType=Regular+Season&PlayerOrTeam=T",
+        "status": 200,
+        "team_rows": 2460,
+        "seconds": 1.57
+      },
+      {
+        "season": 2015,
+        "url": "https://stats.nba.com/stats/leaguegamefinder?LeagueID=00&Season=2015-16&SeasonType=Regular+Season&PlayerOrTeam=T",
+        "status": 200,
+        "team_rows": 2460,
+        "seconds": 1.57
+      },
+      {
+        "season": 2016,
+        "url": "https://stats.nba.com/stats/leaguegamefinder?LeagueID=00&Season=2016-17&SeasonType=Regular+Season&PlayerOrTeam=T",
+        "status": 200,
+        "team_rows": 2460,
+        "seconds": 1.38
+      },
+      {
+        "season": 2017,
+        "url": "https://stats.nba.com/stats/leaguegamefinder?LeagueID=00&Season=2017-18&SeasonType=Regular+Season&PlayerOrTeam=T",
+        "status": 200,
+        "team_rows": 2460,
+        "seconds": 1.46
+      },
+      {
+        "season": 2018,
+        "url": "https://stats.nba.com/stats/leaguegamefinder?LeagueID=00&Season=2018-19&SeasonType=Regular+Season&PlayerOrTeam=T",
+        "status": 200,
+        "team_rows": 2460,
+        "seconds": 1.62
+      },
+      {
+        "season": 2019,
+        "url": "https://stats.nba.com/stats/leaguegamefinder?LeagueID=00&Season=2019-20&SeasonType=Regular+Season&PlayerOrTeam=T",
+        "status": 200,
+        "team_rows": 2118,
+        "seconds": 1.61
+      },
+      {
+        "season": 2020,
+        "url": "https://stats.nba.com/stats/leaguegamefinder?LeagueID=00&Season=2020-21&SeasonType=Regular+Season&PlayerOrTeam=T",
+        "status": 200,
+        "team_rows": 2160,
+        "seconds": 1.26
+      },
+      {
+        "season": 2021,
+        "url": "https://stats.nba.com/stats/leaguegamefinder?LeagueID=00&Season=2021-22&SeasonType=Regular+Season&PlayerOrTeam=T",
+        "status": 200,
+        "team_rows": 2460,
+        "seconds": 1.62
+      },
+      {
+        "season": 2022,
+        "url": "https://stats.nba.com/stats/leaguegamefinder?LeagueID=00&Season=2022-23&SeasonType=Regular+Season&PlayerOrTeam=T",
+        "status": 200,
+        "team_rows": 2460,
+        "seconds": 1.54
+      },
+      {
+        "season": 2023,
+        "url": "https://stats.nba.com/stats/leaguegamefinder?LeagueID=00&Season=2023-24&SeasonType=Regular+Season&PlayerOrTeam=T",
+        "status": 200,
+        "team_rows": 2460,
+        "seconds": 1.49
+      },
+      {
+        "season": 2024,
+        "url": "https://stats.nba.com/stats/leaguegamefinder?LeagueID=00&Season=2024-25&SeasonType=Regular+Season&PlayerOrTeam=T",
+        "status": 200,
+        "team_rows": 2460,
+        "seconds": 1.35
+      },
+      {
+        "season": 2025,
+        "url": "https://stats.nba.com/stats/leaguegamefinder?LeagueID=00&Season=2025-26&SeasonType=Regular+Season&PlayerOrTeam=T",
+        "status": 200,
+        "team_rows": 2460,
+        "seconds": 1.35
+      },
+      {
+        "season": 2026,
+        "url": "https://stats.nba.com/stats/leaguegamefinder?LeagueID=00&Season=2026-27&SeasonType=Regular+Season&PlayerOrTeam=T",
+        "status": 200,
+        "team_rows": 142,
+        "seconds": 0.28
+      }
+    ]
+  },
+  "historical": {
+    "historical_games": 19118,
+    "seasons": {
+      "2010": 1230,
+      "2011": 990,
+      "2012": 1229,
+      "2013": 1230,
+      "2014": 1230,
+      "2015": 1230,
+      "2016": 1230,
+      "2017": 1230,
+      "2018": 1230,
+      "2019": 1059,
+      "2020": 1080,
+      "2021": 1230,
+      "2022": 1230,
+      "2023": 1230,
+      "2024": 1230,
+      "2025": 1230
+    },
+    "columns": [
+      "home_off_rating",
+      "home_def_rating",
+      "home_pace",
+      "home_form",
+      "home_rest",
+      "home_back_to_back",
+      "home_elo",
+      "home_history",
+      "away_off_rating",
+      "away_def_rating",
+      "away_pace",
+      "away_form",
+      "away_rest",
+      "away_back_to_back",
+      "away_elo",
+      "away_history"
+    ],
+    "feature_values_identical_to_original_stats_snapshots": true,
+    "box_scores_efficiency_pace_identical": true,
+    "verified_resume_http_requests": 0
+  },
+  "current_box_parity": {
+    "eligible_current_games_compared": 68,
+    "scores_efficiencies_pace_minutes_identical": true,
+    "columns": [
+      "home_score",
+      "away_score",
+      "home_efficiency",
+      "away_efficiency",
+      "pace",
+      "minutes"
+    ]
+  },
+  "slate_fallback_parity": {
+    "upcoming_games": 52,
+    "archive_fallback_ids_teams_tipoffs_equal_live_cdn": true,
+    "unavailable_tipoffs": []
+  },
+  "backtest": {
+    "report": "nba-download-validation.json",
+    "sha256": "3099b51338acb63c5768744131ea62714f1d3b963ab05e3a31281ae6634061d9",
+    "all_metrics_equal_original": true,
+    "holdout_games": 1230,
+    "holdout_metrics": {
+      "accuracy": 0.6821138211382114,
+      "brier": 0.20855635276254253,
+      "log_loss": 0.6052926083612613,
+      "ece": 0.03765386074260324,
+      "score_mae": 9.565270515588699,
+      "score_rmse": 12.039408481016897,
+      "coverage_90": 0.8995934959349593
+    }
+  },
+  "live": {
+    "issued_forecasts": 52,
+    "generated_at": "2026-10-30T18:38:06.368292+00:00",
+    "network": {
+      "exitcode": 0,
+      "stats_nba_com_requests": 0,
+      "requests": [
+        {
+          "host": "api.github.com",
+          "status": 200
+        },
+        {
+          "host": "github.com",
+          "status": 200
+        },
+        {
+          "host": "api.github.com",
+          "status": 200
+        },
+        {
+          "host": "api.github.com",
+          "status": 200
+        },
+        {
+          "host": "github.com",
+          "status": 200
+        },
+        {
+          "host": "api.github.com",
+          "status": 200
+        },
+        {
+          "host": "github.com",
+          "status": 200
+        },
+        {
+          "host": "cdn.nba.com",
+          "status": 200
+        }
+      ]
+    },
+    "source_provider_current": "ESPN via sportsdataverse; identities/scores checked against NBA schedule"
+  },
+  "controlled_outage": {
+    "issued_forecasts": 52,
+    "actual_archived_inputs": true,
+    "only_cdn_failure_controlled": true,
+    "no_model_forecasts_scores_mocked": true,
+    "all_winner_probabilities_and_score_summaries_equal_standard_run": true,
+    "network": {
+      "exitcode": 0,
+      "kind": "Real archived input data; only the CDN connection failure is controlled, no forecasts or scores mocked",
+      "stats_nba_com_requests": 0,
+      "actual_nba_cdn_requests": 0,
+      "requests": [
+        {
+          "host": "api.github.com",
+          "status": 200
+        },
+        {
+          "host": "github.com",
+          "status": 200
+        },
+        {
+          "host": "api.github.com",
+          "status": 200
+        },
+        {
+          "host": "api.github.com",
+          "status": 200
+        },
+        {
+          "host": "github.com",
+          "status": 200
+        },
+        {
+          "host": "api.github.com",
+          "status": 200
+        },
+        {
+          "host": "github.com",
+          "status": 200
+        },
+        {
+          "host": "cdn.nba.com",
+          "controlled_failure": "RemoteDisconnected; no network request sent"
+        },
+        {
+          "host": "cdn.nba.com",
+          "controlled_failure": "RemoteDisconnected; no network request sent"
+        },
+        {
+          "host": "cdn.nba.com",
+          "controlled_failure": "RemoteDisconnected; no network request sent"
+        }
+      ]
+    }
+  },
+  "checks": {
+    "pytest_passed": 518,
+    "ruff_check": "passed",
+    "ruff_format_check": "passed",
+    "wheel_and_sdist": "5.3.1 built",
+    "ui_evidence": "nba-download-ui-evidence.json"
+  },
+  "code_sha256": {
+    "src/predictions/nba.py": "e8a303b625a0e11113d6e238643fb60b25815136770c3918e0f53349c024899d",
+    "src/predictions/nba_history.py": "c65418839c0a546d7704f004ad288741ee122c60fcf0a32e53f70b23144f5947",
+    "src/predictions/league_data.py": "84ae911b0b2b0313722ce8c52bc1a0a2bd677bc67a0fd0aa369102cc6979fce1",
+    "src/predictions/league_cli.py": "10f8d15e17b58e62a64bedb0ef7e919341697622c0f737286f52b9d7c6863ebf"
+  },
+  "limitations": [
+    "Mac transport failure cannot be diagnosed to a specific historical season without its log; no cloud season failed.",
+    "CI uses deterministic fixtures; real public data was tested separately from Linux.",
+    "GitHub archive availability/publisher freshness remain external dependencies; incomplete sources fail closed.",
+    "Data vintages, missing confirmed availability and no validated betting edge remain unchanged."
+  ]
+}

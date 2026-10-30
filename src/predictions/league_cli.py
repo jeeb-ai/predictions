@@ -7,7 +7,7 @@ import pandas as pd
 
 
 def add_commands(sub):
-    for name in ["nba-backtest", "nba-run", "nhl-backtest", "nhl-run"]:
+    for name in ["nba-fetch", "nba-backtest", "nba-run", "nhl-backtest", "nhl-run"]:
         command = sub.add_parser(name)
         command.add_argument(
             "--cache-dir",
@@ -22,6 +22,18 @@ def add_commands(sub):
         command.add_argument("--through-season", type=int, default=2025)
         command.add_argument("--config", type=Path, default=Path("research.local.json"))
         command.add_argument("--validation", type=Path)
+        if name.startswith("nba"):
+            command.add_argument(
+                "--nba-provider",
+                choices=["auto", "archive", "nba-stats"],
+                default="auto",
+                help="auto reuses verified NBA caches then release archives; nba-stats opts into the live API",
+            )
+            command.add_argument(
+                "--refresh",
+                action="store_true",
+                help="Refresh only the last requested season; retain earlier verified files",
+            )
         command.add_argument(
             "--output-dir",
             type=Path,
@@ -34,6 +46,7 @@ def add_commands(sub):
     worker.add_argument("--config", type=Path, default=Path("research.local.json"))
     worker.add_argument("--sport", choices=["NBA", "NHL"], action="append", required=True)
     worker.add_argument("--max-cycles", type=int)
+    worker.add_argument("--nba-provider", choices=["auto", "archive", "nba-stats"], default="auto")
 
 
 def dispatch(args):
@@ -43,14 +56,27 @@ def dispatch(args):
         return run_league_worker(args)
     if args.command in {"nhl-backtest", "nhl-run"}:
         return dispatch_nhl(args)
-    if args.command not in {"nba-backtest", "nba-run"}:
+    if args.command not in {"nba-fetch", "nba-backtest", "nba-run"}:
         return None
     from predictions.league_model import backtest_league
     from predictions.nba import NBA_COLUMNS, fetch_nba, nba_features, nba_slate
 
     games, source = fetch_nba(
-        args.cache_dir, args.start_season, args.through_season, refresh=args.command == "nba-run"
+        args.cache_dir,
+        args.start_season,
+        args.through_season,
+        refresh=args.command == "nba-run" or getattr(args, "refresh", False),
+        provider=getattr(args, "nba_provider", "auto"),
     )
+    if args.command == "nba-fetch":
+        return {
+            "sport": "NBA",
+            "status": "verified",
+            "games": len(games),
+            "seasons": {str(y): int(n) for y, n in games.groupby("season").size().items()},
+            "cache_dir": str(args.cache_dir),
+            "source": source,
+        }
     if args.command == "nba-backtest":
         holdout = games.loc[games.season.eq(args.through_season)]
         if (
@@ -147,6 +173,7 @@ def run_league_worker(args):
                                 through_season=season,
                                 config=args.config,
                                 validation=validation,
+                                nba_provider=getattr(args, "nba_provider", "auto"),
                                 output_dir=Path(config["paths"]["reports_dir"]) / sport.lower(),
                             )
                         )
