@@ -61,6 +61,9 @@ def _parser() -> argparse.ArgumentParser:
     from predictions.scoring_cli import add_commands as add_scoring_commands
 
     add_scoring_commands(sub)
+    from predictions.league_cli import add_commands as add_league_commands
+
+    add_league_commands(sub)
     add_research_commands(sub)
     return parser
 
@@ -214,6 +217,12 @@ def main(argv: list[str] | None = None) -> int:
         scoring_result = dispatch_scoring(args)
         if scoring_result is not None:
             print(json.dumps(scoring_result, indent=2, allow_nan=False))
+            return 0
+        from predictions.league_cli import dispatch as dispatch_league
+
+        league_result = dispatch_league(args)
+        if league_result is not None:
+            print(json.dumps(league_result, indent=2, allow_nan=False))
             return 0
         research_result = dispatch_research(args)
         if research_result is not None:

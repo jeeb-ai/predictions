@@ -1,0 +1,17 @@
+{
+  "kind": "Actual authenticated Streamlit AppTest against freshly issued official-source NBA forecasts",
+  "title": "Sports Predictions",
+  "sport_filter": "NBA",
+  "nba_cards": 51,
+  "examples": [
+    "### NBA \u00b7 Charlotte Hornets at Washington Wizards",
+    "### NBA \u00b7 Chicago Bulls at Boston Celtics",
+    "### NBA \u00b7 Detroit Pistons at Brooklyn Nets"
+  ],
+  "winner_and_score_text": [
+    "Average projected final score: Washington Wizards 109.2, Charlotte Hornets 116.8. Expected home margin -7.6; total 226.0.",
+    "Average projected final score: Boston Celtics 126.9, Chicago Bulls 111.9. Expected home margin +15.0; total 238.8."
+  ],
+  "ui_exceptions": 0,
+  "limitations": "No verified player availability; no executable market quote or proven betting edge."
+}
