@@ -330,3 +330,30 @@ def test_result_poll_interval_and_no_grading_before_conservative_availability(tm
     repeat = reconcile(config, "NBA", fetcher=feed, clock=lambda: AT + pd.Timedelta(minutes=1))
     assert report["overall"]["graded"] == repeat["overall"]["graded"] == 1
     assert len(calls) == 1 and not repeat["reconciliation"]["official_fetch_requested"]
+
+
+def test_replayed_source_cannot_independently_confirm_a_correction(setup, tmp_path):
+    _, journal = setup
+    journal.append(result(tmp_path), as_of=AT)
+    changed = result(tmp_path, home=99, at=AT + pd.Timedelta(minutes=1))
+    assert journal.append(changed, as_of=AT + pd.Timedelta(minutes=1)) == "disputed"
+    replay = {**changed, "observed_at": (AT + pd.Timedelta(minutes=7)).isoformat()}
+    assert journal.append(replay, as_of=AT + pd.Timedelta(minutes=7)) == "awaiting_confirmation"
+
+
+def test_archive_restore_cannot_downgrade_the_confirmed_official_source(setup, tmp_path):
+    _, journal = setup
+    journal.append(result(tmp_path), as_of=AT)
+    changed = result(tmp_path, home=99, at=AT + pd.Timedelta(minutes=1))
+    changed["source"]["classification"] = "official_stats_archive"
+    assert journal.append(changed, as_of=AT + pd.Timedelta(minutes=1)) == "disputed"
+    restored = result(tmp_path, at=AT + pd.Timedelta(minutes=2))
+    restored["source"]["classification"] = "official_stats_archive"
+    assert journal.append(restored, as_of=AT + pd.Timedelta(minutes=2)) == "final"
+    assert (
+        journal.observations(AT + pd.Timedelta(minutes=2))[-1]["last_confirmed_source_class"]
+        == "official_league_data"
+    )
+    nonfinal = result(tmp_path, state="scheduled", at=AT + pd.Timedelta(minutes=3))
+    nonfinal["source"]["classification"] = "official_stats_archive"
+    assert journal.append(nonfinal, as_of=AT + pd.Timedelta(minutes=3)) == "stale_archive_nonfinal"

@@ -540,12 +540,13 @@
   "claims": "No prospective accuracy or edge established. Historical source checks do not enter the prospective cohort.",
   "hosting": "Temporary workspace one-cycle smoke only; no permanent hosting or iPhone HTTPS deployment claimed.",
   "local_validation": {
-    "pytest": "563 passed in 24.80s",
+    "pytest": "565 passed in 23.02s",
     "ruff_check": "All checks passed",
     "ruff_format": "92 files already formatted",
     "compileall": "passed",
     "git_diff_check": "passed",
     "prospective_accuracy": "Not yet measurable: all 114 primary forecasts pending",
-    "official_completed_games_verified": 9
+    "official_completed_games_verified": 9,
+    "correction_regressions": "Old source replay cannot confirm a correction; archive restore cannot downgrade official-source precedence."
   }
 }

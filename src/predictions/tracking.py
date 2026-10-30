@@ -176,6 +176,8 @@ class OutcomeJournal:
             if last_final and content != last_final:
                 confirmed = (
                     not weaker
+                    and stamp(item["source"]["fetched_at"])
+                    > stamp(previous["source"]["fetched_at"])
                     and candidate == content
                     and stamp(item["observed_at"])
                     >= stamp(previous["observed_at"]) + pd.Timedelta(minutes=5)
@@ -192,8 +194,9 @@ class OutcomeJournal:
             elif content["status"] == "final":
                 item["reason"] = "official_final"
             if item["content"]["status"] == "final":
+                if content != last_final or incoming_class == "official_league_data":
+                    last_class = incoming_class
                 last_final = content
-                last_class = incoming_class
             item["last_confirmed_source_class"] = last_class
             item["last_confirmed_final"] = last_final
             item["previous_observation_id"] = previous["observation_id"] if previous else None
