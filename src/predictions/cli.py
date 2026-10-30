@@ -222,7 +222,7 @@ def main(argv: list[str] | None = None) -> int:
             print(json.dumps(platform_result, indent=2, allow_nan=False))
             if args.command == "platform-status" and args.healthcheck:
                 return 0 if platform_result["healthy"] else 1
-            return 1 if platform_result.get("status") == "failed" else 0
+            return 1 if platform_result.get("status") in ["failed", "partial"] else 0
         from predictions.scoring_cli import dispatch as dispatch_scoring
 
         scoring_result = dispatch_scoring(args)

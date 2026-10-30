@@ -1,0 +1,551 @@
+{
+  "phase": 2,
+  "observed_at": "2026-10-30T20:32:52.706839+00:00",
+  "environment": "Linux Python 3.12.14",
+  "sports": {
+    "NFL": {
+      "overall": {
+        "accuracy": null,
+        "brier": null,
+        "calibration": [],
+        "cancelled": 0,
+        "confidence_intervals_95": null,
+        "ece": null,
+        "graded": 0,
+        "log_loss": null,
+        "losses": 0,
+        "margin_mae": null,
+        "pending": 14,
+        "picked_games": 0,
+        "predicted": 14,
+        "probability_games": 0,
+        "review": 0,
+        "score_games": 0,
+        "score_mae": null,
+        "ties": 0,
+        "total_mae": null,
+        "wins": 0
+      },
+      "retained_receipts": 29,
+      "late_imports": 0,
+      "as_of": "2026-10-30T20:30:56.348655+00:00",
+      "reconciliation": {
+        "action": null,
+        "errors": [],
+        "last_checked_at": "2026-10-30T20:30:56.348655+00:00",
+        "observations": 0,
+        "official_fetch_requested": false,
+        "requested": 0,
+        "status": "completed"
+      },
+      "worker_smoke": {
+        "sport": "NFL",
+        "cycles": 1,
+        "mode": "predictions_only",
+        "status": "completed"
+      },
+      "original_prediction_example": {
+        "game_id": "2026_08_ARI_DAL",
+        "forecast_id": "4ca23676342546b28d4642a8076c2738",
+        "received_at": "2026-10-30T19:25:54.731897+00:00",
+        "generated_at": "2026-10-30T02:46:08.845524+00:00",
+        "kickoff": "2026-11-01T18:00:00+00:00",
+        "home_team": "DAL",
+        "away_team": "ARI",
+        "home_win_probability": 0.7338226064335651,
+        "projected_score": {
+          "away_interval_90": [
+            6,
+            37
+          ],
+          "away_mean": 21.681224009240534,
+          "expected_margin": 5.6983838542940894,
+          "expected_total": 49.060831872775154,
+          "home_interval_90": [
+            12,
+            42
+          ],
+          "home_mean": 27.379607863534623
+        },
+        "status": "pending"
+      }
+    },
+    "NBA": {
+      "overall": {
+        "accuracy": null,
+        "brier": null,
+        "calibration": [],
+        "cancelled": 0,
+        "confidence_intervals_95": null,
+        "ece": null,
+        "graded": 0,
+        "log_loss": null,
+        "losses": 0,
+        "margin_mae": null,
+        "pending": 52,
+        "picked_games": 0,
+        "predicted": 52,
+        "probability_games": 0,
+        "review": 0,
+        "score_games": 0,
+        "score_mae": null,
+        "ties": 0,
+        "total_mae": null,
+        "wins": 0
+      },
+      "retained_receipts": 156,
+      "late_imports": 0,
+      "as_of": "2026-10-30T20:31:00.616547+00:00",
+      "reconciliation": {
+        "action": null,
+        "errors": [],
+        "last_checked_at": "2026-10-30T20:18:43.897694+00:00",
+        "observations": 0,
+        "official_fetch_requested": false,
+        "requested": 0,
+        "status": "completed"
+      },
+      "worker_smoke": {
+        "sport": "NBA",
+        "cycles": 1,
+        "mode": "predictions_only",
+        "status": "completed"
+      },
+      "original_prediction_example": {
+        "game_id": "0022600015",
+        "forecast_id": "d717f660a4ea457eb85c800f6cbecdaf",
+        "received_at": "2026-10-30T19:24:11.900988+00:00",
+        "generated_at": "2026-10-30T18:43:11.254357+00:00",
+        "kickoff": "2026-10-30T23:00:00+00:00",
+        "home_team": "WAS",
+        "away_team": "CHA",
+        "home_win_probability": 0.240060329678701,
+        "projected_score": {
+          "away_interval_90": [
+            97,
+            136
+          ],
+          "away_mean": 116.8014768144757,
+          "expected_margin": -7.5747968203911284,
+          "expected_total": 226.02815680856028,
+          "home_interval_90": [
+            89,
+            130
+          ],
+          "home_mean": 109.22667999408458
+        },
+        "status": "pending"
+      }
+    },
+    "NHL": {
+      "overall": {
+        "accuracy": null,
+        "brier": null,
+        "calibration": [],
+        "cancelled": 0,
+        "confidence_intervals_95": null,
+        "ece": null,
+        "graded": 0,
+        "log_loss": null,
+        "losses": 0,
+        "margin_mae": null,
+        "pending": 48,
+        "picked_games": 0,
+        "predicted": 48,
+        "probability_games": 0,
+        "review": 0,
+        "score_games": 0,
+        "score_mae": null,
+        "ties": 0,
+        "total_mae": null,
+        "wins": 0
+      },
+      "retained_receipts": 144,
+      "late_imports": 0,
+      "as_of": "2026-10-30T20:31:27.742604+00:00",
+      "reconciliation": {
+        "action": null,
+        "errors": [],
+        "last_checked_at": "2026-10-30T20:31:27.742604+00:00",
+        "observations": 0,
+        "official_fetch_requested": false,
+        "requested": 0,
+        "status": "completed"
+      },
+      "worker_smoke": {
+        "sport": "NHL",
+        "cycles": 1,
+        "mode": "predictions_only",
+        "status": "completed"
+      },
+      "original_prediction_example": {
+        "game_id": "2026020214",
+        "forecast_id": "d5e3078b232748658392f4917a8d7c69",
+        "received_at": "2026-10-30T19:24:12.760574+00:00",
+        "generated_at": "2026-10-30T02:51:31.407834+00:00",
+        "kickoff": "2026-10-30T22:00:00+00:00",
+        "home_team": "VGK",
+        "away_team": "NJD",
+        "home_win_probability": 0.4963392725831241,
+        "projected_score": {
+          "away_interval_90": [
+            1,
+            6
+          ],
+          "away_mean": 3.095956011240313,
+          "expected_margin": -0.043415193139537234,
+          "expected_total": 6.148496829341088,
+          "home_interval_90": [
+            1,
+            6
+          ],
+          "home_mean": 3.0525408181007756
+        },
+        "status": "pending"
+      }
+    }
+  },
+  "official_results_validation": {
+    "kind": "Actual official-result acquisition and reconciliation; no historical predictions invented",
+    "as_of": "2026-10-30T20:20:10.962866+00:00",
+    "sports": {
+      "NFL": {
+        "games": 3,
+        "scores_match_existing_verified_historical_source": true,
+        "examples": [
+          {
+            "game_id": "2026_07_LA_LV",
+            "home": "LV",
+            "away": "LA",
+            "home_score": 21,
+            "away_score": 35,
+            "kickoff": "2026-10-25T20:25:00+00:00",
+            "outcome_type": "REG_OR_OT",
+            "source": {
+              "url": "https://www.nfl.com/scores/2026/week-7",
+              "sha256": "2ab4c7e4a63150d006e0b860ea6f63672a4ca09ba65df81149b9f2a5b720761c",
+              "fetched_at": "2026-10-30T20:20:11.452144+00:00",
+              "file": "2ab4c7e4a63150d006e0b860ea6f63672a4ca09ba65df81149b9f2a5b720761c.raw",
+              "bytes": 2239416,
+              "rights": "Public access does not grant redistribution or commercial rights; review provider terms.",
+              "path": "/workspace/predictions/data/research/outcome-sources/nfl/2ab4c7e4a63150d006e0b860ea6f63672a4ca09ba65df81149b9f2a5b720761c.raw",
+              "provider": "NFL.com public official scoreboard",
+              "classification": "official_league_data"
+            },
+            "journal_status": "unchanged"
+          },
+          {
+            "game_id": "2026_07_KC_SEA",
+            "home": "SEA",
+            "away": "KC",
+            "home_score": 20,
+            "away_score": 3,
+            "kickoff": "2026-10-26T00:20:00+00:00",
+            "outcome_type": "REG_OR_OT",
+            "source": {
+              "url": "https://www.nfl.com/scores/2026/week-7",
+              "sha256": "2ab4c7e4a63150d006e0b860ea6f63672a4ca09ba65df81149b9f2a5b720761c",
+              "fetched_at": "2026-10-30T20:20:11.452144+00:00",
+              "file": "2ab4c7e4a63150d006e0b860ea6f63672a4ca09ba65df81149b9f2a5b720761c.raw",
+              "bytes": 2239416,
+              "rights": "Public access does not grant redistribution or commercial rights; review provider terms.",
+              "path": "/workspace/predictions/data/research/outcome-sources/nfl/2ab4c7e4a63150d006e0b860ea6f63672a4ca09ba65df81149b9f2a5b720761c.raw",
+              "provider": "NFL.com public official scoreboard",
+              "classification": "official_league_data"
+            },
+            "journal_status": "unchanged"
+          },
+          {
+            "game_id": "2026_07_DAL_PHI",
+            "home": "PHI",
+            "away": "DAL",
+            "home_score": 21,
+            "away_score": 38,
+            "kickoff": "2026-10-27T00:15:00+00:00",
+            "outcome_type": "REG_OR_OT",
+            "source": {
+              "url": "https://www.nfl.com/scores/2026/week-7",
+              "sha256": "2ab4c7e4a63150d006e0b860ea6f63672a4ca09ba65df81149b9f2a5b720761c",
+              "fetched_at": "2026-10-30T20:20:11.452144+00:00",
+              "file": "2ab4c7e4a63150d006e0b860ea6f63672a4ca09ba65df81149b9f2a5b720761c.raw",
+              "bytes": 2239416,
+              "rights": "Public access does not grant redistribution or commercial rights; review provider terms.",
+              "path": "/workspace/predictions/data/research/outcome-sources/nfl/2ab4c7e4a63150d006e0b860ea6f63672a4ca09ba65df81149b9f2a5b720761c.raw",
+              "provider": "NFL.com public official scoreboard",
+              "classification": "official_league_data"
+            },
+            "journal_status": "unchanged"
+          }
+        ]
+      },
+      "NBA": {
+        "games": 3,
+        "scores_match_existing_verified_historical_source": true,
+        "examples": [
+          {
+            "game_id": "0022600141",
+            "home": "UTA",
+            "away": "SAS",
+            "home_score": 111,
+            "away_score": 117,
+            "kickoff": "2026-10-29T01:00:00+00:00",
+            "outcome_type": "FULL_OT",
+            "source": {
+              "url": "https://cdn.nba.com/static/json/staticData/scheduleLeagueV2_1.json",
+              "sha256": "e9d9eead3327d2b3e3d0f2886ce485b145658b24008603924f238cd9a42dad12",
+              "fetched_at": "2026-10-30T20:20:11.865335+00:00",
+              "file": "e9d9eead3327d2b3e3d0f2886ce485b145658b24008603924f238cd9a42dad12.raw",
+              "bytes": 7444349,
+              "rights": "Public access does not grant redistribution or commercial rights; review provider terms.",
+              "path": "/workspace/predictions/data/research/outcome-sources/nba/e9d9eead3327d2b3e3d0f2886ce485b145658b24008603924f238cd9a42dad12.raw",
+              "provider": "NBA official CDN schedule",
+              "classification": "official_league_data"
+            },
+            "journal_status": "unchanged"
+          },
+          {
+            "game_id": "0022600142",
+            "home": "DAL",
+            "away": "OKC",
+            "home_score": 120,
+            "away_score": 96,
+            "kickoff": "2026-10-29T01:30:00+00:00",
+            "outcome_type": "FULL_OT",
+            "source": {
+              "url": "https://cdn.nba.com/static/json/staticData/scheduleLeagueV2_1.json",
+              "sha256": "e9d9eead3327d2b3e3d0f2886ce485b145658b24008603924f238cd9a42dad12",
+              "fetched_at": "2026-10-30T20:20:11.865335+00:00",
+              "file": "e9d9eead3327d2b3e3d0f2886ce485b145658b24008603924f238cd9a42dad12.raw",
+              "bytes": 7444349,
+              "rights": "Public access does not grant redistribution or commercial rights; review provider terms.",
+              "path": "/workspace/predictions/data/research/outcome-sources/nba/e9d9eead3327d2b3e3d0f2886ce485b145658b24008603924f238cd9a42dad12.raw",
+              "provider": "NBA official CDN schedule",
+              "classification": "official_league_data"
+            },
+            "journal_status": "unchanged"
+          },
+          {
+            "game_id": "0022600143",
+            "home": "LAC",
+            "away": "LAL",
+            "home_score": 87,
+            "away_score": 103,
+            "kickoff": "2026-10-29T02:30:00+00:00",
+            "outcome_type": "FULL_OT",
+            "source": {
+              "url": "https://cdn.nba.com/static/json/staticData/scheduleLeagueV2_1.json",
+              "sha256": "e9d9eead3327d2b3e3d0f2886ce485b145658b24008603924f238cd9a42dad12",
+              "fetched_at": "2026-10-30T20:20:11.865335+00:00",
+              "file": "e9d9eead3327d2b3e3d0f2886ce485b145658b24008603924f238cd9a42dad12.raw",
+              "bytes": 7444349,
+              "rights": "Public access does not grant redistribution or commercial rights; review provider terms.",
+              "path": "/workspace/predictions/data/research/outcome-sources/nba/e9d9eead3327d2b3e3d0f2886ce485b145658b24008603924f238cd9a42dad12.raw",
+              "provider": "NBA official CDN schedule",
+              "classification": "official_league_data"
+            },
+            "journal_status": "unchanged"
+          }
+        ]
+      },
+      "NHL": {
+        "games": 3,
+        "scores_match_existing_verified_historical_source": true,
+        "examples": [
+          {
+            "game_id": "2026020192",
+            "home": "NSH",
+            "away": "NYI",
+            "home_score": 3,
+            "away_score": 4,
+            "kickoff": "2026-10-28T00:00:00+00:00",
+            "outcome_type": "SO",
+            "source": {
+              "url": "https://api-web.nhle.com/v1/gamecenter/2026020192/landing",
+              "sha256": "4325437ff7780bef05c1af73dd634e071248786482b29c587b37e20f61b1dc07",
+              "fetched_at": "2026-10-30T20:20:12.159986+00:00",
+              "file": "4325437ff7780bef05c1af73dd634e071248786482b29c587b37e20f61b1dc07.raw",
+              "bytes": 16258,
+              "rights": "Public access does not grant redistribution or commercial rights; review provider terms.",
+              "path": "/workspace/predictions/data/research/outcome-sources/nhl/4325437ff7780bef05c1af73dd634e071248786482b29c587b37e20f61b1dc07.raw",
+              "provider": "NHL official gamecenter",
+              "classification": "official_league_data"
+            },
+            "journal_status": "final"
+          },
+          {
+            "game_id": "2026020197",
+            "home": "ANA",
+            "away": "VAN",
+            "home_score": 5,
+            "away_score": 6,
+            "kickoff": "2026-10-28T02:00:00+00:00",
+            "outcome_type": "OT",
+            "source": {
+              "url": "https://api-web.nhle.com/v1/gamecenter/2026020197/landing",
+              "sha256": "b71e9362b26f9666751831693543644afb70ee1f4cc6709865889189f898f89d",
+              "fetched_at": "2026-10-30T20:20:12.178361+00:00",
+              "file": "b71e9362b26f9666751831693543644afb70ee1f4cc6709865889189f898f89d.raw",
+              "bytes": 19893,
+              "rights": "Public access does not grant redistribution or commercial rights; review provider terms.",
+              "path": "/workspace/predictions/data/research/outcome-sources/nhl/b71e9362b26f9666751831693543644afb70ee1f4cc6709865889189f898f89d.raw",
+              "provider": "NHL official gamecenter",
+              "classification": "official_league_data"
+            },
+            "journal_status": "final"
+          },
+          {
+            "game_id": "2026020202",
+            "home": "SEA",
+            "away": "TOR",
+            "home_score": 5,
+            "away_score": 4,
+            "kickoff": "2026-10-29T02:00:00+00:00",
+            "outcome_type": "REG",
+            "source": {
+              "url": "https://api-web.nhle.com/v1/gamecenter/2026020202/landing",
+              "sha256": "04b473d24abfc3eba64f51eef67b47d2a2de24c094126d622b2995d277d75e0c",
+              "fetched_at": "2026-10-30T20:20:12.177639+00:00",
+              "file": "04b473d24abfc3eba64f51eef67b47d2a2de24c094126d622b2995d277d75e0c.raw",
+              "bytes": 16708,
+              "rights": "Public access does not grant redistribution or commercial rights; review provider terms.",
+              "path": "/workspace/predictions/data/research/outcome-sources/nhl/04b473d24abfc3eba64f51eef67b47d2a2de24c094126d622b2995d277d75e0c.raw",
+              "provider": "NHL official gamecenter",
+              "classification": "official_league_data"
+            },
+            "journal_status": "final"
+          }
+        ]
+      }
+    }
+  },
+  "ui_evidence": {
+    "method": "Authenticated actual-data Streamlit AppTest with sport and performance period filters",
+    "private_before_login": true,
+    "ui_exceptions": 0,
+    "correct_winner_display": [
+      "\u2014",
+      "\u2014",
+      "\u2014"
+    ],
+    "prospective_outcomes_graded": 0,
+    "fake_trend_charts": false,
+    "home_remains": "Predictions",
+    "screen_sections": [
+      "Why this pick?",
+      "Advanced Analysis",
+      "Why this pick?",
+      "Advanced Analysis",
+      "Why this pick?",
+      "Advanced Analysis",
+      "Why this pick?",
+      "Advanced Analysis",
+      "Why this pick?",
+      "Advanced Analysis",
+      "Why this pick?",
+      "Advanced Analysis",
+      "Why this pick?",
+      "Advanced Analysis",
+      "Why this pick?",
+      "Advanced Analysis",
+      "Why this pick?",
+      "Advanced Analysis",
+      "Why this pick?",
+      "Advanced Analysis",
+      "Why this pick?",
+      "Advanced Analysis",
+      "Why this pick?",
+      "Advanced Analysis",
+      "Why this pick?",
+      "Advanced Analysis",
+      "Why this pick?",
+      "Advanced Analysis",
+      "Why this pick?",
+      "Advanced Analysis",
+      "Why this pick?",
+      "Advanced Analysis",
+      "Why this pick?",
+      "Advanced Analysis",
+      "Why this pick?",
+      "Advanced Analysis",
+      "Why this pick?",
+      "Advanced Analysis",
+      "Why this pick?",
+      "Advanced Analysis",
+      "Why this pick?",
+      "Advanced Analysis",
+      "Why this pick?",
+      "Advanced Analysis",
+      "Why this pick?",
+      "Advanced Analysis",
+      "Why this pick?",
+      "Advanced Analysis",
+      "Why this pick?",
+      "Advanced Analysis",
+      "Why this pick?",
+      "Advanced Analysis",
+      "Why this pick?",
+      "Advanced Analysis",
+      "Why this pick?",
+      "Advanced Analysis",
+      "Why this pick?",
+      "Advanced Analysis",
+      "Why this pick?",
+      "Advanced Analysis",
+      "Why this pick?",
+      "Advanced Analysis",
+      "Why this pick?",
+      "Advanced Analysis",
+      "Why this pick?",
+      "Advanced Analysis",
+      "Why this pick?",
+      "Advanced Analysis",
+      "Why this pick?",
+      "Advanced Analysis",
+      "Why this pick?",
+      "Advanced Analysis",
+      "Why this pick?",
+      "Advanced Analysis",
+      "Why this pick?",
+      "Advanced Analysis",
+      "Why this pick?",
+      "Advanced Analysis",
+      "Why this pick?",
+      "Advanced Analysis",
+      "Why this pick?",
+      "Advanced Analysis",
+      "Why this pick?",
+      "Advanced Analysis",
+      "Why this pick?",
+      "Advanced Analysis",
+      "Why this pick?",
+      "Advanced Analysis",
+      "Why this pick?",
+      "Advanced Analysis",
+      "Why this pick?",
+      "Advanced Analysis",
+      "Why this pick?",
+      "Advanced Analysis",
+      "Why this pick?",
+      "Advanced Analysis",
+      "Why this pick?",
+      "Advanced Analysis",
+      "Prospective accuracy \u2014 future games",
+      "NFL calibration and prediction history",
+      "NBA calibration and prediction history",
+      "NHL calibration and prediction history",
+      "Research / Administration"
+    ],
+    "limitation": "AppTest checks rendering/state, not an iPhone browser screenshot."
+  },
+  "claims": "No prospective accuracy or edge established. Historical source checks do not enter the prospective cohort.",
+  "hosting": "Temporary workspace one-cycle smoke only; no permanent hosting or iPhone HTTPS deployment claimed.",
+  "local_validation": {
+    "pytest": "563 passed in 24.80s",
+    "ruff_check": "All checks passed",
+    "ruff_format": "92 files already formatted",
+    "compileall": "passed",
+    "git_diff_check": "passed",
+    "prospective_accuracy": "Not yet measurable: all 114 primary forecasts pending",
+    "official_completed_games_verified": 9
+  }
+}

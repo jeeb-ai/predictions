@@ -170,6 +170,7 @@ def build_dashboard_view(config: dict, now=None) -> dict:
             except (OSError, ValueError, KeyError, TypeError, OverflowError):
                 league_errors.append(sport.upper())
     return {
+        "config": config,
         "automation": platform_status(config, at=observed),
         "league_errors": league_errors,
         "slate": forecast_source.get("slate", []),
@@ -459,6 +460,9 @@ def render_dashboard(view: dict) -> None:
             f"{sport} snapshot could not be verified. Other sports remain available; check the sport worker."
         )
     render_predictions(view)
+    from predictions.tracking_ui import render as render_prospective
+
+    render_prospective(view["config"])
     with st.expander("Research / Administration", expanded=False):
         st.subheader("Automated prediction workers")
         workers = view.get("automation", {}).get("sports", [])
