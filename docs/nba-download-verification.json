@@ -1,7 +1,7 @@
 {
   "kind": "Measured NBA acquisition, historical model parity and real-source live pipeline verification",
   "observed_at": "2026-10-30T18:44:52.057565+00:00",
-  "execution_environment": "Linux Python3.11; macOS offline tests added to CI, commands documented separately",
+  "execution_environment": "Linux Python3.12.14; macOS offline tests added to CI, commands documented separately",
   "api_diagnosis": {
     "route": "leaguegamefinder; root redirect is irrelevant",
     "mac_failure_reproduced": false,
