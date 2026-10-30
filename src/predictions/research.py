@@ -120,6 +120,9 @@ class _PublicServices:
                 model_version=config["model_version"],
                 bundle=None,
                 include_analysis=True,
+                score_validation=(Path(paths["reports_dir"]) / "scoring-approved.json")
+                if (Path(paths["reports_dir"]) / "scoring-approved.json").is_file()
+                else None,
                 input=self.schedule_path,
                 schedule_metadata=self.schedule_metadata,
                 cache_dir=Path(paths["schedule_cache"]),

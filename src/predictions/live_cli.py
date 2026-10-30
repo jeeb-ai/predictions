@@ -20,6 +20,11 @@ def add_commands(sub) -> None:
     forecast.add_argument("--game-id", action="append", required=True)
     forecast.add_argument("--model-version", choices=["v1", "v2"], default="v2")
     forecast.add_argument("--include-analysis", action="store_true")
+    forecast.add_argument(
+        "--score-validation",
+        type=Path,
+        help="Trusted completed scoring validation report; optional",
+    )
     forecast.add_argument("--bundle", type=Path, help="Trusted local live-model bundle directory")
     forecast.add_argument("--input", type=Path, help="Local nflverse schedule snapshot")
     forecast.add_argument("--cache-dir", type=Path, default=Path("data/raw"))
@@ -233,9 +238,40 @@ def _forecast(args) -> dict:
         features.loc[features["game_id"].isin(args.game_id)].copy(),
         as_of=as_of,
         source_metadata=metadata,
-        output_dir=args.output_dir,
+        output_dir=None if getattr(args, "score_validation", None) else args.output_dir,
         include_analysis=getattr(args, "include_analysis", False),
     )
+    scoring_validation = getattr(args, "score_validation", None)
+    if scoring_validation is not None:
+        from predictions.scoring import forecast_scoring
+
+        try:
+            scores = forecast_scoring(
+                games,
+                _read(scoring_validation),
+                [r["game_id"] for r in batch["forecasts"]],
+                args.model_dir / "scoring",
+                as_of=as_of,
+                source_metadata=metadata,
+            )
+            for record in batch["forecasts"]:
+                record["score_prediction"] = scores[record["game_id"]]
+        except (ValueError, OSError, TypeError, KeyError) as exc:
+            batch["scoring_error"] = str(exc)
+            for record in batch["forecasts"]:
+                record["score_unavailable_reason"] = (
+                    "Scoring validation or fitting could not be verified; independent winner forecast preserved."
+                )
+        import uuid
+
+        directory = args.output_dir / ("forecasts-" + uuid.uuid4().hex)
+        directory.mkdir(parents=True, exist_ok=False)
+        path = directory / "forecasts.json"
+        _write(path, batch)
+        batch["artifact"] = {
+            "path": str(path),
+            "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+        }
     ledger = PaperLedger(args.ledger)
     for forecast in batch["forecasts"]:
         ledger.record_forecast(forecast)

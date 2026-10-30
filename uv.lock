@@ -453,7 +453,7 @@ wheels = [
 
 [[package]]
 name = "nfl-prediction-engine"
-version = "5.0.0"
+version = "5.1.0"
 source = { editable = "." }
 dependencies = [
     { name = "joblib" },
@@ -462,6 +462,8 @@ dependencies = [
     { name = "pyarrow" },
     { name = "requests" },
     { name = "scikit-learn" },
+    { name = "scipy", version = "1.17.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
+    { name = "scipy", version = "1.18.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
     { name = "streamlit" },
     { name = "threadpoolctl" },
 ]
@@ -482,6 +484,8 @@ requires-dist = [
     { name = "requests", specifier = "==2.34.2" },
     { name = "ruff", marker = "extra == 'dev'", specifier = "==0.17.2" },
     { name = "scikit-learn", specifier = "==1.8.0" },
+    { name = "scipy", marker = "python_full_version < '3.12'", specifier = "==1.17.1" },
+    { name = "scipy", marker = "python_full_version >= '3.12'", specifier = "==1.18.1" },
     { name = "streamlit", specifier = "==1.66.1" },
     { name = "threadpoolctl", specifier = "==3.7.0" },
 ]
