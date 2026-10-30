@@ -65,6 +65,9 @@ def _parser() -> argparse.ArgumentParser:
 
     add_league_commands(sub)
     add_research_commands(sub)
+    from predictions.platform_cli import add_commands as add_platform_commands
+
+    add_platform_commands(sub)
     return parser
 
 
@@ -212,6 +215,14 @@ def _compare(args) -> dict:
 def main(argv: list[str] | None = None) -> int:
     args = _parser().parse_args(argv)
     try:
+        from predictions.platform_cli import dispatch as dispatch_platform
+
+        platform_result = dispatch_platform(args)
+        if platform_result is not None:
+            print(json.dumps(platform_result, indent=2, allow_nan=False))
+            if args.command == "platform-status" and args.healthcheck:
+                return 0 if platform_result["healthy"] else 1
+            return 1 if platform_result.get("status") == "failed" else 0
         from predictions.scoring_cli import dispatch as dispatch_scoring
 
         scoring_result = dispatch_scoring(args)
