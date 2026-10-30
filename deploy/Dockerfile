@@ -10,6 +10,7 @@ RUN --mount=type=secret,id=proxy_ca \
 COPY pyproject.toml uv.lock README.md /app/
 COPY src /app/src
 COPY research.example.json /app/research.example.json
+COPY docs/nba-validation.json docs/nhl-validation.json docs/v5-scoring-validation.json /app/docs/
 RUN --mount=type=cache,target=/root/.cache/uv \
     UV_NATIVE_TLS=true UV_LINK_MODE=copy uv sync --frozen --no-dev --python /usr/local/bin/python \
     && useradd --uid 10001 --create-home research \
