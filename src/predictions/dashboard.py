@@ -224,7 +224,29 @@ def _render_forecasts(rows: list[dict]) -> None:
     )
 
 
-def _render_evaluations(rows: list[dict]) -> None:
+def _render_evaluations(rows: list[dict], forecasts=None) -> None:
+    by_id = {row["forecast_id"]: row for row in (forecasts or []) if "forecast_id" in row}
+
+    def probability(row):
+        if row.get("decisive_win_probability") is not None:
+            return row["decisive_win_probability"]
+        forecast = by_id.get(row.get("forecast_id"), {})
+        if forecast and row.get("selected_team") in {
+            forecast.get("home_team"),
+            forecast.get("away_team"),
+        }:
+            return forecast.get(
+                "home_win_probability"
+                if row["selected_team"] == forecast["home_team"]
+                else "away_win_probability"
+            )
+        return None
+
+    def price(row):
+        count = _number(row.get("fill_quantity"))
+        notional = _number(row.get("notional"))
+        return notional / count if count and notional is not None else None
+
     st.subheader("Market evaluations")
     st.caption(
         "Research decisions use the recorded observation times, actual US asks, explicit risk ranges, and conservative estimated fees. Quotes shown here can now be stale."
@@ -239,6 +261,13 @@ def _render_evaluations(rows: list[dict]) -> None:
                 "Market": row.get("market_slug", row.get("market_id")),
                 "Team / side": f"{row.get('selected_team', '?')} / {row.get('outcome', '?')}",
                 "Decision": row.get("status"),
+                "Model win probability (decisive game)": _percent(probability(row)),
+                "Retained executable average ask": _money(price(row)),
+                "Unadjusted probability minus price (not EV)": _score(
+                    float(probability(row)) - price(row)
+                )
+                if probability(row) is not None and price(row) is not None
+                else "Unavailable",
                 "Point EV / contract": _money(row.get("ev_per_contract")),
                 "Lower EV": _money(_object(row.get("uncertainty")).get("ev_per_contract_lower")),
                 "Upper EV": _money(_object(row.get("uncertainty")).get("ev_per_contract_upper")),

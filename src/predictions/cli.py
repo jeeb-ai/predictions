@@ -58,6 +58,9 @@ def _parser() -> argparse.ArgumentParser:
     compare.add_argument("--workers", type=int, default=4)
     compare.add_argument("--offline", action="store_true")
     add_commands(sub)
+    from predictions.scoring_cli import add_commands as add_scoring_commands
+
+    add_scoring_commands(sub)
     add_research_commands(sub)
     return parser
 
@@ -206,6 +209,12 @@ def _compare(args) -> dict:
 def main(argv: list[str] | None = None) -> int:
     args = _parser().parse_args(argv)
     try:
+        from predictions.scoring_cli import dispatch as dispatch_scoring
+
+        scoring_result = dispatch_scoring(args)
+        if scoring_result is not None:
+            print(json.dumps(scoring_result, indent=2, allow_nan=False))
+            return 0
         research_result = dispatch_research(args)
         if research_result is not None:
             print(json.dumps(research_result, indent=2, allow_nan=False))

@@ -121,9 +121,22 @@ def render_predictions(view):
                 explanation = verdict(row, team)
                 st.write(explanation["summary"])
                 st.write(explanation["confidence"])
-                st.caption(
-                    "Projected score, spread and total: Not yet available — a separate scoring model must be validated first."
-                )
+                score = row.get("score_prediction")
+                if score:
+                    summary = score["summary"]
+                    st.write(
+                        f"Average projected score: {home} {summary['home_mean']:.1f}, {away} {summary['away_mean']:.1f} · Expected home margin {summary['expected_margin']:+.1f} · Expected total {summary['expected_total']:.1f}"
+                    )
+                    st.caption(
+                        f"Independent tested scoring model: {score['model_kind']}. These are expected points, not a promised exact final score. Typical-score ranges (90% model distribution): {home} {summary['home_interval_90']}, {away} {summary['away_interval_90']}."
+                    )
+                else:
+                    st.caption(
+                        row.get(
+                            "score_unavailable_reason",
+                            "Projected score, spread and total: Not yet available — an approved scoring model must be configured.",
+                        )
+                    )
                 with st.expander("Why this pick?"):
                     st.markdown("**Three strongest supporting inputs**")
                     for factor in explanation["support"]:
@@ -187,6 +200,8 @@ def render_predictions(view):
             )
             row = next(r for r in rows if r["game_id"] == selected)
             st.write(verdict(row, team)["summary"])
+            if row.get("score_prediction"):
+                render_score_lines(row["score_prediction"])
             with st.expander("Advanced Analysis", expanded=False):
                 render_analysis(row)
     with markets:
@@ -194,7 +209,7 @@ def render_predictions(view):
         st.caption(
             "Executable prices and conditional EV are separate from our predictions. Recorded quotes may now be stale; strict PASS gates remain in force. No real-money execution."
         )
-        _render_evaluations(view["evaluations"])
+        _render_evaluations(view["evaluations"], view["forecasts"])
         for value in view["evaluations"]:
             if value.get("fills"):
                 st.write(
@@ -304,3 +319,50 @@ def render_analysis(row):
     with st.expander("Exact source values and provider provenance"):
         st.json(values)
         st.json(row.get("source_metadata", {}))
+
+
+def render_score_lines(score):
+    from predictions.scoring import outcome_probabilities, read_score_distribution
+
+    st.subheader("Spread and total — choose an exact line")
+    st.caption(
+        "Research scenarios, not observed market lines. Full-game outcomes include overtime; pushes are separate. No prices or betting edge are invented."
+    )
+    spread = st.number_input(
+        "Home point spread (negative means home favorite)",
+        min_value=-100.0,
+        max_value=100.0,
+        value=-3.5,
+        step=0.5,
+    )
+    total = st.number_input(
+        "Combined-points line", min_value=0.0, max_value=200.0, value=44.5, step=0.5
+    )
+    try:
+        probability = outcome_probabilities(
+            read_score_distribution(score), home_spread=spread, total_line=total
+        )
+    except (ValueError, OSError):
+        st.warning(
+            "Retained scoring distribution is unavailable or fails checksum verification. No line probabilities are shown."
+        )
+        return
+    st.write(
+        f"Home covers: {probability['home_cover']['win']:.1%}; away covers: {probability['home_cover']['loss']:.1%}; push: {probability['home_cover']['push']:.1%}."
+    )
+    st.write(
+        f"Over: {probability['over']['win']:.1%}; under: {probability['over']['loss']:.1%}; push: {probability['over']['push']:.1%}."
+    )
+    st.caption(
+        "These estimates come from a tested historical scoring distribution, not from the binary winner probability. They omit parameter-refit uncertainty and require prospective calibration monitoring."
+    )
+    if float(spread).is_integer() or float(total).is_integer():
+        st.warning(
+            "Integer-line push estimates are poorly calibrated: for home −3, the recorded Ridge benchmark predicted a 2.8% push rate in 2025 versus 8.5% observed. NFL key scoring numbers are not modeled explicitly. Do not treat these scenario probabilities as a validated betting edge."
+        )
+    st.caption(
+        "Historical line checks cover home −3/−3.5 and totals44/44.5 only. Other exact lines are unvalidated research scenarios."
+    )
+    st.info(
+        "Market value: PASS — no verified executable spread/total quote, fees, liquidity and matching settlement rules are available. Existing verified moneyline comparisons remain separate in Market Value."
+    )
