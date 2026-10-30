@@ -33,6 +33,30 @@ services:
       # The first run downloads historical PBP and fits causal EP/annual models.
       start_period: 30m
       retries: 3
+  leagues:
+    profiles: [leagues]
+    image: nfl-research:local
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+      secrets: [proxy_ca]
+    command: ["leagues-worker", "--sport", "NBA", "--sport", "NHL", "--config", "/app/research.local.json"]
+    init: true
+    restart: unless-stopped
+    stop_grace_period: 120s
+    cpus: 2.0
+    mem_limit: 4g
+    environment:
+      HTTP_PROXY: ${HTTP_PROXY:-}
+      HTTPS_PROXY: ${HTTPS_PROXY:-}
+      NO_PROXY: ${NO_PROXY:-localhost,127.0.0.1}
+    volumes:
+      - ../research.local.json:/app/research.local.json:ro
+      - research-data:/app/data
+      - research-models:/app/models
+      - research-reports:/app/reports
+      - ../docs/nba-validation.json:/app/reports/research/nba-approved.json:ro
+      - ../docs/nhl-validation.json:/app/reports/research/nhl-approved.json:ro
   dashboard:
     image: nfl-research:local
     build:

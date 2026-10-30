@@ -13,8 +13,14 @@ from predictions.data import _atomic_write
 from predictions.league_model import fit_league, pmf_for, summarize, winner_explanation
 
 
-def issue_league(features, report, root, *, as_of, source, days=7):
-    now = pd.Timestamp.now(tz="UTC")
+def _now():
+    return pd.Timestamp.now(tz="UTC")
+
+
+def issue_league(
+    features, report, root, *, as_of, source, days=7, fitter=fit_league, score_builder=None
+):
+    now = _now()
     as_of = pd.Timestamp(as_of)
     if as_of.tzinfo is None or as_of > now:
         raise ValueError("League forecast cutoff must be observed, not future")
@@ -25,6 +31,24 @@ def issue_league(features, report, root, *, as_of, source, days=7):
         & features.kickoff.le(now + pd.Timedelta(days=days))
         & features.home_score.isna()
     ]
+    if not targets.empty:
+        if pd.to_datetime(targets.feature_cutoff_at, utc=True).ne(as_of).any():
+            raise ValueError("Prepare league features at this exact as_of")
+        used = pd.to_datetime(targets.history_available_through, utc=True)
+        if (used.notna() & used.ge(as_of)).any():
+            raise ValueError("League feature history must precede as_of")
+
+    def check_source(value):
+        if isinstance(value, dict):
+            if value.get("fetched_at") is not None and pd.Timestamp(value["fetched_at"]) > as_of:
+                raise ValueError("League source snapshot observed after as_of")
+            for child in value.values():
+                check_source(child)
+        elif isinstance(value, list):
+            for child in value:
+                check_source(child)
+
+    check_source(source)
     if targets.empty:
         return {
             "sport": sport,
@@ -40,21 +64,34 @@ def issue_league(features, report, root, *, as_of, source, days=7):
     older = features.loc[features.home_score.notna() & features.available_at.lt(as_of)]
     cal = older.loc[older.season.eq(season - 1)]
     train = older.loc[older.season.lt(season - 1) & older.available_at.lt(cal.kickoff.min())]
-    model = fit_league(train, cal, columns, sport)
+    model = fitter(train, cal, columns, sport)
     path = Path(root) / (sport.lower() + "-" + uuid.uuid4().hex)
     path.mkdir(parents=True, exist_ok=False)
     joblib.dump(model, path / "model.joblib")
+    manifest = path / "source.json"
+    manifest.write_text(json.dumps(source, indent=2, allow_nan=False) + "\n")
+    source_ref = {
+        "manifest_path": str(manifest.resolve()),
+        "sha256": hashlib.sha256(manifest.read_bytes()).hexdigest(),
+        "provider": source.get("provider", sport + " verified provider snapshots"),
+    }
     rows = []
+    skipped = []
     means = np.column_stack([m.predict(targets[columns]) for m in model["score_models"]])
     for (_, row), mean in zip(targets.iterrows(), means, strict=True):
         p, explanation = winner_explanation(model, row)
-        pmf = pmf_for(model, mean)
+        extra = {}
+        if score_builder is None:
+            pmf = pmf_for(model, mean)
+        else:
+            pmf, extra = score_builder(model, mean, row)
         identifier = uuid.uuid4().hex
         dist = path / (identifier + ".npy")
         np.save(dist, pmf, allow_pickle=False)
-        generated = pd.Timestamp.now(tz="UTC")
+        generated = _now()
         if generated >= row.kickoff:
-            raise ValueError("Game started during league inference")
+            skipped.append({"game_id": str(row.game_id), "reason": "started_during_computation"})
+            continue
         record = {
             "sport": sport,
             "forecast_id": identifier,
@@ -85,11 +122,27 @@ def issue_league(features, report, root, *, as_of, source, days=7):
             else None,
             "source_games": {side: row[side + "_source_games"] for side in ["home", "away"]},
             "availability": "Unknown: no verified point-in-time player availability in the historical source; not modeled.",
-            "source": source,
+            "source": source_ref,
             "training_seasons": sorted(int(y) for y in train.season.unique()),
             "calibration_season": season - 1,
             "train_ids_sha256": model["train_ids_sha256"],
             "calibration_ids_sha256": model["calibration_ids_sha256"],
+            "historical_validation": {
+                "season": report["holdout_season"],
+                **{
+                    k: report.get("splits", {}).get("holdout", {}).get("model", {}).get(k)
+                    for k in [
+                        "games",
+                        "accuracy",
+                        "brier",
+                        "log_loss",
+                        "ece",
+                        "intervals_95",
+                        "regulation_draw_probability",
+                        "regulation_draw_outcome",
+                    ]
+                },
+            },
             "validation_sha256": hashlib.sha256(
                 json.dumps(report, sort_keys=True).encode()
             ).hexdigest(),
@@ -98,6 +151,21 @@ def issue_league(features, report, root, *, as_of, source, days=7):
                 "reason": "No verified executable market quote or matching settlement rules.",
             },
         }
+        if "regulation_array" in extra:
+            reg_path = path / (identifier + "-regulation.npy")
+            np.save(reg_path, extra.pop("regulation_array"), allow_pickle=False)
+            extra["regulation_distribution"] = {
+                "path": str(reg_path.resolve()),
+                "sha256": hashlib.sha256(reg_path.read_bytes()).hexdigest(),
+            }
+        record.update(extra)
+        if sport == "NHL":
+            record["goalie_information"] = {
+                side: row[side + "_goalie_proxy"] for side in ["home", "away"]
+            }
+            record["availability"] = (
+                "Confirmed starting goalies and player availability are unknown. Prior tracked-shot goalie proxies are used, not actual upcoming starters."
+            )
         (path / (identifier + ".json")).write_text(
             json.dumps(record, indent=2, allow_nan=False) + "\n"
         )
@@ -106,6 +174,7 @@ def issue_league(features, report, root, *, as_of, source, days=7):
         "sport": sport,
         "as_of": as_of.isoformat(),
         "forecasts": rows,
+        "skipped": skipped,
         "status": "completed",
         "model_path": str(path),
     }
@@ -146,14 +215,23 @@ def league_verdict(row):
     if not np.isclose(expit(z), p, atol=1e-12):
         raise ValueError("League explanation probability mismatch")
     labels = {
-        "off_rating": "points scored per100estimated possessions",
-        "def_rating": "points allowed per100estimated possessions",
-        "pace": "possessions per48minutes",
+        "off_rating": "points scored per 100 estimated possessions",
+        "def_rating": "points allowed per 100 estimated possessions",
+        "pace": "possessions per 48 minutes",
         "form": "share of recent games won",
         "rest": "days since previous scheduled game",
-        "back_to_back": "back-to-back indicator (1means yes)",
-        "elo": "opponent-adjusted rating divided by400",
+        "back_to_back": "back-to-back indicator (1 means yes)",
+        "elo": "opponent-adjusted rating divided by 400",
         "history": "recent observed games available",
+        "xg_for": "quality-adjusted scoring chances per earlier 60-minute game (expected goals)",
+        "xg_against": "quality-adjusted chances allowed per earlier 60-minute game",
+        "shot_quality": "estimated goal chance per earlier unblocked shot",
+        "shots_for": "tracked unblocked attempts per earlier regulation game",
+        "shots_against": "opponent tracked attempts per earlier regulation game",
+        "pp_xg": "earlier man-advantage scoring chances per game (expected goals)",
+        "pk_xg": "earlier opponent man-advantage chances allowed per game",
+        "goalie_save": "tracked-shot save fraction of the prior observed goalie",
+        "goalie_shots": "tracked shots in that goalie proxy's eligible prior appearances",
     }
     factors = []
     for value in explanation["contributions"]:

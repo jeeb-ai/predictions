@@ -1,0 +1,41 @@
+{
+  "kind": "Actual authenticated Streamlit AppTest against independently generated official-source NFL/NBA/NHL forecasts; not a mock UI or a pixel screenshot",
+  "sport_options": [
+    "All sports",
+    "NBA",
+    "NFL",
+    "NHL"
+  ],
+  "timezone": "America/Chicago",
+  "checks": {
+    "NBA": {
+      "issued_forecasts": 51,
+      "example_game": "0022600146",
+      "home_probability": 0.8427142733534141,
+      "model_version": "nba-v1",
+      "projected_score_text": "Average projected final score: Utah Jazz 113.3, Portland Trail Blazers 124.7. Expected home margin -11.3; total 238.0.",
+      "ui_exceptions": 0
+    },
+    "NFL": {
+      "issued_forecasts": 1,
+      "example_game": "2026_08_ARI_DAL",
+      "home_probability": 0.7338226064335651,
+      "model_version": "logistic-regression-v2",
+      "projected_score_text": "Average projected score: Dallas Cowboys 27.4, Arizona Cardinals 21.7 \u00b7 Expected home margin +5.7 \u00b7 Expected total 49.1",
+      "ui_exceptions": 0
+    },
+    "NHL": {
+      "issued_forecasts": 48,
+      "example_game": "2026020214",
+      "home_probability": 0.4963392725831241,
+      "model_version": "nhl-v1",
+      "projected_score_text": "Average projected final score: Vegas Golden Knights 3.1, New Jersey Devils 3.1. Expected home margin -0.0; total 6.1.",
+      "ui_exceptions": 0,
+      "regulation_text": "Score-model regulation: home win 37.1%, draw 24.5%, away win 38.4%."
+    }
+  },
+  "authenticated": true,
+  "no_forecasts_before_auth": true,
+  "market_status": "PASS for NBA/NHL: no verified quote/fees/settlement adapter",
+  "limitations": "NHL latest holdout has weak winner results and underestimates extra time. Confirmed starters/player availability unknown. Responsive Streamlit containers/columns used; no physical-device claim."
+}

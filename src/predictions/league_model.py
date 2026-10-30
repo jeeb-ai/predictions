@@ -20,6 +20,14 @@ from sklearn.preprocessing import StandardScaler
 from threadpoolctl import threadpool_limits
 
 
+def winner_target(frame):
+    return (
+        frame["home_win"].astype(int)
+        if "home_win" in frame
+        else (frame.home_score > frame.away_score).astype(int)
+    )
+
+
 @threadpool_limits.wrap(limits=2)
 def fit_league(train, cal, columns, sport):
     if train.available_at.max() >= cal.kickoff.min() or len(train) < 20 or len(cal) < 10:
@@ -27,10 +35,10 @@ def fit_league(train, cal, columns, sport):
     logistic = make_pipeline(
         StandardScaler(), LogisticRegression(C=1, max_iter=2000, random_state=42)
     )
-    logistic.fit(train[columns], (train.home_score > train.away_score).astype(int))
+    logistic.fit(train[columns], winner_target(train))
     platt = LogisticRegression(C=1, max_iter=2000, random_state=42).fit(
         logistic.decision_function(cal[columns]).reshape(-1, 1),
-        (cal.home_score > cal.away_score).astype(int),
+        winner_target(cal),
     )
     models = []
     for side in ["home", "away"]:
@@ -54,7 +62,7 @@ def fit_league(train, cal, columns, sport):
         "covariance": np.cov(residual.T) + np.eye(2) * 0.1,
         "baseline_means": actual.mean(axis=0),
         "baseline_covariance": np.cov(actual.T) + np.eye(2) * 0.1,
-        "baseline_win": float((train.home_score > train.away_score).mean()),
+        "baseline_win": float(winner_target(train).mean()),
         "train_ids_sha256": hashlib.sha256(
             "\n".join(train.game_id.astype(str)).encode()
         ).hexdigest(),
@@ -83,9 +91,16 @@ def pmf_for(model, means, baseline=False):
         # NBA final scores include overtime and cannot be tied.
         np.fill_diagonal(pmf, 0)
     else:
-        center = model["baseline_means"] if baseline else np.maximum(means, 0.05)
+        center = (
+            model["baseline_means"]
+            if baseline
+            else np.maximum(means * model.get("goal_scale", 1), 0.05)
+        )
         pmf = np.outer(poisson.pmf(grid, center[0]), poisson.pmf(grid, center[1]))
-    return pmf / pmf.sum()
+    mass = pmf.sum()
+    if not np.isfinite(mass) or mass <= 0 or (model["sport"] == "NHL" and mass < 0.99):
+        raise ValueError("Unsupported league score distribution mass/tails")
+    return pmf / mass
 
 
 def line_probabilities(pmf, spread, total):
@@ -258,6 +273,16 @@ def league_metrics(frame):
                     "observed": float(group[ycol].mean()) if len(group) else None,
                 }
             )
+    for key in [
+        "regulation_brier3",
+        "regulation_log_loss",
+        "regulation_draw_probability",
+        "regulation_draw_outcome",
+        "shootout_probability",
+        "shootout_outcome",
+    ]:
+        if key in frame:
+            result[key] = float(frame[key].mean())
     result["calibration"] = bins
     result["ece"] = sum(
         b["count"] * abs(b["predicted"] - b["observed"]) for b in bins["winner"] if b["count"]
@@ -281,7 +306,19 @@ def league_metrics(frame):
     return result
 
 
-def backtest_league(features, columns, sport, root, holdout, source, spread, total):
+def backtest_league(
+    features,
+    columns,
+    sport,
+    root,
+    holdout,
+    source,
+    spread,
+    total,
+    *,
+    fitter=fit_league,
+    evaluator=evaluate_league,
+):
     path = Path(root) / (sport.lower() + "-" + uuid.uuid4().hex)
     path.mkdir(parents=True, exist_ok=False)
     seasons = sorted(int(y) for y in features.season.unique() if y <= holdout)
@@ -295,9 +332,9 @@ def backtest_league(features, columns, sport, root, holdout, source, spread, tot
         train = features.loc[
             features.season.lt(season - 1) & features.available_at.lt(cal.kickoff.min())
         ]
-        model = fit_league(train, cal, columns, sport)
+        model = fitter(train, cal, columns, sport)
         joblib.dump(model, path / f"model-{season}.joblib")
-        results.append(evaluate_league(model, test, spread, total))
+        results.append(evaluator(model, test, spread, total))
         folds.append(
             {
                 "test_season": season,
