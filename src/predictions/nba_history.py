@@ -549,7 +549,7 @@ def fetch_history(root, start, through, *, provider="auto", refresh=False):
     return result, sources
 
 
-def archive_slate(root):
+def archive_slate(root, days=7):
     """No guessed tipoffs: join actual ESPN timestamps to official NBA game identities."""
     now = pd.Timestamp.now(tz="UTC")
     year = now.year if now.month >= 7 else now.year - 1
@@ -580,7 +580,7 @@ def archive_slate(root):
     missing = []
     for game in schedule.to_dict("records"):
         day = pd.Timestamp(game["game_date"], tz="America/New_York")
-        if day < now - pd.Timedelta(days=14) or day > now + pd.Timedelta(days=8):
+        if day < now - pd.Timedelta(days=14) or day > now + pd.Timedelta(days=days + 1):
             continue
         key = _match_key(
             game["game_date"], game["home_team_abbreviation"], game["away_team_abbreviation"]

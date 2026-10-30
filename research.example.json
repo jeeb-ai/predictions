@@ -36,5 +36,17 @@
   "dashboard": {
     "token_file": "data/private/dashboard.token",
     "max_snapshot_age_seconds": 1800
+  },
+  "automation": {
+    "intervals": {
+      "NFL": 900,
+      "NBA": 900,
+      "NHL": 900
+    },
+    "retry_seconds": 60,
+    "max_cycle_seconds": 7200,
+    "nba_provider": "auto",
+    "approvals_dir": "docs",
+    "results_interval_seconds": 3600
   }
 }

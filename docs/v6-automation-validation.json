@@ -1,0 +1,96 @@
+{
+  "phase": 1,
+  "observed_at": "2026-10-30T19:45:41.681939+00:00",
+  "environment": "Linux Python3.12.14",
+  "workers": {
+    "mode": "predictions_only",
+    "sports": [
+      {
+        "error_code": null,
+        "finished_at": "2026-10-30T19:33:17.103613+00:00",
+        "last_attempt_at": "2026-10-30T19:32:55.608081+00:00",
+        "last_data_refresh_at": "2026-10-30T19:32:57.098954+00:00",
+        "last_prediction_cycle_at": "2026-10-30T19:33:17.103613+00:00",
+        "setup_action": null,
+        "sport": "NFL",
+        "started_at": "2026-10-30T19:32:55.608081+00:00",
+        "status": "completed",
+        "healthy": true,
+        "stale": false,
+        "interval_seconds": 900,
+        "current_predictions": 14
+      },
+      {
+        "error_code": null,
+        "finished_at": "2026-10-30T19:33:29.368295+00:00",
+        "last_attempt_at": "2026-10-30T19:32:55.818715+00:00",
+        "last_data_refresh_at": "2026-10-30T19:33:22.160962+00:00",
+        "last_prediction_cycle_at": "2026-10-30T19:33:29.368295+00:00",
+        "setup_action": null,
+        "sport": "NBA",
+        "started_at": "2026-10-30T19:32:55.818715+00:00",
+        "status": "completed",
+        "healthy": true,
+        "stale": false,
+        "interval_seconds": 900,
+        "current_predictions": 52
+      },
+      {
+        "error_code": null,
+        "finished_at": "2026-10-30T19:33:44.940297+00:00",
+        "last_attempt_at": "2026-10-30T19:32:55.577097+00:00",
+        "last_data_refresh_at": "2026-10-30T19:33:03.566265+00:00",
+        "last_prediction_cycle_at": "2026-10-30T19:33:44.940297+00:00",
+        "setup_action": null,
+        "sport": "NHL",
+        "started_at": "2026-10-30T19:32:55.577097+00:00",
+        "status": "completed",
+        "healthy": true,
+        "stale": false,
+        "interval_seconds": 900,
+        "current_predictions": 48
+      }
+    ],
+    "healthy": true,
+    "as_of": "2026-10-30T19:45:39.318597+00:00"
+  },
+  "journal": {
+    "NFL": {
+      "receipts": 15,
+      "first_valid_upcoming_matchups": 14,
+      "late_imports": 0,
+      "score_distributions_verified": 15,
+      "model_versions": [
+        "logistic-regression-v2"
+      ],
+      "ui_exceptions": 0
+    },
+    "NBA": {
+      "receipts": 104,
+      "first_valid_upcoming_matchups": 52,
+      "late_imports": 0,
+      "score_distributions_verified": 104,
+      "model_versions": [
+        "nba-v1"
+      ],
+      "ui_exceptions": 0
+    },
+    "NHL": {
+      "receipts": 96,
+      "first_valid_upcoming_matchups": 48,
+      "late_imports": 0,
+      "score_distributions_verified": 96,
+      "model_versions": [
+        "nhl-v1"
+      ],
+      "ui_exceptions": 0
+    }
+  },
+  "first_receipt_at": "2026-10-30T19:24:11.900988+00:00",
+  "last_receipt_at": "2026-10-30T19:33:44.636093+00:00",
+  "prospective_outcomes_graded": 0,
+  "performance_claim": "None: these are real captured predictions, not a fabricated accuracy record.",
+  "tests_passed": 534,
+  "ui": "Authenticated actual-data Streamlit AppTest, sport filters, model cards and operational status; zero exceptions.",
+  "hosting": "One-cycle smoke checks in temporary cloud workspace; no always-on or iPhone HTTPS deployment claimed."
+}

@@ -22,6 +22,14 @@ def default_config() -> dict:
         "confidence_level": 0.95,
         "bootstrap_seed": 42,
         "workers": 4,
+        "automation": {
+            "intervals": {"NFL": 900, "NBA": 900, "NHL": 900},
+            "retry_seconds": 60,
+            "results_interval_seconds": 3600,
+            "max_cycle_seconds": 7200,
+            "nba_provider": "auto",
+            "approvals_dir": "docs",
+        },
         "paths": {
             "state_dir": "data/research",
             "data_dir": "data",
@@ -124,6 +132,19 @@ def validate_config(value: dict, *, base_dir: Path) -> dict:
         if not isinstance(path, str) or not path.strip():
             raise ValueError(f"paths.{key} must be a nonempty path")
         result["paths"][key] = str((base_dir / path).resolve())
+    automation = result["automation"]
+    for sport, interval in automation["intervals"].items():
+        _integer(interval, f"automation.intervals.{sport}", 60, 86400)
+    _integer(automation["retry_seconds"], "automation.retry_seconds", 10, 3600)
+    _integer(
+        automation["results_interval_seconds"], "automation.results_interval_seconds", 60, 86400
+    )
+    _integer(automation["max_cycle_seconds"], "automation.max_cycle_seconds", 60, 21600)
+    if automation["nba_provider"] not in ["auto", "archive", "nba-stats"]:
+        raise ValueError("automation.nba_provider must be auto, archive or nba-stats")
+    if not isinstance(automation["approvals_dir"], str) or not automation["approvals_dir"].strip():
+        raise ValueError("automation.approvals_dir must be a path")
+    automation["approvals_dir"] = str((base_dir / automation["approvals_dir"]).resolve())
     paper = result["paper"]
     if type(paper["enabled"]) is not bool:
         raise ValueError("paper.enabled must be a boolean")
