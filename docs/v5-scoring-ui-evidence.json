@@ -1,0 +1,36 @@
+{
+  "evidence_kind": "Actual authenticated Streamlit AppTest of newly generated pregame winner and separate score forecast",
+  "game_id": "2026_08_CAR_GB",
+  "as_of": "2026-10-29T23:53:35.918818+00:00",
+  "winner_home_probability": 0.6449240423405829,
+  "score_model": "ridge_joint_gaussian",
+  "score_summary": {
+    "home_mean": 24.726217328057487,
+    "away_mean": 22.631201128963752,
+    "home_median": 25,
+    "away_median": 23,
+    "expected_margin": 2.095016199093733,
+    "expected_total": 47.35741845702125,
+    "home_interval_90": [
+      10,
+      40
+    ],
+    "away_interval_90": [
+      7,
+      38
+    ],
+    "home_win_probability": 0.5501667237528247,
+    "tie_probability": 0.03015119794821771,
+    "uncertainty": "Predictive score distribution conditional on fitted inputs; coverage must be assessed out of sample. Not model-refit uncertainty."
+  },
+  "rendered_markdown": [
+    "Green Bay Packers is the model\u2019s pick at 64% for a game that does not finish tied. The largest supporting input is opponent-adjusted results. The strongest counterweight is defensive efficiency. These are patterns in past games, not proof that a statistic causes a win.",
+    "Average projected score: Green Bay Packers 24.7, Carolina Panthers 22.6 \u00b7 Expected home margin +2.1 \u00b7 Expected total 47.4",
+    "Green Bay Packers is the model\u2019s pick at 64% for a game that does not finish tied. The largest supporting input is opponent-adjusted results. The strongest counterweight is defensive efficiency. These are patterns in past games, not proof that a statistic causes a win.",
+    "Home covers: 45.9%; away covers: 54.1%; push: 0.0%.",
+    "Over: 58.2%; under: 41.8%; push: 0.0%."
+  ],
+  "market_status": "PASS: no verified executable spread/total quotes",
+  "ui_exceptions": 0,
+  "artifact_distribution_sha256": "b82838bfba9c357557dffd833d2a927386b7b619c9de28435688a6c369e88e43"
+}
