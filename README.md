@@ -17,6 +17,8 @@ uv run --frozen --extra dev ruff format --check .
 
 Alternatively, create a virtual environment and run `python -m pip install -e '.[dev]'`, then `pytest`. The uv workflow is the fully locked installation. CI runs the locked checks on Python 3.11 and 3.12. Automated tests use local synthetic schedules and mocked HTTP, so they require no external data or credentials.
 
+The macOS CI job uses Python 3.12 on the pinned `macos-15-intel` runner. The moving `macos-latest` ARM64 runner previously failed allocation before tests started; Intel CI does not establish Apple Silicon coverage. Feature branches run checks through pull requests; pushes to `main` are also checked. Concurrency cancels superseded runs for the same PR.
+
 ## Fetch and backtest
 
 ```bash
