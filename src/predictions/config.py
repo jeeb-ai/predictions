@@ -25,6 +25,7 @@ def default_config() -> dict:
         "automation": {
             "intervals": {"NFL": 900, "NBA": 900, "NHL": 900},
             "retry_seconds": 60,
+            "results_interval_seconds": 3600,
             "max_cycle_seconds": 7200,
             "nba_provider": "auto",
             "approvals_dir": "docs",
@@ -135,6 +136,9 @@ def validate_config(value: dict, *, base_dir: Path) -> dict:
     for sport, interval in automation["intervals"].items():
         _integer(interval, f"automation.intervals.{sport}", 60, 86400)
     _integer(automation["retry_seconds"], "automation.retry_seconds", 10, 3600)
+    _integer(
+        automation["results_interval_seconds"], "automation.results_interval_seconds", 60, 86400
+    )
     _integer(automation["max_cycle_seconds"], "automation.max_cycle_seconds", 60, 21600)
     if automation["nba_provider"] not in ["auto", "archive", "nba-stats"]:
         raise ValueError("automation.nba_provider must be auto, archive or nba-stats")

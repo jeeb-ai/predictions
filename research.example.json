@@ -46,6 +46,7 @@
     "retry_seconds": 60,
     "max_cycle_seconds": 7200,
     "nba_provider": "auto",
-    "approvals_dir": "docs"
+    "approvals_dir": "docs",
+    "results_interval_seconds": 3600
   }
 }
