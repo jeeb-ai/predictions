@@ -183,6 +183,9 @@ def issue_league(
 def publish_league(batch, state):
     state = Path(state)
     state.mkdir(parents=True, exist_ok=True)
+    from predictions.prospective import ForecastJournal
+
+    ForecastJournal(state / "prospective.sqlite").capture(batch["sport"], batch["forecasts"])
     run = state / "league-runs" / (batch["sport"].lower() + "-" + uuid.uuid4().hex)
     run.mkdir(parents=True, exist_ok=False)
     payload = json.dumps(batch, indent=2, allow_nan=False).encode()

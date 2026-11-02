@@ -134,6 +134,8 @@ def build_dashboard_view(config: dict, now=None) -> dict:
     forecast_source = (
         predictions or (report if report and report.get("forecasts") else last_successful) or {}
     )
+    from predictions.automation import status as platform_status
+
     league_rows = []
     league_errors = []
     for sport in ["nba", "nhl"]:
@@ -168,6 +170,7 @@ def build_dashboard_view(config: dict, now=None) -> dict:
             except (OSError, ValueError, KeyError, TypeError, OverflowError):
                 league_errors.append(sport.upper())
     return {
+        "automation": platform_status(config, at=observed),
         "league_errors": league_errors,
         "slate": forecast_source.get("slate", []),
         "report": report,
@@ -457,6 +460,30 @@ def render_dashboard(view: dict) -> None:
         )
     render_predictions(view)
     with st.expander("Research / Administration", expanded=False):
+        st.subheader("Automated prediction workers")
+        workers = view.get("automation", {}).get("sports", [])
+        if workers:
+            st.dataframe(
+                pd.DataFrame(
+                    [
+                        {
+                            "Sport": w["sport"],
+                            "State": w["status"],
+                            "Current predictions": w["current_predictions"],
+                            "Last data refresh": _display_time(w.get("last_data_refresh_at")),
+                            "Last prediction cycle": _display_time(
+                                w.get("last_prediction_cycle_at")
+                            ),
+                            "Stale": w["stale"],
+                        }
+                        for w in workers
+                    ]
+                ),
+                hide_index=True,
+            )
+            for worker in workers:
+                if worker.get("setup_action"):
+                    st.info(worker["sport"] + ": " + worker["setup_action"])
         report = view["report"] or {}
         st.caption(f"Worker status: {report.get('status', 'not started')}")
         if report.get("status") in {"partial", "failed"}:

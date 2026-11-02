@@ -104,11 +104,11 @@ def dispatch(args):
         or report.get("columns") != NBA_COLUMNS
     ):
         raise ValueError("Invalid NBA validation report")
-    slate, meta = nba_slate(args.cache_dir)
+    slate, meta = nba_slate(args.cache_dir, days=getattr(args, "lookahead_hours", 168) / 24)
     now = pd.Timestamp.now(tz="UTC")
     slate = slate.loc[
         slate.kickoff.ge(now - pd.Timedelta(days=14))
-        & slate.kickoff.le(now + pd.Timedelta(days=7))
+        & slate.kickoff.le(now + pd.Timedelta(hours=getattr(args, "lookahead_hours", 168)))
         & slate.game_id.str.startswith("002")
     ]
     # A cached historical box-score feed may overlap the schedule; final games win.
@@ -122,9 +122,11 @@ def dispatch(args):
         report,
         args.output_dir,
         as_of=now,
+        days=getattr(args, "lookahead_hours", 168) / 24,
         source={"historical": source, "schedule": meta},
     )
-    publish_league(batch, config["paths"]["state_dir"])
+    if not getattr(args, "defer_publish", False):
+        publish_league(batch, config["paths"]["state_dir"])
     return batch
 
 
@@ -262,7 +264,7 @@ def dispatch_nhl(args):
         or report.get("columns") != NHL_COLUMNS
     ):
         raise ValueError("Invalid NHL validation report")
-    slate, metadata = nhl_slate(args.cache_dir)
+    slate, metadata = nhl_slate(args.cache_dir, days=getattr(args, "lookahead_hours", 168) / 24)
     now = pd.Timestamp.now(tz="UTC")
     frames = pd.concat([games, slate], ignore_index=True).drop_duplicates("game_id", keep="first")
     from predictions.config import load_config
@@ -274,6 +276,7 @@ def dispatch_nhl(args):
         report,
         args.output_dir,
         as_of=now,
+        days=getattr(args, "lookahead_hours", 168) / 24,
         source={
             "provider": "NHL official events via fastRhockey; own older-season xG",
             "historical": source,
@@ -282,5 +285,6 @@ def dispatch_nhl(args):
         fitter=fit_nhl,
         score_builder=nhl_score_builder,
     )
-    publish_league(batch, config["paths"]["state_dir"])
+    if not getattr(args, "defer_publish", False):
+        publish_league(batch, config["paths"]["state_dir"])
     return batch

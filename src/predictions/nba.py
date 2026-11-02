@@ -209,7 +209,7 @@ def _cdn_slate(root):
     return pd.DataFrame(rows), meta
 
 
-def nba_slate(root):
+def nba_slate(root, days=7):
     """Prefer the official CDN; use checked NBA identities + ESPN tipoffs if unavailable."""
     import logging
 
@@ -222,4 +222,4 @@ def nba_slate(root):
         logging.getLogger(__name__).warning(
             "NBA schedule CDN unavailable; checking archive slate: %s", exc
         )
-        return archive_slate(root)
+        return archive_slate(root, days=days)

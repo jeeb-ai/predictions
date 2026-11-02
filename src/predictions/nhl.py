@@ -313,7 +313,7 @@ def nhl_score_builder(model, means, row):
     }
 
 
-def nhl_slate(root):
+def nhl_slate(root, days=7):
     import json
 
     from predictions.league_data import snapshot
@@ -322,7 +322,7 @@ def nhl_slate(root):
     day = now.tz_convert("America/Chicago").normalize()
     rows = {}
     sources = []
-    for offset in [-7, 0, 7]:
+    for offset in range(-7, int(np.ceil(days)) + 7, 7):
         date = (day + pd.Timedelta(days=offset)).strftime("%Y-%m-%d")
         path, meta = snapshot("https://api-web.nhle.com/v1/schedule/" + date, root, refresh=True)
         sources.append(meta)
@@ -331,7 +331,7 @@ def nhl_slate(root):
                 if game["gameType"] != 2 or game.get("gameScheduleState", "OK") != "OK":
                     continue
                 kickoff = pd.Timestamp(game["startTimeUTC"])
-                if kickoff > now + pd.Timedelta(days=7):
+                if kickoff > now + pd.Timedelta(days=days):
                     continue
                 h, a = game["homeTeam"], game["awayTeam"]
                 rows[str(game["id"])] = {

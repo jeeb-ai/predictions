@@ -6,7 +6,7 @@ services:
       dockerfile: deploy/Dockerfile
       secrets: [proxy_ca]
     image: nfl-research:local
-    command: ["research-worker", "--config", "/app/research.local.json"]
+    command: ["platform-worker", "--sport", "NFL", "--config", "/app/research.local.json"]
     init: true
     restart: unless-stopped
     stop_grace_period: 120s
@@ -27,25 +27,20 @@ services:
       - research-models:/app/models
       - research-reports:/app/reports
     healthcheck:
-      test: ["CMD", "nfl-predict", "research-status", "--config", "/app/research.local.json", "--healthcheck"]
+      test: ["CMD", "nfl-predict", "platform-status", "--sport", "NFL", "--config", "/app/research.local.json", "--healthcheck"]
       interval: 30s
       timeout: 10s
       # The first run downloads historical PBP and fits causal EP/annual models.
       start_period: 30m
       retries: 3
-  leagues:
-    profiles: [leagues]
+  nba:
     image: nfl-research:local
-    build:
-      context: ..
-      dockerfile: deploy/Dockerfile
-      secrets: [proxy_ca]
-    command: ["leagues-worker", "--sport", "NBA", "--sport", "NHL", "--config", "/app/research.local.json"]
     init: true
     restart: unless-stopped
-    stop_grace_period: 120s
+    stop_grace_period: 30s
     cpus: 2.0
-    mem_limit: 4g
+    mem_limit: 2g
+    command: ["platform-worker", "--sport", "NBA", "--config", "/app/research.local.json"]
     environment:
       HTTP_PROXY: ${HTTP_PROXY:-}
       HTTPS_PROXY: ${HTTPS_PROXY:-}
@@ -55,8 +50,35 @@ services:
       - research-data:/app/data
       - research-models:/app/models
       - research-reports:/app/reports
-      - ../docs/nba-validation.json:/app/reports/research/nba-approved.json:ro
-      - ../docs/nhl-validation.json:/app/reports/research/nhl-approved.json:ro
+    healthcheck:
+      test: ["CMD", "nfl-predict", "platform-status", "--sport", "NBA", "--config", "/app/research.local.json", "--healthcheck"]
+      interval: 30s
+      timeout: 10s
+      start_period: 30m
+      retries: 3
+  nhl:
+    image: nfl-research:local
+    init: true
+    restart: unless-stopped
+    stop_grace_period: 30s
+    cpus: 2.0
+    mem_limit: 4g
+    command: ["platform-worker", "--sport", "NHL", "--config", "/app/research.local.json"]
+    environment:
+      HTTP_PROXY: ${HTTP_PROXY:-}
+      HTTPS_PROXY: ${HTTPS_PROXY:-}
+      NO_PROXY: ${NO_PROXY:-localhost,127.0.0.1}
+    volumes:
+      - ../research.local.json:/app/research.local.json:ro
+      - research-data:/app/data
+      - research-models:/app/models
+      - research-reports:/app/reports
+    healthcheck:
+      test: ["CMD", "nfl-predict", "platform-status", "--sport", "NHL", "--config", "/app/research.local.json", "--healthcheck"]
+      interval: 30s
+      timeout: 10s
+      start_period: 30m
+      retries: 3
   dashboard:
     image: nfl-research:local
     build:

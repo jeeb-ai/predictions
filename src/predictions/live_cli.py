@@ -272,11 +272,12 @@ def _forecast(args) -> dict:
             "path": str(path),
             "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
         }
-    ledger = PaperLedger(args.ledger)
-    for forecast in batch["forecasts"]:
-        ledger.record_forecast(forecast)
+    if not getattr(args, "skip_ledger", False):
+        ledger = PaperLedger(args.ledger)
+        for forecast in batch["forecasts"]:
+            ledger.record_forecast(forecast)
     batch["bundle_path"] = str(bundle)
-    batch["ledger_path"] = str(args.ledger)
+    batch["ledger_path"] = None if getattr(args, "skip_ledger", False) else str(args.ledger)
     return batch
 
 

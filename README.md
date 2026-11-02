@@ -1,6 +1,6 @@
 # Sports Predictions — NFL, NBA and NHL
 
-Independent NFL, NBA and NHL predictions and matchup analysis. **NBA downloads no longer require the live stats API:** see the [reliable download fix and exact Mac update commands](docs/nba-download-fix.md). [NHL methods, measured limitations and exact Mac commands](docs/nhl-engine.md). [NBA methods, measured validation and exact Mac commands](docs/nba-engine.md). Cards now explain the pick, supporting factors, opposing risks and uncertainty in everyday language. [Phase 1 guide and Mac update commands](docs/v5-phase1.md). The private dashboard opens on **Predictions**, with matchup cards naming our model's predicted winner, win probabilities, uncertainty and update time. **Matchup Analysis** explains the actual pregame statistics and fitted logistic contributions. **Market Value** is an optional, separate Polymarket US comparison. Performance, Paper Ledger and Audit live under expandable Research / Administration.
+Independent NFL, NBA and NHL predictions and matchup analysis. [Version 6 automation, immediate prospective capture and exact Mac/host commands](docs/v6-automation.md). **NBA downloads no longer require the live stats API:** see the [reliable download fix and exact Mac update commands](docs/nba-download-fix.md). [NHL methods, measured limitations and exact Mac commands](docs/nhl-engine.md). [NBA methods, measured validation and exact Mac commands](docs/nba-engine.md). Cards now explain the pick, supporting factors, opposing risks and uncertainty in everyday language. [Phase 1 guide and Mac update commands](docs/v5-phase1.md). The private dashboard opens on **Predictions**, with matchup cards naming our model's predicted winner, win probabilities, uncertainty and update time. **Matchup Analysis** explains the actual pregame statistics and fitted logistic contributions. **Market Value** is an optional, separate Polymarket US comparison. Performance, Paper Ledger and Audit live under expandable Research / Administration.
 
 See the [Version 4.0 guide and limitations](docs/prediction-first-v4.md) and [actual authenticated UI evidence](docs/v4-ui-evidence.json). This product redesign preserves the existing Model 1.0/2.0 families, historical comparisons, leakage protections and local paper ledger. No real-money execution or scoring simulations are implemented. Optional independent score projections now require a completed scoring-validation report; see [Phase 2 methods, measured results, calibration limits and Mac commands](docs/v5-nfl-scoring.md).
 
@@ -16,6 +16,8 @@ uv run --frozen --extra dev ruff format --check .
 ```
 
 Alternatively, create a virtual environment and run `python -m pip install -e '.[dev]'`, then `pytest`. The uv workflow is the fully locked installation. CI runs the locked checks on Python 3.11 and 3.12. Automated tests use local synthetic schedules and mocked HTTP, so they require no external data or credentials.
+
+The macOS CI job uses Python 3.12 on the pinned `macos-15-intel` runner. The moving `macos-latest` ARM64 runner previously failed allocation before tests started; Intel CI does not establish Apple Silicon coverage. Feature branches run checks through pull requests; pushes to `main` are also checked. Concurrency cancels superseded runs for the same PR.
 
 ## Fetch and backtest
 
